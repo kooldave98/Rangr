@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:id="@+id/PostDetailsHeader"
+        android:text="Add new post"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/PostLabel"
+        android:text="Post Text:"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PostDetailsHeader" />
+    <EditText
+        android:id="@+id/PostText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PostLabel"
+        android:maxLines="1"
+        android:imeOptions="actionDone" />
+    <Button
+        android:id="@+id/SaveButton"
+        android:text="Send"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PostText" />
+    <Button
+        android:id="@+id/CancelButton"
+        android:text="Cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SaveButton" />
+</RelativeLayout>
