@@ -4,25 +4,26 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Common.Shared;
 using App.Core.Portable.Device;
+using App.Common.Shared;
 
 namespace App.iOS
 {
 	public partial class NewPostViewController : UIViewController
 	{
-		PostRepository _postRepository;
-		IGeoLocation _geoLocationInstance;
-		ISession _session;
+//		PostRepository _postRepository;
+//		IGeoLocation _geoLocationInstance;
+//		ISession _session;
+		Global _global;
 
 		object detailItem;
 
-		public NewPostViewController (IGeoLocation geolocationInstance
-									, PostRepository postRepository
-									, ISession session) 
+		public NewPostViewController () 
 		: base ("NewPostViewController", null)
 		{
-			_geoLocationInstance = geolocationInstance;
-			_postRepository = postRepository;
-			_session = session;
+			_global = Global.Current;
+//			_geoLocationInstance = geolocationInstance;
+//			_postRepository = postRepository;
+//			_session = session;
 		}
 
 		/// <summary>
@@ -31,8 +32,15 @@ namespace App.iOS
 		async partial void  btnSend (MonoTouch.Foundation.NSObject sender)
 		{
 			var postText = this.tbxPost.Text;
-			var geoLocationString = await _geoLocationInstance.GetCurrentPosition();
-			await _postRepository.CreatePost(postText, _session.GetCurrentUser().ID.ToString(), geoLocationString);
+//			var geoLocationString = await _geoLocationInstance.GetCurrentPosition();
+
+			_global.client.sendPost (async(hubProxy) => {
+				await hubProxy.Invoke ("sendPost", postText);
+			});
+
+
+
+			//await _postRepository(postText, _session.GetCurrentUser().ID.ToString(), geoLocationString);
 			this.NavigationController.PopToRootViewController(true);
 
 		}

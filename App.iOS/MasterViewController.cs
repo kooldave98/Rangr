@@ -14,8 +14,8 @@ namespace App.iOS
 	{
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
-		PostRepository _postRepository;
 		UITextView textView;
+		Global _global;
 
 		DataSource dataSource;
 
@@ -27,7 +27,8 @@ namespace App.iOS
 			textView = new UITextView(new RectangleF(0, 35, 320, 500));
 			_geoLocationInstance = GeoLocation.GetInstance (SynchronizationContext.Current);
 			_sessionInstance = Session.GetInstance ();
-			_postRepository = new PostRepository (new HttpRequest ());
+			//_postRepository = new PostRepository (new HttpRequest ());
+			_global = Global.Current;
 		}
 
 		public DetailViewController DetailViewController {
@@ -69,7 +70,7 @@ namespace App.iOS
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => 
 			{
 				//if (this.NewPostViewController == null)
-					this.NewPostViewController = new NewPostViewController (_geoLocationInstance, _postRepository, _sessionInstance);
+					this.NewPostViewController = new NewPostViewController ();
 
 				//this.NewPostViewController.ModalInPopover = true;
 
@@ -103,29 +104,25 @@ namespace App.iOS
 
 			var traceWriter = new TextViewWriter(SynchronizationContext.Current, textView);
 
-			var client = new CommonClient(traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
+			_global.client = new CommonClient(traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
 
-			var task = client.RunAsync((post) => {
+			var task = _global.client.RunAsync((post) => {
 				dataSource.Objects.Insert (0, post.Text);
 
 				using (var indexPath = NSIndexPath.FromRowSection (0, 0))
 					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
 			});
+				
 
-//			UIAlertView _error = new UIAlertView ("My Title Text", "This is my main text", null, "Ok", null);
-//			UITextField textBox = new UITextField ();
+//			UIAlertView alert = new UIAlertView();
+//			alert.Title = "Add Something";
+//			alert.AddButton("One");
+//			alert.AddButton("Two");
+//			alert.AddButton("Three");
+//			alert.Message = "Enter something:";
+//			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
 //
-//			_error.Show ();
-
-			UIAlertView alert = new UIAlertView();
-			alert.Title = "Add Something";
-			alert.AddButton("One");
-			alert.AddButton("Two");
-			alert.AddButton("Three");
-			alert.Message = "Enter something:";
-			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
-
-			alert.Show();
+//			alert.Show();
 
 		}
 

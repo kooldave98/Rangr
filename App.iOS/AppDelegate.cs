@@ -20,8 +20,8 @@ namespace App.iOS
 		// class-level declarations
 		UINavigationController navigationController;
 		UIWindow window;
-		IGeoLocation _geoLocationInstance;
-		ISession _sessionInstance;
+//		IGeoLocation _geoLocationInstance;
+//		ISession _sessionInstance;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -76,7 +76,6 @@ namespace App.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-
 			var controller = new MasterViewController ();
 			navigationController = new UINavigationController (controller);
 			window.RootViewController = navigationController;

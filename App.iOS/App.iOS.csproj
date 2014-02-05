@@ -91,6 +91,9 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Microsoft.AspNet.SignalR.Client.iOS">
+      <HintPath>..\..\GitHub Repositories\SignalR\src\Microsoft.AspNet.SignalR.Client.iOS\bin\iPhone\Debug\Microsoft.AspNet.SignalR.Client.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -118,6 +121,7 @@
     <Compile Include="NewPostViewController.designer.cs">
       <DependentUpon>NewPostViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MasterViewController.xib" />
@@ -126,9 +130,6 @@
     <InterfaceDefinition Include="NewPostViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="AppCode\" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="App.Core.iOS\App.Core.iOS.csproj">
       <Project>{BBB2AAF6-9DA6-4DBC-9C64-A751791DD47D}</Project>

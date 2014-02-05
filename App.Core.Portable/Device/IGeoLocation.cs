@@ -7,8 +7,10 @@ namespace App.Core.Portable.Device
 	public interface IGeoLocation
 	{
 		Task<String> GetCurrentPosition();
-		event EventHandler<StatusChangedEventArgs> OnStatusChanged;
-		event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
+		void OnGeoPositionChanged (Action<string> handler);
+		void OnStatusChanged (Action<PositionStatus> handler);
+//		event EventHandler<StatusChangedEventArgs> OnStatusChanged;
+//		event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 	}
 
 	public enum PositionStatus

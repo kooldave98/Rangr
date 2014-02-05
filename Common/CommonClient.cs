@@ -71,9 +71,13 @@ namespace App.Common.Shared
 
 			connectionReady = true;
 
-			_geolocation.OnGeoPositionChanged += async (object sender, GeoPositionChangedEventArgs e) => {
-				await hubProxy.Invoke ("updateLocation", e.position);
-			};
+			_geolocation.OnGeoPositionChanged (async(position) => {
+				await hubProxy.Invoke ("updateLocation", position);
+			});
+
+//			_geolocation.OnGeoPositionChanged += async (object sender, GeoPositionChangedEventArgs e) => {
+//				await hubProxy.Invoke ("updateLocation", e.position);
+//			};
 
 			if (callbacks.Any ()) {
 				foreach (var callback in callbacks) {

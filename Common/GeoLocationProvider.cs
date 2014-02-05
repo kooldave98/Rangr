@@ -10,11 +10,13 @@ namespace App.Common.Shared
 {
 	public partial class GeoLocation : IGeoLocation
 	{
-		//Sample geoposition:  "-2.2275587999999997,53.478498699999996";
+		private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
 		private Geolocator geolocator;
-		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
-		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
+		private List<Action<string>> geoPositionChangedCallbacks = new List<Action<string>> ();
+		private List<Action<PositionStatus>> statusChangedCallbacks = new List<Action<PositionStatus>> ();
+//		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
+//		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 		private SynchronizationContext _context;
 		private static bool positionReliable = false;
 		private static Position geoPosition;
@@ -41,7 +43,7 @@ namespace App.Common.Shared
 
 				} else {
 					var geolocationValue = string.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
-
+					geolocationValue = sample_geoposition;//TO BE REMOVED
 
 					NotifyAccurate ();
 
@@ -56,6 +58,18 @@ namespace App.Common.Shared
 		
 		
 		}
+
+
+		public void OnGeoPositionChanged (Action<string> handler)
+		{
+			geoPositionChangedCallbacks.Add (handler);
+		}
+		public void OnStatusChanged (Action<PositionStatus> handler)
+		{
+			statusChangedCallbacks.Add (handler);
+		}
+
+
 
 		public async Task<String> GetCurrentPosition ()
 		{
@@ -73,13 +87,15 @@ namespace App.Common.Shared
 			}
 
 			var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+			geolocationValue = sample_geoposition;
 			return geolocationValue;
 		}
 
 		private bool PositionIsInvalid{
 			get{
-				var timespan = DateTime.UtcNow - geoPosition.Timestamp;
-				return geoPosition.Accuracy > 100 || timespan.Minutes > 1;
+				//var timespan = DateTime.UtcNow - geoPosition.Timestamp;
+				//return geoPosition.Accuracy > 100 || timespan.Minutes > 1;
+				return false;
 			}
 		}
 
@@ -103,12 +119,19 @@ namespace App.Common.Shared
 
 		private void NotifyStatusChanged (PositionStatus status, string statusMessage)
 		{
-			OnStatusChanged (this, new StatusChangedEventArgs(status));
+			//OnStatusChanged (this, new StatusChangedEventArgs(status));
+			foreach (var callback in statusChangedCallbacks) {
+				callback (status);
+			}
 		}
 
 		private void NotifyPositionChanged (string position)
 		{
-			OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
+			//OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
+
+			foreach (var callback in geoPositionChangedCallbacks) {
+				callback (position);
+			}
 		}
 
 		private async Task GetPosition ()

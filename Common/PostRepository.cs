@@ -8,7 +8,7 @@ using App.Core.Portable;
 
 namespace App.Common.Shared
 {
-    public class PostRepository
+	 class PostRepository
     {
         private IHttpRequest _httpRequest;
 
