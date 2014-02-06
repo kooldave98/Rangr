@@ -34,10 +34,13 @@ namespace App.Common.Shared
 			try {
 				await RunHubConnectionAPI (handler);
 			} catch (HttpClientException httpClientException) {
-				_traceWriter.WriteLine ("HttpClientException: {0}", httpClientException.Response);
+				_traceWriter.WriteLine ("------------------------------------>HttpClientException: {0}", httpClientException.Response);
 				throw;
-			} catch (Exception exception) {
-				_traceWriter.WriteLine ("Exception: {0}", exception);
+			} catch(HubException ex)			{
+				_traceWriter.WriteLine ("------------------------------------>HubException: {0}", ex);
+				throw;
+			}catch (Exception exception) {
+				_traceWriter.WriteLine ("------------------------------------>Exception: {0}", exception);
 				throw;
 			}
 		}
@@ -58,16 +61,45 @@ namespace App.Common.Shared
 			var hubConnection = new HubConnection (url, queryString);
 			hubConnection.TraceWriter = _traceWriter;
 
+
+			//On Reconnecting event handler
+			hubConnection.Reconnecting += async ()=> {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnecting");
+			};
+
+			//On slow connection
+			hubConnection.ConnectionSlow += async () => {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Slow poke");
+			};
+
+			hubConnection.Reconnected += async () => {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnected");
+			};
+
+			hubConnection.Closed += async () => {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Closed");
+				//----------Try this maybe
+				//hubConnection.OnReconnecting();
+			};
+
+			hubConnection.Error += async (obj) => {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Error Event");
+			};
+
+
+
+
 			hubProxy = hubConnection.CreateHubProxy ("streamHub");
+
 			hubProxy.On<Post> ("appendPost", (post) => _context.Post (async delegate {
 				//Write to Log
-				hubConnection.TraceWriter.WriteLine (post);
+				hubConnection.TraceWriter.WriteLine ("------------------------------------>"+post);
 				handler (post);
                     
 			}, null));
 
 			await hubConnection.Start ();
-			hubConnection.TraceWriter.WriteLine ("transport.Name={0}", hubConnection.Transport.Name);
+			hubConnection.TraceWriter.WriteLine ("------------------------------------>transport.Name={0}", hubConnection.Transport.Name);
 
 			connectionReady = true;
 
