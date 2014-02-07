@@ -16,7 +16,7 @@ using Android.Content.PM;
 
 namespace App.Android
 {
-	[Activity (Label = "NewPostScreen", ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Label = "New Post", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class NewPostScreen : Activity
 	{
 		Button cancelButton;
@@ -40,6 +40,8 @@ namespace App.Android
 
 			// set our layout to be the home screen
 			SetContentView(Resource.Layout.NewPost);
+
+
 
 			postTextEdit = FindViewById<EditText>(Resource.Id.PostText);
 			saveButton = FindViewById<Button>(Resource.Id.SaveButton);

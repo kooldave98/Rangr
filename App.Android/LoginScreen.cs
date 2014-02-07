@@ -14,7 +14,7 @@ using App.Common.Shared;
 
 namespace App.Android
 {
-	[Activity (Label = "Login", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Label = "Login", MainLauncher = true, NoHistory = true, ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class LoginScreen : Activity
 	{
 		ISession _sessionInstance = Session.Current;

@@ -2,17 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:padding="10dip">
     <LinearLayout
+        android:id="@+id/StreamLayout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1">
-        <Button
-            android:id="@+id/AddButton"
-            android:text="Add Post"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
         <ListView
             android:id="@+id/PostList"
             android:layout_width="fill_parent"
@@ -22,7 +19,7 @@
         android:id="@+id/ConsoleLayout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="100px"
+        android:layout_height="fill_parent"
         android:layout_weight="1">
         <TextView
             android:text="SignalR Console"

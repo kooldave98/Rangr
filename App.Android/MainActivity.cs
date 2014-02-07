@@ -20,13 +20,74 @@ namespace App.Android
 	{
 		Global _global;
 		PostListAdapter _postListAdapter;
-		//IList<Post> _posts;
-		Button _addPostButton;
+		LinearLayout consoleLayout;
+		LinearLayout streamLayout;
 
 		ListView _postListView;
 		TextView _textView;
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
+
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			menu.Add("New Post").SetShowAsAction(ShowAsAction.IfRoom);
+			menu.Add("Console");
+			return true;
+		}
+
+		//This is the Android
+//		public boolean onOptionsItemSelected(MenuItem item) {
+//			// Handle presses on the action bar items
+//			switch (item.getItemId()) {
+//			case R.id.action_search:
+//				openSearch();
+//				return true;
+//			case R.id.action_compose:
+//				composeMessage();
+//				return true;
+//			default:
+//				return super.onOptionsItemSelected(item);
+//			}
+//		}
+
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			switch (item.TitleFormatted.ToString()) { 
+			case "New Post":
+				StartActivity (typeof(NewPostScreen)); break;
+			case "Console":
+				MenuItemClicked(item); break;
+			case "Stream":
+				MenuItemClicked(item); break;
+			}
+
+			return base.OnOptionsItemSelected(item);
+		}
+
+		void MenuItemClicked(IMenuItem menu_item)
+		{
+			var menu_item_string = menu_item.TitleFormatted.ToString ();
+
+			if (consoleLayout.Visibility == ViewStates.Gone) {
+				//consoleLayout.LayoutParameters.Height = 1000;
+				streamLayout.Visibility = ViewStates.Gone;
+				consoleLayout.Visibility = ViewStates.Visible;
+				menu_item.SetTitle ("Stream");
+			} else {
+				consoleLayout.Visibility = ViewStates.Gone;
+				streamLayout.Visibility = ViewStates.Visible;
+				menu_item.SetTitle ("Console");
+			}
+
+
+
+//			Console.WriteLine(menu_item_string + " option menuitem clicked");
+//			var t = Toast.MakeText(this, "Options Menu '"+menu_item_string+"' clicked", ToastLength.Short);
+//			t.SetGravity(GravityFlags.Center, 0, 0);
+//			t.Show();
+		}
+
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -34,6 +95,9 @@ namespace App.Android
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
+
+
+			//ActionBar.SetDisplayHomeAsUpEnabled (true);
 
 			_global = Global.Current;
 			_global.Posts = new List<Post> ();
@@ -43,23 +107,15 @@ namespace App.Android
 
 			//Find our controls
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
-			_addPostButton = FindViewById<Button> (Resource.Id.AddButton);
 
-			var consoleLayout = FindViewById<LinearLayout> (Resource.Id.ConsoleLayout);
+			consoleLayout = FindViewById<LinearLayout> (Resource.Id.ConsoleLayout);
+			streamLayout = FindViewById<LinearLayout> (Resource.Id.StreamLayout);
 
 			consoleLayout.Visibility = ViewStates.Gone;
 
-			consoleLayout.Touch += (object sender, View.TouchEventArgs e) => {
-				consoleLayout.LayoutParameters.Height = 1000;
-			};
-
-
-			// wire up add new post button handler
-			if (_addPostButton != null) {
-				_addPostButton.Click += (sender, e) => {
-					StartActivity (typeof(NewPostScreen));
-				};
-			}
+//			consoleLayout.Touch += (object sender, View.TouchEventArgs e) => {
+//				consoleLayout.LayoutParameters.Height = 1000;
+//			};
 
 
 			// wire up post click handler
