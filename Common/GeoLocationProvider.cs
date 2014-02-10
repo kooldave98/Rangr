@@ -8,6 +8,9 @@ using App.Core.Portable.Device;
 
 namespace App.Common.Shared
 {
+	/// <summary>
+	/// https://github.com/xamarin/Xamarin.Mobile/blob/master/MonoDroid/Samples/GeolocationSample/MainActivity.cs
+	/// </summary>
 	public partial class GeoLocation : IGeoLocation
 	{
 		private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
@@ -54,7 +57,7 @@ namespace App.Common.Shared
 
 			};
 		
-			ToggleListening ();
+			//ToggleListening ();
 		
 		
 		}

@@ -10,6 +10,10 @@ using System.Linq;
 
 namespace App.Common.Shared
 {
+
+	/// <summary>
+	/// Note that there may be a potential issue with the geolocation being stale on reconnection if the client has moved away from his original location
+	/// </summary>
 	public class CommonClient
 	{
 		private IHubProxy hubProxy;
@@ -18,72 +22,119 @@ namespace App.Common.Shared
 		private IGeoLocation _geolocation;
 		private TextWriter _traceWriter;
 		private SynchronizationContext _context;
-		private List<Action<IHubProxy>> callbacks;
+		private List<Action<IHubProxy>> sendPostCallbacks = new List<Action<IHubProxy>> ();
 
-		public CommonClient (TextWriter traceWriter, IGeoLocation geolocatorInstance, ISession sessionInstance, SynchronizationContext context)
+		private HubConnection hubConnection;
+
+		private List<Action<CommonClient>> onConnectionAbortedCallbacks = new List<Action<CommonClient>> ();
+
+
+		private static CommonClient _instance = null;
+		public static CommonClient GetInstance(TextWriter traceWriter, IGeoLocation geolocatorInstance, ISession sessionInstance, SynchronizationContext context)
+		{
+			return _instance ?? (_instance = new CommonClient(traceWriter, geolocatorInstance, sessionInstance, context));
+		}
+
+		private CommonClient (TextWriter traceWriter, IGeoLocation geolocatorInstance, ISession sessionInstance, SynchronizationContext context)
 		{
 			_traceWriter = traceWriter;
 			_session = sessionInstance;
 			_geolocation = geolocatorInstance;
 			_context = context;
-			callbacks = new List<Action<IHubProxy>> ();
 		}
 
-		public async Task RunAsync (Action<Post> handler)
+		public void OnConnectionAborted(Action<CommonClient> handler){
+			//Todo: need to lock this collection for thread safety
+			onConnectionAbortedCallbacks.Add (handler);
+		}
+
+		public async Task Start(Action<Post> handler)
 		{
 			try {
 				await RunHubConnectionAPI (handler);
 			} catch (HttpClientException httpClientException) {
 				_traceWriter.WriteLine ("------------------------------------>HttpClientException: {0}", httpClientException.Response);
-				throw;
-			} catch(HubException ex)			{
+				//throw;
+				abortConnection ();
+			} catch(HubException ex){
 				_traceWriter.WriteLine ("------------------------------------>HubException: {0}", ex);
-				throw;
+				//throw;
+				abortConnection ();
 			}catch (Exception exception) {
 				_traceWriter.WriteLine ("------------------------------------>Exception: {0}", exception);
-				throw;
+				//throw;
+				abortConnection ();
 			}
 		}
 
-		public void sendPost(Action<IHubProxy> callback){
-			if (!connectionReady) {
-				callbacks.Add (callback);
-			} else {
-				callback (hubProxy);
+		private void abortConnection(){
+			_traceWriter.WriteLine ("------------------------------------>Connection aborted event");
+			hubConnection.Stop();
+			connectionReady = false;
+			foreach (var handler in onConnectionAbortedCallbacks) {
+				handler (this);
+			}
+		}
+
+		public void sendPost(Action<IHubProxy> callback)
+		{
+			lock(sendPostCallbacks)
+			{
+				if (!connectionReady) {
+					sendPostCallbacks.Add (callback);
+				} else {
+					callback (hubProxy);
+				}
 			}
 		}
 
 		private async Task RunHubConnectionAPI (Action<Post> handler)
 		{
-
+			//Ensure this is set to false at the beginning of this method
+			connectionReady = false;
 			var queryString = await getQueryString ();
 
-			var hubConnection = new HubConnection (url, queryString);
-			hubConnection.TraceWriter = _traceWriter;
+			hubConnection = new HubConnection (url, queryString);
+			hubConnection.TraceWriter = Console.Out;
+			//hubConnection.TraceWriter = _traceWriter;
 
+			hubConnection.StateChanged += (change) => {
+				_traceWriter.WriteLine ("hubConnection.StateChanged {0} => {1}", change.OldState, change.NewState);
+			};
 
 			//On Reconnecting event handler
 			hubConnection.Reconnecting += async ()=> {
-				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnecting");
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnecting Event");
+				connectionReady = false;
 			};
 
 			//On slow connection
 			hubConnection.ConnectionSlow += async () => {
-				_traceWriter.WriteLine ("------------------------------------>Hub Connection Slow poke");
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Slow Event");
 			};
 
 			hubConnection.Reconnected += async () => {
-				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnected");
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Reconnected Event");
+				connectionReady = true;
 			};
 
 			hubConnection.Closed += async () => {
-				_traceWriter.WriteLine ("------------------------------------>Hub Connection Closed");
-				//----------Try this maybe
-				//hubConnection.OnReconnecting();
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Closed Event");
+
+				//hubConnection.Stop();
+				connectionReady = false;
+
+				await start ();
+
 			};
 
 			hubConnection.Error += async (obj) => {
 				_traceWriter.WriteLine ("------------------------------------>Hub Connection Error Event");
+
+			};
+
+			hubConnection.Received += async (obj) => {
+				_traceWriter.WriteLine ("------------------------------------>Hub Connection Received Event");
 			};
 
 
@@ -93,32 +144,48 @@ namespace App.Common.Shared
 
 			hubProxy.On<Post> ("appendPost", (post) => _context.Post (async delegate {
 				//Write to Log
-				hubConnection.TraceWriter.WriteLine ("------------------------------------>"+post);
-				handler (post);
+				_traceWriter.WriteLine ("------------------------------------Append Post--> UserId: {0}, UserName : {1}, PostText : {2}>", post.UserID, post.UserDisplayName, post.Text);
+
+
+				handler(post);
+
                     
 			}, null));
 
-			await hubConnection.Start ();
-			hubConnection.TraceWriter.WriteLine ("------------------------------------>transport.Name={0}", hubConnection.Transport.Name);
+			await start ();
 
-			connectionReady = true;
 
 			_geolocation.OnGeoPositionChanged (async(position) => {
-				await hubProxy.Invoke ("updateLocation", position);
+				if(connectionReady){
+					await hubProxy.Invoke ("updateLocation", position);
+					_traceWriter.WriteLine ("------------------------------------>Position Changed={0}", position);
+				}
 			});
 
 //			_geolocation.OnGeoPositionChanged += async (object sender, GeoPositionChangedEventArgs e) => {
 //				await hubProxy.Invoke ("updateLocation", e.position);
 //			};
+		}
 
-			if (callbacks.Any ()) {
-				foreach (var callback in callbacks) {
-					callback (hubProxy);
+		private async Task start(){
+			await hubConnection.Start ();
+
+			_traceWriter.WriteLine ("------------------------------------>HubConnection started with transport.Name={0}", hubConnection.Transport.Name);
+
+
+
+			lock (sendPostCallbacks) {
+
+				if (sendPostCallbacks.Any ()) {
+					foreach (var callback in sendPostCallbacks) {
+						callback (hubProxy);
+					}
+
+					sendPostCallbacks.Clear ();
 				}
+				connectionReady = true;
 
-				callbacks.Clear ();
 			}
-
 		}
 
 		private string url {

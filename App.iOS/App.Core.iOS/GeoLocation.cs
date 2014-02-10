@@ -24,6 +24,8 @@ namespace App.Common.Shared
 			_context = context;
 			geolocator = new Geolocator();
 
+			Init ();
+
 		}
 	}
 }

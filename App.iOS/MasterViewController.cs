@@ -6,6 +6,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using System.Threading;
 using App.Core.Portable.Device;
+using App.Core.Portable.Models;
 using App.Common.Shared;
 
 namespace App.iOS
@@ -104,15 +105,21 @@ namespace App.iOS
 
 			var traceWriter = new TextViewWriter(SynchronizationContext.Current, textView);
 
-			_global.client = new CommonClient(traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
 
-			var task = _global.client.RunAsync((post) => {
+			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
+
+			Action<Post> routine = (post) => {
 				dataSource.Objects.Insert (0, post.Text);
 
 				using (var indexPath = NSIndexPath.FromRowSection (0, 0))
 					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+			};
+
+			_global.client.OnConnectionAborted ((client) => {
+				client.Start(routine);
 			});
-				
+
+			_global.client.Start (routine);
 
 //			UIAlertView alert = new UIAlertView();
 //			alert.Title = "Add Something";

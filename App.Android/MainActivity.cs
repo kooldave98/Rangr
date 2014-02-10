@@ -132,13 +132,19 @@ namespace App.Android
 
 			var traceWriter = new TextViewWriter (SynchronizationContext.Current, _textView);
 
-			_global.client = new CommonClient (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
+			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
 
-			var task = _global.client.RunAsync ((post) => {
-				_global.Posts.Insert(0, post);
+			Action<Post> routine = (post) => {
+				_global.Posts.Insert (0, post);
 
-				refreshGrid();
+				refreshGrid ();
+			};
+
+			_global.client.OnConnectionAborted ((client) => {
+				client.Start(routine);
 			});
+
+			_global.client.Start (routine);
 		}
 
 		protected override void OnResume ()
