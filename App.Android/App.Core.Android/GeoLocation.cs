@@ -11,17 +11,16 @@ namespace App.Common.Shared
 {
 	public partial class GeoLocation
 	{
-		public static GeoLocation GetInstance(SynchronizationContext context, Activity activityContext)
+		public static GeoLocation GetInstance(Activity activityContext)
 		{
-			return _instance ?? (_instance = new GeoLocation(context, activityContext));
+			return _instance ?? (_instance = new GeoLocation(activityContext));
 		}
 
-		private GeoLocation(SynchronizationContext context, Activity activityContext)
+		private GeoLocation(Activity activityContext)
 		{
 			if (this.geolocator != null)
 				return;
-
-			_context = context;
+				
 			geolocator = new Geolocator (activityContext);
 
 			Init ();

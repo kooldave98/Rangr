@@ -20,7 +20,7 @@ namespace App.Common.Shared
 		private List<Action<PositionStatus>> statusChangedCallbacks = new List<Action<PositionStatus>> ();
 //		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 //		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
-		private SynchronizationContext _context;
+		//private SynchronizationContext _context;
 		private static bool positionReliable = false;
 		private static Position geoPosition;
 
@@ -57,7 +57,7 @@ namespace App.Common.Shared
 
 			};
 		
-			//ToggleListening ();
+			ToggleListening ();
 		
 		
 		}
@@ -156,64 +156,11 @@ namespace App.Common.Shared
 		{
 
 			if (!this.geolocator.IsListening) {
-				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: true);
+				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
 			} else {
 				this.geolocator.StopListening ();
 			}
 		}
-		//		private TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-		//		private CancellationTokenSource cancelSource;
-		//
-		//		private void Setup()
-		//		{
-		//
-		//		}
-		//
-		//		public void GetPosition ()
-		//		{
-		//			Setup();
-		//
-		//			this.cancelSource = new CancellationTokenSource();
-		//
-		//
-		//			this.geolocator.GetPositionAsync (timeout: 10000, cancelToken: this.cancelSource.Token, includeHeading: true)
-		//				.ContinueWith (t =>
-		//					{
-		//						if (t.IsFaulted)
-		//							PositionStatus.Text = ((GeolocationException)t.Exception.InnerException).Error.ToString();
-		//						else if (t.IsCanceled)
-		//							PositionStatus.Text = "Canceled";
-		//						else
-		//						{
-		//							PositionStatus.Text = t.Result.Timestamp.ToString("G");
-		//							PositionLatitude.Text = "La: " + t.Result.Latitude.ToString("N4");
-		//							PositionLongitude.Text = "Lo: " + t.Result.Longitude.ToString("N4");
-		//						}
-		//
-		//					}, scheduler);
-		//		}
-		//
-		//		public void CancelPosition ()
-		//		{
-		//			CancellationTokenSource cancel = this.cancelSource;
-		//			if (cancel != null)
-		//				cancel.Cancel();
-		//		}
-		//		private void OnListeningError (object sender, PositionErrorEventArgs e)
-		//		{
-		//			BeginInvokeOnMainThread (() => {
-		//				ListenStatus.Text = e.Error.ToString();
-		//			});
-		//		}
-		//
-		//		private void OnPositionChanged (object sender, PositionEventArgs e)
-		//		{
-		//			BeginInvokeOnMainThread (() => {
-		//				ListenStatus.Text = e.Position.Timestamp.ToString("G");
-		//				ListenLatitude.Text = "La: " + e.Position.Latitude.ToString("N4");
-		//				ListenLongitude.Text = "Lo: " + e.Position.Longitude.ToString("N4");
-		//			});
-		//		}
 	}
 
 

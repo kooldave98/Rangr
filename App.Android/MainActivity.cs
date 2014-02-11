@@ -102,7 +102,7 @@ namespace App.Android
 			_global = Global.Current;
 			_global.Posts = new List<Post> ();
 
-			_geoLocationInstance = GeoLocation.GetInstance (SynchronizationContext.Current, this);
+			_geoLocationInstance = GeoLocation.GetInstance (this);
 			_sessionInstance = Session.Current;
 
 			//Find our controls

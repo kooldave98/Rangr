@@ -26,7 +26,7 @@ namespace App.iOS
 
 			// Custom initialization
 			textView = new UITextView(new RectangleF(0, 35, 320, 500));
-			_geoLocationInstance = GeoLocation.GetInstance (SynchronizationContext.Current);
+			_geoLocationInstance = GeoLocation.GetInstance ();
 			_sessionInstance = Session.GetInstance ();
 			//_postRepository = new PostRepository (new HttpRequest ());
 			_global = Global.Current;
