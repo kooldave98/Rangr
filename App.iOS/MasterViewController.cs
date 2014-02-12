@@ -121,15 +121,15 @@ namespace App.iOS
 
 			_global.client.Start (routine);
 
-//			UIAlertView alert = new UIAlertView();
-//			alert.Title = "Add Something";
-//			alert.AddButton("One");
-//			alert.AddButton("Two");
-//			alert.AddButton("Three");
-//			alert.Message = "Enter something:";
-//			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
-//
-//			alert.Show();
+			UIAlertView alert = new UIAlertView();
+			alert.Title = "Add Something";
+			alert.AddButton("One");
+			alert.AddButton("Two");
+			alert.AddButton("Three");
+			alert.Message = "Enter something:";
+			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
+
+			alert.Show();
 
 		}
 

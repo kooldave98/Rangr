@@ -57,9 +57,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PostDetailsScreen.cs" />
     <Compile Include="NewPostScreen.cs" />
-    <Compile Include="LoginScreen.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="PostListAdapter.cs" />
+    <Compile Include="LoginActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -73,6 +73,28 @@
     <AndroidResource Include="Resources\layout\PostDetails.axml" />
     <AndroidResource Include="Resources\layout\PostListItem.axml" />
     <AndroidResource Include="Resources\layout\NewPost.axml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="..\..\GitHub Repositories\prebuilt-apps\EmployeeDirectory\EmployeeDirectory.Android\Resources\Drawable-hdpi\loginbox.9.png">
+      <Link>Resources\drawable-hdpi\loginbox.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\..\GitHub Repositories\prebuilt-apps\EmployeeDirectory\EmployeeDirectory.Android\Resources\Drawable-mdpi\loginbox.9.png">
+      <Link>Resources\drawable-mdpi\loginbox.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\..\GitHub Repositories\prebuilt-apps\EmployeeDirectory\EmployeeDirectory.Android\Resources\Drawable-xhdpi\loginbox.9.png">
+      <Link>Resources\drawable-xhdpi\loginbox.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\login_button.xml" />
+    <AndroidResource Include="..\..\GitHub Repositories\prebuilt-apps\EmployeeDirectory\EmployeeDirectory.Android\Resources\Drawable-hdpi\questionmark.png">
+      <Link>Resources\drawable-hdpi\questionmark.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\..\GitHub Repositories\prebuilt-apps\EmployeeDirectory\EmployeeDirectory.Android\Resources\Drawable-mdpi\questionmark.png">
+      <Link>Resources\drawable-mdpi\questionmark.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Color\disabledText.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -84,5 +106,10 @@
       <Project>{9174B72C-57C4-4F6A-BBAF-578E8855E5E5}</Project>
       <Name>App.Core.Android</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
   </ItemGroup>
 </Project>

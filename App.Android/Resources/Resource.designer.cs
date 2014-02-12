@@ -41,11 +41,42 @@ namespace App.Android
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int blueclick = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int disabledText = 2130968578;
+			
+			// aapt resource value: 0x7f040001
+			public const int greyheadertext = 2130968577;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int login_button = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int loginbox = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int questionmark = 2130837507;
 			
 			static Drawable()
 			{
@@ -60,47 +91,71 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05000a
-			public const int CancelButton = 2131034122;
+			// aapt resource value: 0x7f070012
+			public const int CancelButton = 2131165202;
 			
-			// aapt resource value: 0x7f050002
-			public const int ConsoleLayout = 2131034114;
+			// aapt resource value: 0x7f07000a
+			public const int ConsoleLayout = 2131165194;
 			
-			// aapt resource value: 0x7f050004
-			public const int ConsoleScrollView = 2131034116;
+			// aapt resource value: 0x7f07000c
+			public const int ConsoleScrollView = 2131165196;
 			
-			// aapt resource value: 0x7f050006
-			public const int PostDetailsHeader = 2131034118;
+			// aapt resource value: 0x7f07000e
+			public const int PostDetailsHeader = 2131165198;
 			
-			// aapt resource value: 0x7f050007
-			public const int PostLabel = 2131034119;
+			// aapt resource value: 0x7f07000f
+			public const int PostLabel = 2131165199;
 			
-			// aapt resource value: 0x7f050001
-			public const int PostList = 2131034113;
+			// aapt resource value: 0x7f070009
+			public const int PostList = 2131165193;
 			
-			// aapt resource value: 0x7f050008
-			public const int PostText = 2131034120;
+			// aapt resource value: 0x7f070010
+			public const int PostText = 2131165200;
 			
-			// aapt resource value: 0x7f05000b
-			public const int PostTextLabel = 2131034123;
+			// aapt resource value: 0x7f070013
+			public const int PostTextLabel = 2131165203;
 			
-			// aapt resource value: 0x7f050009
-			public const int SaveButton = 2131034121;
+			// aapt resource value: 0x7f070011
+			public const int SaveButton = 2131165201;
 			
-			// aapt resource value: 0x7f050000
-			public const int StreamLayout = 2131034112;
+			// aapt resource value: 0x7f070008
+			public const int StreamLayout = 2131165192;
 			
-			// aapt resource value: 0x7f05000d
-			public const int UserNameText = 2131034125;
+			// aapt resource value: 0x7f070015
+			public const int UserNameText = 2131165205;
 			
-			// aapt resource value: 0x7f05000c
-			public const int lstItemPost = 2131034124;
+			// aapt resource value: 0x7f070001
+			public const int dialogImage = 2131165185;
 			
-			// aapt resource value: 0x7f050005
-			public const int textView = 2131034117;
+			// aapt resource value: 0x7f070000
+			public const int dialogLayout = 2131165184;
 			
-			// aapt resource value: 0x7f050003
-			public const int textView1 = 2131034115;
+			// aapt resource value: 0x7f070002
+			public const int dialogTitle = 2131165186;
+			
+			// aapt resource value: 0x7f070005
+			public const int logIn = 2131165189;
+			
+			// aapt resource value: 0x7f070006
+			public const int loginProgress = 2131165190;
+			
+			// aapt resource value: 0x7f070007
+			public const int loginQuestion = 2131165191;
+			
+			// aapt resource value: 0x7f070014
+			public const int lstItemPost = 2131165204;
+			
+			// aapt resource value: 0x7f070004
+			public const int password = 2131165188;
+			
+			// aapt resource value: 0x7f07000d
+			public const int textView = 2131165197;
+			
+			// aapt resource value: 0x7f07000b
+			public const int textView1 = 2131165195;
+			
+			// aapt resource value: 0x7f070003
+			public const int userName = 2131165187;
 			
 			static Id()
 			{
@@ -116,16 +171,19 @@ namespace App.Android
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int Login = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int NewPost = 2130903041;
+			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int PostDetails = 2130903042;
+			public const int NewPost = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int PostListItem = 2130903043;
+			public const int PostDetails = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int PostListItem = 2130903044;
 			
 			static Layout()
 			{
@@ -140,11 +198,8 @@ namespace App.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
-			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int app_name = 2131034112;
 			
 			static String()
 			{
@@ -152,6 +207,22 @@ namespace App.Android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int CustomHoloTheme = 2131099648;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
