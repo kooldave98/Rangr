@@ -6,7 +6,7 @@ namespace App.iOS
 {
 	public class Session : ISession
 	{
-		private User _user;
+		private const string CurrentUserKey = "currentuser";
 		private static ISession _instance = null;
 		public static ISession GetInstance()
 		{
@@ -15,18 +15,15 @@ namespace App.iOS
 
 		private Session()
 		{
-			_user = new User () {
-				ID = 1,
-				DisplayName = "SeededUser"
-			};
 		}
 
 		public User GetCurrentUser(){
-			return _user;
+			var user = PersistentStorage.Current.Load<User> (CurrentUserKey);
+			return user;
 		}
 
 		public void AddCurrentUser(User user){
-			_user = user;
+			PersistentStorage.Current.Save(CurrentUserKey, user);
 		}
 	}
 }

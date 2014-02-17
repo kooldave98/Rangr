@@ -26,7 +26,7 @@ namespace App.Android
 //		PostRepository _postRepository;
 //		IGeoLocation _geoLocationInstance;
 //		ISession _sessionInstance;
-		Global _global;
+		Application _global;
 
 		protected override void OnCreate (Bundle bundle)
 		{

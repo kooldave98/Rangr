@@ -57,21 +57,13 @@ namespace App.iOS
 
 		protected void Initialize()
 		{
-
-		}
-
-
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => 
 			{
 				//if (this.NewPostViewController == null)
-					this.NewPostViewController = new NewPostViewController ();
+				this.NewPostViewController = new NewPostViewController ();
 
 				//this.NewPostViewController.ModalInPopover = true;
 
@@ -121,15 +113,20 @@ namespace App.iOS
 
 			_global.client.Start (routine);
 
-			UIAlertView alert = new UIAlertView();
-			alert.Title = "Add Something";
-			alert.AddButton("One");
-			alert.AddButton("Two");
-			alert.AddButton("Three");
-			alert.Message = "Enter something:";
-			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
+			//			UIAlertView alert = new UIAlertView();
+			//			alert.Title = "Add Something";
+			//			alert.AddButton("One");
+			//			alert.AddButton("Two");
+			//			alert.AddButton("Three");
+			//			alert.Message = "Enter something:";
+			//			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;//UIAlertViewStyle.LoginAndPasswordInput;
+			//			alert.Show();
+		}
 
-			alert.Show();
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
 
 		}
 

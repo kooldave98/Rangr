@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-//delete from here
 using System.Threading;
 using App.Core.Portable.Device;
 using App.Common.Shared;
@@ -17,20 +16,68 @@ namespace App.iOS
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
-		// class-level declarations
-		UINavigationController navigationController;
 		UIWindow window;
-//		IGeoLocation _geoLocationInstance;
-//		ISession _sessionInstance;
+		MasterViewController mainViewController;
 
-		//
-		// This method is invoked when the application has loaded and is ready to run. In this
-		// method you should instantiate the window, load the UI into it and then make the window
-		// visible.
-		//
-		// You have 17 seconds to return from this method, or iOS will terminate your application.
-		//
+		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+		{
+			if(!UIDevice.CurrentDevice.CheckSystemVersion(7,0))
+				Theme.Apply ();
 
+			//
+			// Build the UI
+			//
+			mainViewController = new MasterViewController ();
+
+			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			window.RootViewController = new UINavigationController (mainViewController);
+			window.MakeKeyAndVisible ();
+
+			//
+			// Show the login screen at startup
+			//
+			var login = new LoginViewController ();
+			mainViewController.PresentViewController (login, false, null);
+
+			return true;
+		}
+
+		public override void WillEnterForeground (UIApplication application)
+		{
+			if (ShouldShowLogin (Global.LastUseTime)) {
+
+				var login = new LoginViewController ();
+				mainViewController.PresentViewController (login, false, null);
+			}
+		}
+
+		public override void DidEnterBackground (UIApplication application)
+		{
+			Global.LastUseTime = DateTime.UtcNow;
+		}
+
+		public static bool ShouldShowLogin (DateTime? lastUseTime)
+		{
+			if (!lastUseTime.HasValue) {
+				return true;
+			}
+
+			return (DateTime.UtcNow - lastUseTime) > Global.ForceLoginTimespan;
+		}
+	}
+}
+
+
+
+//
+//
+// This method is invoked when the application has loaded and is ready to run. In this
+// method you should instantiate the window, load the UI into it and then make the window
+// visible.
+//
+// You have 17 seconds to return from this method, or iOS will terminate your application.
+//
+//
 //		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 //		{
 //			window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -71,20 +118,4 @@ namespace App.iOS
 //
 //			return true;
 //		}
-
-
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			var controller = new MasterViewController ();
-			navigationController = new UINavigationController (controller);
-			window.RootViewController = navigationController;
-
-			// make the window visible
-			window.MakeKeyAndVisible ();
-			
-			return true;
-		}
-	}
-}
-
+//

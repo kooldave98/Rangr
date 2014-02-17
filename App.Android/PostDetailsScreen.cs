@@ -16,7 +16,7 @@ namespace App.Android
 	[Activity (Label = "PostDetailsScreen", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PostDetailsScreen : Activity
 	{
-		Global _global;
+		Application _global;
 		Post post = new Post();
 		Button cancelButton;
 		TextView postTextLabel;

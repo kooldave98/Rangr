@@ -4,7 +4,6 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Common.Shared;
 using App.Core.Portable.Device;
-using App.Common.Shared;
 
 namespace App.iOS
 {
@@ -15,7 +14,6 @@ namespace App.iOS
 //		ISession _session;
 		Global _global;
 
-		object detailItem;
 
 		public NewPostViewController () 
 		: base ("NewPostViewController", null)
@@ -29,7 +27,7 @@ namespace App.iOS
 		/// <summary>
 		/// This is our common action handler. Two buttons call this via an action method.
 		/// </summary>
-		async partial void  btnSend (MonoTouch.Foundation.NSObject sender)
+		partial void  btnSend (MonoTouch.Foundation.NSObject sender)
 		{
 			var postText = this.tbxPost.Text;
 //			var geoLocationString = await _geoLocationInstance.GetCurrentPosition();
