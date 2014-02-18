@@ -11,12 +11,22 @@ namespace App.Android
 	[Application (Label = "GeoWalkr", Theme = "@style/CustomHoloTheme", Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application {
 
-		public static IList<Post> Posts { get; set;}
+		public IList<Post> Posts { get; set;}
 
-		public static CommonClient client { get; set;}
+		public CommonClient client { get; set;}
+
+		public static Global Current
+		{
+			get{
+				return _instance;// ?? (_instance = new GeoLocation(activityContext));
+			}
+		}
+
+		private static Global _instance = null;
 
 		public Global(IntPtr handle, global::Android.Runtime.JniHandleOwnership transfer)
 			: base(handle, transfer) {
+			_instance = this;
 		}
 
 		public override void OnCreate()
@@ -24,9 +34,9 @@ namespace App.Android
 			base.OnCreate();
 		}
 
-		public static DateTime LastUseTime { get; set; }
+		public DateTime LastUseTime { get; set; }
 
-		public static readonly TimeSpan ForceLoginTimespan = TimeSpan.FromMinutes (5);
+		public readonly TimeSpan ForceLoginTimespan = TimeSpan.FromMinutes (5);
 	}
 }
 

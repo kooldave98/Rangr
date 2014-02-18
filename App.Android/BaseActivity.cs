@@ -10,14 +10,14 @@ namespace App.Android {
 		{
 			base.OnPause ();
 
-			Android.Application.LastUseTime = DateTime.UtcNow;
+			Global.Current.LastUseTime = DateTime.UtcNow;
 		}
 
 		protected override void OnResume ()
 		{
 			base.OnResume ();
 
-			if (ShouldShowLogin (Android.Application.LastUseTime)) {
+			if (ShouldShowLogin (Global.Current.LastUseTime)) {
 				var intent = new Intent (this, typeof (LoginActivity));
 				intent.SetFlags (ActivityFlags.ClearTop);
 				StartActivity(intent);
@@ -30,7 +30,7 @@ namespace App.Android {
 				return true;
 			}
 
-			return (DateTime.UtcNow - lastUseTime) > Android.Application.ForceLoginTimespan;
+			return (DateTime.UtcNow - lastUseTime) > Global.Current.ForceLoginTimespan;
 		}
 	}
 }

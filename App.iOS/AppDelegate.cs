@@ -18,6 +18,7 @@ namespace App.iOS
 	{
 		UIWindow window;
 		MasterViewController mainViewController;
+		ISession _sessionInstance = Session.GetInstance ();
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
@@ -36,8 +37,17 @@ namespace App.iOS
 			//
 			// Show the login screen at startup
 			//
-			var login = new LoginViewController ();
-			mainViewController.PresentViewController (login, false, null);
+
+			//Check if the user exists first before loading the login view
+			var user = _sessionInstance.GetCurrentUser ();
+			if (user != null) {
+				mainViewController.Initialize ();
+
+			} else {
+				var login = new LoginViewController (mainViewController.Initialize);
+				mainViewController.PresentViewController (login, false, null);
+			}
+
 
 			return true;
 		}
@@ -46,7 +56,7 @@ namespace App.iOS
 		{
 			if (ShouldShowLogin (Global.LastUseTime)) {
 
-				var login = new LoginViewController ();
+				var login = new LoginViewController (mainViewController.Initialize);
 				mainViewController.PresentViewController (login, false, null);
 			}
 		}

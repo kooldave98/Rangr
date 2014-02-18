@@ -10,46 +10,49 @@ namespace App.iOS
 {
 	public partial class LoginViewController : UIViewController
 	{
-		ISession _sessionInstance = Session.GetInstance();
+		ISession _sessionInstance = Session.GetInstance ();
 		HttpRequest _httpRequest;
 		User user;
+		private Action init_callback;
 
-
-		public LoginViewController ()
+		public LoginViewController (Action the_init_callback)
 		{
+			init_callback = the_init_callback;
+		}
 
-			//Check if the user exists first before populating the view
-			user = _sessionInstance.GetCurrentUser ();
-			if (user != null) {
-				DismissViewController (true, null);
-			}
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);			 
+
+			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
 
 			InitView ();
 
 			_httpRequest = new HttpRequest ();
+
 		}
 
-
-		public override void ViewWillAppear (bool animated)
+		public override void ViewDidLoad ()
 		{
-			base.ViewWillAppear (animated);
-			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
+			base.ViewDidLoad ();
+
+
+
+
 		}
 
 		private async void Login ()
 		{
-			if (string.IsNullOrEmpty(username.Text))
-			{
-				var view = new UIAlertView("Oops", "Please enter a username.", null, "Ok");
-				view.Dismissed += (sender, e) => username.BecomeFirstResponder();
-				view.Show();
+			if (string.IsNullOrEmpty (username.Text)) {
+				var view = new UIAlertView ("Oops", "Please enter a username.", null, "Ok");
+				view.Dismissed += (sender, e) => username.BecomeFirstResponder ();
+				view.Show ();
 				return;
 			}
-			if (string.IsNullOrEmpty(password.Text))
-			{
-				var view = new UIAlertView("Oops", "Please enter a password.", null, "Ok");
-				view.Dismissed += (sender, e) => password.BecomeFirstResponder();
-				view.Show();
+			if (string.IsNullOrEmpty (password.Text)) {
+				var view = new UIAlertView ("Oops", "Please enter a password.", null, "Ok");
+				view.Dismissed += (sender, e) => password.BecomeFirstResponder ();
+				view.Show ();
 				return;
 			}
 
@@ -61,9 +64,11 @@ namespace App.iOS
 			//indicator.StopAnimating ();
 
 
-			var userID = await new UserRepository(_httpRequest).CreateUser(username.Text);
-			user = await new UserRepository(_httpRequest).GetUserById(userID.ID);
-			_sessionInstance.AddCurrentUser(user);
+			var userID = await new UserRepository (_httpRequest).CreateUser (username.Text);
+			user = await new UserRepository (_httpRequest).GetUserById (userID.ID);
+			_sessionInstance.AddCurrentUser (user);
+
+			init_callback ();
 
 			DismissViewController (true, null);
 		}

@@ -55,13 +55,11 @@ namespace App.iOS
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-		protected void Initialize()
-		{
+		public void Initialize() {
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
-			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => 
-			{
+			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
 				//if (this.NewPostViewController == null)
 				this.NewPostViewController = new NewPostViewController ();
 
@@ -74,16 +72,14 @@ namespace App.iOS
 
 
 			NavigationItem.SetLeftBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Action), false);
-			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => 
-			{
-				if (this.ConsoleViewController == null)
-				{
+			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => {
+				if (this.ConsoleViewController == null) {
 					this.ConsoleViewController = new UIViewController ();
-					var label = new UILabel(new RectangleF(0, 0, 320, 30));			
+					var label = new UILabel (new RectangleF (0, 0, 320, 30));			
 					label.Text = "SignalR Log";
 
-					ConsoleViewController.Add(label);
-					ConsoleViewController.Add(textView);
+					ConsoleViewController.Add (label);
+					ConsoleViewController.Add (textView);
 				}
 
 
@@ -95,7 +91,7 @@ namespace App.iOS
 			TableView.Source = dataSource = new DataSource (this);
 
 
-			var traceWriter = new TextViewWriter(SynchronizationContext.Current, textView);
+			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
 
 
 			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
@@ -108,7 +104,7 @@ namespace App.iOS
 			};
 
 			_global.client.OnConnectionAborted ((client) => {
-				client.Start(routine);
+				client.Start (routine);
 			});
 
 			_global.client.Start (routine);
