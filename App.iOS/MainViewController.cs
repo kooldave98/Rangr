@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Drawing;
 using System.Collections.Generic;
@@ -11,21 +11,20 @@ using App.Common.Shared;
 
 namespace App.iOS
 {
-	public partial class MasterViewController : UITableViewController
+	public partial class MainViewController : UITableViewController
 	{
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
 		UITextView textView;
 		Global _global;
-
 		DataSource dataSource;
 
-		public MasterViewController () : base ("MasterViewController", null)
+		public MainViewController () : base ("MainViewController", null)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("Master", "Master");
+			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 
 			// Custom initialization
-			textView = new UITextView(new RectangleF(0, 35, 320, 500));
+			textView = new UITextView (new RectangleF (0, 35, 320, 500));
 			_geoLocationInstance = GeoLocation.GetInstance ();
 			_sessionInstance = Session.GetInstance ();
 			//_postRepository = new PostRepository (new HttpRequest ());
@@ -37,7 +36,7 @@ namespace App.iOS
 			set;
 		}
 
-		public NewPostViewController NewPostViewController {
+		public CreatePostViewController CreatePostViewController {
 			get;
 			set;
 		}
@@ -51,22 +50,22 @@ namespace App.iOS
 		{
 			// Releases the view if it doesn't have a superview.
 			base.DidReceiveMemoryWarning ();
-			
+
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-		public void Initialize() {
+		public void Initialize ()
+		{
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
 				//if (this.NewPostViewController == null)
-				this.NewPostViewController = new NewPostViewController ();
-
+				this.CreatePostViewController = new CreatePostViewController ();
 				//this.NewPostViewController.ModalInPopover = true;
 
 				// Pass the selected object to the new view controller.
-				this.NavigationController.PushViewController (this.NewPostViewController, true);
+				this.NavigationController.PushViewController (this.CreatePostViewController, true);
 
 			};
 
@@ -119,7 +118,6 @@ namespace App.iOS
 			//			alert.Show();
 		}
 
-
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
@@ -130,9 +128,9 @@ namespace App.iOS
 		{
 			static readonly NSString CellIdentifier = new NSString ("Cell");
 			readonly List<object> objects = new List<object> ();
-			readonly MasterViewController controller;
+			readonly MainViewController controller;
 
-			public DataSource (MasterViewController controller)
+			public DataSource (MainViewController controller)
 			{
 				this.controller = controller;
 			}

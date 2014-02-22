@@ -141,10 +141,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MasterViewController.cs" />
-    <Compile Include="MasterViewController.designer.cs">
-      <DependentUpon>MasterViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="DetailViewController.cs" />
     <Compile Include="DetailViewController.designer.cs">
       <DependentUpon>DetailViewController.cs</DependentUpon>
@@ -153,17 +149,21 @@
     <Compile Include="LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewPostViewController.cs" />
-    <Compile Include="NewPostViewController.designer.cs">
-      <DependentUpon>NewPostViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Theme.cs" />
+    <Compile Include="CreatePostViewController.cs" />
+    <Compile Include="CreatePostViewController.designer.cs">
+      <DependentUpon>CreatePostViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainViewController.cs" />
+    <Compile Include="MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="MasterViewController.xib" />
     <InterfaceDefinition Include="DetailViewController.xib" />
-    <InterfaceDefinition Include="NewPostViewController.xib" />
+    <InterfaceDefinition Include="CreatePostViewController.xib" />
+    <InterfaceDefinition Include="MainViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

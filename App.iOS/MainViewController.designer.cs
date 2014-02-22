@@ -9,21 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace App.iOS
 {
-	[Register ("NewPostViewController")]
-	partial class NewPostViewController
+	[Register ("MainViewController")]
+	partial class MainViewController
 	{
-		[Outlet]
-		MonoTouch.UIKit.UITextField tbxPost { get; set; }
-
-		[Action ("btnSend:")]
-		partial void btnSend (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (tbxPost != null) {
-				tbxPost.Dispose ();
-				tbxPost = null;
-			}
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace App.iOS
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		UIWindow window;
-		MasterViewController mainViewController;
+		MainViewController mainViewController;
 		ISession _sessionInstance = Session.GetInstance ();
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
@@ -28,7 +28,7 @@ namespace App.iOS
 			//
 			// Build the UI
 			//
-			mainViewController = new MasterViewController ();
+			mainViewController = new MainViewController ();
 
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			window.RootViewController = new UINavigationController (mainViewController);
