@@ -165,6 +165,9 @@
     <Compile Include="Controls\ConsoleView.designer.cs">
       <DependentUpon>ConsoleView.cs</DependentUpon>
     </Compile>
+    <Compile Include="PostsTableViewSource.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

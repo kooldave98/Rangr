@@ -3,12 +3,13 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using App.Core.Portable.Models;
 
 namespace App.iOS
 {
 	public partial class DetailViewController : UIViewController
 	{
-		object detailItem;
+		Post detailItem;
 
 		public DetailViewController () : base ("DetailViewController", null)
 		{
@@ -17,7 +18,7 @@ namespace App.iOS
 			// Custom initialization
 		}
 
-		public void SetDetailItem (object newDetailItem)
+		public void SetDetailItem (Post newDetailItem)
 		{
 			if (detailItem != newDetailItem) {
 				detailItem = newDetailItem;
@@ -31,7 +32,7 @@ namespace App.iOS
 		{
 			// Update the user interface for the detail item
 			if (IsViewLoaded && detailItem != null)
-				detailDescriptionLabel.Text = detailItem.ToString ();
+				detailDescriptionLabel.Text = detailItem.Text;
 		}
 
 		public override void DidReceiveMemoryWarning ()

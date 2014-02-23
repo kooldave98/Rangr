@@ -18,14 +18,14 @@ namespace App.iOS
 		UITextView textView;
 		ConsoleView consoleView;
 		Global _global;
-		DataSource dataSource;
+		PostsTableViewSource dataSource;
 
 		public MainViewController () : base ("MainViewController", null)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 
 			// Custom initialization
-			consoleView = new ConsoleView (){
+			consoleView = new ConsoleView () {
 				//Frame = View.Frame
 			};
 				
@@ -37,20 +37,11 @@ namespace App.iOS
 			_global = Global.Current;
 		}
 
-		public DetailViewController DetailViewController {
-			get;
-			set;
-		}
+		public DetailViewController DetailViewController { get; set; }
 
-		public CreatePostViewController CreatePostViewController {
-			get;
-			set;
-		}
+		public CreatePostViewController CreatePostViewController { get; set; }
 
-		public UIViewController ConsoleViewController {
-			get;
-			set;
-		}
+		public UIViewController ConsoleViewController { get; set; }
 
 		public override void DidReceiveMemoryWarning ()
 		{
@@ -58,6 +49,8 @@ namespace App.iOS
 			base.DidReceiveMemoryWarning ();
 
 			// Release any cached data, images, etc that aren't in use.
+
+			showModal ();
 		}
 
 		public void Initialize ()
@@ -78,18 +71,17 @@ namespace App.iOS
 
 			NavigationItem.SetLeftBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Action), false);
 			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => {
-				if(ConsoleViewController == null)
-				{
+				if (ConsoleViewController == null) {
 					this.ConsoleViewController = new UIViewController ();
 					consoleView.Frame = ConsoleViewController.View.Frame;
-					this.ConsoleViewController.Add(consoleView);
+					this.ConsoleViewController.Add (consoleView);
 				}
 				// Pass the selected object to the new view controller.
 				this.NavigationController.PushViewController (this.ConsoleViewController, true);
 
 			};
 
-			TableView.Source = dataSource = new DataSource (this);
+			TableView.Source = dataSource = new PostsTableViewSource (this);
 
 
 			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
@@ -98,10 +90,11 @@ namespace App.iOS
 			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
 
 			Action<Post> routine = (post) => {
-				dataSource.Objects.Insert (0, post.Text);
+				dataSource.Objects.Insert (0, post);
 
-				using (var indexPath = NSIndexPath.FromRowSection (0, 0))
+				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
 					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+				}
 			};
 
 			_global.client.OnConnectionAborted ((client) => {
@@ -110,14 +103,8 @@ namespace App.iOS
 
 			_global.client.Start (routine);
 
-			//			UIAlertView alert = new UIAlertView();
-			//			alert.Title = "Add Something";
-			//			alert.AddButton("One");
-			//			alert.AddButton("Two");
-			//			alert.AddButton("Three");
-			//			alert.Message = "Enter something:";
-			//			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;//UIAlertViewStyle.LoginAndPasswordInput;
-			//			alert.Show();
+			//showModal;
+
 		}
 
 		public override void ViewDidLoad ()
@@ -126,84 +113,18 @@ namespace App.iOS
 
 		}
 
-		class DataSource : UITableViewSource
+
+		private void showModal()
 		{
-			static readonly NSString CellIdentifier = new NSString ("Cell");
-			readonly List<object> objects = new List<object> ();
-			readonly MainViewController controller;
+			UIAlertView alert = new UIAlertView ();
+			alert.Title = "Add Something";
+			alert.AddButton ("One");
+			alert.AddButton ("Two");
+			alert.AddButton ("Three");
+			alert.Message = "Low Memory o";
+			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;//UIAlertViewStyle.LoginAndPasswordInput;
+			alert.Show ();
 
-			public DataSource (MainViewController controller)
-			{
-				this.controller = controller;
-			}
-
-			public IList<object> Objects {
-				get { return objects; }
-			}
-			// Customize the number of sections in the table view.
-			public override int NumberOfSections (UITableView tableView)
-			{
-				return 1;
-			}
-
-			public override int RowsInSection (UITableView tableview, int section)
-			{
-				return objects.Count;
-			}
-			// Customize the appearance of table view cells.
-			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
-			{
-				var cell = tableView.DequeueReusableCell (CellIdentifier);
-				if (cell == null) {
-					cell = new UITableViewCell (UITableViewCellStyle.Default, CellIdentifier);
-					cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-				}
-
-				cell.TextLabel.Text = objects [indexPath.Row].ToString ();
-
-				return cell;
-			}
-
-			public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
-			{
-				// Return false if you do not want the specified item to be editable.
-				return true;
-			}
-
-			public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
-			{
-				if (editingStyle == UITableViewCellEditingStyle.Delete) {
-					// Delete the row from the data source.
-					objects.RemoveAt (indexPath.Row);
-					controller.TableView.DeleteRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
-				} else if (editingStyle == UITableViewCellEditingStyle.Insert) {
-					// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-				}
-			}
-			/*
-			// Override to support rearranging the table view.
-			public override void MoveRow (UITableView tableView, NSIndexPath sourceIndexPath, NSIndexPath destinationIndexPath)
-			{
-			}
-			*/
-			/*
-			// Override to support conditional rearranging of the table view.
-			public override bool CanMoveRow (UITableView tableView, NSIndexPath indexPath)
-			{
-				// Return false if you do not want the item to be re-orderable.
-				return true;
-			}
-			*/
-			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-			{
-				if (controller.DetailViewController == null)
-					controller.DetailViewController = new DetailViewController ();
-
-				controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
-
-				// Pass the selected object to the new view controller.
-				controller.NavigationController.PushViewController (controller.DetailViewController, true);
-			}
 		}
 	}
 }
