@@ -140,7 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppDelegate.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="DetailViewController.cs" />
     <Compile Include="DetailViewController.designer.cs">
       <DependentUpon>DetailViewController.cs</DependentUpon>
@@ -159,11 +161,10 @@
     <Compile Include="MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="DetailViewController.xib" />
-    <InterfaceDefinition Include="CreatePostViewController.xib" />
-    <InterfaceDefinition Include="MainViewController.xib" />
+    <Compile Include="Controls\ConsoleView.cs" />
+    <Compile Include="Controls\ConsoleView.designer.cs">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -185,5 +186,22 @@
       <Version>0.7.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="CreatePostViewController.xib">
+      <DependentUpon>CreatePostViewController.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="DetailViewController.xib">
+      <DependentUpon>DetailViewController.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="MainViewController.xib">
+      <DependentUpon>MainViewController.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="Controls\ConsoleView.xib">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
+    </InterfaceDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

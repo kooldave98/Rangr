@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="view" destination="bzM-e0-nG5" id="v74-5D-nld"/>
+                <outlet property="view" destination="bzM-e0-nG5" id="Wfr-8G-zSv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

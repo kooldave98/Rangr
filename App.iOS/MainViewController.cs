@@ -16,6 +16,7 @@ namespace App.iOS
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
 		UITextView textView;
+		ConsoleView consoleView;
 		Global _global;
 		DataSource dataSource;
 
@@ -24,7 +25,12 @@ namespace App.iOS
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 
 			// Custom initialization
-			textView = new UITextView (new RectangleF (0, 35, 320, 500));
+			consoleView = new ConsoleView (){
+				//Frame = View.Frame
+			};
+				
+			textView = consoleView.Console;
+
 			_geoLocationInstance = GeoLocation.GetInstance ();
 			_sessionInstance = Session.GetInstance ();
 			//_postRepository = new PostRepository (new HttpRequest ());
@@ -72,16 +78,12 @@ namespace App.iOS
 
 			NavigationItem.SetLeftBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Action), false);
 			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => {
-				if (this.ConsoleViewController == null) {
+				if(ConsoleViewController == null)
+				{
 					this.ConsoleViewController = new UIViewController ();
-					var label = new UILabel (new RectangleF (0, 0, 320, 30));			
-					label.Text = "SignalR Log";
-
-					ConsoleViewController.Add (label);
-					ConsoleViewController.Add (textView);
+					consoleView.Frame = ConsoleViewController.View.Frame;
+					this.ConsoleViewController.Add(consoleView);
 				}
-
-
 				// Pass the selected object to the new view controller.
 				this.NavigationController.PushViewController (this.ConsoleViewController, true);
 
