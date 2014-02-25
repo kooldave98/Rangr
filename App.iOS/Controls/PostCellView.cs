@@ -3,9 +3,11 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Core.Portable.Models;
+//using MonoTouch.ObjCRuntime;
 
 namespace App.iOS
 {
+	[Register("PostCellView")] 
 	public partial class PostCellView : UITableViewCell
 	{
 		const string PlaceholderImagePath = "Placeholder.jpg";

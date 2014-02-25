@@ -64,7 +64,7 @@ namespace App.iOS
 
 		public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			return 180;
+			return 90;
 		}
 
 		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)

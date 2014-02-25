@@ -9,7 +9,7 @@ using System.CodeDom.Compiler;
 
 namespace App.iOS
 {
-	[Register ("PostCellView")]
+
 	partial class PostCellView
 	{
 		[Outlet]
