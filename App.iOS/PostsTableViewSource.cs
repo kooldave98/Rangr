@@ -4,13 +4,12 @@ using MonoTouch.Foundation;
 using System.Linq;
 using System.Collections.Generic;
 using App.Core.Portable.Models;
+using MonoTouch.ObjCRuntime;
 
 namespace App.iOS
 {
 	public class PostsTableViewSource : UITableViewSource
 	{
-		const string PlaceholderImagePath = "Placeholder.jpg";
-		static readonly NSString CellIdentifier = new NSString ("Cell");
 		readonly List<Post> objects = new List<Post> ();
 		readonly MainViewController controller;
 
@@ -35,20 +34,37 @@ namespace App.iOS
 		// Customize the appearance of table view cells.
 		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell (CellIdentifier);
-			if (cell == null) {
-				cell = new UITableViewCell (UITableViewCellStyle.Subtitle, CellIdentifier);
+			var post = objects [indexPath.Row];
 
+			var cell = tableView.DequeueReusableCell (PostCellView.Key) as PostCellView;
+
+			if (cell == null)
+			{
+				cell = PostCellView.Create ();
 				cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 			}
 
-			cell.TextLabel.Text = objects[indexPath.Row].UserDisplayName;
-			cell.DetailTextLabel.Text = objects[indexPath.Row].Text;
-			cell.ImageView.Image = UIImage.FromBundle (PlaceholderImagePath);
+			cell.BindDataToCell(post);
+
+
+//			if (cell == null) {
+//				cell = new UITableViewCell (UITableViewCellStyle.Subtitle, CellIdentifier);
+//
+//				cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+//			}
+
+//			cell.TextLabel.Text = objects[indexPath.Row].UserDisplayName;
+//			cell.DetailTextLabel.Text = objects[indexPath.Row].Text;
+//			cell.ImageView.Image = UIImage.FromBundle (PlaceholderImagePath);
 			//cell.ImageView.Image = UIImage.FromFile("Images/"+tableItems[indexPath.Row].ImageName); // don't use for Value2
 
 
 			return cell;
+		}
+
+		public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+		{
+			return 180;
 		}
 
 		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)

@@ -168,6 +168,10 @@
     <Compile Include="PostsTableViewSource.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PostCellView.cs" />
+    <Compile Include="Controls\PostCellView.designer.cs">
+      <DependentUpon>PostCellView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -202,6 +206,9 @@
     </InterfaceDefinition>
     <InterfaceDefinition Include="Controls\ConsoleView.xib">
       <DependentUpon>ConsoleView.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="Controls\PostCellView.xib">
+      <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
