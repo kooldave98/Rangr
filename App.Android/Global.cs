@@ -8,7 +8,7 @@ using App.Common.Shared;
 
 namespace App.Android
 {
-	[Application (Label = "GeoWalkr", Theme = "@style/CustomHoloTheme", Icon="@drawable/Icon")]
+	[Application (Label = "@string/app_name", Theme = "@style/CustomHoloTheme")]//, Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application {
 
 		public IList<Post> Posts { get; set;}

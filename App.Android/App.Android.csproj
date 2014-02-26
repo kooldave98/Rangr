@@ -96,6 +96,8 @@
     <AndroidResource Include="Resources\Color\disabledText.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\Placeholder.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\Placeholder.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

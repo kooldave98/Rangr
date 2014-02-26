@@ -76,7 +76,10 @@ namespace App.Android
 			public const int loginbox = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int questionmark = 2130837507;
+			public const int Placeholder = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int questionmark = 2130837508;
 			
 			static Drawable()
 			{
@@ -100,6 +103,9 @@ namespace App.Android
 			// aapt resource value: 0x7f07000c
 			public const int ConsoleScrollView = 2131165196;
 			
+			// aapt resource value: 0x7f070018
+			public const int Divider = 2131165208;
+			
 			// aapt resource value: 0x7f07000e
 			public const int PostDetailsHeader = 2131165198;
 			
@@ -121,8 +127,11 @@ namespace App.Android
 			// aapt resource value: 0x7f070008
 			public const int StreamLayout = 2131165192;
 			
-			// aapt resource value: 0x7f070015
-			public const int UserNameText = 2131165205;
+			// aapt resource value: 0x7f070017
+			public const int UserImageButton = 2131165207;
+			
+			// aapt resource value: 0x7f070016
+			public const int UserNameText = 2131165206;
 			
 			// aapt resource value: 0x7f070001
 			public const int dialogImage = 2131165185;
@@ -133,6 +142,12 @@ namespace App.Android
 			// aapt resource value: 0x7f070002
 			public const int dialogTitle = 2131165186;
 			
+			// aapt resource value: 0x7f070014
+			public const int linearLayout1 = 2131165204;
+			
+			// aapt resource value: 0x7f070015
+			public const int linearLayout2 = 2131165205;
+			
 			// aapt resource value: 0x7f070005
 			public const int logIn = 2131165189;
 			
@@ -141,9 +156,6 @@ namespace App.Android
 			
 			// aapt resource value: 0x7f070007
 			public const int loginQuestion = 2131165191;
-			
-			// aapt resource value: 0x7f070014
-			public const int lstItemPost = 2131165204;
 			
 			// aapt resource value: 0x7f070004
 			public const int password = 2131165188;
