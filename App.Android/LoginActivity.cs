@@ -18,7 +18,7 @@ namespace App.Android
 				, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : Activity, TextView.IOnEditorActionListener
 	{
-		ISession _sessionInstance = Session.Current;
+		ISession _sessionInstance = Session.GetInstance();
 
 		EditText password, userName;
 		Button login;

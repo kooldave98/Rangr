@@ -81,6 +81,8 @@
     <Compile Include="..\..\Common\GeoLocationProvider.cs">
       <Link>GeoLocationProvider.cs</Link>
     </Compile>
+    <Compile Include="PersistentStorage_OLD.cs" />
+    <Compile Include="Global.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

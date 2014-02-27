@@ -103,7 +103,7 @@ namespace App.Android
 			_global.Posts = new List<Post> ();
 
 			_geoLocationInstance = GeoLocation.GetInstance (this);
-			_sessionInstance = Session.Current;
+			_sessionInstance = Session.GetInstance();
 
 			//Find our controls
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
