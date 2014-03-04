@@ -8,12 +8,12 @@ namespace App.Core.Portable.Device
 	{
 		Task<String> GetCurrentPosition();
 		void OnGeoPositionChanged (Action<string> handler);
-		void OnStatusChanged (Action<PositionStatus> handler);
+		void OnStatusChanged (Action<Status> handler);
 //		event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 //		event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 	}
 
-	public enum PositionStatus
+	public enum Status
 	{
 		ERROR,
 		RELIABLE,
@@ -32,9 +32,9 @@ namespace App.Core.Portable.Device
 
 	public class StatusChangedEventArgs : EventArgs
 	{
-		public PositionStatus status { get; private set;}
+		public Status status { get; private set;}
 
-		public StatusChangedEventArgs(PositionStatus the_status)
+		public StatusChangedEventArgs(Status the_status)
 		{
 			status = the_status;
 		}

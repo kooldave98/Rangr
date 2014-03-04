@@ -17,7 +17,7 @@ namespace App.Common.Shared
 		private static GeoLocation _instance = null;
 		private Geolocator geolocator;
 		private List<Action<string>> geoPositionChangedCallbacks = new List<Action<string>> ();
-		private List<Action<PositionStatus>> statusChangedCallbacks = new List<Action<PositionStatus>> ();
+		private List<Action<Status>> statusChangedCallbacks = new List<Action<Status>> ();
 //		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 //		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 		//private SynchronizationContext _context;
@@ -31,7 +31,7 @@ namespace App.Common.Shared
 			geolocator.PositionError += (sender, args) => {
 				var errorMessage = args.Error.ToString ();
 
-				NotifyStatusChanged (PositionStatus.ERROR, errorMessage);
+				NotifyStatusChanged (Status.ERROR, errorMessage);
 
 			};
 
@@ -67,7 +67,7 @@ namespace App.Common.Shared
 		{
 			geoPositionChangedCallbacks.Add (handler);
 		}
-		public void OnStatusChanged (Action<PositionStatus> handler)
+		public void OnStatusChanged (Action<Status> handler)
 		{
 			statusChangedCallbacks.Add (handler);
 		}
@@ -107,7 +107,7 @@ namespace App.Common.Shared
 			if (positionReliable) {
 				positionReliable = false;
 
-				NotifyStatusChanged (PositionStatus.UNRELIABLE, "Position is not reliable");
+				NotifyStatusChanged (Status.UNRELIABLE, "Position is not reliable");
 			}
 		}
 
@@ -116,11 +116,11 @@ namespace App.Common.Shared
 			if (!positionReliable) {
 				positionReliable = true;
 
-				NotifyStatusChanged (PositionStatus.RELIABLE, "Position is reliable");
+				NotifyStatusChanged (Status.RELIABLE, "Position is reliable");
 			}
 		}
 
-		private void NotifyStatusChanged (PositionStatus status, string statusMessage)
+		private void NotifyStatusChanged (Status status, string statusMessage)
 		{
 			//OnStatusChanged (this, new StatusChangedEventArgs(status));
 			foreach (var callback in statusChangedCallbacks) {
@@ -143,9 +143,9 @@ namespace App.Common.Shared
 			var t = geolocator.GetPositionAsync (10000);
 
 			if (t.IsFaulted) {
-				NotifyStatusChanged (PositionStatus.ERROR, ((GeolocationException)t.Exception.InnerException).Error.ToString ());
+				NotifyStatusChanged (Status.ERROR, ((GeolocationException)t.Exception.InnerException).Error.ToString ());
 			} else if (t.IsCanceled) {
-				NotifyStatusChanged (PositionStatus.ERROR, "Geolocator was cancelled");
+				NotifyStatusChanged (Status.ERROR, "Geolocator was cancelled");
 			} else {
 				geoPosition = await t;
 			}
