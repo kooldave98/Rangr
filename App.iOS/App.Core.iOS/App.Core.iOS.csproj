@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BBB2AAF6-9DA6-4DBC-9C64-A751791DD47D}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,15 +64,26 @@
     </Compile>
     <Compile Include="TextViewWriter.cs" />
     <Compile Include="PersistentStorage.cs" />
-    <Compile Include="..\..\Common\PostRepository.cs">
-      <Link>PostRepository.cs</Link>
-    </Compile>
-    <Compile Include="Session.cs" />
-    <Compile Include="..\..\Common\UserRepository.cs">
-      <Link>UserRepository.cs</Link>
-    </Compile>
     <Compile Include="..\..\Common\GeoLocationProvider.cs">
       <Link>GeoLocationProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Connections.cs">
+      <Link>Services\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Posts.cs">
+      <Link>Services\Posts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\SeenPosts.cs">
+      <Link>Services\SeenPosts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Users.cs">
+      <Link>Services\Users.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Session.cs">
+      <Link>Session.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\JavaScriptTimer.cs">
+      <Link>JavaScriptTimer.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

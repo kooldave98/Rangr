@@ -5,9 +5,9 @@ namespace App.Core.Portable.Device
 {
 	public interface ISession
 	{
+		//User
 		User GetCurrentUser ();
-
-		void AddCurrentUser (User user);
+		void PersistCurrentUser (User user);
 	}
 }
 

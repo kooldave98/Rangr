@@ -13,10 +13,10 @@ namespace App.Common.Shared
 	/// </summary>
 	public partial class GeoLocation : IGeoLocation
 	{
-		private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
+		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
 		private Geolocator geolocator;
-		private List<Action<string>> geoPositionChangedCallbacks = new List<Action<string>> ();
+		private List<Action<GeoValue>> geoPositionChangedCallbacks = new List<Action<GeoValue>> ();
 		private List<Action<Status>> statusChangedCallbacks = new List<Action<Status>> ();
 //		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 //		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
@@ -46,11 +46,13 @@ namespace App.Common.Shared
 
 				} else {
 					var geolocationValue = string.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
-					geolocationValue = sample_geoposition;//TO BE REMOVED
+					//geolocationValue = sample_geoposition;//TO BE REMOVED
 
 					NotifyAccurate ();
 
-					NotifyPositionChanged (geolocationValue);
+					var geo_value = new GeoValue { geolocation_value = geolocationValue, geolocation_accuracy = Convert.ToInt32(geoPosition.Accuracy)};
+
+					NotifyPositionChanged (geo_value);
 
 				}
 
@@ -63,7 +65,7 @@ namespace App.Common.Shared
 		}
 
 
-		public void OnGeoPositionChanged (Action<string> handler)
+		public void OnGeoPositionChanged (Action<GeoValue> handler)
 		{
 			geoPositionChangedCallbacks.Add (handler);
 		}
@@ -74,7 +76,7 @@ namespace App.Common.Shared
 
 
 
-		public async Task<String> GetCurrentPosition ()
+		public async Task<GeoValue> GetCurrentPosition ()
 		{
 			if (geoPosition == null) {
 				await GetPosition ();
@@ -90,8 +92,8 @@ namespace App.Common.Shared
 			}
 
 			var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
-			geolocationValue = sample_geoposition;
-			return geolocationValue;
+			//geolocationValue = sample_geoposition;
+			return new GeoValue { geolocation_value = geolocationValue, geolocation_accuracy = Convert.ToInt32(geoPosition.Accuracy)};
 		}
 
 		private bool PositionIsInvalid{
@@ -128,7 +130,7 @@ namespace App.Common.Shared
 			}
 		}
 
-		private void NotifyPositionChanged (string position)
+		private void NotifyPositionChanged (GeoValue position)
 		{
 			//OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
 

@@ -10,7 +10,7 @@ namespace App.iOS
 {
 	public class PostsTableViewSource : UITableViewSource
 	{
-		readonly List<Post> objects = new List<Post> ();
+		readonly List<SeenPost> objects = new List<SeenPost> ();
 		readonly MainViewController controller;
 
 		public PostsTableViewSource (MainViewController controller)
@@ -18,7 +18,7 @@ namespace App.iOS
 			this.controller = controller;
 		}
 
-		public IList<Post> Objects {
+		public IList<SeenPost> Objects {
 			get { return objects; }
 		}
 		// Customize the number of sections in the table view.

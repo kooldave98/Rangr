@@ -13,9 +13,9 @@ namespace App.Android
 	[Application (Label = "@string/app_name", Theme = "@style/CustomHoloTheme")]//, Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application
 	{
-		public IList<Post> Posts { get; set; }
+		public IList<SeenPost> Posts { get; set; }
 
-		public CommonClient client { get; set; }
+		public ConnectionIdentity current_connection { get; set;}
 
 		public static Global Current {
 			get {

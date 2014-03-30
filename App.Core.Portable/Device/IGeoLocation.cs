@@ -6,8 +6,8 @@ namespace App.Core.Portable.Device
 {
 	public interface IGeoLocation
 	{
-		Task<String> GetCurrentPosition();
-		void OnGeoPositionChanged (Action<string> handler);
+		Task<GeoValue> GetCurrentPosition();
+		void OnGeoPositionChanged (Action<GeoValue> handler);
 		void OnStatusChanged (Action<Status> handler);
 //		event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 //		event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
@@ -38,6 +38,13 @@ namespace App.Core.Portable.Device
 		{
 			status = the_status;
 		}
+	}
+
+	public class GeoValue
+	{
+		public string geolocation_value { get; set;}
+
+		public int geolocation_accuracy { get; set;}
 	}
 
 

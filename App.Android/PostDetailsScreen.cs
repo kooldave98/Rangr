@@ -17,10 +17,9 @@ namespace App.Android
 	public class PostDetailsScreen : Activity
 	{
 		Global _global;
-		Post post = new Post();
+		SeenPost post = new SeenPost();
 		Button cancelButton;
 		TextView postTextLabel;
-		Button saveButton;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -30,7 +29,7 @@ namespace App.Android
 
 			int postID = Intent.GetIntExtra("PostID", 0);
 			if(postID > 0) {
-				post = _global.Posts.Single (p => p.ID == postID);
+				post = _global.Posts.Single (p => p.id == postID);
 			}
 
 
@@ -40,7 +39,7 @@ namespace App.Android
 			postTextLabel = FindViewById<TextView>(Resource.Id.PostTextLabel);
 			cancelButton = FindViewById<Button>(Resource.Id.CancelButton);
 
-			postTextLabel.Text = post.Text;
+			postTextLabel.Text = post.text;
 
 
 			// button clicks 

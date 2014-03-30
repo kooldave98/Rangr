@@ -1,40 +1,43 @@
 ﻿using System;
-using System.Linq;
-using System.Drawing;
 using System.Collections.Generic;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using System.Drawing;
+using System.Linq;
 using System.Threading;
+using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
-using App.Common.Shared;
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using App.Core.Portable.Network;
 
 namespace App.iOS
 {
 	public partial class MainViewController : UITableViewController
 	{
+		IHttpRequest _httpRequest;
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
 		UITextView textView;
 		ConsoleView consoleView;
 		Global _global;
 		PostsTableViewSource dataSource;
+		Connections ConnectionServices;
 
 		public MainViewController () : base ("MainViewController", null)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
+			_httpRequest = HttpRequest.Current;
+			_geoLocationInstance = GeoLocation.GetInstance ();
+			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
+			ConnectionServices = new Connections (_httpRequest);
+			_global = Global.Current;
 
 			// Custom initialization
 			consoleView = new ConsoleView () {
 				//Frame = View.Frame
 			};
-				
-			textView = consoleView.Console;
 
-			_geoLocationInstance = GeoLocation.GetInstance ();
-			_sessionInstance = Session.GetInstance ();
-			//_postRepository = new PostRepository (new HttpRequest ());
-			_global = Global.Current;
+			textView = consoleView.Console;
+			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 		}
 
 		public DetailViewController DetailViewController { get; set; }
@@ -53,7 +56,7 @@ namespace App.iOS
 			showModal ();
 		}
 
-		public void Initialize ()
+		public async void Initialize ()
 		{
 			// Perform any additional setup after loading the view, typically from a nib.
 
@@ -83,25 +86,43 @@ namespace App.iOS
 
 			TableView.Source = dataSource = new PostsTableViewSource (this);
 
+			var location = await _geoLocationInstance.GetCurrentPosition ();
+			
+			var user = _sessionInstance.GetCurrentUser ();
 
-			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
+			//CreateConnection here
+			_global.current_connection = await ConnectionServices.Create(user.user_id.ToString(), location.geolocation_value, location.geolocation_accuracy.ToString());
 
 
-			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
+			//init heartbeat here
 
-			Action<Post> routine = (post) => {
-				dataSource.Objects.Insert (0, post);
+			_geoLocationInstance.OnGeoPositionChanged (async (geo_value)=>{
+				_global.current_connection = await ConnectionServices
+					.Update(_global.current_connection.connection_id.ToString(), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString());
 
-				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
-					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
-				}
-			};
+			});	
 
-			_global.client.OnConnectionAborted ((client) => {
-				client.Start (routine);
-			});
 
-			_global.client.Start (routine);
+			JavaScriptTimer.SetInterval(async () =>
+			{
+					var position = await _geoLocationInstance.GetCurrentPosition();		
+
+					_global.current_connection = await ConnectionServices
+						.Update(_global.current_connection.connection_id.ToString(), position.geolocation_value, position.geolocation_accuracy.ToString());
+
+			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+
+
+
+//			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
+//
+//			Action<SeenPost> routine = (post) => {
+//				dataSource.Objects.Insert (0, post);
+//
+//				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
+//					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+//				}
+//			};
 
 			//showModal;
 
@@ -127,4 +148,5 @@ namespace App.iOS
 
 		}
 	}
+
 }

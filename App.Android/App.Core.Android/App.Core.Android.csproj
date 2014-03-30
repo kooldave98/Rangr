@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9174B72C-57C4-4F6A-BBAF-578E8855E5E5}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,25 +64,36 @@
     <Compile Include="..\..\Common\HttpRequest.cs">
       <Link>HttpRequest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\PostRepository.cs">
-      <Link>PostRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\UserRepository.cs">
-      <Link>UserRepository.cs</Link>
-    </Compile>
     <Compile Include="Persistence\BaseEntity.cs" />
     <Compile Include="Persistence\EntityDatabase.cs" />
     <Compile Include="Persistence\IBaseEntity.cs" />
     <Compile Include="Persistence\Models\KeyValue.cs" />
     <Compile Include="GeoLocation.cs" />
     <Compile Include="PersistentStorage.cs" />
-    <Compile Include="Session.cs" />
     <Compile Include="TextViewWriter.cs" />
     <Compile Include="..\..\Common\GeoLocationProvider.cs">
       <Link>GeoLocationProvider.cs</Link>
     </Compile>
     <Compile Include="PersistentStorage_OLD.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="..\..\Common\Session.cs">
+      <Link>Session.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Connections.cs">
+      <Link>Services\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Posts.cs">
+      <Link>Services\Posts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\SeenPosts.cs">
+      <Link>Services\SeenPosts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Users.cs">
+      <Link>Services\Users.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\JavaScriptTimer.cs">
+      <Link>JavaScriptTimer.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -104,5 +115,8 @@
       <Version>4.5.11</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

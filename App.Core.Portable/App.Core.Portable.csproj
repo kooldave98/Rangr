@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>12.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1A81AE71-9B42-4976-8C53-5575D5D22002}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,10 +38,16 @@
     <Compile Include="Device\IGeoLocation.cs" />
     <Compile Include="Device\ISession.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserIdentity.cs" />
-    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\UserIdentity.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources.cs" />
     <Compile Include="Persistence\IPersistentStorage.cs" />
+    <Compile Include="Models\Connection.cs" />
+    <Compile Include="Models\ConnectionIdentity.cs">
+      <DependentUpon>Connection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeenPost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup />

@@ -24,10 +24,10 @@ namespace App.iOS
 			return (PostCellView)Nib.Instantiate (null, null) [0];
 		}
 
-		public void BindDataToCell(Post post)
+		public void BindDataToCell(SeenPost post)
 		{
-			UserNameView.Text = post.UserDisplayName;
-			UserPostTextView.Text = post.Text;
+			UserNameView.Text = post.user_display_name;
+			UserPostTextView.Text = post.text;
 			UserImageView.Image = UIImage.FromBundle (PlaceholderImagePath);
 		}
 	}

@@ -13,7 +13,7 @@ namespace App.iOS
 	{
 		//public IList<Post> Posts { get; set;}
 
-		public CommonClient client { get; set;}
+		public ConnectionIdentity current_connection { get; set;}
 
 		private static Global _instance = null;
 		public static Global Current { get { return _instance ?? (_instance = new Global ()); } }

@@ -1,15 +1,15 @@
 using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
+using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using App.Core.Portable.Models;
 
 namespace App.iOS
 {
 	public partial class DetailViewController : UIViewController
 	{
-		Post detailItem;
+		SeenPost detailItem;
 
 		public DetailViewController () : base ("DetailViewController", null)
 		{
@@ -18,7 +18,7 @@ namespace App.iOS
 			// Custom initialization
 		}
 
-		public void SetDetailItem (Post newDetailItem)
+		public void SetDetailItem (SeenPost newDetailItem)
 		{
 			if (detailItem != newDetailItem) {
 				detailItem = newDetailItem;
@@ -32,7 +32,7 @@ namespace App.iOS
 		{
 			// Update the user interface for the detail item
 			if (IsViewLoaded && detailItem != null)
-				detailDescriptionLabel.Text = detailItem.Text;
+				detailDescriptionLabel.Text = detailItem.text;
 		}
 
 		public override void DidReceiveMemoryWarning ()

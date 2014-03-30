@@ -18,7 +18,8 @@ namespace App.Android
 				, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : Activity, TextView.IOnEditorActionListener
 	{
-		ISession _sessionInstance = Session.GetInstance();
+		ISession _sessionInstance = Session.GetInstance(PersistentStorage.Current);
+		private Users UserServices;
 
 		EditText password, userName;
 		Button login;
@@ -34,67 +35,75 @@ namespace App.Android
 			var user = _sessionInstance.GetCurrentUser ();
 			if (user != null) {
 				StartActivity (typeof(MainActivity));
-			}
+			} else {
 
-
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Login);
-
-			// Get our controls from the layout resource,
-			// and attach an event to it
-			login = FindViewById<Button> (Resource.Id.logIn);
-			userName = FindViewById<EditText> (Resource.Id.userName);
-			password = FindViewById<EditText> (Resource.Id.password);
-			progressIndicator = FindViewById<ProgressBar> (Resource.Id.loginProgress);
-			var loginHelp = FindViewById<ImageButton> (Resource.Id.loginQuestion);
-
-			var _httpRequest = new HttpRequest ();
+				var _httpRequest = HttpRequest.Current;
+				UserServices = new Users (_httpRequest);
 
 
 
-			//Set edit action listener to allow the next & go buttons on the input keyboard to interact with login.
-			userName.SetOnEditorActionListener (this);
-			password.SetOnEditorActionListener (this);
 
-			userName.TextChanged += (sender, e) => {
-				//loginViewModel.Username = userName.Text;
-			};
-			password.TextChanged += (sender, e) => {
-				//loginViewModel.Password = password.Text;
-			};
+				// Set our view from the "main" layout resource
+				SetContentView (Resource.Layout.Login);
 
-			loginHelp.Click += (sender, e) => {
-				var builder = new AlertDialog.Builder (this)
+				// Get our controls from the layout resource,
+				// and attach an event to it
+				login = FindViewById<Button> (Resource.Id.logIn);
+				userName = FindViewById<EditText> (Resource.Id.userName);
+				password = FindViewById<EditText> (Resource.Id.password);
+				progressIndicator = FindViewById<ProgressBar> (Resource.Id.loginProgress);
+				var loginHelp = FindViewById<ImageButton> (Resource.Id.loginQuestion);
+
+
+
+				//Set edit action listener to allow the next & go buttons on the input keyboard to interact with login.
+				userName.SetOnEditorActionListener (this);
+				password.SetOnEditorActionListener (this);
+
+				userName.TextChanged += (sender, e) => {
+					//loginViewModel.Username = userName.Text;
+				};
+				password.TextChanged += (sender, e) => {
+					//loginViewModel.Password = password.Text;
+				};
+
+				loginHelp.Click += (sender, e) => {
+					var builder = new AlertDialog.Builder (this)
 					.SetTitle ("Need Help?")
 					.SetMessage ("Enter any username or password.")
-					.SetPositiveButton ("Ok", (innerSender, innere) => { });
-				var dialog = builder.Create ();
-				dialog.Show ();
-			};
-
-			LoginAction = async delegate {
-
-				if (!string.IsNullOrEmpty (userName.Text)) {
-					//this hides the keyboard
-					var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
-					imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
-					login.Visibility = ViewStates.Invisible;
-					progressIndicator.Visibility = ViewStates.Visible;
-
-					var userID = await new UserRepository(_httpRequest).CreateUser(userName.Text);
-					user = await new UserRepository(_httpRequest).GetUserById(userID.ID);
-					_sessionInstance.AddCurrentUser(user);
-					RunOnUiThread (() => {
-						StartActivity (typeof (MainActivity));
+					.SetPositiveButton ("Ok", (innerSender, innere) => {
 					});
-				}
-			};
+					var dialog = builder.Create ();
+					dialog.Show ();
+				};
 
-			// Perform the login and dismiss the keyboard
-			login.Click += (sender, e) => {LoginAction();};
+				LoginAction = async delegate {
 
-			//request focus to the edit text to start on username.
-			userName.RequestFocus ();
+					if (!string.IsNullOrEmpty (userName.Text)) {
+						//this hides the keyboard
+						var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
+						imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
+						login.Visibility = ViewStates.Invisible;
+						progressIndicator.Visibility = ViewStates.Visible;
+
+						var userID = await UserServices.Create (userName.Text);
+						user = await UserServices.Get (userID.user_id.ToString ());
+						_sessionInstance.PersistCurrentUser (user);
+
+						//RunOnUiThread (() => {
+							StartActivity (typeof(MainActivity));
+							//});
+					}
+				};
+
+				// Perform the login and dismiss the keyboard
+				login.Click += (sender, e) => {
+					LoginAction ();
+				};
+
+				//request focus to the edit text to start on username.
+				userName.RequestFocus ();
+			}
 
 		}
 

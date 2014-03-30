@@ -7,18 +7,18 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	public class PostListAdapter : BaseAdapter<Post>
+	public class PostListAdapter : BaseAdapter<SeenPost>
 	{
 		Activity context = null;
-		IList<Post> _posts = new List<Post>();
+		IList<SeenPost> _posts = new List<SeenPost>();
 
-		public PostListAdapter (Activity context, IList<Post> posts) : base ()
+		public PostListAdapter (Activity context, IList<SeenPost> posts) : base ()
 		{
 			this.context = context;
 			this._posts = posts;
 		}
 
-		public override Post this[int position]
+		public override SeenPost this[int position]
 		{
 			get { return _posts[position]; }
 		}
@@ -52,8 +52,8 @@ namespace App.Android
 			var txtDescription = view.FindViewById<TextView>(Resource.Id.PostText);
 
 			//Assign item's values to the various subviews
-			txtName.SetText (item.UserDisplayName, TextView.BufferType.Normal);
-			txtDescription.SetText (item.Text, TextView.BufferType.Normal);
+			txtName.SetText (item.user_display_name, TextView.BufferType.Normal);
+			txtDescription.SetText (item.text, TextView.BufferType.Normal);
 			view.FindViewById<ImageView>(Resource.Id.UserImageButton).SetImageResource(Resource.Drawable.Placeholder);
 			//Finally return the view
 			return view;

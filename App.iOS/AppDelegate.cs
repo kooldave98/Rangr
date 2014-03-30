@@ -18,7 +18,7 @@ namespace App.iOS
 	{
 		UIWindow window;
 		MainViewController mainViewController;
-		ISession _sessionInstance = Session.GetInstance ();
+		ISession _sessionInstance = Session.GetInstance(PersistentStorage.Current);
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{

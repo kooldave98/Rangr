@@ -45,7 +45,7 @@ namespace App.Android
 			return db.DeleteItem<KeyValue> (id);
 		}
 
-		private static PersistentStorage _instance = null;
+		//private static PersistentStorage _instance = null;
 
 	}
 }

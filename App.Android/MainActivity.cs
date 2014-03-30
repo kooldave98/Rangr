@@ -12,6 +12,7 @@ using App.Core.Portable.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Android.Content.PM;
+using App.Core.Portable.Network;
 
 namespace App.Android
 {
@@ -27,6 +28,9 @@ namespace App.Android
 		TextView _textView;
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
+		Connections ConnectionServices;
+		IHttpRequest _httpRequest;
+
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
@@ -89,7 +93,7 @@ namespace App.Android
 		}
 
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
@@ -100,10 +104,15 @@ namespace App.Android
 			//ActionBar.SetDisplayHomeAsUpEnabled (true);
 
 			_global = Global.Current;
-			_global.Posts = new List<Post> ();
+			_global.Posts = new List<SeenPost> ();
 
 			_geoLocationInstance = GeoLocation.GetInstance (this);
-			_sessionInstance = Session.GetInstance();
+			_sessionInstance = Session.GetInstance(PersistentStorage.Current);
+			_httpRequest = HttpRequest.Current;
+
+			ConnectionServices = new Connections (_httpRequest);
+
+
 
 			//Find our controls
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
@@ -122,29 +131,49 @@ namespace App.Android
 			if (_postListView != null) {
 				_postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
 					var postDetails = new Intent (this, typeof(PostDetailsScreen));
-					postDetails.PutExtra("PostID", _global.Posts [e.Position].ID);
+					postDetails.PutExtra("PostID", _global.Posts [e.Position].id);
 					StartActivity (postDetails);
 				};
 			}
 
-			_textView = FindViewById<TextView> (Resource.Id.textView);
+
+			var location = await _geoLocationInstance.GetCurrentPosition ();
+
+			var user = _sessionInstance.GetCurrentUser ();
+
+			//CreateConnection here
+			_global.current_connection = await ConnectionServices.Create(user.user_id.ToString(), location.geolocation_value, location.geolocation_accuracy.ToString());
 
 
-			var traceWriter = new TextViewWriter (SynchronizationContext.Current, _textView);
+			//init heartbeat here
 
-			_global.client = CommonClient.GetInstance (traceWriter, _geoLocationInstance, _sessionInstance, SynchronizationContext.Current);
+			_geoLocationInstance.OnGeoPositionChanged (async (geo_value)=>{
+				_global.current_connection = await ConnectionServices
+					.Update(_global.current_connection.connection_id.ToString(), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString());
 
-			Action<Post> routine = (post) => {
-				_global.Posts.Insert (0, post);
+			});	
 
-				refreshGrid ();
-			};
 
-			_global.client.OnConnectionAborted ((client) => {
-				client.Start(routine);
-			});
+			JavaScriptTimer.SetInterval(async () =>
+				{
+					var position = await _geoLocationInstance.GetCurrentPosition();		
 
-			_global.client.Start (routine);
+					_global.current_connection = await ConnectionServices
+						.Update(_global.current_connection.connection_id.ToString(), position.geolocation_value, position.geolocation_accuracy.ToString());
+
+				}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+
+//			_textView = FindViewById<TextView> (Resource.Id.textView);
+//
+//
+//			var traceWriter = new TextViewWriter (SynchronizationContext.Current, _textView);
+//
+//
+//			Action<SeenPost> routine = (post) => {
+//				_global.Posts.Insert (0, post);
+//
+//				refreshGrid ();
+//			};
 		}
 
 		protected override void OnResume ()

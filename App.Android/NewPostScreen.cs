@@ -23,20 +23,16 @@ namespace App.Android
 		EditText postTextEdit;
 		Button saveButton;
 
-//		PostRepository _postRepository;
-//		IGeoLocation _geoLocationInstance;
-//		ISession _sessionInstance;
+
 		Global _global;
+		Posts post_services;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			_global = Global.Current;
-//			_geoLocationInstance = GeoLocation.GetInstance (SynchronizationContext.Current, this);
-//			_sessionInstance = Session.Current;
-//			_postRepository = new PostRepository (new HttpRequest ());
-
+			post_services = new Posts(HttpRequest.Current);
 
 			// set our layout to be the home screen
 			SetContentView(Resource.Layout.NewPost);
@@ -57,18 +53,13 @@ namespace App.Android
 		{
 			//Post to server
 			var postText = this.postTextEdit.Text;
-			_global.client.sendPost (async(hubProxy) => {
-				await hubProxy.Invoke ("sendPost", postText);
-			});
-			//var geoLocationString = await _geoLocationInstance.GetCurrentPosition();
-			//await _postRepository.CreatePost(postText, _sessionInstance.GetCurrentUser().ID.ToString(), geoLocationString);
+			post_services.Create(postText, _global.current_connection.connection_id.ToString());
 
 			Finish();
 		}
 
 		void Cancel()
 		{
-
 			Finish();
 		}
 	}

@@ -1,22 +1,26 @@
 using System;
 using System.Drawing;
+using App.Common.Shared;
+using App.Core.Portable.Device;
+using App.Core.Portable.Models;
+using App.Core.Portable.Network;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using App.Core.Portable.Device;
-using App.Common.Shared;
-using App.Core.Portable.Models;
 
 namespace App.iOS
 {
 	public partial class LoginViewController : UIViewController
 	{
-		ISession _sessionInstance = Session.GetInstance ();
-		HttpRequest _httpRequest;
-		User user;
+		private ISession _sessionInstance;
+		private IHttpRequest _httpRequest;
+		private Users UserServices;
 		private Action init_callback;
 
 		public LoginViewController (Action the_init_callback)
 		{
+			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
+			_httpRequest = HttpRequest.Current;
+			UserServices = new Users (_httpRequest);
 			init_callback = the_init_callback;
 		}
 
@@ -26,19 +30,13 @@ namespace App.iOS
 
 			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
 
-			InitView ();
-
-			_httpRequest = new HttpRequest ();
+			InitView ();		
 
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
-
-
-
 		}
 
 		private async void Login ()
@@ -64,9 +62,9 @@ namespace App.iOS
 			//indicator.StopAnimating ();
 
 
-			var userID = await new UserRepository (_httpRequest).CreateUser (username.Text);
-			user = await new UserRepository (_httpRequest).GetUserById (userID.ID);
-			_sessionInstance.AddCurrentUser (user);
+			var userID = await UserServices.Create (username.Text);
+			var user = await UserServices.Get (userID.user_id.ToString());
+			_sessionInstance.PersistCurrentUser (user);
 
 			init_callback ();
 

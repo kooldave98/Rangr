@@ -8,6 +8,6 @@ namespace App.Core.Portable
 {
     public static class Resources
     {
-        public static string baseUrl = "http://geonowapp.azurewebsites.net/api";
+		public const string baseUrl = "http://geonowapp.azurewebsites.net/api";
     }
 }
