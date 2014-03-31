@@ -71,7 +71,7 @@ namespace App.Android
 
 		void MenuItemClicked(IMenuItem menu_item)
 		{
-			var menu_item_string = menu_item.TitleFormatted.ToString ();
+			//var menu_item_string = menu_item.TitleFormatted.ToString ();
 
 			if (consoleLayout.Visibility == ViewStates.Gone) {
 				//consoleLayout.LayoutParameters.Height = 1000;

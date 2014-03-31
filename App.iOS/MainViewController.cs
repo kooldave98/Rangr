@@ -22,6 +22,8 @@ namespace App.iOS
 		Global _global;
 		PostsTableViewSource dataSource;
 		Connections ConnectionServices;
+		SeenPosts SeenPostServices;
+		int start_index = 0;
 
 		public MainViewController () : base ("MainViewController", null)
 		{
@@ -29,6 +31,7 @@ namespace App.iOS
 			_geoLocationInstance = GeoLocation.GetInstance ();
 			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
 			ConnectionServices = new Connections (_httpRequest);
+			SeenPostServices = new SeenPosts (_httpRequest);
 			_global = Global.Current;
 
 			// Custom initialization
@@ -58,6 +61,9 @@ namespace App.iOS
 
 		public async void Initialize ()
 		{
+
+			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
+
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
@@ -113,25 +119,31 @@ namespace App.iOS
 			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 
 
+			RefreshControl = new UIRefreshControl();
 
-//			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
-//
-//			Action<SeenPost> routine = (post) => {
-//				dataSource.Objects.Insert (0, post);
-//
-//				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
-//					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
-//				}
-//			};
+			RefreshControl.ValueChanged += async (object sender, EventArgs e) => {
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-			//showModal;
+				var posts = await SeenPostServices.Get(_global.current_connection.connection_id.ToString(), start_index.ToString());
+
+				foreach (var post in posts) {
+					start_index = post.id + 1;
+
+					dataSource.Objects.Insert (0, post);
+
+					using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
+						TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+					}
+				}
+
+				RefreshControl.EndRefreshing ();
+			};
 
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
 		}
 
 

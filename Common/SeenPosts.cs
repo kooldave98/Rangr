@@ -11,13 +11,13 @@ namespace App.Common.Shared
 {
 	public class SeenPosts
     {
-		public async Task<SeenPost> Get(int connection_id, int start_index)
+		public async Task<List<SeenPost>> Get(string connection_id, string start_index)
         {
 			var url = String.Format("{0}/?connection_id={1}&start_index={2}", base_rest_url, connection_id, start_index);
             string data = await _httpRequest.Get(url);
 
-			var seen_post = JsonConvert.DeserializeObject<SeenPost>(data);
-			return seen_post;
+			var seen_posts = JsonConvert.DeserializeObject<List<SeenPost>>(data);
+			return seen_posts;
         }
 
 		private const string restful_resource = "seenposts";
