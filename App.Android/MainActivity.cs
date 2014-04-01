@@ -13,6 +13,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Android.Content.PM;
 using App.Core.Portable.Network;
+using Xamarin.ActionBarPullToRefresh.Library;
+using System.Threading.Tasks;
 
 namespace App.Android
 {
@@ -23,53 +25,54 @@ namespace App.Android
 		PostListAdapter _postListAdapter;
 		LinearLayout consoleLayout;
 		LinearLayout streamLayout;
-
 		ListView _postListView;
 		TextView _textView;
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
 		Connections ConnectionServices;
 		IHttpRequest _httpRequest;
+		SeenPosts SeenPostServices;
+		int start_index = 0;
+		private PullToRefreshAttacher mPullToRefreshAttacher;
 
-
-		public override bool OnCreateOptionsMenu(IMenu menu)
+		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			menu.Add("New Post").SetShowAsAction(ShowAsAction.IfRoom);
-			menu.Add("Console");
+			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
+			menu.Add ("Console");
 			return true;
 		}
-
 		//This is the Android
-//		public boolean onOptionsItemSelected(MenuItem item) {
-//			// Handle presses on the action bar items
-//			switch (item.getItemId()) {
-//			case R.id.action_search:
-//				openSearch();
-//				return true;
-//			case R.id.action_compose:
-//				composeMessage();
-//				return true;
-//			default:
-//				return super.onOptionsItemSelected(item);
-//			}
-//		}
-
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
+		//		public boolean onOptionsItemSelected(MenuItem item) {
+		//			// Handle presses on the action bar items
+		//			switch (item.getItemId()) {
+		//			case R.id.action_search:
+		//				openSearch();
+		//				return true;
+		//			case R.id.action_compose:
+		//				composeMessage();
+		//				return true;
+		//			default:
+		//				return super.onOptionsItemSelected(item);
+		//			}
+		//		}
+		public override bool OnOptionsItemSelected (IMenuItem item)
 		{
-			switch (item.TitleFormatted.ToString()) { 
+			switch (item.TitleFormatted.ToString ()) { 
 			case "New Post":
-				StartActivity (typeof(NewPostScreen)); break;
+				StartActivity (typeof(NewPostScreen));
+				break;
 			case "Console":
-				MenuItemClicked(item); break;
+				MenuItemClicked (item);
+				break;
 			case "Stream":
-				MenuItemClicked(item); break;
+				MenuItemClicked (item);
+				break;
 			}
 
-			return base.OnOptionsItemSelected(item);
+			return base.OnOptionsItemSelected (item);
 		}
 
-		void MenuItemClicked(IMenuItem menu_item)
+		void MenuItemClicked (IMenuItem menu_item)
 		{
 			//var menu_item_string = menu_item.TitleFormatted.ToString ();
 
@@ -92,7 +95,6 @@ namespace App.Android
 //			t.Show();
 		}
 
-
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -107,11 +109,11 @@ namespace App.Android
 			_global.Posts = new List<SeenPost> ();
 
 			_geoLocationInstance = GeoLocation.GetInstance (this);
-			_sessionInstance = Session.GetInstance(PersistentStorage.Current);
+			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
 			_httpRequest = HttpRequest.Current;
 
 			ConnectionServices = new Connections (_httpRequest);
-
+			SeenPostServices = new SeenPosts (_httpRequest);
 
 
 			//Find our controls
@@ -129,9 +131,30 @@ namespace App.Android
 
 			// wire up post click handler
 			if (_postListView != null) {
+
+				mPullToRefreshAttacher = new PullToRefreshAttacher (this, _postListView);
+
+				// Set Listener to know when a refresh should be started
+				mPullToRefreshAttacher.Refresh += async (sender, e) => {
+					var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
+
+					foreach (var post in posts) {
+
+						start_index = post.id + 1;
+
+						_global.Posts.Insert (0, post);					
+										
+					}	
+
+					mPullToRefreshAttacher.SetRefreshComplete ();
+					refreshGrid ();
+				};
+
+
+
 				_postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
 					var postDetails = new Intent (this, typeof(PostDetailsScreen));
-					postDetails.PutExtra("PostID", _global.Posts [e.Position].id);
+					postDetails.PutExtra ("PostID", _global.Posts [e.Position].id);
 					StartActivity (postDetails);
 				};
 			}
@@ -142,38 +165,30 @@ namespace App.Android
 			var user = _sessionInstance.GetCurrentUser ();
 
 			//CreateConnection here
-			_global.current_connection = await ConnectionServices.Create(user.user_id.ToString(), location.geolocation_value, location.geolocation_accuracy.ToString());
+			_global.current_connection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
 
 			//init heartbeat here
 
-			_geoLocationInstance.OnGeoPositionChanged (async (geo_value)=>{
+			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
 				_global.current_connection = await ConnectionServices
-					.Update(_global.current_connection.connection_id.ToString(), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString());
+					.Update (_global.current_connection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
 
 			});	
 
 
-			JavaScriptTimer.SetInterval(async () =>
-				{
-					var position = await _geoLocationInstance.GetCurrentPosition();		
+			JavaScriptTimer.SetInterval (async () => {
+				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
-					_global.current_connection = await ConnectionServices
-						.Update(_global.current_connection.connection_id.ToString(), position.geolocation_value, position.geolocation_accuracy.ToString());
+				_global.current_connection = await ConnectionServices
+						.Update (_global.current_connection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
 
-				}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 
 //			_textView = FindViewById<TextView> (Resource.Id.textView);
 //
 //
 //			var traceWriter = new TextViewWriter (SynchronizationContext.Current, _textView);
-//
-//
-//			Action<SeenPost> routine = (post) => {
-//				_global.Posts.Insert (0, post);
-//
-//				refreshGrid ();
-//			};
 		}
 
 		protected override void OnResume ()
@@ -185,10 +200,10 @@ namespace App.Android
 
 		}
 
-		private void refreshGrid()
+		private void refreshGrid ()
 		{
 			// create our adapter
-			_postListAdapter = new PostListAdapter(this, _global.Posts);
+			_postListAdapter = new PostListAdapter (this, _global.Posts);
 
 			//Hook up our adapter to our ListView
 			_postListView.Adapter = _postListAdapter;
