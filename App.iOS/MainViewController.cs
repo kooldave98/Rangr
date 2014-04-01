@@ -137,6 +137,7 @@ namespace App.iOS
 				}
 
 				RefreshControl.EndRefreshing ();
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 			};
 
 		}
