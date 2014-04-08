@@ -54,11 +54,11 @@ namespace App.iOS
 
 		public override void WillEnterForeground (UIApplication application)
 		{
-			if (ShouldShowLogin (Global.LastUseTime)) {
-
-				var login = new LoginViewController (mainViewController.Initialize);
-				mainViewController.PresentViewController (login, false, null);
-			}
+//			if (ShouldShowLogin (Global.LastUseTime)) {
+//
+//				var login = new LoginViewController (mainViewController.Initialize);
+//				mainViewController.PresentViewController (login, false, null);
+//			}
 		}
 
 		public override void DidEnterBackground (UIApplication application)

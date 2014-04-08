@@ -75,7 +75,6 @@
       <Link>GeoLocationProvider.cs</Link>
     </Compile>
     <Compile Include="PersistentStorage_OLD.cs" />
-    <Compile Include="Global.cs" />
     <Compile Include="..\..\Common\Session.cs">
       <Link>Session.cs</Link>
     </Compile>

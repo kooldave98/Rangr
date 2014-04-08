@@ -11,19 +11,23 @@ namespace App.iOS
 	{
 		Posts post_services;
 		Global _global;
+		private Action success_callback;
 
-		public CreatePostViewController () : base ("CreatePostViewController", null)
+		public CreatePostViewController (Action the_success_callback) : base ("CreatePostViewController", null)
 		{
 			_global = Global.Current;
 			post_services = new Posts(HttpRequest.Current);
+			success_callback = the_success_callback;
 		}
 
 		public void ConfigureView ()
 		{						
-			this.CreatePostBtn.TouchUpInside += delegate {
+			this.CreatePostBtn.TouchUpInside += async delegate {
 				var postText = this.NewPostTbx.Text;
 						
-				post_services.Create(postText, _global.current_connection.connection_id.ToString());		
+				await post_services.Create(postText, _global.current_connection.connection_id.ToString());		
+
+				success_callback();
 
 				this.NavigationController.PopToRootViewController (true);
 			};

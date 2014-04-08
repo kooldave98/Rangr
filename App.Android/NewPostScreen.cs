@@ -2,17 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using App.Core.Portable.Models;
-using App.Core.Portable.Device;
 using App.Common.Shared;
-using System.Threading;
-using Android.Content.PM;
+using App.Core.Portable.Device;
+using App.Core.Portable.Models;
 
 namespace App.Android
 {
@@ -43,17 +44,19 @@ namespace App.Android
 			saveButton = FindViewById<Button>(Resource.Id.SaveButton);
 			cancelButton = FindViewById<Button>(Resource.Id.CancelButton);
 
-			saveButton.Click += (object sender, EventArgs e) => { Save();};
+			saveButton.Click += async (object sender, EventArgs e) => { await Save();};
 
 			// button clicks 
 			cancelButton.Click += (sender, e) => { Cancel(); };
 		}
 
-		private void Save()
+		private async Task Save()
 		{
 			//Post to server
 			var postText = this.postTextEdit.Text;
-			post_services.Create(postText, _global.current_connection.connection_id.ToString());
+			await post_services.Create(postText, _global.current_connection.connection_id.ToString());
+
+			SetResult(Result.Ok);
 
 			Finish();
 		}

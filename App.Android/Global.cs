@@ -5,8 +5,6 @@ using Android.App;
 using System.IO;
 using App.Core.Portable.Models;
 using App.Common.Shared;
-using Android.Content;
-using Android.Preferences;
 
 namespace App.Android
 {
@@ -39,20 +37,6 @@ namespace App.Android
 		public DateTime LastUseTime { get; set; }
 
 		public readonly TimeSpan ForceLoginTimespan = TimeSpan.FromMinutes (5);
-
-		public string GetString(string key)
-		{
-			var prefs = Global.Context.GetSharedPreferences(this.PackageName, FileCreationMode.Private);
-			return prefs.GetString(key, string.Empty);
-		}
-
-		public void SaveString(string key, string value)
-		{
-			var prefs = Global.Context.GetSharedPreferences(this.PackageName, FileCreationMode.Private);
-			var prefEditor = prefs.Edit();
-			prefEditor.PutString(key, value);
-			prefEditor.Commit();
-		}
 
 	}
 }

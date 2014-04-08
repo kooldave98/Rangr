@@ -35,6 +35,7 @@ namespace App.Android
 			var user = _sessionInstance.GetCurrentUser ();
 			if (user != null) {
 				StartActivity (typeof(MainActivity));
+				Finish ();
 			} else {
 
 				var _httpRequest = HttpRequest.Current;

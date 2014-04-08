@@ -26,7 +26,6 @@ namespace App.Android
 		LinearLayout consoleLayout;
 		LinearLayout streamLayout;
 		ListView _postListView;
-		TextView _textView;
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;
 		Connections ConnectionServices;
@@ -59,7 +58,7 @@ namespace App.Android
 		{
 			switch (item.TitleFormatted.ToString ()) { 
 			case "New Post":
-				StartActivity (typeof(NewPostScreen));
+				StartActivityForResult (typeof(NewPostScreen), 0);
 				break;
 			case "Console":
 				MenuItemClicked (item);
@@ -136,18 +135,9 @@ namespace App.Android
 
 				// Set Listener to know when a refresh should be started
 				mPullToRefreshAttacher.Refresh += async (sender, e) => {
-					var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
-
-					foreach (var post in posts) {
-
-						start_index = post.id + 1;
-
-						_global.Posts.Insert (0, post);					
-										
-					}	
+					await getPosts();
 
 					mPullToRefreshAttacher.SetRefreshComplete ();
-					refreshGrid ();
 				};
 
 
@@ -167,7 +157,7 @@ namespace App.Android
 			//CreateConnection here
 			_global.current_connection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-
+			await getPosts();
 			//init heartbeat here
 
 			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
@@ -185,10 +175,6 @@ namespace App.Android
 
 			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 
-//			_textView = FindViewById<TextView> (Resource.Id.textView);
-//
-//
-//			var traceWriter = new TextViewWriter (SynchronizationContext.Current, _textView);
 		}
 
 		protected override void OnResume ()
@@ -196,7 +182,6 @@ namespace App.Android
 			base.OnResume ();
 
 			refreshGrid ();
-
 
 		}
 
@@ -208,6 +193,30 @@ namespace App.Android
 			//Hook up our adapter to our ListView
 			_postListView.Adapter = _postListAdapter;
 		}
+
+		protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			base.OnActivityResult(requestCode, resultCode, data);
+			if (resultCode == Result.Ok) {
+				await getPosts ();
+			}
+		}
+
+		private async Task getPosts()
+		{
+			var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
+
+			foreach (var post in posts) {
+
+				start_index = post.id + 1;
+
+				_global.Posts.Insert (0, post);					
+
+			}
+
+			refreshGrid ();
+		}
+
 	}
 }
 

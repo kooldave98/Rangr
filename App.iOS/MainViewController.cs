@@ -9,6 +9,7 @@ using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Core.Portable.Network;
+using System.Threading.Tasks;
 
 namespace App.iOS
 {
@@ -62,14 +63,14 @@ namespace App.iOS
 		public async void Initialize ()
 		{
 
-			var traceWriter = new TextViewWriter (SynchronizationContext.Current, textView);
-
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
 				//if (this.NewPostViewController == null)
-				this.CreatePostViewController = new CreatePostViewController ();
+				this.CreatePostViewController = new CreatePostViewController (() => {
+					getPosts ();
+				});
 				//this.NewPostViewController.ModalInPopover = true;
 
 				// Pass the selected object to the new view controller.
@@ -97,44 +98,33 @@ namespace App.iOS
 			var user = _sessionInstance.GetCurrentUser ();
 
 			//CreateConnection here
-			_global.current_connection = await ConnectionServices.Create(user.user_id.ToString(), location.geolocation_value, location.geolocation_accuracy.ToString());
+			_global.current_connection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-
+			await getPosts();
 			//init heartbeat here
 
-			_geoLocationInstance.OnGeoPositionChanged (async (geo_value)=>{
+			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
 				_global.current_connection = await ConnectionServices
-					.Update(_global.current_connection.connection_id.ToString(), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString());
+					.Update (_global.current_connection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
 
 			});	
 
 
-			JavaScriptTimer.SetInterval(async () =>
-			{
-					var position = await _geoLocationInstance.GetCurrentPosition();		
+			JavaScriptTimer.SetInterval (async () => {
+				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
-					_global.current_connection = await ConnectionServices
-						.Update(_global.current_connection.connection_id.ToString(), position.geolocation_value, position.geolocation_accuracy.ToString());
+				_global.current_connection = await ConnectionServices
+						.Update (_global.current_connection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
 
 			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 
 
-			RefreshControl = new UIRefreshControl();
+			RefreshControl = new UIRefreshControl ();
 
 			RefreshControl.ValueChanged += async (object sender, EventArgs e) => {
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-				var posts = await SeenPostServices.Get(_global.current_connection.connection_id.ToString(), start_index.ToString());
-
-				foreach (var post in posts) {
-					start_index = post.id + 1;
-
-					dataSource.Objects.Insert (0, post);
-
-					using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
-						TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
-					}
-				}
+				await getPosts ();
 
 				RefreshControl.EndRefreshing ();
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
@@ -142,13 +132,27 @@ namespace App.iOS
 
 		}
 
+		private async Task getPosts ()
+		{
+			var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
+
+			foreach (var post in posts) {
+				start_index = post.id + 1;
+
+				dataSource.Objects.Insert (0, post);
+
+				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
+					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+				}
+			}
+		}
+
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 		}
 
-
-		private void showModal()
+		private void showModal ()
 		{
 			UIAlertView alert = new UIAlertView ();
 			alert.Title = "Add Something";
@@ -161,5 +165,4 @@ namespace App.iOS
 
 		}
 	}
-
 }

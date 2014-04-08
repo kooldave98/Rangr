@@ -63,6 +63,7 @@
     <Compile Include="PostListAdapter.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="BaseActivity.cs" />
+    <Compile Include="Global.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

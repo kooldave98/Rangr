@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using App.Core.Portable.Persistence;
 using Newtonsoft.Json;
+using Android.App;
+using Android.Content;
 
 namespace App.Android
 {
@@ -38,13 +40,13 @@ namespace App.Android
 				return false;
 
 			var output = JsonConvert.SerializeObject(value);
-			Global.Current.SaveString (key, output);
+			SaveString (key, output);
 			return true;
 		}
 
 		public T Load<T>(string key)
 		{
-			var value = Global.Current.GetString (key);
+			var value = GetString (key);
 
 			if (string.IsNullOrWhiteSpace (value)) {
 				return default(T);
@@ -58,6 +60,23 @@ namespace App.Android
 
 			return output;
 		}
+
+
+		private string GetString(string key)
+		{
+			var prefs = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
+			return prefs.GetString(key, string.Empty);
+		}
+
+		private void SaveString(string key, string value)
+		{
+			var prefs = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
+			var prefEditor = prefs.Edit();
+			prefEditor.PutString(key, value);
+			prefEditor.Commit();
+		}
+
+
 	}
 }
 
