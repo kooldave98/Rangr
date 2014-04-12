@@ -14,25 +14,28 @@ using Android.Widget;
 using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
+using App.Core.Android;
 
 namespace App.Android
 {
 	[Activity (Label = "New Post", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class NewPostScreen : Activity
 	{
+		ISession SessionInstance;
+
 		Button cancelButton;
 		EditText postTextEdit;
 		Button saveButton;
 
-
-		Global _global;
 		Posts post_services;
+
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			_global = Global.Current;
+			SessionInstance = Session.GetInstance (PersistentStorage.Current);
+
 			post_services = new Posts(HttpRequest.Current);
 
 			// set our layout to be the home screen
@@ -54,7 +57,7 @@ namespace App.Android
 		{
 			//Post to server
 			var postText = this.postTextEdit.Text;
-			await post_services.Create(postText, _global.current_connection.connection_id.ToString());
+			await post_services.Create(postText, SessionInstance.CurrentConnection.connection_id.ToString());
 
 			SetResult(Result.Ok);
 

@@ -8,6 +8,9 @@ namespace App.Core.Portable.Device
 		//User
 		User GetCurrentUser ();
 		void PersistCurrentUser (User user);
+
+		//No need to persist this, will just keep in memory
+		ConnectionIdentity CurrentConnection { get; set;}
 	}
 }
 

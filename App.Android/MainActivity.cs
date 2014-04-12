@@ -5,34 +5,25 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content.PM;
 using System.Threading;
-using App.Common.Shared;
-using App.Core.Portable.Device;
-using App.Core.Portable.Models;
 using System.Linq;
 using System.Collections.Generic;
-using Android.Content.PM;
-using App.Core.Portable.Network;
 using Xamarin.ActionBarPullToRefresh.Library;
 using System.Threading.Tasks;
+using App.Common;
+using App.Common.Shared;
+using App.Core.Android;
+
 
 namespace App.Android
 {
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//Remember to use the Tab Layout from the Standard/Content Controls in the Sandbox as a test first.
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	[Activity (Label = "Walkr", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainActivity : Activity
 	{
-		Global _global;
-		PostListAdapter _postListAdapter;
-		LinearLayout consoleLayout;
-		LinearLayout streamLayout;
-		ListView _postListView;
-		IGeoLocation _geoLocationInstance;
-		ISession _sessionInstance;
-		Connections ConnectionServices;
-		IHttpRequest _httpRequest;
-		SeenPosts SeenPostServices;
-		int start_index = 0;
-		private PullToRefreshAttacher mPullToRefreshAttacher;
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
@@ -40,20 +31,7 @@ namespace App.Android
 			menu.Add ("Console");
 			return true;
 		}
-		//This is the Android
-		//		public boolean onOptionsItemSelected(MenuItem item) {
-		//			// Handle presses on the action bar items
-		//			switch (item.getItemId()) {
-		//			case R.id.action_search:
-		//				openSearch();
-		//				return true;
-		//			case R.id.action_compose:
-		//				composeMessage();
-		//				return true;
-		//			default:
-		//				return super.onOptionsItemSelected(item);
-		//			}
-		//		}
+
 		public override bool OnOptionsItemSelected (IMenuItem item)
 		{
 			switch (item.TitleFormatted.ToString ()) { 
@@ -71,23 +49,20 @@ namespace App.Android
 			return base.OnOptionsItemSelected (item);
 		}
 
-		void MenuItemClicked (IMenuItem menu_item)
+		private void MenuItemClicked (IMenuItem menu_item)
 		{
 			//var menu_item_string = menu_item.TitleFormatted.ToString ();
 
-			if (consoleLayout.Visibility == ViewStates.Gone) {
-				//consoleLayout.LayoutParameters.Height = 1000;
-				streamLayout.Visibility = ViewStates.Gone;
-				consoleLayout.Visibility = ViewStates.Visible;
-				menu_item.SetTitle ("Stream");
-			} else {
-				consoleLayout.Visibility = ViewStates.Gone;
-				streamLayout.Visibility = ViewStates.Visible;
-				menu_item.SetTitle ("Console");
-			}
-
-
-
+//			if (consoleLayout.Visibility == ViewStates.Gone) {
+//				//consoleLayout.LayoutParameters.Height = 1000;
+//				streamLayout.Visibility = ViewStates.Gone;
+//				consoleLayout.Visibility = ViewStates.Visible;
+//				menu_item.SetTitle ("Stream");
+//			} else {
+//				consoleLayout.Visibility = ViewStates.Gone;
+//				streamLayout.Visibility = ViewStates.Visible;
+//				menu_item.SetTitle ("Console");
+//			}
 //			Console.WriteLine(menu_item_string + " option menuitem clicked");
 //			var t = Toast.MakeText(this, "Options Menu '"+menu_item_string+"' clicked", ToastLength.Short);
 //			t.SetGravity(GravityFlags.Center, 0, 0);
@@ -98,83 +73,45 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
+
+			view_model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+
+			view_model.IsBusyChanged +=	(sender, e) => {
+				if(view_model.IsBusy)
+				{
+					progress = ProgressDialog.Show(this, "Loading...", "Busy", true);
+				}
+				else{
+					progress.Dismiss();
+				}
+			};
+
+
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-
 			//ActionBar.SetDisplayHomeAsUpEnabled (true);
-
-			_global = Global.Current;
-			_global.Posts = new List<SeenPost> ();
-
-			_geoLocationInstance = GeoLocation.GetInstance (this);
-			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
-			_httpRequest = HttpRequest.Current;
-
-			ConnectionServices = new Connections (_httpRequest);
-			SeenPostServices = new SeenPosts (_httpRequest);
-
 
 			//Find our controls
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
 
-			consoleLayout = FindViewById<LinearLayout> (Resource.Id.ConsoleLayout);
-			streamLayout = FindViewById<LinearLayout> (Resource.Id.StreamLayout);
-
-			consoleLayout.Visibility = ViewStates.Gone;
-
-//			consoleLayout.Touch += (object sender, View.TouchEventArgs e) => {
-//				consoleLayout.LayoutParameters.Height = 1000;
-//			};
-
+			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
 
 			// wire up post click handler
 			if (_postListView != null) {
 
-				mPullToRefreshAttacher = new PullToRefreshAttacher (this, _postListView);
+				setup_pull_to_refresh_on_list (_postListView);
 
-				// Set Listener to know when a refresh should be started
-				mPullToRefreshAttacher.Refresh += async (sender, e) => {
-					await getPosts();
-
-					mPullToRefreshAttacher.SetRefreshComplete ();
-				};
-
-
-
-				_postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-					var postDetails = new Intent (this, typeof(PostDetailsScreen));
-					postDetails.PutExtra ("PostID", _global.Posts [e.Position].id);
-					StartActivity (postDetails);
-				};
+				bind_list_item_click (_postListView);
 			}
 
+			await view_model.init ();
 
-			var location = await _geoLocationInstance.GetCurrentPosition ();
+		}
 
-			var user = _sessionInstance.GetCurrentUser ();
-
-			//CreateConnection here
-			_global.current_connection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
-
-			await getPosts();
-			//init heartbeat here
-
-			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
-				_global.current_connection = await ConnectionServices
-					.Update (_global.current_connection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
-
-			});	
-
-
-			JavaScriptTimer.SetInterval (async () => {
-				var position = await _geoLocationInstance.GetCurrentPosition ();		
-
-				_global.current_connection = await ConnectionServices
-						.Update (_global.current_connection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
-
-			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-
+		protected override void OnStart ()
+		{
+			base.OnStart ();
 		}
 
 		protected override void OnResume ()
@@ -182,41 +119,67 @@ namespace App.Android
 			base.OnResume ();
 
 			refreshGrid ();
-
-		}
-
-		private void refreshGrid ()
-		{
-			// create our adapter
-			_postListAdapter = new PostListAdapter (this, _global.Posts);
-
-			//Hook up our adapter to our ListView
-			_postListView.Adapter = _postListAdapter;
 		}
 
 		protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult(requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
-				await getPosts ();
+				await view_model.RefreshPosts ();
 			}
 		}
 
-		private async Task getPosts()
+		private void HandleOnNewPostsReceived (object sender, EventArgs e)
 		{
-			var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
-
-			foreach (var post in posts) {
-
-				start_index = post.id + 1;
-
-				_global.Posts.Insert (0, post);					
-
-			}
-
 			refreshGrid ();
 		}
 
+		private void refreshGrid ()
+		{
+			// create our adapter
+			_postListAdapter = new PostListAdapter (this, view_model.Posts);
+
+			//Hook up our adapter to our ListView
+			_postListView.Adapter = _postListAdapter;
+		}
+
+		private void setup_pull_to_refresh_on_list(ListView list_view)
+		{
+			mPullToRefreshAttacher = new PullToRefreshAttacher (this, list_view);
+
+			// Set Listener to know when a refresh should be started
+			mPullToRefreshAttacher.Refresh += async (sender, e) => {
+				await view_model.RefreshPosts();
+
+				mPullToRefreshAttacher.SetRefreshComplete ();
+			};
+		}
+
+		private void bind_list_item_click(ListView list_view)
+		{
+			list_view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+				var postDetails = new Intent (this, typeof(PostDetailsScreen));
+				postDetails.PutExtra ("PostID", view_model.Posts [e.Position].id);
+				StartActivity (postDetails);
+			};
+		}
+
+		private FeedViewModel view_model 
+		{
+			get
+			{
+				return Global.Current.Feed;
+			}
+			set 
+			{
+				Global.Current.Feed = value;
+			}
+		}
+
+		private ProgressDialog progress;
+		private PostListAdapter _postListAdapter;
+		private ListView _postListView;
+		private PullToRefreshAttacher mPullToRefreshAttacher;
 	}
 }
 

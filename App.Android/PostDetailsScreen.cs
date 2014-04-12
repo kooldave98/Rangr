@@ -29,7 +29,9 @@ namespace App.Android
 
 			int postID = Intent.GetIntExtra("PostID", 0);
 			if(postID > 0) {
-				post = _global.Posts.Single (p => p.id == postID);
+				//IDEALLY, this would be gotten from some persistence, maybe DB
+				//Just using the global for now cause its much easier.
+				post = _global.Feed.Posts.Single (p => p.id == postID);
 			}
 
 

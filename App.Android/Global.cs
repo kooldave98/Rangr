@@ -5,15 +5,16 @@ using Android.App;
 using System.IO;
 using App.Core.Portable.Models;
 using App.Common.Shared;
+using App.Common;
 
 namespace App.Android
 {
 	[Application (Label = "@string/app_name", Theme = "@style/CustomHoloTheme")]//, Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application
 	{
-		public IList<SeenPost> Posts { get; set; }
+		public FeedViewModel Feed { get; set; }
 
-		public ConnectionIdentity current_connection { get; set;}
+		//public ConnectionIdentity current_connection { get; set;}
 
 		public static Global Current {
 			get {

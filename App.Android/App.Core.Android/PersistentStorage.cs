@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Android.App;
 using Android.Content;
 
-namespace App.Android
+namespace App.Core.Android
 {
 	public class PersistentStorage : IPersistentStorage
 	{

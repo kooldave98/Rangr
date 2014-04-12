@@ -7,28 +7,33 @@ namespace App.Common.Shared
 {
 	public class Session : ISession
 	{
-		private IPersistentStorage PersistentStorage;
+		public ConnectionIdentity CurrentConnection { get; set;}
 
-		private const string CurrentUserKey = "currentuser";
+		public User GetCurrentUser()
+		{
+			var user = PersistentStorage.Load<User> (CurrentUserKey);
+			return user;
+		}
 
-		private static ISession _instance = null;
+		public void PersistCurrentUser(User user)
+		{
+			PersistentStorage.Save(CurrentUserKey, user);
+		}
+
 		public static ISession GetInstance(IPersistentStorage persistent_storage_instance)
 		{
 			return _instance ?? (_instance = new Session(persistent_storage_instance));
 		}
 
+		private IPersistentStorage PersistentStorage;
+
+		private const string CurrentUserKey = "currentuser";
+
+		private static ISession _instance = null;
+
 		private Session(IPersistentStorage persistent_storage_instance)
 		{
 			PersistentStorage = persistent_storage_instance;
-		}
-
-		public User GetCurrentUser(){
-			var user = PersistentStorage.Load<User> (CurrentUserKey);
-			return user;
-		}
-
-		public void PersistCurrentUser(User user){
-			PersistentStorage.Save(CurrentUserKey, user);
 		}
 	}
 }
