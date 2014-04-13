@@ -23,54 +23,17 @@ namespace App.Android
 	[Activity (Label = "Walkr", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainActivity : Activity
 	{
-		public override bool OnCreateOptionsMenu (IMenu menu)
-		{
-			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
-			menu.Add ("Console");
-			return true;
-		}
-
-		public override bool OnOptionsItemSelected (IMenuItem item)
-		{
-			switch (item.TitleFormatted.ToString ()) { 
-			case "New Post":
-				StartActivityForResult (typeof(NewPostActivity), 0);
-				break;
-			case "Console":
-				MenuItemClicked (item);
-				break;
-			case "Stream":
-				MenuItemClicked (item);
-				break;
-			}
-
-			return base.OnOptionsItemSelected (item);
-		}
-
-		private void MenuItemClicked (IMenuItem menu_item)
-		{
-			//var menu_item_string = menu_item.TitleFormatted.ToString ();
-
-//			if (consoleLayout.Visibility == ViewStates.Gone) {
-//				//consoleLayout.LayoutParameters.Height = 1000;
-//				streamLayout.Visibility = ViewStates.Gone;
-//				consoleLayout.Visibility = ViewStates.Visible;
-//				menu_item.SetTitle ("Stream");
-//			} else {
-//				consoleLayout.Visibility = ViewStates.Gone;
-//				streamLayout.Visibility = ViewStates.Visible;
-//				menu_item.SetTitle ("Console");
-//			}
-//			Console.WriteLine(menu_item_string + " option menuitem clicked");
-//			var t = Toast.MakeText(this, "Options Menu '"+menu_item_string+"' clicked", ToastLength.Short);
-//			t.SetGravity(GravityFlags.Center, 0, 0);
-//			t.Show();
-		}
-
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
+			SetContentView (Resource.Layout.Main);
+
+			//ActionBar.SetDisplayHomeAsUpEnabled (true);
+
+			_postListView = FindViewById<ListView> (Resource.Id.PostList);
+
+			//App logic
 
 			view_model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
@@ -81,15 +44,6 @@ namespace App.Android
 					progress.Dismiss ();
 				}
 			};
-
-
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
-
-			//ActionBar.SetDisplayHomeAsUpEnabled (true);
-
-			//Find our controls
-			_postListView = FindViewById<ListView> (Resource.Id.PostList);
 
 			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
 
@@ -158,6 +112,51 @@ namespace App.Android
 				var postDetails = PostDetailsActivity.CreateIntent (this, post);
 				StartActivity (postDetails);
 			};
+		}
+
+
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
+			menu.Add ("Console");
+			return true;
+		}
+
+		public override bool OnOptionsItemSelected (IMenuItem item)
+		{
+			switch (item.TitleFormatted.ToString ()) { 
+			case "New Post":
+				StartActivityForResult (typeof(NewPostActivity), 0);
+				break;
+			case "Console":
+				MenuItemClicked (item);
+				break;
+			case "Stream":
+				MenuItemClicked (item);
+				break;
+			}
+
+			return base.OnOptionsItemSelected (item);
+		}
+
+		private void MenuItemClicked (IMenuItem menu_item)
+		{
+			//var menu_item_string = menu_item.TitleFormatted.ToString ();
+
+			//			if (consoleLayout.Visibility == ViewStates.Gone) {
+			//				//consoleLayout.LayoutParameters.Height = 1000;
+			//				streamLayout.Visibility = ViewStates.Gone;
+			//				consoleLayout.Visibility = ViewStates.Visible;
+			//				menu_item.SetTitle ("Stream");
+			//			} else {
+			//				consoleLayout.Visibility = ViewStates.Gone;
+			//				streamLayout.Visibility = ViewStates.Visible;
+			//				menu_item.SetTitle ("Console");
+			//			}
+			//			Console.WriteLine(menu_item_string + " option menuitem clicked");
+			//			var t = Toast.MakeText(this, "Options Menu '"+menu_item_string+"' clicked", ToastLength.Short);
+			//			t.SetGravity(GravityFlags.Center, 0, 0);
+			//			t.Show();
 		}
 
 		private FeedViewModel view_model {

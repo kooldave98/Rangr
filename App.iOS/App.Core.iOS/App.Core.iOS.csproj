@@ -52,6 +52,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -84,6 +85,21 @@
     </Compile>
     <Compile Include="..\..\Common\JavaScriptTimer.cs">
       <Link>JavaScriptTimer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\FeedViewModel.cs">
+      <Link>ViewModels\FeedViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\LoginViewModel.cs">
+      <Link>ViewModels\LoginViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\NewPostViewModel.cs">
+      <Link>ViewModels\NewPostViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\PostDetailsViewModel.cs">
+      <Link>ViewModels\PostDetailsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\ViewModelBase.cs">
+      <Link>ViewModels\ViewModelBase.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

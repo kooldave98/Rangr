@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using App.Common;
 using App.Common.Shared;
 using App.Core.Portable.Device;
 using MonoTouch.Foundation;
@@ -9,28 +10,36 @@ namespace App.iOS
 {
 	public partial class CreatePostViewController : UIViewController
 	{
-		Posts post_services;
-		Global _global;
+		private NewPostViewModel view_model;
 		private Action success_callback;
 
-		public CreatePostViewController (Action the_success_callback) : base ("CreatePostViewController", null)
+		public CreatePostViewController (Action the_success_callback) 
+				: base ("CreatePostViewController", null)
 		{
-			_global = Global.Current;
-			post_services = new Posts(HttpRequest.Current);
+			view_model = new NewPostViewModel (PersistentStorage.Current);
 			success_callback = the_success_callback;
 		}
 
-		public void ConfigureView ()
-		{						
-			this.CreatePostBtn.TouchUpInside += async delegate {
-				var postText = this.NewPostTbx.Text;
-						
-				await post_services.Create(postText, _global.current_connection.connection_id.ToString());		
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
 
-				success_callback();
+			// Perform any additional setup after loading the view, typically from a nib.
+			this.CreatePostBtn.TouchUpInside += Login;
+		}
+
+		private async void Login (object sender, EventArgs e)
+		{
+			if (!string.IsNullOrWhiteSpace (NewPostTbx.Text)) 
+			{
+				view_model.PostText = this.NewPostTbx.Text;
+
+				await view_model.CreatePost ();		
+
+				success_callback ();
 
 				this.NavigationController.PopToRootViewController (true);
-			};
+			}
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -46,13 +55,7 @@ namespace App.iOS
 			base.ViewWillAppear (animated);
 		}
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
 
-			// Perform any additional setup after loading the view, typically from a nib.
-			ConfigureView ();
-		}
 	}
 }
 

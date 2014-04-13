@@ -6,21 +6,20 @@ using App.Core.Portable.Models;
 using App.Core.Portable.Network;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using App.Common;
 
 namespace App.iOS
 {
 	public partial class LoginViewController : UIViewController
 	{
-		private ISession _sessionInstance;
-		private IHttpRequest _httpRequest;
-		private Users UserServices;
+		private LoginViewModel view_model;
+
 		private Action init_callback;
 
 		public LoginViewController (Action the_init_callback)
 		{
-			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
-			_httpRequest = HttpRequest.Current;
-			UserServices = new Users (_httpRequest);
+			view_model = new LoginViewModel (PersistentStorage.Current);
+
 			init_callback = the_init_callback;
 		}
 
@@ -58,13 +57,11 @@ namespace App.iOS
 			password.ResignFirstResponder ();
 
 			indicator.StartAnimating ();
-
 			//indicator.StopAnimating ();
 
+			view_model.UserDisplayName = username.Text;
 
-			var userID = await UserServices.Create (username.Text);
-			var user = await UserServices.Get (userID.user_id.ToString());
-			_sessionInstance.PersistCurrentUser (user);
+			await view_model.Login ();
 
 			init_callback ();
 

@@ -4,35 +4,46 @@ using System.Drawing;
 using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using App.Common;
 
 namespace App.iOS
 {
 	public partial class DetailViewController : UIViewController
 	{
-		SeenPost detailItem;
+		PostDetailsViewModel view_model;
 
-		public DetailViewController () : base ("DetailViewController", null)
+		public DetailViewController () 
+			: base ("DetailViewController", null)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Detail", "Detail");
 
-			// Custom initialization
+			view_model = new PostDetailsViewModel ();
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			// Perform any additional setup after loading the view, typically from a nib.
+			ConfigureView ();
 		}
 
 		public void SetDetailItem (SeenPost newDetailItem)
 		{
-			if (detailItem != newDetailItem) {
-				detailItem = newDetailItem;
+			if (view_model.CurrentPost != newDetailItem) {
+				view_model.CurrentPost = newDetailItem;
 				
 				// Update the view
 				ConfigureView ();
 			}
 		}
 
-		void ConfigureView ()
+		private void ConfigureView ()
 		{
 			// Update the user interface for the detail item
-			if (IsViewLoaded && detailItem != null)
-				detailDescriptionLabel.Text = detailItem.text;
+			if (IsViewLoaded && view_model.CurrentPost != null) {
+				detailDescriptionLabel.Text = view_model.CurrentPost.text;
+			}
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -41,14 +52,6 @@ namespace App.iOS
 			base.DidReceiveMemoryWarning ();
 			
 			// Release any cached data, images, etc that aren't in use.
-		}
-
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-			
-			// Perform any additional setup after loading the view, typically from a nib.
-			ConfigureView ();
 		}
 	}
 }

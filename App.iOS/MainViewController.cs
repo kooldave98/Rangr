@@ -10,45 +10,28 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Core.Portable.Network;
 using System.Threading.Tasks;
+using App.Common;
 
 namespace App.iOS
 {
 	public partial class MainViewController : UITableViewController
 	{
-		IHttpRequest _httpRequest;
-		IGeoLocation _geoLocationInstance;
-		ISession _sessionInstance;
-		UITextView textView;
-		ConsoleView consoleView;
-		Global _global;
+		FeedViewModel view_model;
+
 		PostsTableViewSource dataSource;
-		Connections ConnectionServices;
-		SeenPosts SeenPostServices;
-		int start_index = 0;
 
 		public MainViewController () : base ("MainViewController", null)
 		{
-			_httpRequest = HttpRequest.Current;
-			_geoLocationInstance = GeoLocation.GetInstance ();
-			_sessionInstance = Session.GetInstance (PersistentStorage.Current);
-			ConnectionServices = new Connections (_httpRequest);
-			SeenPostServices = new SeenPosts (_httpRequest);
-			_global = Global.Current;
-
-			// Custom initialization
-			consoleView = new ConsoleView () {
-				//Frame = View.Frame
-			};
-
-			textView = consoleView.Console;
+			view_model = new FeedViewModel(GeoLocation.GetInstance (), PersistentStorage.Current);
+				
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
+
+			TableView.Source = dataSource = new PostsTableViewSource (this);
 		}
 
 		public DetailViewController DetailViewController { get; set; }
 
 		public CreatePostViewController CreatePostViewController { get; set; }
-
-		public UIViewController ConsoleViewController { get; set; }
 
 		public override void DidReceiveMemoryWarning ()
 		{
@@ -62,14 +45,11 @@ namespace App.iOS
 
 		public async void Initialize ()
 		{
-
-			// Perform any additional setup after loading the view, typically from a nib.
-
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
 				//if (this.NewPostViewController == null)
-				this.CreatePostViewController = new CreatePostViewController (() => {
-					getPosts ();
+				this.CreatePostViewController = new CreatePostViewController (async() => {
+					await view_model.RefreshPosts ();
 				});
 				//this.NewPostViewController.ModalInPopover = true;
 
@@ -81,63 +61,37 @@ namespace App.iOS
 
 			NavigationItem.SetLeftBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Action), false);
 			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => {
-				if (ConsoleViewController == null) {
-					this.ConsoleViewController = new UIViewController ();
-					consoleView.Frame = ConsoleViewController.View.Frame;
-					this.ConsoleViewController.Add (consoleView);
-				}
-				// Pass the selected object to the new view controller.
-				this.NavigationController.PushViewController (this.ConsoleViewController, true);
-
+				//alert hey oh
 			};
 
-			TableView.Source = dataSource = new PostsTableViewSource (this);
+			view_model.IsBusyChanged +=	(sender, e) => {
+				if (view_model.IsBusy) {
+					//Show startup progress here
+				} else {
+					//stop progress
+				}
+			};
 
-			var location = await _geoLocationInstance.GetCurrentPosition ();
-			
-			var user = _sessionInstance.GetCurrentUser ();
-
-			//CreateConnection here
-			_global.current_connection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
-
-			await getPosts();
-			//init heartbeat here
-
-			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
-				_global.current_connection = await ConnectionServices
-					.Update (_global.current_connection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
-
-			});	
-
-
-			JavaScriptTimer.SetInterval (async () => {
-				var position = await _geoLocationInstance.GetCurrentPosition ();		
-
-				_global.current_connection = await ConnectionServices
-						.Update (_global.current_connection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
-
-			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-
+			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
 
 			RefreshControl = new UIRefreshControl ();
 
 			RefreshControl.ValueChanged += async (object sender, EventArgs e) => {
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-				await getPosts ();
+				await view_model.RefreshPosts ();
 
 				RefreshControl.EndRefreshing ();
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 			};
 
+			await view_model.init ();
+
 		}
 
-		private async Task getPosts ()
+		private void HandleOnNewPostsReceived (object sender, EventArgs e)
 		{
-			var posts = await SeenPostServices.Get (_global.current_connection.connection_id.ToString (), start_index.ToString ());
-
-			foreach (var post in posts) {
-				start_index = post.id + 1;
+			foreach (var post in view_model.LatestPosts) {
 
 				dataSource.Objects.Insert (0, post);
 

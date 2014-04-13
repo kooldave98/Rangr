@@ -39,7 +39,7 @@ namespace App.iOS
 			//
 
 			//Check if the user exists first before loading the login view
-			var user = _sessionInstance.GetCurrentUser ();
+			var user = _sessionInstance.GetCurrentUser (true);
 			if (user != null) {
 				mainViewController.Initialize ();
 

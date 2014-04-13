@@ -13,6 +13,10 @@ namespace App.Common
 	{
 		public int start_index { get; set; }
 
+		//1.1non android breaking ios workaround
+		public IList<SeenPost> LatestPosts { get; set; }
+		//end workaround
+
 		public IList<SeenPost> Posts { get; set; }
 
 		public async Task RefreshPosts ()
@@ -24,6 +28,10 @@ namespace App.Common
 
 				Posts.Insert (0, post);
 			}
+
+			//1.2non android breaking ios workaround
+			LatestPosts = posts;
+			//end workaround
 
 			if (OnNewPostsReceived != null) {
 				OnNewPostsReceived (this, EventArgs.Empty);
@@ -67,6 +75,10 @@ namespace App.Common
 		public FeedViewModel (IGeoLocation the_geolocation_instance, IPersistentStorage the_persistent_storage_instance)
 		{
 			Posts = new List<SeenPost> ();
+
+			//1.3 non android breaking ios workaround
+			LatestPosts = new List<SeenPost> ();
+			//end workaround
 
 			_geoLocationInstance = the_geolocation_instance;
 
