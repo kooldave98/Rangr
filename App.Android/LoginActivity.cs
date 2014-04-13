@@ -9,6 +9,7 @@ using Android.Widget;
 using App.Common.Shared;
 using App.Core.Android;
 using App.Core.Portable.Device;
+using App.Common;
 
 namespace App.Android
 {
@@ -19,32 +20,24 @@ namespace App.Android
 				, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : Activity, TextView.IOnEditorActionListener
 	{
-		ISession _sessionInstance = Session.GetInstance(PersistentStorage.Current);
-		private Users UserServices;
+		private LoginViewModel view_model { get; set;}
 
-		EditText password, userName;
-		Button login;
-		ProgressBar progressIndicator;
-		Action LoginAction;
-
+		private EditText password, userName;
+		private Button login;
+		private ProgressBar progressIndicator;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
+			view_model = new LoginViewModel (PersistentStorage.Current);
+
 			//Check if the user exists first before populating the view
-			var user = _sessionInstance.GetCurrentUser ();
-			if (user != null) {
+
+			if (view_model.CurrentUserExists) {
 				StartActivity (typeof(MainActivity));
 				Finish ();
 			} else {
-
-				var _httpRequest = HttpRequest.Current;
-				UserServices = new Users (_httpRequest);
-
-
-
-
 				// Set our view from the "main" layout resource
 				SetContentView (Resource.Layout.Login);
 
@@ -63,7 +56,7 @@ namespace App.Android
 				password.SetOnEditorActionListener (this);
 
 				userName.TextChanged += (sender, e) => {
-					//loginViewModel.Username = userName.Text;
+					view_model.UserDisplayName = userName.Text;
 				};
 				password.TextChanged += (sender, e) => {
 					//loginViewModel.Password = password.Text;
@@ -79,29 +72,8 @@ namespace App.Android
 					dialog.Show ();
 				};
 
-				LoginAction = async delegate {
-
-					if (!string.IsNullOrEmpty (userName.Text)) {
-						//this hides the keyboard
-						var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
-						imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
-						login.Visibility = ViewStates.Invisible;
-						progressIndicator.Visibility = ViewStates.Visible;
-
-						var userID = await UserServices.Create (userName.Text);
-						user = await UserServices.Get (userID.user_id.ToString ());
-						_sessionInstance.PersistCurrentUser (user);
-
-						//RunOnUiThread (() => {
-							StartActivity (typeof(MainActivity));
-							//});
-					}
-				};
-
 				// Perform the login and dismiss the keyboard
-				login.Click += (sender, e) => {
-					LoginAction ();
-				};
+				login.Click += DoLogin;
 
 				//request focus to the edit text to start on username.
 				userName.RequestFocus ();
@@ -109,6 +81,29 @@ namespace App.Android
 
 		}
 
+		private async void DoLogin(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrEmpty (userName.Text)) {
+
+				hide_keyboard_and_show_progress ();
+
+				await view_model.Login ();
+
+				//RunOnUiThread (() => {
+				StartActivity (typeof(MainActivity));
+				//});
+			}
+		}
+
+		private void hide_keyboard_and_show_progress()
+		{
+			//this hides the keyboard
+			var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
+			imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
+			login.Visibility = ViewStates.Invisible;
+			progressIndicator.Visibility = ViewStates.Visible;
+		}
+			
 		protected override void OnResume ()
 		{
 			base.OnResume ();
@@ -128,7 +123,7 @@ namespace App.Android
 			//go edit action will login
 			if (actionId == ImeAction.Go) {
 				if (!string.IsNullOrEmpty (userName.Text)) {
-					LoginAction ();
+					DoLogin (this, EventArgs.Empty);
 				} else if (string.IsNullOrEmpty (userName.Text)) {
 					userName.RequestFocus ();
 				} else {

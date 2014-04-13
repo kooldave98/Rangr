@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Android.App;
-using System.IO;
-using App.Core.Portable.Models;
-using App.Common.Shared;
 using App.Common;
+using App.Common.Shared;
+using App.Core.Portable.Models;
 
 namespace App.Android
 {
@@ -13,8 +13,6 @@ namespace App.Android
 	public class Global : global::Android.App.Application
 	{
 		public FeedViewModel Feed { get; set; }
-
-		//public ConnectionIdentity current_connection { get; set;}
 
 		public static Global Current {
 			get {

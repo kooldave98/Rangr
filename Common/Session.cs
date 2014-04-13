@@ -9,9 +9,14 @@ namespace App.Common.Shared
 	{
 		public ConnectionIdentity CurrentConnection { get; set;}
 
-		public User GetCurrentUser()
+		public User GetCurrentUser(bool allowDefault = false)
 		{
 			var user = PersistentStorage.Load<User> (CurrentUserKey);
+
+			if (!allowDefault && user == null) {
+				throw new InvalidOperationException ("User Session does not exist");
+			}
+
 			return user;
 		}
 

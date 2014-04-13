@@ -6,7 +6,7 @@ namespace App.Core.Portable.Device
 	public interface ISession
 	{
 		//User
-		User GetCurrentUser ();
+		User GetCurrentUser (bool allowDefault = false);
 		void PersistCurrentUser (User user);
 
 		//No need to persist this, will just keep in memory

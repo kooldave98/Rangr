@@ -36,6 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{589CF5
 		Common\EmptyClass.cs = Common\EmptyClass.cs
 		Common\FeedViewModel.cs = Common\FeedViewModel.cs
 		Common\ViewModelBase.cs = Common\ViewModelBase.cs
+		Common\NewPostViewModel.cs = Common\NewPostViewModel.cs
+		Common\PostDetailsViewModel.cs = Common\PostDetailsViewModel.cs
+		Common\LoginViewModel.cs = Common\LoginViewModel.cs
 	EndProjectSection
 EndProject
 Global

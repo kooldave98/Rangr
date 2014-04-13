@@ -99,6 +99,15 @@
     <Compile Include="..\..\Common\ViewModelBase.cs">
       <Link>ViewModels\ViewModelBase.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\NewPostViewModel.cs">
+      <Link>ViewModels\NewPostViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\PostDetailsViewModel.cs">
+      <Link>ViewModels\PostDetailsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\LoginViewModel.cs">
+      <Link>ViewModels\LoginViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

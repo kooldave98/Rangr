@@ -15,7 +15,6 @@ using App.Common;
 using App.Common.Shared;
 using App.Core.Android;
 
-
 namespace App.Android
 {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -24,7 +23,6 @@ namespace App.Android
 	[Activity (Label = "Walkr", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainActivity : Activity
 	{
-
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
 			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
@@ -36,7 +34,7 @@ namespace App.Android
 		{
 			switch (item.TitleFormatted.ToString ()) { 
 			case "New Post":
-				StartActivityForResult (typeof(NewPostScreen), 0);
+				StartActivityForResult (typeof(NewPostActivity), 0);
 				break;
 			case "Console":
 				MenuItemClicked (item);
@@ -77,12 +75,10 @@ namespace App.Android
 			view_model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
 			view_model.IsBusyChanged +=	(sender, e) => {
-				if(view_model.IsBusy)
-				{
-					progress = ProgressDialog.Show(this, "Loading...", "Busy", true);
-				}
-				else{
-					progress.Dismiss();
+				if (view_model.IsBusy) {
+					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
+				} else {
+					progress.Dismiss ();
 				}
 			};
 
@@ -121,9 +117,9 @@ namespace App.Android
 			refreshGrid ();
 		}
 
-		protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		protected override async void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
-			base.OnActivityResult(requestCode, resultCode, data);
+			base.OnActivityResult (requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
 				await view_model.RefreshPosts ();
 			}
@@ -143,35 +139,32 @@ namespace App.Android
 			_postListView.Adapter = _postListAdapter;
 		}
 
-		private void setup_pull_to_refresh_on_list(ListView list_view)
+		private void setup_pull_to_refresh_on_list (ListView list_view)
 		{
 			mPullToRefreshAttacher = new PullToRefreshAttacher (this, list_view);
 
 			// Set Listener to know when a refresh should be started
 			mPullToRefreshAttacher.Refresh += async (sender, e) => {
-				await view_model.RefreshPosts();
+				await view_model.RefreshPosts ();
 
 				mPullToRefreshAttacher.SetRefreshComplete ();
 			};
 		}
 
-		private void bind_list_item_click(ListView list_view)
+		private void bind_list_item_click (ListView list_view)
 		{
 			list_view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-				var postDetails = new Intent (this, typeof(PostDetailsScreen));
-				postDetails.PutExtra ("PostID", view_model.Posts [e.Position].id);
+				var post = view_model.Posts [e.Position];
+				var postDetails = PostDetailsActivity.CreateIntent (this, post);
 				StartActivity (postDetails);
 			};
 		}
 
-		private FeedViewModel view_model 
-		{
-			get
-			{
+		private FeedViewModel view_model {
+			get {
 				return Global.Current.Feed;
 			}
-			set 
-			{
+			set {
 				Global.Current.Feed = value;
 			}
 		}
