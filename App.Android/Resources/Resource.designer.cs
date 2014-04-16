@@ -231,6 +231,9 @@ namespace App.Android
 			// aapt resource value: 0x7f030005
 			public const int PostListItem = 2130903045;
 			
+			// aapt resource value: 0x7f030006
+			public const int TabLayout = 2130903046;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

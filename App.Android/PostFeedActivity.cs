@@ -21,7 +21,7 @@ namespace App.Android
 	//Remember to use the Tab Layout from the Standard/Content Controls in the Sandbox as a test first.
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	[Activity (Label = "Walkr", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class MainActivity : Activity
+	public class PostFeedActivity : Activity
 	{
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -100,8 +100,12 @@ namespace App.Android
 			// Set Listener to know when a refresh should be started
 			mPullToRefreshAttacher.Refresh += async (sender, e) => {
 				await view_model.RefreshPosts ();
+				JavaScriptTimer.SetTimeout(delegate{
+					RunOnUiThread(()=>{
+						mPullToRefreshAttacher.SetRefreshComplete ();
+					});
+				},1500);//1.5 secs
 
-				mPullToRefreshAttacher.SetRefreshComplete ();
 			};
 		}
 

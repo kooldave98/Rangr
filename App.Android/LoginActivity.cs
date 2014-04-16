@@ -35,7 +35,7 @@ namespace App.Android
 			//Check if the user exists first before populating the view
 
 			if (view_model.CurrentUserExists) {
-				StartActivity (typeof(MainActivity));
+				StartActivity (typeof(PostFeedActivity));
 				Finish ();
 			} else {
 				// Set our view from the "main" layout resource
@@ -90,7 +90,7 @@ namespace App.Android
 				await view_model.Login ();
 
 				//RunOnUiThread (() => {
-				StartActivity (typeof(MainActivity));
+				StartActivity (typeof(PostFeedActivity));
 				//});
 			}
 		}

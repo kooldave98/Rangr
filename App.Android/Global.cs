@@ -6,6 +6,7 @@ using Android.App;
 using App.Common;
 using App.Common.Shared;
 using App.Core.Portable.Models;
+using Android.Content;
 
 namespace App.Android
 {
@@ -16,7 +17,7 @@ namespace App.Android
 
 		public static Global Current {
 			get {
-				return _instance;// ?? (_instance = new GeoLocation(activityContext));
+				return _instance;
 			}
 		}
 
