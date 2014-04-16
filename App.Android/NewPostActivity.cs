@@ -19,9 +19,19 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	[Activity (Label = "New Post", ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class NewPostActivity : Activity
 	{
+
+		public override bool OnNavigateUp()
+		{
+			base.OnNavigateUp ();
+
+			Finish ();
+
+			return true;
+		}
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -31,17 +41,16 @@ namespace App.Android
 			// set our layout to be the home screen
 			SetContentView (Resource.Layout.NewPost);
 
+			ActionBar.SetDisplayHomeAsUpEnabled (true);
+
 			postTextEdit = FindViewById<EditText> (Resource.Id.PostText);
 			saveButton = FindViewById<Button> (Resource.Id.SaveButton);
-			cancelButton = FindViewById<Button> (Resource.Id.CancelButton);
 
 			postTextEdit.TextChanged += (sender, e) => {
 				view_model.PostText = postTextEdit.Text;
 			};
 
 			saveButton.Click += HandleSaveButtonClicked;
-
-			cancelButton.Click += HandleCancelClicked;
 		}
 
 		private async void HandleSaveButtonClicked (object sender, EventArgs e)
@@ -55,13 +64,9 @@ namespace App.Android
 			}
 		}
 
-		private void HandleCancelClicked (object sender, EventArgs e)
-		{
-			Finish ();
-		}
+
 
 		private NewPostViewModel view_model;
-		private Button cancelButton;
 		private EditText postTextEdit;
 		private Button saveButton;
 	}

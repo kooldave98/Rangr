@@ -15,9 +15,18 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	[Activity (Label = "PostDetailsScreen", ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PostDetailsActivity : Activity
 	{
+		public override bool OnNavigateUp()
+		{
+			base.OnNavigateUp ();
+
+			Finish ();
+
+			return true;
+		}
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -32,18 +41,14 @@ namespace App.Android
 			// set our layout to be the home screen
 			SetContentView (Resource.Layout.PostDetails);
 
+			ActionBar.SetDisplayHomeAsUpEnabled (true);
+
 			postTextLabel = FindViewById<TextView> (Resource.Id.PostTextLabel);
-			cancelButton = FindViewById<Button> (Resource.Id.CancelButton);
 
 			postTextLabel.Text = view_model.CurrentPost.text;
-
-			cancelButton.Click += HandleCancelButtonClicked;
 		}
 
-		private void HandleCancelButtonClicked (object sender, EventArgs e)
-		{
-			Finish ();
-		}
+
 
 		public static Intent CreateIntent (Context context, SeenPost post)
 		{
@@ -56,7 +61,6 @@ namespace App.Android
 
 		PostDetailsViewModel view_model;
 
-		Button cancelButton;
 		TextView postTextLabel;
 	}
 }

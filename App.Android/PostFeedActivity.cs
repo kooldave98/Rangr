@@ -20,7 +20,7 @@ namespace App.Android
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//Remember to use the Tab Layout from the Standard/Content Controls in the Sandbox as a test first.
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	[Activity (Label = "Walkr", ScreenOrientation = ScreenOrientation.Portrait)]
+	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class PostFeedActivity : Activity
 	{
 		protected async override void OnCreate (Bundle bundle)
@@ -29,7 +29,7 @@ namespace App.Android
 
 			SetContentView (Resource.Layout.Main);
 
-			//ActionBar.SetDisplayHomeAsUpEnabled (true);
+
 
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
 
