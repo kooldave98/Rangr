@@ -10,7 +10,8 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
+        android:id="@+id/linearLayout1"
+        android:layout_marginBottom="20dip">
         <ImageButton
             android:src="@drawable/Placeholder"
             android:layout_width="64dip"
@@ -23,7 +24,7 @@
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/linearLayout2"
             android:layout_weight="1"
             android:gravity="center"
@@ -43,7 +44,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/PostText"
-                android:maxLines="4"
+                android:maxLines="15"
                 android:textColor="#666"
                 android:ellipsize="none" />
         </LinearLayout>

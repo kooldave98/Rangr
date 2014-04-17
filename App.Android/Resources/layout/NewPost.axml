@@ -42,12 +42,13 @@
     <EditText
         android:id="@+id/PostText"
         android:layout_width="fill_parent"
-        android:layout_height="167.0dp"
+        android:layout_height="160dp"
         android:maxLines="5"
         android:imeOptions="actionDone"
         android:singleLine="false"
+        android:maxLength="160"
         android:freezesText="false"
-        android:maxLength="160" />
+        android:cursorVisible="true" />
     <Button
         style="@style/XamButton"
         android:text="Send"

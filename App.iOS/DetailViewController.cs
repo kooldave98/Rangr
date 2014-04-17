@@ -17,7 +17,7 @@ namespace App.iOS
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Detail", "Detail");
 
-			view_model = new PostDetailsViewModel ();
+			view_model = new PostDetailsViewModel (PersistentStorage.Current);
 		}
 
 		public override void ViewDidLoad ()

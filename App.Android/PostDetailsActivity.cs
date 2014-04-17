@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using App.Common;
 using App.Core.Portable.Models;
+using App.Core.Android;
 
 namespace App.Android
 {
@@ -31,7 +32,7 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			view_model = new PostDetailsViewModel ();
+			view_model = new PostDetailsViewModel (PersistentStorage.Current);
 
 			if (Intent.HasExtra ("Post")) {
 				var postBytes = Intent.GetByteArrayExtra ("Post");
@@ -42,6 +43,8 @@ namespace App.Android
 			SetContentView (Resource.Layout.PostDetails);
 
 			ActionBar.SetDisplayHomeAsUpEnabled (true);
+
+			FindViewById<TextView> (Resource.Id.UserNameText).SetText (view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);
 
 			postTextLabel = FindViewById<TextView> (Resource.Id.PostTextLabel);
 

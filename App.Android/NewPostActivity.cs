@@ -43,14 +43,12 @@ namespace App.Android
 
 			ActionBar.SetDisplayHomeAsUpEnabled (true);
 
-			postTextEdit = FindViewById<EditText> (Resource.Id.PostText);
-			saveButton = FindViewById<Button> (Resource.Id.SaveButton);
+			FindViewById<TextView> (Resource.Id.UserNameText).SetText (view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);
 
-			postTextEdit.TextChanged += (sender, e) => {
-				view_model.PostText = postTextEdit.Text;
-			};
+			FindViewById<EditText> (Resource.Id.PostText).TextChanged += HandlePostTextChanged;
 
-			saveButton.Click += HandleSaveButtonClicked;
+			FindViewById<Button> (Resource.Id.SaveButton).Click += HandleSaveButtonClicked;
+
 		}
 
 		private async void HandleSaveButtonClicked (object sender, EventArgs e)
@@ -64,10 +62,11 @@ namespace App.Android
 			}
 		}
 
-
+		private void HandlePostTextChanged(object sender, EventArgs e)
+		{
+			view_model.PostText = ((EditText)sender).Text;
+		}
 
 		private NewPostViewModel view_model;
-		private EditText postTextEdit;
-		private Button saveButton;
 	}
 }

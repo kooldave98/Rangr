@@ -3,11 +3,14 @@ using System.Threading.Tasks;
 using App.Core.Portable.Device;
 using App.Common.Shared;
 using App.Core.Portable.Persistence;
+using App.Core.Portable.Models;
 
 namespace App.Common
 {
 	public class NewPostViewModel : ViewModelBase
 	{
+		public User CurrentUser { get; private set;}
+
 		public string PostText { get; set; }
 
 		public async Task CreatePost ()
@@ -23,6 +26,8 @@ namespace App.Common
 		{
 			SessionInstance = Session.GetInstance (the_persistent_storage_instance);
 			post_services = new Posts (HttpRequest.Current);
+
+			CurrentUser = SessionInstance.GetCurrentUser ();
 		}
 
 		private ISession SessionInstance;
