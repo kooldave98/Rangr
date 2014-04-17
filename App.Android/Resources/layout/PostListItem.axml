@@ -11,6 +11,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
+        <ImageButton
+            android:src="@drawable/Placeholder"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:id="@+id/UserImageButton"
+            android:background="@null"
+            android:scaleType="fitCenter" />
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
@@ -36,18 +43,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/PostText"
-                android:minLines="1"
-                android:maxLines="1"
+                android:maxLines="4"
                 android:textColor="#666"
-                android:ellipsize="end" />
+                android:ellipsize="none" />
         </LinearLayout>
-        <ImageButton
-            android:src="@drawable/Placeholder"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:id="@+id/UserImageButton"
-            android:background="@null"
-            android:scaleType="fitCenter" />
     </LinearLayout>
     <View
         android:layout_width="fill_parent"

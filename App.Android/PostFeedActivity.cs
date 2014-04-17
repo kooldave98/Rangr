@@ -27,7 +27,7 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			SetContentView (Resource.Layout.Main);
+			SetContentView (Resource.Layout.PostFeed);
 
 
 

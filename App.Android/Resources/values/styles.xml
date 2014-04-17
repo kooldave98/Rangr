@@ -2,4 +2,10 @@
 <resources>
   <style name="CustomHoloTheme" parent="@android:style/Theme.Holo">
   </style>
+
+  <style name="WalkrSubTitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">@color/action_bar_title_color</item>
+		<item name="android:textStyle">bold</item>
+	</style>
 </resources>

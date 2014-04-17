@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <TextView
-        android:id="@+id/PostDetailsHeader"
-        android:text="Add new post"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/PostLabel"
-        android:text="Post Text:"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/PostDetailsHeader" />
+        android:id="@+id/linearLayout1">
+        <ImageButton
+            android:src="@drawable/Placeholder"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:id="@+id/UserImageButton"
+            android:background="@null"
+            android:scaleType="fitCenter" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="8dip">
+            <TextView
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/UserNameText"
+                android:minLines="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </LinearLayout>
+    </LinearLayout>
     <EditText
         android:id="@+id/PostText"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/PostLabel"
-        android:maxLines="1"
-        android:imeOptions="actionDone" />
+        android:layout_height="167.0dp"
+        android:maxLines="5"
+        android:imeOptions="actionDone"
+        android:singleLine="false"
+        android:freezesText="false"
+        android:maxLength="160" />
     <Button
-        android:id="@+id/SaveButton"
+        style="@style/XamButton"
         android:text="Send"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/PostText" />
-</RelativeLayout>
+        android:id="@+id/SaveButton"
+        android:layout_below="@+id/PostText"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
