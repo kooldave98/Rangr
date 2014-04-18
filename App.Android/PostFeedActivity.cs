@@ -17,11 +17,8 @@ using App.Core.Android;
 
 namespace App.Android
 {
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//Remember to use the Tab Layout from the Standard/Content Controls in the Sandbox as a test first.
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PostFeedActivity : Activity
+	public class PostFeedActivity : BaseActivity
 	{
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -118,12 +115,17 @@ namespace App.Android
 			};
 		}
 
-
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
 			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
-			menu.Add ("Console");
-			return true;
+
+			MenuInflater.Inflate (Resource.Menu.menu, menu);
+
+			menu.FindItem (Resource.Id.feed_menu_item).SetEnabled(false);
+
+			return base.OnCreateOptionsMenu (menu);
+
+			//return true;
 		}
 
 		public override bool OnOptionsItemSelected (IMenuItem item)
@@ -133,34 +135,11 @@ namespace App.Android
 				StartActivityForResult (typeof(NewPostActivity), 0);
 				break;
 			case "Console":
-				MenuItemClicked (item);
-				break;
-			case "Stream":
-				MenuItemClicked (item);
+				ShowToast (false);
 				break;
 			}
 
 			return base.OnOptionsItemSelected (item);
-		}
-
-		private void MenuItemClicked (IMenuItem menu_item)
-		{
-			//var menu_item_string = menu_item.TitleFormatted.ToString ();
-
-			//			if (consoleLayout.Visibility == ViewStates.Gone) {
-			//				//consoleLayout.LayoutParameters.Height = 1000;
-			//				streamLayout.Visibility = ViewStates.Gone;
-			//				consoleLayout.Visibility = ViewStates.Visible;
-			//				menu_item.SetTitle ("Stream");
-			//			} else {
-			//				consoleLayout.Visibility = ViewStates.Gone;
-			//				streamLayout.Visibility = ViewStates.Visible;
-			//				menu_item.SetTitle ("Console");
-			//			}
-			//			Console.WriteLine(menu_item_string + " option menuitem clicked");
-			//			var t = Toast.MakeText(this, "Options Menu '"+menu_item_string+"' clicked", ToastLength.Short);
-			//			t.SetGravity(GravityFlags.Center, 0, 0);
-			//			t.Show();
 		}
 
 		private FeedViewModel view_model {

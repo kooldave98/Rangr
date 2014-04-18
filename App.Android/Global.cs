@@ -34,10 +34,6 @@ namespace App.Android
 			base.OnCreate ();
 		}
 
-		public DateTime LastUseTime { get; set; }
-
-		public readonly TimeSpan ForceLoginTimespan = TimeSpan.FromMinutes (5);
-
 	}
 }
 

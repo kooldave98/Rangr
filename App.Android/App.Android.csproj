@@ -69,6 +69,14 @@
       <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="PostFeedActivity.cs" />
+    <Compile Include="PeopleActivity.cs" />
+    <Compile Include="ProfileActivity.cs" />
+    <Compile Include="PeopleMapFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PeopleListFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,7 +113,6 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\Placeholder.jpg" />
     <AndroidResource Include="Resources\drawable-mdpi\Placeholder.jpg" />
-    <AndroidResource Include="Resources\layout\TabLayout.axml" />
     <AndroidResource Include="Resources\values\themes.xml" />
     <AndroidResource Include="Resources\drawable\ab_background.xml" />
     <AndroidResource Include="Resources\drawable\btn_bg.xml" />
@@ -175,6 +182,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\processing.png" />
     <AndroidResource Include="Resources\menu\menu.xml" />
     <AndroidResource Include="Resources\layout\PostFeed.axml" />
+    <AndroidResource Include="Resources\layout\People.axml" />
+    <AndroidResource Include="Resources\layout\Tab.axml">
+      <DependentUpon>People.axml</DependentUpon>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
