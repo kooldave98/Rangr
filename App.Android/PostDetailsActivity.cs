@@ -32,7 +32,7 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			view_model = new PostDetailsViewModel (PersistentStorage.Current);
+			view_model = new PostDetailsViewModel ();
 
 			if (Intent.HasExtra ("Post")) {
 				var postBytes = Intent.GetByteArrayExtra ("Post");
@@ -44,7 +44,7 @@ namespace App.Android
 
 			ActionBar.SetDisplayHomeAsUpEnabled (true);
 
-			FindViewById<TextView> (Resource.Id.UserNameText).SetText (view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);
+			FindViewById<TextView> (Resource.Id.UserNameText).SetText (view_model.CurrentPost.user_display_name, TextView.BufferType.Normal);
 
 			postTextLabel = FindViewById<TextView> (Resource.Id.PostTextLabel);
 

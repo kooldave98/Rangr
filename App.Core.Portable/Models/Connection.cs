@@ -14,4 +14,3 @@ namespace App.Core.Portable.Models
 
 	}
 }
-

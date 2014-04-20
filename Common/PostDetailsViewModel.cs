@@ -9,8 +9,6 @@ namespace App.Common
 {
 	public class PostDetailsViewModel : ViewModelBase
 	{
-		public User CurrentUser { get; private set;}
-
 		public SeenPost CurrentPost { get; set;}
 
 		public void Deserialize(byte[] postBytes)
@@ -29,15 +27,10 @@ namespace App.Common
 			return postStream.ToArray ();
 		}
 
-		public PostDetailsViewModel (IPersistentStorage the_persistent_storage_instance)
+		public PostDetailsViewModel ()
 		{
-			SessionInstance = Session.GetInstance (the_persistent_storage_instance);
-			CurrentUser = SessionInstance.GetCurrentUser ();
-
 			CurrentPost = new SeenPost ();
 		}
-
-		private ISession SessionInstance;
 	}
 }
 

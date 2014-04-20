@@ -39,7 +39,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{589CF5
 		Common\NewPostViewModel.cs = Common\NewPostViewModel.cs
 		Common\PostDetailsViewModel.cs = Common\PostDetailsViewModel.cs
 		Common\LoginViewModel.cs = Common\LoginViewModel.cs
+		Common\PeopleViewModel.cs = Common\PeopleViewModel.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinStore.Droid", "..\GitHub Repositories\xamarin-store-app\XamarinStore.Droid\XamarinStore.Droid.csproj", "{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +168,22 @@ Global
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|x86.ActiveCfg = Release|iPhoneSimulator
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|x86.Build.0 = Release|iPhoneSimulator
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|iPhone.Build.0 = Release|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{E96837AE-F19A-4467-AE2D-2C4FDCD8A0F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}

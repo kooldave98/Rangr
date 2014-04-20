@@ -9,23 +9,31 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Content.PM;
+using App.Common;
+using App.Core.Android;
 
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PeopleActivity : BaseActivity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.People);
 
+			//load our viewmodel
+			view_model = new PeopleViewModel (PersistentStorage.Current);
+
+			await view_model.RefreshConnectedUsers ();
+
+			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 
-			AddTab ("List", new PeopleListFragment ());
-			AddTab ("Map", new PeopleMapFragment ());
+			AddTab ("List", new PeopleListFragment (view_model));
+			AddTab ("Map", new PeopleMapFragment (view_model));
 
 			if (bundle != null)
 				this.ActionBar.SelectTab(this.ActionBar.GetTabAt(bundle.GetInt("tab")));
@@ -68,6 +76,8 @@ namespace App.Android
 
 			return base.OnCreateOptionsMenu (menu);
 		}
+
+		private PeopleViewModel view_model;
 	}
 }
 

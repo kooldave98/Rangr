@@ -77,6 +77,7 @@
     <Compile Include="PeopleListFragment.cs">
       <DependentUpon>PeopleActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="PeopleListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -87,7 +88,9 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\PostDetails.axml" />
-    <AndroidResource Include="Resources\layout\PostListItem.axml" />
+    <AndroidResource Include="Resources\layout\PostListItem.axml">
+      <DependentUpon>PostList.axml</DependentUpon>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\NewPost.axml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
@@ -181,9 +184,15 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\processing.png" />
     <AndroidResource Include="Resources\menu\menu.xml" />
-    <AndroidResource Include="Resources\layout\PostFeed.axml" />
     <AndroidResource Include="Resources\layout\People.axml" />
-    <AndroidResource Include="Resources\layout\Tab.axml">
+    <AndroidResource Include="Resources\layout\PeopleList.axml">
+      <DependentUpon>People.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PostList.axml" />
+    <AndroidResource Include="Resources\layout\TabExampleToBeDeleted.axml">
+      <DependentUpon>People.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PeopleListItem.axml">
       <DependentUpon>People.axml</DependentUpon>
     </AndroidResource>
   </ItemGroup>

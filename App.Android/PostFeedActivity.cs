@@ -24,7 +24,7 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			SetContentView (Resource.Layout.PostFeed);
+			SetContentView (Resource.Layout.PostList);
 
 
 
@@ -33,6 +33,9 @@ namespace App.Android
 			//App logic
 
 			view_model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+
+			//setup list adapter
+			setupAdapter ();
 
 			view_model.IsBusyChanged +=	(sender, e) => {
 				if (view_model.IsBusy) {
@@ -81,13 +84,19 @@ namespace App.Android
 			refreshGrid ();
 		}
 
-		private void refreshGrid ()
+		private void setupAdapter()
 		{
 			// create our adapter
 			_postListAdapter = new PostListAdapter (this, view_model.Posts);
 
 			//Hook up our adapter to our ListView
 			_postListView.Adapter = _postListAdapter;
+		}
+
+		private void refreshGrid ()
+		{
+			_postListAdapter.NotifyDataSetChanged ();
+
 		}
 
 		private void setup_pull_to_refresh_on_list (ListView list_view)

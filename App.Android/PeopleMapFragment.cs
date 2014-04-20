@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using App.Common;
 
 namespace App.Android
 {
@@ -25,12 +26,19 @@ namespace App.Android
 		{
 			base.OnCreateView(inflater, container, savedInstanceState);
 
-			var view = inflater.Inflate(Resource.Layout.Tab, container, false);
+			var view = inflater.Inflate(Resource.Layout.TabExampleToBeDeleted, container, false);
 			var sampleTextView = view.FindViewById<TextView>(Resource.Id.sampleTextView);
 			sampleTextView.Text = "sample fragment text 2";
 
 			return view;
 		}
+
+		public PeopleMapFragment(PeopleViewModel the_view_model)
+		{
+			view_model = the_view_model;
+		}
+
+		PeopleViewModel view_model;
 	}
 }
 

@@ -9,29 +9,49 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using App.Common;
 
 namespace App.Android
 {
-	public class PeopleListFragment : Fragment
+	public class PeopleListFragment : ListFragment
 	{
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
+			RetainInstance = true;
 
-			// Create your fragment here
 		}
 
-		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			base.OnCreateView (inflater, container, savedInstanceState);
+			var peopleListView = inflater.Inflate (Resource.Layout.PeopleList, container, false);
 
-			var view = inflater.Inflate (Resource.Layout.Tab, container, false);
-			var sampleTextView = view.FindViewById<TextView> (Resource.Id.sampleTextView);             
-			sampleTextView.Text = "sample fragment text";
 
-			return view;
+			peopleListView.PivotY = 0;
+			peopleListView.PivotX = container.Width;
+
+			return peopleListView;
 		}
 
+		public override void OnViewCreated (View view, Bundle savedInstanceState)
+		{
+			base.OnViewCreated (view, savedInstanceState);
+			ListView.DividerHeight = 0;
+			ListView.Divider = null;
+			var peopleListAdapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
+
+			ListAdapter = peopleListAdapter;
+
+			view_model.OnConnectionsReceived += (sender, e) => {
+				peopleListAdapter.NotifyDataSetChanged();
+			};
+		}
+
+		public PeopleListFragment(PeopleViewModel the_view_model)
+		{
+			view_model = the_view_model;
+		}
+
+		PeopleViewModel view_model;
 	}
 }
-

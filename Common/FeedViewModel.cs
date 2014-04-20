@@ -9,6 +9,8 @@ using App.Core.Portable.Persistence;
 
 namespace App.Common
 {
+	//The ios workarounds are because I didn't want to be repopulating the list each time.
+	//So I am caching the latest posts every time a pull is made.
 	public class FeedViewModel : ViewModelBase
 	{
 		public int start_index { get; set; }
