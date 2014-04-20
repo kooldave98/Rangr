@@ -258,23 +258,23 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05001b
-			public const int Divider = 2131034139;
+			// aapt resource value: 0x7f050018
+			public const int Divider = 2131034136;
 			
-			// aapt resource value: 0x7f05001a
-			public const int PostList = 2131034138;
+			// aapt resource value: 0x7f05001b
+			public const int PostList = 2131034139;
 			
 			// aapt resource value: 0x7f05000e
 			public const int PostText = 2131034126;
 			
-			// aapt resource value: 0x7f050018
-			public const int PostTextLabel = 2131034136;
+			// aapt resource value: 0x7f050019
+			public const int PostTextLabel = 2131034137;
 			
 			// aapt resource value: 0x7f05000f
 			public const int SaveButton = 2131034127;
 			
-			// aapt resource value: 0x7f050019
-			public const int StreamLayout = 2131034137;
+			// aapt resource value: 0x7f05001a
+			public const int StreamLayout = 2131034138;
 			
 			// aapt resource value: 0x7f050012
 			public const int SwipeContent = 2131034130;
