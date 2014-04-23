@@ -47,7 +47,7 @@ namespace App.Android
 			}
 
 			view.FindViewById<TextView> (Resource.Id.personName).Text = person.user_display_name;
-			view.FindViewById<TextView> (Resource.Id.distance).Text = person.geolocation_accuracy_in_metres + " metres accurate";
+			view.FindViewById<TextView> (Resource.Id.distance).Text = person.geolocation_accuracy_in_metres + " metres";
 			view.FindViewById<TextView> (Resource.Id.status).Text = "Available";
 
 			var personImage = view.FindViewById<ImageView> (Resource.Id.personImage);

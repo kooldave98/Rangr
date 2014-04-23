@@ -19,7 +19,7 @@ namespace App.Common
 		{
 			var result = await ConnectionServices.Get (_sessionInstance.CurrentConnection.connection_id.ToString ());
 
-			ConnectedUsers = ConnectedUsers.Union (result, new ConnectionComparer ()).ToList();
+			ConnectedUsers = result;
 
 			if (OnConnectionsReceived != null) {
 				OnConnectionsReceived (this, EventArgs.Empty);

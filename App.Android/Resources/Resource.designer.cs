@@ -50,23 +50,71 @@ namespace App.Android
 		public partial class Attribute
 		{
 			
-			// aapt resource value: 0x7f010004
-			public const int delegateClass = 2130771972;
-			
-			// aapt resource value: 0x7f010002
-			public const int headerInAnimation = 2130771970;
-			
 			// aapt resource value: 0x7f010000
-			public const int headerLayout = 2130771968;
+			public const int adSize = 2130771968;
 			
 			// aapt resource value: 0x7f010001
-			public const int headerOutAnimation = 2130771969;
-			
-			// aapt resource value: 0x7f010005
-			public const int headerTransformerClass = 2130771973;
+			public const int adUnitId = 2130771969;
 			
 			// aapt resource value: 0x7f010003
-			public const int refreshScrollDistance = 2130771971;
+			public const int cameraBearing = 2130771971;
+			
+			// aapt resource value: 0x7f010004
+			public const int cameraTargetLat = 2130771972;
+			
+			// aapt resource value: 0x7f010005
+			public const int cameraTargetLng = 2130771973;
+			
+			// aapt resource value: 0x7f010006
+			public const int cameraTilt = 2130771974;
+			
+			// aapt resource value: 0x7f010007
+			public const int cameraZoom = 2130771975;
+			
+			// aapt resource value: 0x7f010014
+			public const int delegateClass = 2130771988;
+			
+			// aapt resource value: 0x7f010012
+			public const int headerInAnimation = 2130771986;
+			
+			// aapt resource value: 0x7f010010
+			public const int headerLayout = 2130771984;
+			
+			// aapt resource value: 0x7f010011
+			public const int headerOutAnimation = 2130771985;
+			
+			// aapt resource value: 0x7f010015
+			public const int headerTransformerClass = 2130771989;
+			
+			// aapt resource value: 0x7f010002
+			public const int mapType = 2130771970;
+			
+			// aapt resource value: 0x7f010013
+			public const int refreshScrollDistance = 2130771987;
+			
+			// aapt resource value: 0x7f010008
+			public const int uiCompass = 2130771976;
+			
+			// aapt resource value: 0x7f010009
+			public const int uiRotateGestures = 2130771977;
+			
+			// aapt resource value: 0x7f01000a
+			public const int uiScrollGestures = 2130771978;
+			
+			// aapt resource value: 0x7f01000b
+			public const int uiTiltGestures = 2130771979;
+			
+			// aapt resource value: 0x7f01000c
+			public const int uiZoomControls = 2130771980;
+			
+			// aapt resource value: 0x7f01000d
+			public const int uiZoomGestures = 2130771981;
+			
+			// aapt resource value: 0x7f01000e
+			public const int useViewLifecycle = 2130771982;
+			
+			// aapt resource value: 0x7f01000f
+			public const int zOrderOnTop = 2130771983;
 			
 			static Attribute()
 			{
@@ -81,53 +129,89 @@ namespace App.Android
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f07000a
-			public const int ab_background = 2131165194;
+			// aapt resource value: 0x7f050014
+			public const int ab_background = 2131034132;
 			
-			// aapt resource value: 0x7f07000b
-			public const int ab_bottom_shadow_1 = 2131165195;
+			// aapt resource value: 0x7f050015
+			public const int ab_bottom_shadow_1 = 2131034133;
 			
-			// aapt resource value: 0x7f07000c
-			public const int ab_bottom_shadow_2 = 2131165196;
+			// aapt resource value: 0x7f050016
+			public const int ab_bottom_shadow_2 = 2131034134;
 			
-			// aapt resource value: 0x7f070009
-			public const int action_bar_title_color = 2131165193;
+			// aapt resource value: 0x7f050013
+			public const int action_bar_title_color = 2131034131;
 			
-			// aapt resource value: 0x7f070000
-			public const int blueclick = 2131165184;
+			// aapt resource value: 0x7f05000a
+			public const int blueclick = 2131034122;
 			
-			// aapt resource value: 0x7f07000d
-			public const int btn_bg_color = 2131165197;
+			// aapt resource value: 0x7f050017
+			public const int btn_bg_color = 2131034135;
 			
-			// aapt resource value: 0x7f07000e
-			public const int btn_bg_shadow_color = 2131165198;
+			// aapt resource value: 0x7f050018
+			public const int btn_bg_shadow_color = 2131034136;
 			
-			// aapt resource value: 0x7f07000f
-			public const int disabledText = 2131165199;
+			// aapt resource value: 0x7f050009
+			public const int common_action_bar_splitter = 2131034121;
 			
-			// aapt resource value: 0x7f070001
-			public const int greyheadertext = 2131165185;
+			// aapt resource value: 0x7f050000
+			public const int common_signin_btn_dark_text_default = 2131034112;
 			
-			// aapt resource value: 0x7f070008
-			public const int main_background = 2131165192;
+			// aapt resource value: 0x7f050002
+			public const int common_signin_btn_dark_text_disabled = 2131034114;
 			
-			// aapt resource value: 0x7f070003
-			public const int xam_blue = 2131165187;
+			// aapt resource value: 0x7f050003
+			public const int common_signin_btn_dark_text_focused = 2131034115;
 			
-			// aapt resource value: 0x7f070004
-			public const int xam_dark_blue = 2131165188;
+			// aapt resource value: 0x7f050001
+			public const int common_signin_btn_dark_text_pressed = 2131034113;
 			
-			// aapt resource value: 0x7f070006
-			public const int xam_gray = 2131165190;
+			// aapt resource value: 0x7f050008
+			public const int common_signin_btn_default_background = 2131034120;
 			
-			// aapt resource value: 0x7f070005
-			public const int xam_green = 2131165189;
+			// aapt resource value: 0x7f050004
+			public const int common_signin_btn_light_text_default = 2131034116;
 			
-			// aapt resource value: 0x7f070007
-			public const int xam_light_gray = 2131165191;
+			// aapt resource value: 0x7f050006
+			public const int common_signin_btn_light_text_disabled = 2131034118;
 			
-			// aapt resource value: 0x7f070002
-			public const int xam_purple = 2131165186;
+			// aapt resource value: 0x7f050007
+			public const int common_signin_btn_light_text_focused = 2131034119;
+			
+			// aapt resource value: 0x7f050005
+			public const int common_signin_btn_light_text_pressed = 2131034117;
+			
+			// aapt resource value: 0x7f050019
+			public const int common_signin_btn_text_dark = 2131034137;
+			
+			// aapt resource value: 0x7f05001a
+			public const int common_signin_btn_text_light = 2131034138;
+			
+			// aapt resource value: 0x7f05001b
+			public const int disabledText = 2131034139;
+			
+			// aapt resource value: 0x7f05000b
+			public const int greyheadertext = 2131034123;
+			
+			// aapt resource value: 0x7f050012
+			public const int main_background = 2131034130;
+			
+			// aapt resource value: 0x7f05000d
+			public const int xam_blue = 2131034125;
+			
+			// aapt resource value: 0x7f05000e
+			public const int xam_dark_blue = 2131034126;
+			
+			// aapt resource value: 0x7f050010
+			public const int xam_gray = 2131034128;
+			
+			// aapt resource value: 0x7f05000f
+			public const int xam_green = 2131034127;
+			
+			// aapt resource value: 0x7f050011
+			public const int xam_light_gray = 2131034129;
+			
+			// aapt resource value: 0x7f05000c
+			public const int xam_purple = 2131034124;
 			
 			static Color()
 			{
@@ -142,8 +226,8 @@ namespace App.Android
 		public partial class Dimension
 		{
 			
-			// aapt resource value: 0x7f090000
-			public const int btn_corner_radius = 2131296256;
+			// aapt resource value: 0x7f0a0000
+			public const int btn_corner_radius = 2131361792;
 			
 			static Dimension()
 			{
@@ -183,67 +267,151 @@ namespace App.Android
 			public const int cart = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int complete = 2130837512;
+			public const int common_signin_btn_icon_dark = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int configure = 2130837513;
+			public const int common_signin_btn_icon_disabled_dark = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int discrete_shadow = 2130837514;
+			public const int common_signin_btn_icon_disabled_focus_dark = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int dummy_avatar = 2130837515;
+			public const int common_signin_btn_icon_disabled_focus_light = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int empty_basket = 2130837516;
+			public const int common_signin_btn_icon_disabled_light = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int gallery_next = 2130837517;
+			public const int common_signin_btn_icon_focus_dark = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int gallery_prev = 2130837518;
+			public const int common_signin_btn_icon_focus_light = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int ic_action_basket = 2130837519;
+			public const int common_signin_btn_icon_light = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int ic_action_logo = 2130837520;
+			public const int common_signin_btn_icon_normal_dark = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int Icon = 2130837521;
+			public const int common_signin_btn_icon_normal_light = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int login_button = 2130837522;
+			public const int common_signin_btn_icon_pressed_dark = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int loginbox = 2130837523;
+			public const int common_signin_btn_icon_pressed_light = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int monkey = 2130837524;
+			public const int common_signin_btn_text_dark = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int Placeholder = 2130837525;
+			public const int common_signin_btn_text_disabled_dark = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int processing = 2130837526;
+			public const int common_signin_btn_text_disabled_focus_dark = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int ProductImage = 2130837527;
+			public const int common_signin_btn_text_disabled_focus_light = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int purple_shirt = 2130837528;
+			public const int common_signin_btn_text_disabled_light = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int questionmark = 2130837529;
+			public const int common_signin_btn_text_focus_dark = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int shirt_image = 2130837530;
+			public const int common_signin_btn_text_focus_light = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int user_default_avatar = 2130837531;
+			public const int common_signin_btn_text_light = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int wrench = 2130837532;
+			public const int common_signin_btn_text_normal_dark = 2130837532;
+			
+			// aapt resource value: 0x7f02001d
+			public const int common_signin_btn_text_normal_light = 2130837533;
+			
+			// aapt resource value: 0x7f02001e
+			public const int common_signin_btn_text_pressed_dark = 2130837534;
+			
+			// aapt resource value: 0x7f02001f
+			public const int common_signin_btn_text_pressed_light = 2130837535;
+			
+			// aapt resource value: 0x7f020020
+			public const int complete = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int configure = 2130837537;
+			
+			// aapt resource value: 0x7f020022
+			public const int discrete_shadow = 2130837538;
+			
+			// aapt resource value: 0x7f020023
+			public const int dummy_avatar = 2130837539;
+			
+			// aapt resource value: 0x7f020024
+			public const int empty_basket = 2130837540;
+			
+			// aapt resource value: 0x7f020025
+			public const int gallery_next = 2130837541;
+			
+			// aapt resource value: 0x7f020026
+			public const int gallery_prev = 2130837542;
+			
+			// aapt resource value: 0x7f020027
+			public const int ic_action_basket = 2130837543;
+			
+			// aapt resource value: 0x7f020028
+			public const int ic_action_logo = 2130837544;
+			
+			// aapt resource value: 0x7f020029
+			public const int ic_plusone_medium_off_client = 2130837545;
+			
+			// aapt resource value: 0x7f02002a
+			public const int ic_plusone_small_off_client = 2130837546;
+			
+			// aapt resource value: 0x7f02002b
+			public const int ic_plusone_standard_off_client = 2130837547;
+			
+			// aapt resource value: 0x7f02002c
+			public const int ic_plusone_tall_off_client = 2130837548;
+			
+			// aapt resource value: 0x7f02002d
+			public const int Icon = 2130837549;
+			
+			// aapt resource value: 0x7f02002e
+			public const int login_button = 2130837550;
+			
+			// aapt resource value: 0x7f02002f
+			public const int loginbox = 2130837551;
+			
+			// aapt resource value: 0x7f020030
+			public const int monkey = 2130837552;
+			
+			// aapt resource value: 0x7f020031
+			public const int Placeholder = 2130837553;
+			
+			// aapt resource value: 0x7f020032
+			public const int processing = 2130837554;
+			
+			// aapt resource value: 0x7f020033
+			public const int ProductImage = 2130837555;
+			
+			// aapt resource value: 0x7f020034
+			public const int purple_shirt = 2130837556;
+			
+			// aapt resource value: 0x7f020035
+			public const int questionmark = 2130837557;
+			
+			// aapt resource value: 0x7f020036
+			public const int shirt_image = 2130837558;
+			
+			// aapt resource value: 0x7f020037
+			public const int user_default_avatar = 2130837559;
+			
+			// aapt resource value: 0x7f020038
+			public const int wrench = 2130837560;
 			
 			static Drawable()
 			{
@@ -258,101 +426,116 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050018
-			public const int Divider = 2131034136;
+			// aapt resource value: 0x7f06001d
+			public const int Divider = 2131099677;
 			
-			// aapt resource value: 0x7f05001b
-			public const int PostList = 2131034139;
+			// aapt resource value: 0x7f060021
+			public const int PostList = 2131099681;
 			
-			// aapt resource value: 0x7f05000e
-			public const int PostText = 2131034126;
+			// aapt resource value: 0x7f060013
+			public const int PostText = 2131099667;
 			
-			// aapt resource value: 0x7f050019
-			public const int PostTextLabel = 2131034137;
+			// aapt resource value: 0x7f06001f
+			public const int PostTextLabel = 2131099679;
 			
-			// aapt resource value: 0x7f05000f
-			public const int SaveButton = 2131034127;
+			// aapt resource value: 0x7f060014
+			public const int SaveButton = 2131099668;
 			
-			// aapt resource value: 0x7f05001a
-			public const int StreamLayout = 2131034138;
+			// aapt resource value: 0x7f060020
+			public const int StreamLayout = 2131099680;
 			
-			// aapt resource value: 0x7f050012
-			public const int SwipeContent = 2131034130;
+			// aapt resource value: 0x7f060017
+			public const int SwipeContent = 2131099671;
 			
-			// aapt resource value: 0x7f05000b
-			public const int UserImageButton = 2131034123;
+			// aapt resource value: 0x7f060010
+			public const int UserImageButton = 2131099664;
 			
-			// aapt resource value: 0x7f05000d
-			public const int UserNameText = 2131034125;
+			// aapt resource value: 0x7f060012
+			public const int UserNameText = 2131099666;
 			
-			// aapt resource value: 0x7f050003
-			public const int dialogImage = 2131034115;
+			// aapt resource value: 0x7f060008
+			public const int dialogImage = 2131099656;
 			
-			// aapt resource value: 0x7f050002
-			public const int dialogLayout = 2131034114;
+			// aapt resource value: 0x7f060007
+			public const int dialogLayout = 2131099655;
 			
-			// aapt resource value: 0x7f050004
-			public const int dialogTitle = 2131034116;
+			// aapt resource value: 0x7f060009
+			public const int dialogTitle = 2131099657;
 			
-			// aapt resource value: 0x7f050016
-			public const int distance = 2131034134;
+			// aapt resource value: 0x7f06001b
+			public const int distance = 2131099675;
 			
-			// aapt resource value: 0x7f05001d
-			public const int feed_menu_item = 2131034141;
+			// aapt resource value: 0x7f060022
+			public const int feed_menu_item = 2131099682;
 			
-			// aapt resource value: 0x7f050010
-			public const int fragmentContainer = 2131034128;
+			// aapt resource value: 0x7f060015
+			public const int fragmentContainer = 2131099669;
 			
-			// aapt resource value: 0x7f050011
-			public const int imageView1 = 2131034129;
+			// aapt resource value: 0x7f060004
+			public const int hybrid = 2131099652;
 			
-			// aapt resource value: 0x7f05000a
-			public const int linearLayout1 = 2131034122;
+			// aapt resource value: 0x7f060016
+			public const int imageView1 = 2131099670;
 			
-			// aapt resource value: 0x7f05000c
-			public const int linearLayout2 = 2131034124;
+			// aapt resource value: 0x7f06000f
+			public const int linearLayout1 = 2131099663;
 			
-			// aapt resource value: 0x7f050014
-			public const int linearLayout3 = 2131034132;
+			// aapt resource value: 0x7f060011
+			public const int linearLayout2 = 2131099665;
 			
-			// aapt resource value: 0x7f050007
-			public const int logIn = 2131034119;
+			// aapt resource value: 0x7f060019
+			public const int linearLayout3 = 2131099673;
 			
-			// aapt resource value: 0x7f050008
-			public const int loginProgress = 2131034120;
+			// aapt resource value: 0x7f06000c
+			public const int logIn = 2131099660;
 			
-			// aapt resource value: 0x7f050009
-			public const int loginQuestion = 2131034121;
+			// aapt resource value: 0x7f06000d
+			public const int loginProgress = 2131099661;
 			
-			// aapt resource value: 0x7f050006
-			public const int password = 2131034118;
+			// aapt resource value: 0x7f06000e
+			public const int loginQuestion = 2131099662;
 			
-			// aapt resource value: 0x7f05001e
-			public const int people_menu_item = 2131034142;
+			// aapt resource value: 0x7f06001e
+			public const int map = 2131099678;
 			
-			// aapt resource value: 0x7f050013
-			public const int personImage = 2131034131;
+			// aapt resource value: 0x7f060000
+			public const int none = 2131099648;
 			
-			// aapt resource value: 0x7f050015
-			public const int personName = 2131034133;
+			// aapt resource value: 0x7f060001
+			public const int normal = 2131099649;
 			
-			// aapt resource value: 0x7f05001f
-			public const int profile_menu_item = 2131034143;
+			// aapt resource value: 0x7f06000b
+			public const int password = 2131099659;
 			
-			// aapt resource value: 0x7f050001
-			public const int ptr_progress = 2131034113;
+			// aapt resource value: 0x7f060023
+			public const int people_menu_item = 2131099683;
 			
-			// aapt resource value: 0x7f050000
-			public const int ptr_text = 2131034112;
+			// aapt resource value: 0x7f060018
+			public const int personImage = 2131099672;
 			
-			// aapt resource value: 0x7f05001c
-			public const int sampleTextView = 2131034140;
+			// aapt resource value: 0x7f06001a
+			public const int personName = 2131099674;
 			
-			// aapt resource value: 0x7f050017
-			public const int status = 2131034135;
+			// aapt resource value: 0x7f060024
+			public const int profile_menu_item = 2131099684;
 			
-			// aapt resource value: 0x7f050005
-			public const int userName = 2131034117;
+			// aapt resource value: 0x7f060006
+			public const int ptr_progress = 2131099654;
+			
+			// aapt resource value: 0x7f060005
+			public const int ptr_text = 2131099653;
+			
+			// aapt resource value: 0x7f060002
+			public const int satellite = 2131099650;
+			
+			// aapt resource value: 0x7f06001c
+			public const int status = 2131099676;
+			
+			// aapt resource value: 0x7f060003
+			public const int terrain = 2131099651;
+			
+			// aapt resource value: 0x7f06000a
+			public const int userName = 2131099658;
 			
 			static Id()
 			{
@@ -360,6 +543,22 @@ namespace App.Android
 			}
 			
 			private Id()
+			{
+			}
+		}
+		
+		public partial class Integer
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int google_play_services_version = 2131230720;
+			
+			static Integer()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Integer()
 			{
 			}
 		}
@@ -386,16 +585,16 @@ namespace App.Android
 			public const int PeopleListItem = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int PostDetails = 2130903046;
+			public const int PeopleMap = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int PostList = 2130903047;
+			public const int PostDetails = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int PostListItem = 2130903048;
+			public const int PostList = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int TabExampleToBeDeleted = 2130903049;
+			public const int PostListItem = 2130903049;
 			
 			static Layout()
 			{
@@ -410,8 +609,8 @@ namespace App.Android
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f0a0000
-			public const int menu = 2131361792;
+			// aapt resource value: 0x7f0b0000
+			public const int menu = 2131427328;
 			
 			static Menu()
 			{
@@ -426,14 +625,92 @@ namespace App.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060002
-			public const int app_name = 2131099650;
+			// aapt resource value: 0x7f07001c
+			public const int app_name = 2131165212;
 			
-			// aapt resource value: 0x7f060000
-			public const int pull_to_refresh_pull_label = 2131099648;
+			// aapt resource value: 0x7f070015
+			public const int auth_client_needs_enabling_title = 2131165205;
 			
-			// aapt resource value: 0x7f060001
-			public const int pull_to_refresh_refreshing_label = 2131099649;
+			// aapt resource value: 0x7f070016
+			public const int auth_client_needs_installation_title = 2131165206;
+			
+			// aapt resource value: 0x7f070017
+			public const int auth_client_needs_update_title = 2131165207;
+			
+			// aapt resource value: 0x7f070018
+			public const int auth_client_play_services_err_notification_msg = 2131165208;
+			
+			// aapt resource value: 0x7f070019
+			public const int auth_client_requested_by_msg = 2131165209;
+			
+			// aapt resource value: 0x7f070014
+			public const int auth_client_using_bad_version_title = 2131165204;
+			
+			// aapt resource value: 0x7f070006
+			public const int common_google_play_services_enable_button = 2131165190;
+			
+			// aapt resource value: 0x7f070005
+			public const int common_google_play_services_enable_text = 2131165189;
+			
+			// aapt resource value: 0x7f070004
+			public const int common_google_play_services_enable_title = 2131165188;
+			
+			// aapt resource value: 0x7f070003
+			public const int common_google_play_services_install_button = 2131165187;
+			
+			// aapt resource value: 0x7f070001
+			public const int common_google_play_services_install_text_phone = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int common_google_play_services_install_text_tablet = 2131165186;
+			
+			// aapt resource value: 0x7f070000
+			public const int common_google_play_services_install_title = 2131165184;
+			
+			// aapt resource value: 0x7f07000c
+			public const int common_google_play_services_invalid_account_text = 2131165196;
+			
+			// aapt resource value: 0x7f07000b
+			public const int common_google_play_services_invalid_account_title = 2131165195;
+			
+			// aapt resource value: 0x7f07000a
+			public const int common_google_play_services_network_error_text = 2131165194;
+			
+			// aapt resource value: 0x7f070009
+			public const int common_google_play_services_network_error_title = 2131165193;
+			
+			// aapt resource value: 0x7f07000d
+			public const int common_google_play_services_unknown_issue = 2131165197;
+			
+			// aapt resource value: 0x7f070010
+			public const int common_google_play_services_unsupported_date_text = 2131165200;
+			
+			// aapt resource value: 0x7f07000f
+			public const int common_google_play_services_unsupported_text = 2131165199;
+			
+			// aapt resource value: 0x7f07000e
+			public const int common_google_play_services_unsupported_title = 2131165198;
+			
+			// aapt resource value: 0x7f070011
+			public const int common_google_play_services_update_button = 2131165201;
+			
+			// aapt resource value: 0x7f070008
+			public const int common_google_play_services_update_text = 2131165192;
+			
+			// aapt resource value: 0x7f070007
+			public const int common_google_play_services_update_title = 2131165191;
+			
+			// aapt resource value: 0x7f070012
+			public const int common_signin_button_text = 2131165202;
+			
+			// aapt resource value: 0x7f070013
+			public const int common_signin_button_text_long = 2131165203;
+			
+			// aapt resource value: 0x7f07001a
+			public const int pull_to_refresh_pull_label = 2131165210;
+			
+			// aapt resource value: 0x7f07001b
+			public const int pull_to_refresh_refreshing_label = 2131165211;
 			
 			static String()
 			{
@@ -448,29 +725,29 @@ namespace App.Android
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f080000
-			public const int CustomHoloTheme = 2131230720;
+			// aapt resource value: 0x7f090000
+			public const int CustomHoloTheme = 2131296256;
 			
-			// aapt resource value: 0x7f080001
-			public const int WalkrSubTitleStyle = 2131230721;
+			// aapt resource value: 0x7f090001
+			public const int WalkrSubTitleStyle = 2131296257;
 			
-			// aapt resource value: 0x7f080003
-			public const int XamActionBarStyle = 2131230723;
+			// aapt resource value: 0x7f090003
+			public const int XamActionBarStyle = 2131296259;
 			
-			// aapt resource value: 0x7f080002
-			public const int XamActionBarTheme = 2131230722;
+			// aapt resource value: 0x7f090002
+			public const int XamActionBarTheme = 2131296258;
 			
-			// aapt resource value: 0x7f080004
-			public const int XamActionBarTitleStyle = 2131230724;
+			// aapt resource value: 0x7f090004
+			public const int XamActionBarTitleStyle = 2131296260;
 			
-			// aapt resource value: 0x7f080007
-			public const int XamButton = 2131230727;
+			// aapt resource value: 0x7f090007
+			public const int XamButton = 2131296263;
 			
-			// aapt resource value: 0x7f080006
-			public const int XamSubtitleText = 2131230726;
+			// aapt resource value: 0x7f090006
+			public const int XamSubtitleText = 2131296262;
 			
-			// aapt resource value: 0x7f080005
-			public const int XamTitleText = 2131230725;
+			// aapt resource value: 0x7f090005
+			public const int XamTitleText = 2131296261;
 			
 			static Style()
 			{
@@ -485,14 +762,84 @@ namespace App.Android
 		public partial class Styleable
 		{
 			
-			public static int[] PullToRefreshLayout = new int[]
+			public static int[] AdsAttrs = new int[]
 			{
 					2130771968,
-					2130771969,
+					2130771969};
+			
+			// aapt resource value: 0
+			public const int AdsAttrs_adSize = 0;
+			
+			// aapt resource value: 1
+			public const int AdsAttrs_adUnitId = 1;
+			
+			public static int[] MapAttrs = new int[]
+			{
 					2130771970,
 					2130771971,
 					2130771972,
-					2130771973};
+					2130771973,
+					2130771974,
+					2130771975,
+					2130771976,
+					2130771977,
+					2130771978,
+					2130771979,
+					2130771980,
+					2130771981,
+					2130771982,
+					2130771983};
+			
+			// aapt resource value: 1
+			public const int MapAttrs_cameraBearing = 1;
+			
+			// aapt resource value: 2
+			public const int MapAttrs_cameraTargetLat = 2;
+			
+			// aapt resource value: 3
+			public const int MapAttrs_cameraTargetLng = 3;
+			
+			// aapt resource value: 4
+			public const int MapAttrs_cameraTilt = 4;
+			
+			// aapt resource value: 5
+			public const int MapAttrs_cameraZoom = 5;
+			
+			// aapt resource value: 0
+			public const int MapAttrs_mapType = 0;
+			
+			// aapt resource value: 6
+			public const int MapAttrs_uiCompass = 6;
+			
+			// aapt resource value: 7
+			public const int MapAttrs_uiRotateGestures = 7;
+			
+			// aapt resource value: 8
+			public const int MapAttrs_uiScrollGestures = 8;
+			
+			// aapt resource value: 9
+			public const int MapAttrs_uiTiltGestures = 9;
+			
+			// aapt resource value: 10
+			public const int MapAttrs_uiZoomControls = 10;
+			
+			// aapt resource value: 11
+			public const int MapAttrs_uiZoomGestures = 11;
+			
+			// aapt resource value: 12
+			public const int MapAttrs_useViewLifecycle = 12;
+			
+			// aapt resource value: 13
+			public const int MapAttrs_zOrderOnTop = 13;
+			
+			public static int[] PullToRefreshLayout = new int[]
+			{
+					2130771984,
+					2130771985,
+					2130771986,
+					2130771987,
+					2130771988,
+					2130771989};
 			
 			// aapt resource value: 4
 			public const int PullToRefreshLayout_delegateClass = 4;
