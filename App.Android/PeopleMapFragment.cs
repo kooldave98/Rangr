@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using Android.App;
 using Android.Content;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using Android.Gms.Maps.Model;
-using Android.Gms.Maps;
+using App.Core.Portable.Models;
 
 namespace App.Android
 {
@@ -29,7 +30,7 @@ namespace App.Android
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
-			RetainInstance = true; 
+			RetainInstance = true;
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -60,7 +61,7 @@ namespace App.Android
 		public override void OnResume()
 		{
 			base.OnResume();
-			SetupMapIfNeeded();
+			SetupMap();
 		}
 
 		public override void OnDestroyView() 
@@ -74,8 +75,11 @@ namespace App.Android
 			ft.Commit();
 		}
 
-		private void SetupMapIfNeeded()
+		private async void SetupMap()
 		{
+
+			await view_model.RefreshConnectedUsers();
+
 			GoogleMap _map = null;
 
 			if (_map == null)
@@ -88,16 +92,9 @@ namespace App.Android
 
 					_map.MyLocationEnabled = true;
 
-					_map.AddMarker(new MarkerOptions()
-										.SetPosition(VimyRidge)
-										.SetTitle("Korede")
-										.InvokeIcon(BitmapDescriptorFactory
-														.DefaultMarker(BitmapDescriptorFactory
-																		.HueCyan)));
-								
-					_map.AddMarker(new MarkerOptions()
-										.SetPosition(Passchendaele)
-										.SetTitle("Passchendaele"));
+					foreach (var connection in view_model.ConnectedUsers) {
+						_map.AddMarker (GetMarker(connection));								
+					}
 
 					// We create an instance of CameraUpdate, and move the map to it.
 					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(VimyRidge, 15);
@@ -106,7 +103,22 @@ namespace App.Android
 			}
 		}
 
+		private MarkerOptions GetMarker(Connection connected_user)
+		{
 
+			return new MarkerOptions ()
+				.SetPosition (GetPosition (connected_user.geolocation_string))
+				.SetTitle (connected_user.user_display_name);
+			//.InvokeIcon(BitmapDescriptorFactory
+			//.DefaultMarker(BitmapDescriptorFactory
+			//.HueCyan)));;
+		}
+
+		private LatLng GetPosition(string geo_string)
+		{
+			var array = geo_string.Split (',');
+			return new LatLng (double.Parse(array [1]), double.Parse(array [0]));
+		}
 
 		public PeopleMapFragment(PeopleViewModel the_view_model)
 		{

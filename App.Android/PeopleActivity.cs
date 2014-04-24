@@ -27,8 +27,6 @@ namespace App.Android
 			//load our viewmodel
 			view_model = new PeopleViewModel (PersistentStorage.Current);
 
-			await view_model.RefreshConnectedUsers ();
-
 			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 
@@ -37,6 +35,11 @@ namespace App.Android
 
 			if (bundle != null)
 				this.ActionBar.SelectTab (this.ActionBar.GetTabAt (bundle.GetInt ("tab")));
+		}
+
+		protected async override void OnResume()
+		{
+			base.OnResume();
 		}
 
 		protected override void OnSaveInstanceState (Bundle outState)
@@ -60,8 +63,6 @@ namespace App.Android
 				}
 				e.FragmentTransaction.Add (Resource.Id.fragmentContainer, view);
 
-				//reload the data
-				await view_model.RefreshConnectedUsers ();
 			};
 			tab.TabUnselected += delegate(object sender, ActionBar.TabEventArgs e) {
 				e.FragmentTransaction.Remove (view);

@@ -19,7 +19,6 @@ namespace App.Android
 		{
 			base.OnCreate (savedInstanceState);
 			RetainInstance = true;
-
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -33,9 +32,12 @@ namespace App.Android
 			return peopleListView;
 		}
 
-		public override void OnViewCreated (View view, Bundle savedInstanceState)
+		public async override void OnViewCreated (View view, Bundle savedInstanceState)
 		{
 			base.OnViewCreated (view, savedInstanceState);
+
+			await view_model.RefreshConnectedUsers();
+
 			ListView.DividerHeight = 0;
 			ListView.Divider = null;
 			var peopleListAdapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
@@ -45,6 +47,11 @@ namespace App.Android
 			view_model.OnConnectionsReceived += (sender, e) => {
 				peopleListAdapter.NotifyDataSetChanged();
 			};
+		}
+
+		public override void OnResume()
+		{
+			base.OnResume();
 		}
 
 		public PeopleListFragment(PeopleViewModel the_view_model)
