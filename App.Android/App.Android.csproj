@@ -63,9 +63,6 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PostListAdapter.cs">
-      <DependentUpon>PostFeedActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginActivity.cs" />
     <Compile Include="BaseActivity.cs" />
     <Compile Include="Global.cs" />
@@ -85,6 +82,12 @@
     </Compile>
     <Compile Include="PeopleListAdapter.cs">
       <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileAdapter.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PostFeedAdapter.cs">
+      <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +206,27 @@
     <AndroidResource Include="Resources\layout\PeopleMap.axml">
       <DependentUpon>People.axml</DependentUpon>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\EmailPropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GroupHeaderListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PhonePropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TwitterPropertyListItem.axml">
+      <SubType>AndroidResource</SubType>
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UrlPropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Profile.axml" />
+    <AndroidResource Include="Resources\drawable\twitter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

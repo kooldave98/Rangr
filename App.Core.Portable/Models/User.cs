@@ -2,9 +2,17 @@ using System;
 
 namespace App.Core.Portable.Models
 {
-	public class User : UserIdentity
+	public class User : UserIdentity, IUser
 	{
 		public string user_display_name { get; set;}
+
+		public string status_message { get; set;}
+
+		public string telephone_number { get; set;}
+
+		public string twitter_name { get; set;}
+
+		public string image_url { get; set;}
 	}
 }
 

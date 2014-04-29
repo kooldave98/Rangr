@@ -7,12 +7,12 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	public class PostListAdapter : BaseAdapter<SeenPost>
+	public class PostFeedAdapter : BaseAdapter<SeenPost>
 	{
 		Activity context = null;
 		IList<SeenPost> _posts = new List<SeenPost>();
 
-		public PostListAdapter (Activity context, IList<SeenPost> posts) : base ()
+		public PostFeedAdapter (Activity context, IList<SeenPost> posts) : base ()
 		{
 			this.context = context;
 			this._posts = posts;

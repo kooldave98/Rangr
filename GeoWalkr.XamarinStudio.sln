@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{589CF5
 		Common\PostDetailsViewModel.cs = Common\PostDetailsViewModel.cs
 		Common\LoginViewModel.cs = Common\LoginViewModel.cs
 		Common\PeopleViewModel.cs = Common\PeopleViewModel.cs
+		Common\ProfileViewModel.cs = Common\ProfileViewModel.cs
 	EndProjectSection
 EndProject
 Global

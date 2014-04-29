@@ -13,6 +13,7 @@ using Android.Widget;
 using App.Common;
 using App.Core.Portable.Models;
 using App.Core.Android;
+using System.Xml.Serialization;
 
 namespace App.Android
 {
@@ -32,12 +33,16 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			view_model = new PostDetailsViewModel ();
+			SeenPost post;
 
 			if (Intent.HasExtra ("Post")) {
 				var postBytes = Intent.GetByteArrayExtra ("Post");
-				view_model.Deserialize (postBytes);
+				post = PostDetailsViewModel.Deserialize (postBytes);
+			}else{
+				post = new SeenPost ();
 			}
+
+			view_model = new PostDetailsViewModel (post);
 
 			// set our layout to be the home screen
 			SetContentView (Resource.Layout.PostDetails);

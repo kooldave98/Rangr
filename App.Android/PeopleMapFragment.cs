@@ -18,8 +18,6 @@ namespace App.Android
 {
 	public class PeopleMapFragment : Fragment
 	{
-		private static readonly LatLng Passchendaele = new LatLng(53.478498699999996, -2.2275587999999997);
-		private static readonly LatLng VimyRidge = new LatLng(53.4785183, -2.2274819);
 //		private GoogleMap _map;
 
 		public override void OnActivityCreated(Bundle savedInstanceState)
@@ -75,6 +73,8 @@ namespace App.Android
 			ft.Commit();
 		}
 
+		//See: http://docs.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/
+		//for more info on configuring Google maps
 		private async void SetupMap()
 		{
 
@@ -96,11 +96,21 @@ namespace App.Android
 						_map.AddMarker (GetMarker(connection));								
 					}
 
+					var my_location = GetPosition (view_model.CurrentLocation.geolocation_value);
+
 					// We create an instance of CameraUpdate, and move the map to it.
-					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(VimyRidge, 15);
-					_map.MoveCamera(cameraUpdate);
+					CameraPosition cameraPosition = new CameraPosition.Builder()
+						.Target(my_location)      // Sets the center of the map to Mountain View
+						.Zoom(15)                   // Sets the zoom
+						//.Bearing(90)                // Sets the orientation of the camera to east
+						//.Tilt(30)                   // Sets the tilt of the camera to 30 degrees
+						.Build();                   // Creates a CameraPosition from the builder
+
+					_map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
 				}
 			}
+
+
 		}
 
 		private MarkerOptions GetMarker(Connection connected_user)

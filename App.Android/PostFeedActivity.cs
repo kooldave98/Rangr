@@ -22,10 +22,10 @@ namespace App.Android
 	{
 		protected async override void OnCreate (Bundle bundle)
 		{
+			Title = "Feed";
 			base.OnCreate (bundle);
 
 			SetContentView (Resource.Layout.PostList);
-
 
 
 			_postListView = FindViewById<ListView> (Resource.Id.PostList);
@@ -87,7 +87,7 @@ namespace App.Android
 		private void setupAdapter()
 		{
 			// create our adapter
-			_postListAdapter = new PostListAdapter (this, view_model.Posts);
+			_postListAdapter = new PostFeedAdapter (this, view_model.Posts);
 
 			//Hook up our adapter to our ListView
 			_postListView.Adapter = _postListAdapter;
@@ -161,7 +161,7 @@ namespace App.Android
 		}
 
 		private ProgressDialog progress;
-		private PostListAdapter _postListAdapter;
+		private PostFeedAdapter _postListAdapter;
 		private ListView _postListView;
 		private PullToRefreshAttacher mPullToRefreshAttacher;
 	}

@@ -11,21 +11,23 @@ using Android.Views;
 using Android.Widget;
 using App.Common;
 using App.Core.Android;
+using App.Common.Shared;
 
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PeopleActivity : BaseActivity
 	{
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnCreate (Bundle bundle)
 		{
+			Title = "People";
 			base.OnCreate (bundle);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.People);
 
 			//load our viewmodel
-			view_model = new PeopleViewModel (PersistentStorage.Current);
+			view_model = new PeopleViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
 			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
@@ -37,7 +39,7 @@ namespace App.Android
 				this.ActionBar.SelectTab (this.ActionBar.GetTabAt (bundle.GetInt ("tab")));
 		}
 
-		protected async override void OnResume()
+		protected override void OnResume()
 		{
 			base.OnResume();
 		}
@@ -56,7 +58,7 @@ namespace App.Android
 			//tab.SetIcon (Resource.Drawable.ic_tab_white);
 
 			// must set event handler before adding tab
-			tab.TabSelected += async delegate(object sender, ActionBar.TabEventArgs e) {
+			tab.TabSelected += delegate(object sender, ActionBar.TabEventArgs e) {
 				var fragment = this.FragmentManager.FindFragmentById (Resource.Id.fragmentContainer);
 				if (fragment != null) {
 					e.FragmentTransaction.Remove (fragment);         

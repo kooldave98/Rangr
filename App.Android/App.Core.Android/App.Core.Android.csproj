@@ -111,6 +111,9 @@
     <Compile Include="..\..\Common\PeopleViewModel.cs">
       <Link>ViewModels\PeopleViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\ProfileViewModel.cs">
+      <Link>ViewModels\ProfileViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

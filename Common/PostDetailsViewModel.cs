@@ -11,11 +11,22 @@ namespace App.Common
 	{
 		public SeenPost CurrentPost { get; set;}
 
-		public void Deserialize(byte[] postBytes)
+		public PostDetailsViewModel (SeenPost the_seen_post)
+		{
+			CurrentPost = the_seen_post;
+		}
+
+		public PostDetailsViewModel ()
+		{
+			CurrentPost = new SeenPost();
+		}
+
+		#region ReUseableHelpers
+		public static SeenPost Deserialize(byte[] postBytes)
 		{
 			var serializer = new System.Xml.Serialization.XmlSerializer (typeof(SeenPost));
 
-			CurrentPost = (SeenPost)serializer.Deserialize (new MemoryStream (postBytes));
+			return (SeenPost)serializer.Deserialize (new MemoryStream (postBytes));
 		}
 
 		public static byte[] Serialize(SeenPost post)
@@ -26,11 +37,7 @@ namespace App.Common
 
 			return postStream.ToArray ();
 		}
-
-		public PostDetailsViewModel ()
-		{
-			CurrentPost = new SeenPost ();
-		}
+		#endregion
 	}
 }
 
