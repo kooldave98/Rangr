@@ -65,7 +65,7 @@ namespace App.Android
 				loginHelp.Click += (sender, e) => {
 					var builder = new AlertDialog.Builder (this)
 					.SetTitle ("Need Help?")
-					.SetMessage ("Enter any username or password.")
+					.SetMessage ("Enter your desired display name and your given beta testing key.")
 					.SetPositiveButton ("Ok", (innerSender, innere) => {
 					});
 					var dialog = builder.Create ();

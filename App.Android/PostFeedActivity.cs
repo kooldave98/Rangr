@@ -18,7 +18,7 @@ using App.Core.Android;
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PostFeedActivity : BaseActivity
+	public class PostFeedActivity : BaseListActivity
 	{
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -28,7 +28,10 @@ namespace App.Android
 			SetContentView (Resource.Layout.PostList);
 
 
-			_postListView = FindViewById<ListView> (Resource.Id.PostList);
+			_postListView = ListView;//FindViewById<ListView> (Resource.Id.PostList);
+//
+//			_postListView.PivotY = 0;
+//			_postListView.PivotX =  container.Width;
 
 			//App logic
 
@@ -87,7 +90,9 @@ namespace App.Android
 		private void setupAdapter()
 		{
 			// create our adapter
-			_postListAdapter = new PostFeedAdapter (this, view_model.Posts);
+			ListAdapter = _postListAdapter = new PostFeedAdapter (this, view_model.Posts);
+
+			
 
 			//Hook up our adapter to our ListView
 			_postListView.Adapter = _postListAdapter;

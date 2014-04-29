@@ -16,8 +16,8 @@ namespace App.Common
 			var person = Session.GetInstance (the_persistent_storage_instance).GetCurrentUser ();
 
 			person.status_message = "Hey there, I'm on Walkr !";
-			person.twitter_name = "@kooldave98";
-			person.telephone_number = "07711072437";
+			person.twitter_name = "@walkr";
+			person.telephone_number = "0123456789";
 
 
 			if (person == null) {

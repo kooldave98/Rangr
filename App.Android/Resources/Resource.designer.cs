@@ -444,17 +444,14 @@ namespace App.Android
 			// aapt resource value: 0x7f060024
 			public const int PhoneButton = 2131099684;
 			
-			// aapt resource value: 0x7f060027
-			public const int PostList = 2131099687;
-			
 			// aapt resource value: 0x7f060018
 			public const int PostText = 2131099672;
 			
 			// aapt resource value: 0x7f060025
 			public const int PostTextLabel = 2131099685;
 			
-			// aapt resource value: 0x7f060028
-			public const int ProfileList = 2131099688;
+			// aapt resource value: 0x7f060027
+			public const int ProfileList = 2131099687;
 			
 			// aapt resource value: 0x7f060019
 			public const int SaveButton = 2131099673;
@@ -486,8 +483,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060020
 			public const int distance = 2131099680;
 			
-			// aapt resource value: 0x7f060029
-			public const int feed_menu_item = 2131099689;
+			// aapt resource value: 0x7f060028
+			public const int feed_menu_item = 2131099688;
 			
 			// aapt resource value: 0x7f06001a
 			public const int fragmentContainer = 2131099674;
@@ -528,8 +525,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060012
 			public const int password = 2131099666;
 			
-			// aapt resource value: 0x7f06002a
-			public const int people_menu_item = 2131099690;
+			// aapt resource value: 0x7f060029
+			public const int people_menu_item = 2131099689;
 			
 			// aapt resource value: 0x7f06001d
 			public const int personImage = 2131099677;
@@ -537,8 +534,8 @@ namespace App.Android
 			// aapt resource value: 0x7f06001f
 			public const int personName = 2131099679;
 			
-			// aapt resource value: 0x7f06002b
-			public const int profile_menu_item = 2131099691;
+			// aapt resource value: 0x7f06002a
+			public const int profile_menu_item = 2131099690;
 			
 			// aapt resource value: 0x7f060006
 			public const int ptr_progress = 2131099654;
