@@ -58,7 +58,7 @@ namespace App.Android
 				bind_list_item_click (_postListView);
 			}
 
-			await view_model.init ();
+			await view_model.RefreshPosts ();
 
 		}
 

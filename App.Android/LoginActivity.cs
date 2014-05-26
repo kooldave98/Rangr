@@ -20,21 +20,23 @@ namespace App.Android
 				, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : Activity, TextView.IOnEditorActionListener
 	{
-		private LoginViewModel view_model { get; set;}
+		private LoginViewModel view_model { get; set; }
 
 		private EditText password, userName;
 		private Button login;
 		private ProgressBar progressIndicator;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			view_model = new LoginViewModel (PersistentStorage.Current);
+			view_model = new LoginViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
 			//Check if the user exists first before populating the view
 
 			if (view_model.CurrentUserExists) {
+
+				await view_model.Login ();
 				StartActivity (typeof(PostFeedActivity));
 				Finish ();
 			} else {
@@ -81,7 +83,7 @@ namespace App.Android
 
 		}
 
-		private async void DoLogin(object sender, EventArgs e)
+		private async void DoLogin (object sender, EventArgs e)
 		{
 			if (!string.IsNullOrEmpty (userName.Text)) {
 
@@ -95,7 +97,7 @@ namespace App.Android
 			}
 		}
 
-		private void hide_keyboard_and_show_progress()
+		private void hide_keyboard_and_show_progress ()
 		{
 			//this hides the keyboard
 			var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
@@ -103,16 +105,17 @@ namespace App.Android
 			login.Visibility = ViewStates.Invisible;
 			progressIndicator.Visibility = ViewStates.Visible;
 		}
-			
+
 		protected override void OnResume ()
 		{
 			base.OnResume ();
-
-			password.Text =
+			if (!view_model.CurrentUserExists) {
+				password.Text =
 				userName.Text = string.Empty;
 
-			login.Visibility = ViewStates.Visible;
-			progressIndicator.Visibility = ViewStates.Invisible;
+				login.Visibility = ViewStates.Visible;
+				progressIndicator.Visibility = ViewStates.Invisible;
+			}
 		}
 
 		/// <summary>

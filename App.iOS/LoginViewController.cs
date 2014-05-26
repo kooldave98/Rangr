@@ -18,7 +18,7 @@ namespace App.iOS
 
 		public LoginViewController (Action the_init_callback)
 		{
-			view_model = new LoginViewModel (PersistentStorage.Current);
+			view_model = new LoginViewModel (GeoLocation.GetInstance (), PersistentStorage.Current);
 
 			init_callback = the_init_callback;
 		}

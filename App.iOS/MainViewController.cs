@@ -85,7 +85,7 @@ namespace App.iOS
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 			};
 
-			await view_model.init ();
+			await view_model.RefreshPosts ();
 
 		}
 
