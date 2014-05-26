@@ -5,12 +5,15 @@ using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using App.Core.Portable.Network;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace App.Common
 {
 	public class LoginViewModel : ViewModelBase
 	{
 		public string UserDisplayName { get; set; }
+
+		private IDisposable TimerDisposable { get; set;}
 
 		public bool CurrentUserExists 
 		{ 
@@ -45,6 +48,14 @@ namespace App.Common
 
 		}
 
+		public void SuspendViewModel()
+		{
+			var timer = (Timer)TimerDisposable;
+			timer.Stop ();
+			timer.Dispose ();
+		}
+
+
 		private async Task InitHeartBeat ()
 		{
 			IsBusy = true;
@@ -67,7 +78,7 @@ namespace App.Common
 			});	
 
 
-			JavaScriptTimer.SetInterval (async () => {
+			TimerDisposable = JavaScriptTimer.SetInterval (async () => {
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
 				sessionInstance.CurrentConnection = await ConnectionServices

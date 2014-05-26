@@ -26,8 +26,6 @@ namespace App.Android
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.People);
 
-			//load our viewmodel
-			view_model = new PeopleViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
 			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
@@ -82,7 +80,24 @@ namespace App.Android
 			return base.OnCreateOptionsMenu (menu);
 		}
 
-		private PeopleViewModel view_model;
+		private PeopleViewModel view_model
+		{
+			get {
+				return (PeopleViewModel)the_view_model;
+			}
+		}
+
+		protected override ViewModelBase the_view_model {
+			get 
+			{
+				if(Global.Current.People_View_Model == null)
+				{
+					Global.Current.People_View_Model = new PeopleViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+				}
+
+				return Global.Current.People_View_Model;
+			}
+		}
 	}
 }
 

@@ -22,8 +22,6 @@ namespace App.Android
 			Title = "My Profile";
 			base.OnCreate (bundle);
 
-			view_model = new ProfileViewModel (PersistentStorage.Current);
-
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Profile);
 
@@ -53,7 +51,24 @@ namespace App.Android
 		private ProfileAdapter listAdapter;
 		private ListView listView;
 
-		private ProfileViewModel view_model;
+		private ProfileViewModel view_model
+		{
+			get {
+				return (ProfileViewModel)the_view_model;
+			}
+		}
+
+		protected override ViewModelBase the_view_model {
+			get 
+			{
+				if(Global.Current.Profile_View_Model == null)
+				{
+					Global.Current.Profile_View_Model = new ProfileViewModel (PersistentStorage.Current);
+				}
+
+				return Global.Current.Profile_View_Model;
+			}
+		}
 	}
 }
 

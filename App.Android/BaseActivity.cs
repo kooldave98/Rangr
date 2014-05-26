@@ -1,14 +1,30 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Android.OS;
+using App.Common;
 
 namespace App.Android 
 {
-	public class BaseActivity : Activity 
+	public abstract class BaseActivity : Activity 
 	{
+
+		protected override void OnCreate (Bundle bundle)
+		{
+			base.OnCreate (bundle);
+
+			the_view_model.IsBusyChanged +=	(sender, e) => {
+				if (the_view_model.IsBusy) {
+					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
+				} else {
+					progress.Dismiss ();
+				}
+			};
+		}
+
+
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
 		//http://stackoverflow.com/questions/7059572/difference-between-onmenuitemselected-and-onoptionsitemselected
 		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
@@ -46,11 +62,29 @@ namespace App.Android
 				t.Show();
 			}
 		}
+
+		protected abstract ViewModelBase the_view_model { get;}
+
+
+		private ProgressDialog progress;
 
 	}
 
-	public class BaseListActivity : ListActivity 
+	public abstract class BaseListActivity : ListActivity 
 	{
+		protected override void OnCreate (Bundle bundle)
+		{
+			base.OnCreate (bundle);
+
+			the_view_model.IsBusyChanged +=	(sender, e) => {
+				if (the_view_model.IsBusy) {
+					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
+				} else {
+					progress.Dismiss ();
+				}
+			};
+		}
+
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
 		//http://stackoverflow.com/questions/7059572/difference-between-onmenuitemselected-and-onoptionsitemselected
 		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
@@ -88,6 +122,11 @@ namespace App.Android
 				t.Show();
 			}
 		}
+
+		protected abstract ViewModelBase the_view_model { get;}
+
+
+		private ProgressDialog progress;
 
 	}
 }

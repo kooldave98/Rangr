@@ -13,7 +13,13 @@ namespace App.Android
 	[Application (Label = "@string/app_name", Theme = "@style/CustomHoloTheme")]//, Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application
 	{
-		public FeedViewModel Feed { get; set; }
+		public LoginViewModel Login_View_Model { get; set; }
+
+		public FeedViewModel Feed_View_Model { get; set; }
+
+		public PeopleViewModel People_View_Model { get; set; }
+
+		public ProfileViewModel Profile_View_Model { get; set; }
 
 		public static Global Current {
 			get {

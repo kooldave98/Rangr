@@ -20,7 +20,6 @@ namespace App.Android
 				, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : Activity, TextView.IOnEditorActionListener
 	{
-		private LoginViewModel view_model { get; set; }
 
 		private EditText password, userName;
 		private Button login;
@@ -29,8 +28,6 @@ namespace App.Android
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
-			view_model = new LoginViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
 
 			//Check if the user exists first before populating the view
 
@@ -141,6 +138,19 @@ namespace App.Android
 				return true;
 			}
 			return false;
+		}
+			
+
+		protected LoginViewModel view_model {
+			get 
+			{
+				if(Global.Current.Login_View_Model == null)
+				{
+					Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+				}
+
+				return Global.Current.Login_View_Model;
+			}
 		}
 	}
 }

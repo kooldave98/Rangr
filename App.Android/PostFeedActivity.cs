@@ -35,18 +35,10 @@ namespace App.Android
 
 			//App logic
 
-			view_model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
-
 			//setup list adapter
 			setupAdapter ();
 
-			view_model.IsBusyChanged +=	(sender, e) => {
-				if (view_model.IsBusy) {
-					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
-				} else {
-					progress.Dismiss ();
-				}
-			};
+
 
 			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
 
@@ -156,16 +148,26 @@ namespace App.Android
 			return base.OnOptionsItemSelected (item);
 		}
 
-		private FeedViewModel view_model {
+		private FeedViewModel view_model
+		{
 			get {
-				return Global.Current.Feed;
-			}
-			set {
-				Global.Current.Feed = value;
+				return (FeedViewModel)the_view_model;
 			}
 		}
 
-		private ProgressDialog progress;
+		protected override ViewModelBase the_view_model {
+			get 
+			{
+				if(Global.Current.Feed_View_Model == null)
+				{
+					Global.Current.Feed_View_Model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+				}
+
+				return Global.Current.Feed_View_Model;
+			}
+		}
+
+		//private ProgressDialog progress;
 		private PostFeedAdapter _postListAdapter;
 		private ListView _postListView;
 		private PullToRefreshAttacher mPullToRefreshAttacher;
