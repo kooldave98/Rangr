@@ -24,7 +24,6 @@ namespace App.Android
 			};
 		}
 
-
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
 		//http://stackoverflow.com/questions/7059572/difference-between-onmenuitemselected-and-onoptionsitemselected
 		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
@@ -67,6 +66,50 @@ namespace App.Android
 
 
 		private ProgressDialog progress;
+
+
+		protected override void OnPause ()
+		{
+			base.OnPause ();
+
+			++paused;
+		}
+
+		protected override void OnStop ()
+		{
+			base.OnStop ();
+
+			++stopped;
+		}
+
+		protected override void OnStart ()
+		{
+			base.OnStart ();
+
+			++started;
+		}
+
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+
+			++resumed;
+		}
+
+
+		private static int resumed;
+		private static int paused;
+		private static int started;
+		private static int stopped;
+
+		// And these two public static functions
+		public static bool isApplicationVisible() {
+			return started > stopped;
+		}
+
+		public static bool isApplicationInForeground() {
+			return resumed > stopped;
+		}
 
 	}
 
@@ -127,6 +170,50 @@ namespace App.Android
 
 
 		private ProgressDialog progress;
+
+
+		protected override void OnPause ()
+		{
+			base.OnPause ();
+
+			++paused;
+		}
+
+		protected override void OnStop ()
+		{
+			base.OnStop ();
+
+			++stopped;
+		}
+
+		protected override void OnStart ()
+		{
+			base.OnStart ();
+
+			++started;
+		}
+
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+
+			++resumed;
+		}
+
+
+		private static int resumed;
+		private static int paused;
+		private static int started;
+		private static int stopped;
+
+		// And these two public static functions
+		public static bool isApplicationVisible() {
+			return started > stopped;
+		}
+
+		public static bool isApplicationInForeground() {
+			return resumed > stopped;
+		}
 
 	}
 }

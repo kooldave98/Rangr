@@ -37,11 +37,6 @@ namespace App.Android
 				this.ActionBar.SelectTab (this.ActionBar.GetTabAt (bundle.GetInt ("tab")));
 		}
 
-		protected override void OnResume()
-		{
-			base.OnResume();
-		}
-
 		protected override void OnSaveInstanceState (Bundle outState)
 		{
 			outState.PutInt ("tab", this.ActionBar.SelectedNavigationIndex);
@@ -92,7 +87,7 @@ namespace App.Android
 			{
 				if(Global.Current.People_View_Model == null)
 				{
-					Global.Current.People_View_Model = new PeopleViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+					Global.Current.People_View_Model = new PeopleViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 				}
 
 				return Global.Current.People_View_Model;

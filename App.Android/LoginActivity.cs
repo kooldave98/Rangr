@@ -18,7 +18,7 @@ namespace App.Android
 				, NoHistory = true
 				, ScreenOrientation = ScreenOrientation.Portrait
 				, LaunchMode = LaunchMode.SingleTop)]			
-	public class LoginActivity : Activity, TextView.IOnEditorActionListener
+	public class LoginActivity : BaseActivity, TextView.IOnEditorActionListener
 	{
 
 		private EditText password, userName;
@@ -139,14 +139,20 @@ namespace App.Android
 			}
 			return false;
 		}
+
+		private LoginViewModel view_model {
+			get {
+				return (LoginViewModel)the_view_model;
+			}
+		}
 			
 
-		protected LoginViewModel view_model {
+		protected override ViewModelBase the_view_model {
 			get 
 			{
 				if(Global.Current.Login_View_Model == null)
 				{
-					Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+					Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 				}
 
 				return Global.Current.Login_View_Model;

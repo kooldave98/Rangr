@@ -9,6 +9,8 @@ namespace App.Core.Portable.Device
 		Task<GeoValue> GetCurrentPosition();
 		void OnGeoPositionChanged (Action<GeoValue> handler);
 		void OnStatusChanged (Action<Status> handler);
+		void StartListening ();
+		void StopListening ();
 //		event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 //		event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 	}

@@ -89,6 +89,7 @@
     <Compile Include="PostFeedAdapter.cs">
       <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="ActivityLifeCycle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

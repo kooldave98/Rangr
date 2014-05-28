@@ -10,6 +10,7 @@ using Android.Content;
 
 namespace App.Android
 {
+
 	[Application (Label = "@string/app_name", Theme = "@style/CustomHoloTheme")]//, Icon="@drawable/Icon")]
 	public class Global : global::Android.App.Application
 	{
@@ -41,5 +42,6 @@ namespace App.Android
 		}
 
 	}
+
 }
 

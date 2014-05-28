@@ -18,7 +18,7 @@ namespace App.Android
 {
 	public class PeopleMapFragment : Fragment
 	{
-//		private GoogleMap _map;
+		private GoogleMap _map;
 
 		public override void OnActivityCreated(Bundle savedInstanceState)
 		{
@@ -62,6 +62,12 @@ namespace App.Android
 			SetupMap();
 		}
 
+		public override void OnPause ()
+		{
+			base.OnPause ();
+			_map = null;
+		}
+
 		public override void OnDestroyView() 
 		{
 
@@ -79,8 +85,6 @@ namespace App.Android
 		{
 
 			await view_model.RefreshConnectedUsers();
-
-			GoogleMap _map = null;
 
 			if (_map == null)
 			{

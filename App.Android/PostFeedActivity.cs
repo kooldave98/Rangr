@@ -20,27 +20,21 @@ namespace App.Android
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class PostFeedActivity : BaseListActivity
 	{
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnCreate (Bundle bundle)
 		{
-			Title = "Feed";
 			base.OnCreate (bundle);
+
+			Title = "Feed";		
 
 			SetContentView (Resource.Layout.PostList);
 
 
 			_postListView = ListView;//FindViewById<ListView> (Resource.Id.PostList);
-//
-//			_postListView.PivotY = 0;
-//			_postListView.PivotX =  container.Width;
 
-			//App logic
 
 			//setup list adapter
 			setupAdapter ();
 
-
-
-			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
 
 			// wire up post click handler
 			if (_postListView != null) {
@@ -50,27 +44,33 @@ namespace App.Android
 				bind_list_item_click (_postListView);
 			}
 
+
+
+		}
+
+		protected override async void OnResume ()
+		{
+			base.OnResume ();
+
+			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
+
 			await view_model.RefreshPosts ();
 
 		}
 
-		protected override void OnStart ()
+		protected override void OnPause ()
 		{
-			base.OnStart ();
-		}
+			base.OnPause ();
 
-		protected override void OnResume ()
-		{
-			base.OnResume ();
+			view_model.OnNewPostsReceived -= HandleOnNewPostsReceived;
 
-			refreshGrid ();
 		}
 
 		protected override async void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult (requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
-				await view_model.RefreshPosts ();
+				//await view_model.RefreshPosts ();
 			}
 		}
 
@@ -160,7 +160,7 @@ namespace App.Android
 			{
 				if(Global.Current.Feed_View_Model == null)
 				{
-					Global.Current.Feed_View_Model = new FeedViewModel (GeoLocation.GetInstance (this), PersistentStorage.Current);
+					Global.Current.Feed_View_Model = new FeedViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 				}
 
 				return Global.Current.Feed_View_Model;

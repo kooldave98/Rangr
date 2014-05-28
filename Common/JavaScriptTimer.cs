@@ -21,11 +21,17 @@ namespace App.Common.Shared
 			return timer as IDisposable;
 		}
 
-		public static IDisposable SetTimeout (Action method, int delayInMilliseconds)
+
+		//D.O: Modified this method to be self disposable
+		public static void SetTimeout (Action method, int delayInMilliseconds)
 		{
 			System.Timers.Timer timer = new System.Timers.Timer (delayInMilliseconds);
 			timer.Elapsed += (source, e) => {
 				method ();
+
+
+				timer.Stop();
+				timer.Dispose();
 			};
 
 			timer.AutoReset = false;
@@ -34,7 +40,7 @@ namespace App.Common.Shared
 
 			// Returns a stop handle which can be used for stopping
 			// the timer, if required
-			return timer as IDisposable;
+			//return timer as IDisposable;
 		}
 	}
 }

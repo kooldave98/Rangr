@@ -40,18 +40,17 @@ namespace App.Android
 
 			ListView.DividerHeight = 0;
 			ListView.Divider = null;
-			var peopleListAdapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
+			list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
 
-			ListAdapter = peopleListAdapter;
+			ListAdapter = list_adapter;
 
-			view_model.OnConnectionsReceived += (sender, e) => {
-				peopleListAdapter.NotifyDataSetChanged();
-			};
+			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
 		}
 
-		public override void OnResume()
+
+		private void HandleOnConnectionsReceived(object sender, EventArgs e)
 		{
-			base.OnResume();
+			list_adapter.NotifyDataSetChanged();
 		}
 
 		public PeopleListFragment(PeopleViewModel the_view_model)
@@ -59,6 +58,7 @@ namespace App.Android
 			view_model = the_view_model;
 		}
 
+		PeopleListAdapter list_adapter;
 		PeopleViewModel view_model;
 	}
 }

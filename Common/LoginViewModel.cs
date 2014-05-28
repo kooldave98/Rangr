@@ -13,8 +13,6 @@ namespace App.Common
 	{
 		public string UserDisplayName { get; set; }
 
-		private IDisposable TimerDisposable { get; set;}
-
 		public bool CurrentUserExists 
 		{ 
 			get
@@ -48,12 +46,23 @@ namespace App.Common
 
 		}
 
-		public void SuspendViewModel()
+		public void SuspendMemoryIntensiveResources()
 		{
 			var timer = (Timer)TimerDisposable;
 			timer.Stop ();
 			timer.Dispose ();
+
+			_geoLocationInstance.StopListening ();
 		}
+
+		public void ResumeMemoryIntensiveResources()
+		{
+			_geoLocationInstance.StartListening ();
+
+			initTimer ();
+		}
+
+		private IDisposable TimerDisposable { get; set;}
 
 
 		private async Task InitHeartBeat ()
@@ -71,13 +80,19 @@ namespace App.Common
 
 			//init heartbeat here
 
+			_geoLocationInstance.StartListening ();
+
 			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
 				sessionInstance.CurrentConnection = await ConnectionServices
 					.Update (sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
 
 			});	
 
+			initTimer ();
+		}
 
+		private void initTimer ()
+		{
 			TimerDisposable = JavaScriptTimer.SetInterval (async () => {
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
@@ -86,7 +101,6 @@ namespace App.Common
 
 			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 		}
-
 
 		public LoginViewModel (IGeoLocation the_geolocation_instance, IPersistentStorage the_persistent_storage_instance)
 		{

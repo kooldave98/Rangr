@@ -59,8 +59,6 @@ namespace App.Common.Shared
 
 			};
 		
-			ToggleListening ();
-		
 		
 		}
 
@@ -154,13 +152,28 @@ namespace App.Common.Shared
 		
 		}
 
-		private void ToggleListening ()
+//		private void ToggleListening ()
+//		{
+//
+//			if (!this.geolocator.IsListening) {
+//				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
+//			} else {
+//				this.geolocator.StopListening ();
+//			}
+//		}
+
+		public void StopListening ()
 		{
 
+			if (this.geolocator.IsListening) {
+				this.geolocator.StopListening ();
+			} 
+		}
+
+		public void StartListening()
+		{
 			if (!this.geolocator.IsListening) {
 				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
-			} else {
-				this.geolocator.StopListening ();
 			}
 		}
 	}
