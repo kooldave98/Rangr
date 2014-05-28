@@ -58,12 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Common\CommonClient.cs">
-      <Link>CommonClient.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\HttpRequest.cs">
-      <Link>HttpRequest.cs</Link>
-    </Compile>
     <Compile Include="Persistence\BaseEntity.cs" />
     <Compile Include="Persistence\EntityDatabase.cs" />
     <Compile Include="Persistence\IBaseEntity.cs" />
@@ -71,48 +65,54 @@
     <Compile Include="GeoLocation.cs" />
     <Compile Include="PersistentStorage.cs" />
     <Compile Include="TextViewWriter.cs" />
-    <Compile Include="..\..\Common\GeoLocationProvider.cs">
+    <Compile Include="PersistentStorage_OLD.cs" />
+    <Compile Include="..\..\App.Common\CommonClient.cs">
+      <Link>CommonClient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\GeoLocationProvider.cs">
       <Link>GeoLocationProvider.cs</Link>
     </Compile>
-    <Compile Include="PersistentStorage_OLD.cs" />
-    <Compile Include="..\..\Common\Session.cs">
-      <Link>Session.cs</Link>
+    <Compile Include="..\..\App.Common\HttpRequest.cs">
+      <Link>HttpRequest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\Connections.cs">
-      <Link>Services\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\Posts.cs">
-      <Link>Services\Posts.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\SeenPosts.cs">
-      <Link>Services\SeenPosts.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\Users.cs">
-      <Link>Services\Users.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\JavaScriptTimer.cs">
+    <Compile Include="..\..\App.Common\JavaScriptTimer.cs">
       <Link>JavaScriptTimer.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\FeedViewModel.cs">
+    <Compile Include="..\..\App.Common\Session.cs">
+      <Link>Session.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\FeedViewModel.cs">
       <Link>ViewModels\FeedViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\ViewModelBase.cs">
-      <Link>ViewModels\ViewModelBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\NewPostViewModel.cs">
-      <Link>ViewModels\NewPostViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\PostDetailsViewModel.cs">
-      <Link>ViewModels\PostDetailsViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\LoginViewModel.cs">
+    <Compile Include="..\..\App.Common\LoginViewModel.cs">
       <Link>ViewModels\LoginViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\PeopleViewModel.cs">
+    <Compile Include="..\..\App.Common\NewPostViewModel.cs">
+      <Link>ViewModels\NewPostViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\PeopleViewModel.cs">
       <Link>ViewModels\PeopleViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\ProfileViewModel.cs">
+    <Compile Include="..\..\App.Common\PostDetailsViewModel.cs">
+      <Link>ViewModels\PostDetailsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\ProfileViewModel.cs">
       <Link>ViewModels\ProfileViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\ViewModelBase.cs">
+      <Link>ViewModels\ViewModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\Connections.cs">
+      <Link>Services\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\Posts.cs">
+      <Link>Services\Posts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\SeenPosts.cs">
+      <Link>Services\SeenPosts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\Users.cs">
+      <Link>Services\Users.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

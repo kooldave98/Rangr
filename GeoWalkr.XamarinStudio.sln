@@ -21,27 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox.iOS", "SandBox.iOS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Android", "Sandbox.Android\Sandbox.Android.csproj", "{765E6271-1F49-4225-B3A4-4CC1AB69E1DA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{589CF5E3-3CE0-45F4-8E94-97FCB1135070}"
-	ProjectSection(SolutionItems) = preProject
-		Common\CommonClient.cs = Common\CommonClient.cs
-		Common\Connections.cs = Common\Connections.cs
-		Common\GeoLocationProvider.cs = Common\GeoLocationProvider.cs
-		Common\HttpRequest.cs = Common\HttpRequest.cs
-		Common\JavaScriptTimer.cs = Common\JavaScriptTimer.cs
-		Common\Posts.cs = Common\Posts.cs
-		Common\SeenPosts.cs = Common\SeenPosts.cs
-		Common\ServiceLocator.cs = Common\ServiceLocator.cs
-		Common\Session.cs = Common\Session.cs
-		Common\Users.cs = Common\Users.cs
-		Common\EmptyClass.cs = Common\EmptyClass.cs
-		Common\FeedViewModel.cs = Common\FeedViewModel.cs
-		Common\ViewModelBase.cs = Common\ViewModelBase.cs
-		Common\NewPostViewModel.cs = Common\NewPostViewModel.cs
-		Common\PostDetailsViewModel.cs = Common\PostDetailsViewModel.cs
-		Common\LoginViewModel.cs = Common\LoginViewModel.cs
-		Common\PeopleViewModel.cs = Common\PeopleViewModel.cs
-		Common\ProfileViewModel.cs = Common\ProfileViewModel.cs
-	EndProjectSection
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "App.Common", "App.Common\App.Common.shproj", "{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
