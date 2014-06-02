@@ -91,6 +91,7 @@ namespace App.Android
 				//RunOnUiThread (() => {
 				StartActivity (typeof(PostFeedActivity));
 				//});
+				Finish ();
 			}
 		}
 

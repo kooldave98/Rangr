@@ -20,7 +20,7 @@ using App.Core.Portable.Models;
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
-	public class NewPostActivity : Activity
+	public class NewPostActivity : BaseActivity
 	{
 
 		public override bool OnNavigateUp()
@@ -36,8 +36,6 @@ namespace App.Android
 		{
 			base.OnCreate (bundle);
 
-			view_model = new NewPostViewModel (PersistentStorage.Current);
-
 			// set our layout to be the home screen
 			SetContentView (Resource.Layout.NewPost);
 
@@ -47,8 +45,29 @@ namespace App.Android
 
 			FindViewById<EditText> (Resource.Id.PostText).TextChanged += HandlePostTextChanged;
 
-			FindViewById<Button> (Resource.Id.SaveButton).Click += HandleSaveButtonClicked;
+		}
 
+		private IMenuItem send_button;
+
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			send_button = menu.Add ("Send").SetEnabled(false);
+			send_button.SetShowAsAction (ShowAsAction.IfRoom);
+
+			return base.OnCreateOptionsMenu (menu);
+
+			//return true;
+		}
+
+		public override bool OnOptionsItemSelected (IMenuItem item)
+		{
+			switch (item.TitleFormatted.ToString()) { 
+			case "Send":
+				HandleSaveButtonClicked (item, EventArgs.Empty);
+				break;
+			}
+
+			return base.OnOptionsItemSelected (item);
 		}
 
 		private async void HandleSaveButtonClicked (object sender, EventArgs e)
@@ -64,9 +83,30 @@ namespace App.Android
 
 		private void HandlePostTextChanged(object sender, EventArgs e)
 		{
-			view_model.PostText = ((EditText)sender).Text;
+			var text = ((EditText)sender).Text;
+
+			if (string.IsNullOrWhiteSpace (text)) {
+				send_button.SetEnabled (false);
+			
+			} else {
+				view_model.PostText = text;
+
+				send_button.SetEnabled (true);
+			}
+
 		}
+			
 
 		private NewPostViewModel view_model;
+
+		protected override ViewModelBase the_view_model {
+			get 
+			{
+				if (view_model == null) {
+					view_model = new NewPostViewModel (PersistentStorage.Current);
+				}
+				return view_model;
+			}
+		}
 	}
 }

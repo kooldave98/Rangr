@@ -71,48 +71,61 @@ namespace App.Android
 		protected override void OnPause ()
 		{
 			base.OnPause ();
-
-			++paused;
+			Global.Current.suspend ();
 		}
 
 		protected override void OnStop ()
 		{
 			base.OnStop ();
 
-			++stopped;
+		}
+
+		protected override void OnDestroy ()
+		{
+			base.OnDestroy ();
+
+			Finish ();
+
 		}
 
 		protected override void OnStart ()
 		{
 			base.OnStart ();
 
-			++started;
 		}
 
 		protected override void OnResume ()
 		{
 			base.OnResume ();
-
-			++resumed;
+			Global.Current.resume ();
+			notify ("OnResume");
 		}
 
+		private void notify(String methodName) {
+			var name = this.LocalClassName;
 
-		private static int resumed;
-		private static int paused;
-		private static int started;
-		private static int stopped;
+			var noti = new Notification.Builder(this)
+				.SetContentTitle(methodName + " " + name).SetAutoCancel(true)
+										.SetSmallIcon(Resource.Drawable.ic_action_logo)
+										.SetContentText(name).Build();
 
-		// And these two public static functions
-		public static bool isApplicationVisible() {
-			return started > stopped;
+			var notificationManager = (NotificationManager) GetSystemService(NotificationService);
+			notificationManager.Notify((int) CurrentTimeMillis(), noti);
 		}
 
-		public static bool isApplicationInForeground() {
-			return resumed > stopped;
+		private static readonly DateTime Jan1st1970 = new DateTime
+			(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+		public static long CurrentTimeMillis()
+		{
+			return (long) (DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
 		}
 
 	}
 
+	/// <summary>
+	/// Base list activity.
+	/// </summary>
 	public abstract class BaseListActivity : ListActivity 
 	{
 		protected override void OnCreate (Bundle bundle)
@@ -175,44 +188,33 @@ namespace App.Android
 		protected override void OnPause ()
 		{
 			base.OnPause ();
-
-			++paused;
+			Global.Current.suspend ();
 		}
 
 		protected override void OnStop ()
 		{
 			base.OnStop ();
 
-			++stopped;
+		}
+
+		protected override void OnDestroy ()
+		{
+			base.OnDestroy ();
+
+			Finish ();
+
 		}
 
 		protected override void OnStart ()
 		{
 			base.OnStart ();
 
-			++started;
 		}
 
 		protected override void OnResume ()
 		{
 			base.OnResume ();
-
-			++resumed;
-		}
-
-
-		private static int resumed;
-		private static int paused;
-		private static int started;
-		private static int stopped;
-
-		// And these two public static functions
-		public static bool isApplicationVisible() {
-			return started > stopped;
-		}
-
-		public static bool isApplicationInForeground() {
-			return resumed > stopped;
+			Global.Current.resume ();
 		}
 
 	}

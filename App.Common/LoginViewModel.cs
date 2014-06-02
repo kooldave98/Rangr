@@ -28,9 +28,10 @@ namespace App.Common
 
 		public async Task Login()
 		{
-			if (CurrentUserExists) {
+			if (!logged_in && CurrentUserExists) {
 
 				await InitHeartBeat ();
+				logged_in = true;
 			} 
 			else if (!string.IsNullOrWhiteSpace (UserDisplayName))
 			{
@@ -40,7 +41,7 @@ namespace App.Common
 
 				await InitHeartBeat ();
 			}
-			else {
+			else if(!logged_in) {
 				throw new InvalidOperationException ("You must enter a Display Name to create a new user");
 			}
 
@@ -48,21 +49,27 @@ namespace App.Common
 
 		public void SuspendMemoryIntensiveResources()
 		{
-			var timer = (Timer)TimerDisposable;
-			timer.Stop ();
-			timer.Dispose ();
+			if (paused.HasValue && !paused.Value) {
+				TimerDisposable.Stop ();
+				TimerDisposable.Dispose ();
+				TimerDisposable = null;
 
-			_geoLocationInstance.StopListening ();
+				_geoLocationInstance.StopListening ();
+			}
+			paused = true;
 		}
 
 		public void ResumeMemoryIntensiveResources()
 		{
-			_geoLocationInstance.StartListening ();
+			if (paused.HasValue && paused.Value) {
+				_geoLocationInstance.StartListening ();
 
-			initTimer ();
+				initTimer ();
+			}
+			paused = false;
 		}
 
-		private IDisposable TimerDisposable { get; set;}
+		private Timer TimerDisposable;
 
 
 		private async Task InitHeartBeat ()
@@ -93,7 +100,7 @@ namespace App.Common
 
 		private void initTimer ()
 		{
-			TimerDisposable = JavaScriptTimer.SetInterval (async () => {
+			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
 				sessionInstance.CurrentConnection = await ConnectionServices
@@ -118,6 +125,8 @@ namespace App.Common
 		private Connections ConnectionServices;
 		private Users UserServices;
 		private ISession sessionInstance;
+		private bool logged_in = false;
+		private bool? paused;
 	}
 }
 

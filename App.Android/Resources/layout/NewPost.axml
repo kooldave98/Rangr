@@ -49,15 +49,4 @@
         android:maxLength="160"
         android:freezesText="false"
         android:cursorVisible="true" />
-    <Button
-        style="@style/XamButton"
-        android:text="Send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/SaveButton"
-        android:layout_below="@+id/PostText"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp" />
 </LinearLayout>

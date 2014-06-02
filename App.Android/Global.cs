@@ -41,6 +41,39 @@ namespace App.Android
 			base.OnCreate ();
 		}
 
+		public void suspend()
+		{
+			if (Login_View_Model != null) {
+				Login_View_Model.SuspendMemoryIntensiveResources ();
+			}
+		}
+
+		public void resume()
+		{
+			if (Login_View_Model != null) {
+				Login_View_Model.ResumeMemoryIntensiveResources ();
+			}
+		}
+
+//		public override void OnCreate ()
+//		{
+//			base.OnCreate ();
+//
+//			TestFlight.TestFlight.TakeOff (this, "dfc77da6-f29c-4fff-acd6-59dc5ad774ab");
+//			AndroidEnvironment.UnhandledExceptionRaiser += HandleUnhandledException;
+//		}
+//
+//		void HandleUnhandledException (object sender, RaiseThrowableEventArgs e)
+//		{
+//			TestFlight.TestFlight.SendCrash (e.Exception);
+//		}
+//
+//		protected override void Dispose (bool disposing)
+//		{
+//			AndroidEnvironment.UnhandledExceptionRaiser -= HandleUnhandledException;
+//			base.Dispose (disposing);
+//		}
+
 	}
 
 }

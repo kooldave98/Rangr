@@ -429,8 +429,8 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060022
-			public const int Divider = 2131099682;
+			// aapt resource value: 0x7f060021
+			public const int Divider = 2131099681;
 			
 			// aapt resource value: 0x7f06000b
 			public const int EmailButton = 2131099659;
@@ -441,26 +441,23 @@ namespace App.Android
 			// aapt resource value: 0x7f06000a
 			public const int NameTextView = 2131099658;
 			
-			// aapt resource value: 0x7f060024
-			public const int PhoneButton = 2131099684;
+			// aapt resource value: 0x7f060023
+			public const int PhoneButton = 2131099683;
 			
 			// aapt resource value: 0x7f060018
 			public const int PostText = 2131099672;
 			
-			// aapt resource value: 0x7f060025
-			public const int PostTextLabel = 2131099685;
-			
-			// aapt resource value: 0x7f060027
-			public const int ProfileList = 2131099687;
-			
-			// aapt resource value: 0x7f060019
-			public const int SaveButton = 2131099673;
+			// aapt resource value: 0x7f060024
+			public const int PostTextLabel = 2131099684;
 			
 			// aapt resource value: 0x7f060026
-			public const int StreamLayout = 2131099686;
+			public const int ProfileList = 2131099686;
 			
-			// aapt resource value: 0x7f06001c
-			public const int SwipeContent = 2131099676;
+			// aapt resource value: 0x7f060025
+			public const int StreamLayout = 2131099685;
+			
+			// aapt resource value: 0x7f06001b
+			public const int SwipeContent = 2131099675;
 			
 			// aapt resource value: 0x7f060016
 			public const int UserImageButton = 2131099670;
@@ -480,20 +477,20 @@ namespace App.Android
 			// aapt resource value: 0x7f060010
 			public const int dialogTitle = 2131099664;
 			
-			// aapt resource value: 0x7f060020
-			public const int distance = 2131099680;
+			// aapt resource value: 0x7f06001f
+			public const int distance = 2131099679;
 			
-			// aapt resource value: 0x7f060028
-			public const int feed_menu_item = 2131099688;
+			// aapt resource value: 0x7f060027
+			public const int feed_menu_item = 2131099687;
 			
-			// aapt resource value: 0x7f06001a
-			public const int fragmentContainer = 2131099674;
+			// aapt resource value: 0x7f060019
+			public const int fragmentContainer = 2131099673;
 			
 			// aapt resource value: 0x7f060004
 			public const int hybrid = 2131099652;
 			
-			// aapt resource value: 0x7f06001b
-			public const int imageView1 = 2131099675;
+			// aapt resource value: 0x7f06001a
+			public const int imageView1 = 2131099674;
 			
 			// aapt resource value: 0x7f060007
 			public const int linearLayout1 = 2131099655;
@@ -501,8 +498,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060008
 			public const int linearLayout2 = 2131099656;
 			
-			// aapt resource value: 0x7f06001e
-			public const int linearLayout3 = 2131099678;
+			// aapt resource value: 0x7f06001d
+			public const int linearLayout3 = 2131099677;
 			
 			// aapt resource value: 0x7f060013
 			public const int logIn = 2131099667;
@@ -513,8 +510,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060015
 			public const int loginQuestion = 2131099669;
 			
-			// aapt resource value: 0x7f060023
-			public const int map = 2131099683;
+			// aapt resource value: 0x7f060022
+			public const int map = 2131099682;
 			
 			// aapt resource value: 0x7f060000
 			public const int none = 2131099648;
@@ -525,17 +522,17 @@ namespace App.Android
 			// aapt resource value: 0x7f060012
 			public const int password = 2131099666;
 			
+			// aapt resource value: 0x7f060028
+			public const int people_menu_item = 2131099688;
+			
+			// aapt resource value: 0x7f06001c
+			public const int personImage = 2131099676;
+			
+			// aapt resource value: 0x7f06001e
+			public const int personName = 2131099678;
+			
 			// aapt resource value: 0x7f060029
-			public const int people_menu_item = 2131099689;
-			
-			// aapt resource value: 0x7f06001d
-			public const int personImage = 2131099677;
-			
-			// aapt resource value: 0x7f06001f
-			public const int personName = 2131099679;
-			
-			// aapt resource value: 0x7f06002a
-			public const int profile_menu_item = 2131099690;
+			public const int profile_menu_item = 2131099689;
 			
 			// aapt resource value: 0x7f060006
 			public const int ptr_progress = 2131099654;
@@ -546,8 +543,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060002
 			public const int satellite = 2131099650;
 			
-			// aapt resource value: 0x7f060021
-			public const int status = 2131099681;
+			// aapt resource value: 0x7f060020
+			public const int status = 2131099680;
 			
 			// aapt resource value: 0x7f060003
 			public const int terrain = 2131099651;

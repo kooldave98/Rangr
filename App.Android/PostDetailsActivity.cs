@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
-	public class PostDetailsActivity : Activity
+	public class PostDetailsActivity : BaseActivity
 	{
 		public override bool OnNavigateUp()
 		{
@@ -32,17 +32,6 @@ namespace App.Android
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
-			SeenPost post;
-
-			if (Intent.HasExtra ("Post")) {
-				var postBytes = Intent.GetByteArrayExtra ("Post");
-				post = PostDetailsViewModel.Deserialize (postBytes);
-			}else{
-				post = new SeenPost ();
-			}
-
-			view_model = new PostDetailsViewModel (post);
 
 			// set our layout to be the home screen
 			SetContentView (Resource.Layout.PostDetails);
@@ -67,9 +56,29 @@ namespace App.Android
 			return intent;
 		}
 
-		PostDetailsViewModel view_model;
+		private TextView postTextLabel;
 
-		TextView postTextLabel;
+		private PostDetailsViewModel view_model;
+
+		protected override ViewModelBase the_view_model {
+			get 
+			{
+				if(view_model == null)
+				{
+					SeenPost post;
+					if (Intent.HasExtra ("Post")) {
+						var postBytes = Intent.GetByteArrayExtra ("Post");
+						post = PostDetailsViewModel.Deserialize (postBytes);
+					}else{
+						post = new SeenPost ();
+					}
+
+					view_model = new PostDetailsViewModel (post);
+				}
+
+				return view_model;
+			}
+		}
 	}
 }
 
