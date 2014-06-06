@@ -90,6 +90,7 @@
       <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="ActivityLifeCycle.cs" />
+    <Compile Include="EditProfileActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -228,6 +229,7 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Profile.axml" />
     <AndroidResource Include="Resources\drawable\twitter.png" />
+    <AndroidResource Include="Resources\layout\EditProfile.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

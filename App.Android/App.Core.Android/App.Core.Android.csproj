@@ -114,6 +114,9 @@
     <Compile Include="..\..\App.Common\Users.cs">
       <Link>Services\Users.cs</Link>
     </Compile>
+    <Compile Include="..\..\App.Common\EditProfileViewModel.cs">
+      <Link>ViewModels\EditProfileViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

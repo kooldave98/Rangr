@@ -98,7 +98,7 @@ namespace App.Android
 		{
 			base.OnResume ();
 			Global.Current.resume ();
-			notify ("OnResume");
+			//notify ("OnResume");
 		}
 
 		private void notify(String methodName) {

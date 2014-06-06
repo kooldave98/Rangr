@@ -33,6 +33,23 @@ namespace App.Common.Shared
 			return user_identity;
         }
 
+		public async Task<UserIdentity> Update (string user_id, string user_display_name, string status_message)
+		{
+			var requestBody = new List<KeyValuePair<string, string>> () 
+			{
+				new KeyValuePair<string, string>( "user_id", user_id ),
+				new KeyValuePair<string, string>( "user_display_name", user_display_name ),
+				new KeyValuePair<string, string>( "status_message", status_message )
+			};
+
+
+			var url = String.Format ("{0}/", base_rest_url);
+			string data = await _httpRequest.Put (url, requestBody);  
+
+			var user_identity = JsonConvert.DeserializeObject<UserIdentity> (data);
+			return user_identity;
+		}
+
 
 		private const string restful_resource = "users";
 		private IHttpRequest _httpRequest;

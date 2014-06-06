@@ -33,7 +33,11 @@ namespace App.Android
 
 
 			//setup list adapter
-			setupAdapter ();
+			// create our adapter
+			ListAdapter = _postListAdapter = new PostFeedAdapter (this, view_model.Posts);
+
+			//Hook up our adapter to our ListView
+			_postListView.Adapter = _postListAdapter;
 
 
 			// wire up post click handler
@@ -66,7 +70,7 @@ namespace App.Android
 
 		}
 
-		protected override async void OnActivityResult (int requestCode, Result resultCode, Intent data)
+		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult (requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
@@ -77,17 +81,6 @@ namespace App.Android
 		private void HandleOnNewPostsReceived (object sender, EventArgs e)
 		{
 			refreshGrid ();
-		}
-
-		private void setupAdapter()
-		{
-			// create our adapter
-			ListAdapter = _postListAdapter = new PostFeedAdapter (this, view_model.Posts);
-
-			
-
-			//Hook up our adapter to our ListView
-			_postListView.Adapter = _postListAdapter;
 		}
 
 		private void refreshGrid ()

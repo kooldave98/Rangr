@@ -39,13 +39,42 @@ namespace App.Android
 
 		}
 
+		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
+		{
+			base.OnActivityResult (requestCode, resultCode, data);
+			if (resultCode == Result.Ok) {
+				//Nuke our cache
+				Global.Current.Profile_View_Model = null;
+
+				//refresh list view
+				listView.Adapter = listAdapter = new ProfileAdapter (view_model.PropertyGroups);
+				listAdapter.NotifyDataSetChanged ();
+			}
+		}
+
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
+			menu.Add ("Edit Profile").SetShowAsAction (ShowAsAction.IfRoom);
+
 			MenuInflater.Inflate (Resource.Menu.menu, menu);
 
 			menu.FindItem (Resource.Id.profile_menu_item).SetEnabled (false);
 
 			return base.OnCreateOptionsMenu (menu);
+		}
+
+		public override bool OnOptionsItemSelected (IMenuItem item)
+		{
+			switch (item.TitleFormatted.ToString ()) { 
+			case "Edit Profile":
+				StartActivityForResult (typeof(EditProfileActivity), 0);
+				break;
+			case "Console":
+				ShowToast (false);
+				break;
+			}
+
+			return base.OnOptionsItemSelected (item);
 		}
 
 		private ProfileAdapter listAdapter;

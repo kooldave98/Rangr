@@ -15,14 +15,13 @@ namespace App.Common
 		{
 			var person = Session.GetInstance (the_persistent_storage_instance).GetCurrentUser ();
 
-			person.status_message = "Hey there, I'm on Walkr !";
-			person.twitter_name = "@walkr";
-			person.telephone_number = "0123456789";
-
-
 			if (person == null) {
 				throw new ArgumentNullException ("person");
 			}
+
+			person.status_message = person.status_message;
+			person.twitter_name = "@walkr";
+			person.telephone_number = "0123456789";
 
 			Person = person;
 

@@ -28,5 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Users.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditProfileViewModel.cs" />
   </ItemGroup>
 </Project>
