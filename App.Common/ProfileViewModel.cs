@@ -19,7 +19,7 @@ namespace App.Common
 				throw new ArgumentNullException ("person");
 			}
 
-			person.status_message = person.status_message;
+			person.status_message = "Hey there, I'm on Walkr";
 			person.twitter_name = "@walkr";
 			person.telephone_number = "0123456789";
 
