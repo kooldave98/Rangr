@@ -85,6 +85,16 @@ namespace App.Common
 
 		public ObservableCollection<PropertyGroup> PropertyGroups { get; private set; }
 
+		public override void ResurrectViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void TombstoneViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
 	}
 
 	public class PropertyGroup : IEnumerable<Property>

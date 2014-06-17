@@ -30,6 +30,16 @@ namespace App.Common
 			CurrentUser = SessionInstance.GetCurrentUser ();
 		}
 
+		public override void ResurrectViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void TombstoneViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
 		private ISession SessionInstance;
 		private Posts post_services;
 	}

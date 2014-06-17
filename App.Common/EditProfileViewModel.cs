@@ -31,6 +31,16 @@ namespace App.Common
 			CurrentUserToBeEdited = SessionInstance.GetCurrentUser ();
 		}
 
+		public override void ResurrectViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void TombstoneViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
 		private ISession SessionInstance;
 		private Users user_services;
 	}

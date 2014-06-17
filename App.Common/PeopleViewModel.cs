@@ -47,10 +47,24 @@ namespace App.Common
 		{
 			CurrentLocation = await _geoLocationInstance.GetCurrentPosition ();
 
-			_geoLocationInstance.OnGeoPositionChanged ((geo_value)=>{ 
-				CurrentLocation = geo_value;
-			});
+			geoPositionChangedEventHandler = (sender, e) => { 
+				CurrentLocation = e.position;
+			};
+
+			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
 		}
+
+		public override void ResurrectViewModel()
+		{
+			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
+		}
+
+		public override void TombstoneViewModel()
+		{
+			_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
+		}
+
+		private EventHandler<GeoPositionChangedEventArgs> geoPositionChangedEventHandler;
 
 		IGeoLocation _geoLocationInstance;
 		ISession _sessionInstance;

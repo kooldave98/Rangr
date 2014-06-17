@@ -21,6 +21,16 @@ namespace App.Common
 			CurrentPost = new SeenPost();
 		}
 
+		public override void ResurrectViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void TombstoneViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
 		#region ReUseableHelpers
 		public static SeenPost Deserialize(byte[] postBytes)
 		{

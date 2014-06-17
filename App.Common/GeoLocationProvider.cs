@@ -16,10 +16,8 @@ namespace App.Common.Shared
 		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
 		private Geolocator geolocator;
-		private List<Action<GeoValue>> geoPositionChangedCallbacks = new List<Action<GeoValue>> ();
-		private List<Action<Status>> statusChangedCallbacks = new List<Action<Status>> ();
-//		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
-//		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
+		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
+		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 		//private SynchronizationContext _context;
 		private static bool positionReliable = false;
 		private static Position geoPosition;
@@ -60,16 +58,6 @@ namespace App.Common.Shared
 			};
 		
 		
-		}
-
-
-		public void OnGeoPositionChanged (Action<GeoValue> handler)
-		{
-			geoPositionChangedCallbacks.Add (handler);
-		}
-		public void OnStatusChanged (Action<Status> handler)
-		{
-			statusChangedCallbacks.Add (handler);
 		}
 
 
@@ -122,18 +110,15 @@ namespace App.Common.Shared
 
 		private void NotifyStatusChanged (Status status, string statusMessage)
 		{
-			//OnStatusChanged (this, new StatusChangedEventArgs(status));
-			foreach (var callback in statusChangedCallbacks) {
-				callback (status);
+			if (OnStatusChanged != null) {
+				OnStatusChanged (this, new StatusChangedEventArgs (status));
 			}
 		}
 
 		private void NotifyPositionChanged (GeoValue position)
 		{
-			//OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
-
-			foreach (var callback in geoPositionChangedCallbacks) {
-				callback (position);
+			if (OnGeoPositionChanged != null) {
+				OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
 			}
 		}
 

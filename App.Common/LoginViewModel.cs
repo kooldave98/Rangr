@@ -47,7 +47,7 @@ namespace App.Common
 
 		}
 
-		public void SuspendMemoryIntensiveResources()
+		public override void TombstoneViewModel()
 		{
 			if (paused.HasValue && !paused.Value) {
 				TimerDisposable.Stop ();
@@ -55,13 +55,16 @@ namespace App.Common
 				TimerDisposable = null;
 
 				_geoLocationInstance.StopListening ();
+				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
 			}
 			paused = true;
 		}
 
-		public void ResumeMemoryIntensiveResources()
+		public override void ResurrectViewModel()
 		{
 			if (paused.HasValue && paused.Value) {
+
+				_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
 				_geoLocationInstance.StartListening ();
 
 				initTimer ();
@@ -87,13 +90,15 @@ namespace App.Common
 
 			//init heartbeat here
 
-			_geoLocationInstance.StartListening ();
-
-			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
+			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
 				sessionInstance.CurrentConnection = await ConnectionServices
-					.Update (sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
+					.Update (sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.position.geolocation_value, geo_value.position.geolocation_accuracy.ToString ());
 
-			});	
+			};
+
+			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
+
+			_geoLocationInstance.StartListening ();
 
 			initTimer ();
 		}
@@ -120,6 +125,8 @@ namespace App.Common
 
 			UserServices = new Users (HttpRequest.Current);
 		}
+
+		private EventHandler<GeoPositionChangedEventArgs> geoPositionChangedEventHandler;
 
 		private IGeoLocation _geoLocationInstance;
 		private Connections ConnectionServices;

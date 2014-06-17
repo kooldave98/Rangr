@@ -44,14 +44,14 @@ namespace App.Android
 		public void suspend()
 		{
 			if (Login_View_Model != null) {
-				Login_View_Model.SuspendMemoryIntensiveResources ();
+				Login_View_Model.TombstoneViewModel ();
 			}
 		}
 
 		public void resume()
 		{
 			if (Login_View_Model != null) {
-				Login_View_Model.ResumeMemoryIntensiveResources ();
+				Login_View_Model.ResurrectViewModel ();
 			}
 		}
 

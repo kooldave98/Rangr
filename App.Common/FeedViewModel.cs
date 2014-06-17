@@ -74,6 +74,17 @@ namespace App.Common
 //			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 //		}
 
+		public override void ResurrectViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void TombstoneViewModel()
+		{
+			throw new NotImplementedException ();
+		}
+
+
 		public FeedViewModel (IGeoLocation the_geolocation_instance, IPersistentStorage the_persistent_storage_instance)
 		{
 			Posts = new List<SeenPost> ();

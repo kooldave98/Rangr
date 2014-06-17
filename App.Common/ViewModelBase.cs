@@ -26,7 +26,7 @@ namespace App.Common {
 	/// - Implements some basic validation logic
 	/// - Implements some IsBusy logic
 	/// </summary>
-	public class ViewModelBase : INotifyPropertyChanged
+	public abstract class ViewModelBase : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -143,5 +143,9 @@ namespace App.Common {
 				ev (this, new PropertyChangedEventArgs (name));
 			}
 		}
+
+		public abstract void TombstoneViewModel();
+
+		public abstract void ResurrectViewModel();
 	}
 }
