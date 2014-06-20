@@ -44,7 +44,8 @@ namespace App.Android
 			base.OnActivityResult (requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
 				//Nuke our cache
-				Global.Current.Profile_View_Model = null;
+				//if the profile doesn't update with the new details, then uncomment this
+				//Global.Current.Profile_View_Model = null;
 
 				//refresh list view
 				listView.Adapter = listAdapter = new ProfileAdapter (view_model.PropertyGroups);
@@ -80,23 +81,17 @@ namespace App.Android
 		private ProfileAdapter listAdapter;
 		private ListView listView;
 
-		private ProfileViewModel view_model
+		private ProfileViewModel view_model;
+
+		protected override ViewModelBase init_view_model ()
 		{
-			get {
-				return (ProfileViewModel)the_view_model;
-			}
-		}
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if(Global.Current.Profile_View_Model == null)
-				{
-					Global.Current.Profile_View_Model = new ProfileViewModel (PersistentStorage.Current);
-				}
-
-				return Global.Current.Profile_View_Model;
+			if (view_model == null) {
+				view_model = new ProfileViewModel (PersistentStorage.Current);
 			}
+
+			return view_model;
+
 		}
 	}
 }

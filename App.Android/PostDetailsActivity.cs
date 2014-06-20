@@ -20,7 +20,7 @@ namespace App.Android
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PostDetailsActivity : BaseActivity
 	{
-		public override bool OnNavigateUp()
+		public override bool OnNavigateUp ()
 		{
 			base.OnNavigateUp ();
 
@@ -60,24 +60,22 @@ namespace App.Android
 
 		private PostDetailsViewModel view_model;
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if(view_model == null)
-				{
-					SeenPost post;
-					if (Intent.HasExtra ("Post")) {
-						var postBytes = Intent.GetByteArrayExtra ("Post");
-						post = PostDetailsViewModel.Deserialize (postBytes);
-					}else{
-						post = new SeenPost ();
-					}
-
-					view_model = new PostDetailsViewModel (post);
+		protected override ViewModelBase init_view_model ()
+		{
+			if (view_model == null) {
+				SeenPost post;
+				if (Intent.HasExtra ("Post")) {
+					var postBytes = Intent.GetByteArrayExtra ("Post");
+					post = PostDetailsViewModel.Deserialize (postBytes);
+				} else {
+					post = new SeenPost ();
 				}
 
-				return view_model;
+				view_model = new PostDetailsViewModel (post);
 			}
+
+			return view_model;
+
 		}
 	}
 }

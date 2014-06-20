@@ -32,12 +32,12 @@ namespace App.Common
 
 		public override void ResurrectViewModel()
 		{
-			throw new NotImplementedException ();
+			//throw new NotImplementedException ();
 		}
 
 		public override void TombstoneViewModel()
 		{
-			throw new NotImplementedException ();
+			//throw new NotImplementedException ();
 		}
 
 		private ISession SessionInstance;

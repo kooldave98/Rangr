@@ -75,23 +75,16 @@ namespace App.Android
 			return base.OnCreateOptionsMenu (menu);
 		}
 
-		private PeopleViewModel view_model
+		private PeopleViewModel view_model;
+
+		protected override ViewModelBase init_view_model ()
 		{
-			get {
-				return (PeopleViewModel)the_view_model;
+			if (view_model == null) {
+				view_model = new PeopleViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 			}
-		}
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if(Global.Current.People_View_Model == null)
-				{
-					Global.Current.People_View_Model = new PeopleViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
-				}
-
-				return Global.Current.People_View_Model;
-			}
+			return view_model;
+			
 		}
 	}
 }

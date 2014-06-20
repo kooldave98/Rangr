@@ -28,35 +28,51 @@ namespace App.Android
 
 			SetContentView (Resource.Layout.PostList);
 
+			postListView = ListView;//FindViewById<ListView> (Resource.Id.PostList);
 
-			_postListView = ListView;//FindViewById<ListView> (Resource.Id.PostList);
-
-
-			//setup list adapter
-			// create our adapter
-			ListAdapter = _postListAdapter = new PostFeedAdapter (this, view_model.Posts);
-
+			#region setup list adapter
+			ListAdapter = postListAdapter = new PostFeedAdapter (this, view_model.Posts);
+			//----------
 			//Hook up our adapter to our ListView
-			_postListView.Adapter = _postListAdapter;
+			//---------
+			postListView.Adapter = postListAdapter;
+			#endregion
 
+			#region Setup pull to refresh
+			mPullToRefreshAttacher = new PullToRefreshAttacher (this, postListView);
+
+			mPullToRefreshAttacher.Refresh += async (sender, e) => {
+				await view_model.RefreshPosts ();
+				JavaScriptTimer.SetTimeout (delegate {
+					RunOnUiThread (() => {
+						mPullToRefreshAttacher.SetRefreshComplete ();
+					});
+				}, 1500);//1.5 secs
+
+			};
+			#endregion
 
 			// wire up post click handler
-			if (_postListView != null) {
-
-				setup_pull_to_refresh_on_list (_postListView);
-
-				bind_list_item_click (_postListView);
-			}
-
-
+			postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+				var post = view_model.Posts [e.Position];
+				var postDetails = PostDetailsActivity.CreateIntent (this, post);
+				StartActivity (postDetails);
+			};
 
 		}
+
+		private EventHandler<EventArgs> NewPostsReceivedHandler;
 
 		protected override async void OnResume ()
 		{
 			base.OnResume ();
 
-			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
+			NewPostsReceivedHandler = (object sender, EventArgs e) => {
+				//Refresh list view data
+				postListAdapter.NotifyDataSetChanged ();
+			};
+
+			view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
 			await view_model.RefreshPosts ();
 
@@ -66,7 +82,7 @@ namespace App.Android
 		{
 			base.OnPause ();
 
-			view_model.OnNewPostsReceived -= HandleOnNewPostsReceived;
+			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
 
 		}
 
@@ -78,49 +94,13 @@ namespace App.Android
 			}
 		}
 
-		private void HandleOnNewPostsReceived (object sender, EventArgs e)
-		{
-			refreshGrid ();
-		}
-
-		private void refreshGrid ()
-		{
-			_postListAdapter.NotifyDataSetChanged ();
-
-		}
-
-		private void setup_pull_to_refresh_on_list (ListView list_view)
-		{
-			mPullToRefreshAttacher = new PullToRefreshAttacher (this, list_view);
-
-			// Set Listener to know when a refresh should be started
-			mPullToRefreshAttacher.Refresh += async (sender, e) => {
-				await view_model.RefreshPosts ();
-				JavaScriptTimer.SetTimeout(delegate{
-					RunOnUiThread(()=>{
-						mPullToRefreshAttacher.SetRefreshComplete ();
-					});
-				},1500);//1.5 secs
-
-			};
-		}
-
-		private void bind_list_item_click (ListView list_view)
-		{
-			list_view.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-				var post = view_model.Posts [e.Position];
-				var postDetails = PostDetailsActivity.CreateIntent (this, post);
-				StartActivity (postDetails);
-			};
-		}
-
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
 			menu.Add ("New Post").SetShowAsAction (ShowAsAction.IfRoom);
 
 			MenuInflater.Inflate (Resource.Menu.menu, menu);
 
-			menu.FindItem (Resource.Id.feed_menu_item).SetEnabled(false);
+			menu.FindItem (Resource.Id.feed_menu_item).SetEnabled (false);
 
 			return base.OnCreateOptionsMenu (menu);
 
@@ -141,30 +121,23 @@ namespace App.Android
 			return base.OnOptionsItemSelected (item);
 		}
 
-		private FeedViewModel view_model
+		private FeedViewModel view_model;
+
+		protected override ViewModelBase init_view_model ()
 		{
-			get {
-				return (FeedViewModel)the_view_model;
+			if (view_model == null) {
+				view_model = new FeedViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 			}
-		}
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if(Global.Current.Feed_View_Model == null)
-				{
-					Global.Current.Feed_View_Model = new FeedViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
-				}
-
-				return Global.Current.Feed_View_Model;
-			}
+			return view_model;		
 		}
 
 		//private ProgressDialog progress;
-		private PostFeedAdapter _postListAdapter;
-		private ListView _postListView;
+		private PostFeedAdapter postListAdapter;
+		private ListView postListView;
 		private PullToRefreshAttacher mPullToRefreshAttacher;
 	}
 }
 
 
+//(FeedViewModel)the_view_model

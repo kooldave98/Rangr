@@ -6,22 +6,31 @@ using Android.Widget;
 using Android.OS;
 using App.Common;
 
-namespace App.Android 
+namespace App.Android
 {
-	public abstract class BaseActivity : Activity 
+	public abstract class BaseActivity : Activity
 	{
+		private bool isBusyHandlerSet = false;
+
+		private EventHandler isBusyChangedEventHandler;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			the_view_model.IsBusyChanged +=	(sender, e) => {
+			the_view_model = init_view_model ();
+
+			isBusyChangedEventHandler = (sender, e) => {
+
 				if (the_view_model.IsBusy) {
 					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
 				} else {
 					progress.Dismiss ();
 				}
 			};
+
+			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
+			isBusyHandlerSet = true;
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
@@ -44,101 +53,125 @@ namespace App.Android
 		}
 
 
-		protected void ResurrectActivity(Type activityType)
+		protected void ResurrectActivity (Type activityType)
 		{
-			var i = new Intent(Global.Current, activityType);
-			i.SetFlags(ActivityFlags.ReorderToFront);
-			StartActivity(i);
+			var i = new Intent (Global.Current, activityType);
+			i.SetFlags (ActivityFlags.ReorderToFront);
+			StartActivity (i);
 		}
 
 
-		protected void ShowToast(bool really)
+		protected void ShowToast (bool really)
 		{
-			if(really)
-			{
-				var t = Toast.MakeText(this, "A toast", ToastLength.Short);
-				t.SetGravity(GravityFlags.Center, 0, 0);
-				t.Show();
+			if (really) {
+				var t = Toast.MakeText (this, "A toast", ToastLength.Short);
+				t.SetGravity (GravityFlags.Center, 0, 0);
+				t.Show ();
 			}
 		}
 
-		protected abstract ViewModelBase the_view_model { get;}
+		private ViewModelBase the_view_model;
 
+		protected abstract ViewModelBase init_view_model ();
 
 		private ProgressDialog progress;
 
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+
+			if (!isBusyHandlerSet) {
+				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
+			}
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				the_view_model.ResurrectViewModel ();
+			}
+
+			Global.Current.resume ();
+			//notify ("OnResume");
+		}
 
 		protected override void OnPause ()
 		{
 			base.OnPause ();
+
+			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
+			isBusyHandlerSet = false;
+
+			if (progress != null)
+				progress.Dismiss ();
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				the_view_model.TombstoneViewModel ();
+			}
+
 			Global.Current.suspend ();
-		}
-
-		protected override void OnStop ()
-		{
-			base.OnStop ();
-
-		}
-
-		protected override void OnDestroy ()
-		{
-			base.OnDestroy ();
-
-			Finish ();
-
 		}
 
 		protected override void OnStart ()
 		{
 			base.OnStart ();
-
 		}
 
-		protected override void OnResume ()
+		protected override void OnStop ()
 		{
-			base.OnResume ();
-			Global.Current.resume ();
-			//notify ("OnResume");
+			base.OnStop ();
 		}
 
-		private void notify(String methodName) {
+		protected override void OnDestroy ()
+		{
+			base.OnDestroy ();
+			Finish ();
+		}
+
+		private void notify (String methodName)
+		{
 			var name = this.LocalClassName;
 
-			var noti = new Notification.Builder(this)
-				.SetContentTitle(methodName + " " + name).SetAutoCancel(true)
-										.SetSmallIcon(Resource.Drawable.ic_action_logo)
-										.SetContentText(name).Build();
+			var noti = new Notification.Builder (this)
+				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
+				.SetSmallIcon (Resource.Drawable.ic_action_logo)
+				.SetContentText (name).Build ();
 
-			var notificationManager = (NotificationManager) GetSystemService(NotificationService);
-			notificationManager.Notify((int) CurrentTimeMillis(), noti);
+			var notificationManager = (NotificationManager)GetSystemService (NotificationService);
+			notificationManager.Notify ((int)CurrentTimeMillis (), noti);
 		}
 
-		private static readonly DateTime Jan1st1970 = new DateTime
-			(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+		private static readonly DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-		public static long CurrentTimeMillis()
+		public static long CurrentTimeMillis ()
 		{
-			return (long) (DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
+			return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
 		}
-
 	}
 
 	/// <summary>
 	/// Base list activity.
 	/// </summary>
-	public abstract class BaseListActivity : ListActivity 
+	public abstract class BaseListActivity : ListActivity
 	{
+		private bool isBusyHandlerSet = false;
+
+		private EventHandler isBusyChangedEventHandler;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			the_view_model.IsBusyChanged +=	(sender, e) => {
+			the_view_model = init_view_model ();
+
+			isBusyChangedEventHandler = (sender, e) => {
+
 				if (the_view_model.IsBusy) {
 					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
 				} else {
 					progress.Dismiss ();
 				}
 			};
+
+			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
+			isBusyHandlerSet = true;
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
@@ -161,61 +194,96 @@ namespace App.Android
 		}
 
 
-		protected void ResurrectActivity(Type activityType)
+		protected void ResurrectActivity (Type activityType)
 		{
-			var i = new Intent(Global.Current, activityType);
-			i.SetFlags(ActivityFlags.ReorderToFront);
-			StartActivity(i);
+			var i = new Intent (Global.Current, activityType);
+			i.SetFlags (ActivityFlags.ReorderToFront);
+			StartActivity (i);
 		}
 
 
-		protected void ShowToast(bool really)
+		protected void ShowToast (bool really)
 		{
-			if(really)
-			{
-				var t = Toast.MakeText(this, "A toast", ToastLength.Short);
-				t.SetGravity(GravityFlags.Center, 0, 0);
-				t.Show();
+			if (really) {
+				var t = Toast.MakeText (this, "A toast", ToastLength.Short);
+				t.SetGravity (GravityFlags.Center, 0, 0);
+				t.Show ();
 			}
 		}
 
-		protected abstract ViewModelBase the_view_model { get;}
+		private ViewModelBase the_view_model;
 
+		protected abstract ViewModelBase init_view_model ();
 
 		private ProgressDialog progress;
 
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+
+			if (!isBusyHandlerSet) {
+				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
+			}
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				the_view_model.ResurrectViewModel ();
+			}
+
+			Global.Current.resume ();
+			//notify ("OnResume");
+		}
 
 		protected override void OnPause ()
 		{
 			base.OnPause ();
+
+			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
+			isBusyHandlerSet = false;
+
+			if (progress != null)
+				progress.Dismiss ();
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				the_view_model.TombstoneViewModel ();
+			}
+
 			Global.Current.suspend ();
-		}
-
-		protected override void OnStop ()
-		{
-			base.OnStop ();
-
-		}
-
-		protected override void OnDestroy ()
-		{
-			base.OnDestroy ();
-
-			Finish ();
-
 		}
 
 		protected override void OnStart ()
 		{
 			base.OnStart ();
-
 		}
 
-		protected override void OnResume ()
+		protected override void OnStop ()
 		{
-			base.OnResume ();
-			Global.Current.resume ();
+			base.OnStop ();
 		}
 
+		protected override void OnDestroy ()
+		{
+			base.OnDestroy ();
+			Finish ();
+		}
+
+		private void notify (String methodName)
+		{
+			var name = this.LocalClassName;
+
+			var noti = new Notification.Builder (this)
+				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
+				.SetSmallIcon (Resource.Drawable.ic_action_logo)
+				.SetContentText (name).Build ();
+
+			var notificationManager = (NotificationManager)GetSystemService (NotificationService);
+			notificationManager.Notify ((int)CurrentTimeMillis (), noti);
+		}
+
+		private static readonly DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+		public static long CurrentTimeMillis ()
+		{
+			return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
+		}
 	}
 }

@@ -116,6 +116,11 @@ namespace App.Android
 			}
 		}
 
+		protected override void OnPause ()
+		{
+			base.OnPause ();
+		}
+
 		/// <summary>
 		/// Observes the TextView's ImeAction so an action can be taken on keypress.
 		/// </summary>
@@ -141,23 +146,20 @@ namespace App.Android
 			return false;
 		}
 
-		private LoginViewModel view_model {
-			get {
-				return (LoginViewModel)the_view_model;
+		private LoginViewModel view_model{
+			get{ 
+				return (LoginViewModel) init_view_model ();
 			}
 		}
-			
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if(Global.Current.Login_View_Model == null)
-				{
-					Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
-				}
 
-				return Global.Current.Login_View_Model;
+		protected override ViewModelBase init_view_model ()
+		{
+			if (Global.Current.Login_View_Model == null) {
+				Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
 			}
+
+			return Global.Current.Login_View_Model;
 		}
 	}
 }

@@ -49,6 +49,7 @@ namespace App.Common
 
 		public override void TombstoneViewModel()
 		{
+			//Todo need to Null Guard the timer and stuff generally.
 			if (paused.HasValue && !paused.Value) {
 				TimerDisposable.Stop ();
 				TimerDisposable.Dispose ();

@@ -24,7 +24,7 @@ namespace App.Android
 	public class EditProfileActivity : BaseActivity
 	{
 
-		public override bool OnNavigateUp()
+		public override bool OnNavigateUp ()
 		{
 			//<hack> to ensure that status message gets saved
 			display_name_field.RequestFocus ();
@@ -75,7 +75,7 @@ namespace App.Android
 			}
 		}
 
-		private async void HandleStatusMessageChanged(object sender, EventArgs e)
+		private async void HandleStatusMessageChanged (object sender, EventArgs e)
 		{
 			var the_sender = (EditText)sender;
 			if (!the_sender.HasFocus) {
@@ -97,7 +97,7 @@ namespace App.Android
 				if (display_name_field.HasFocus) {
 					status_message_field.RequestFocus ();
 				} else if (status_message_field.HasFocus) {
-					display_name_field.RequestFocus();
+					display_name_field.RequestFocus ();
 				}
 				return true;
 			}
@@ -110,14 +110,14 @@ namespace App.Android
 
 		private EditProfileViewModel view_model;
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if (view_model == null) {
-					view_model = new EditProfileViewModel (PersistentStorage.Current);
-				}
-				return view_model;
+		protected override ViewModelBase init_view_model ()
+		{
+
+			if (view_model == null) {
+				view_model = new EditProfileViewModel (PersistentStorage.Current);
 			}
+			return view_model;
+
 		}
 	}
 }

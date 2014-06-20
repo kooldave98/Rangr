@@ -16,12 +16,6 @@ namespace App.Android
 	{
 		public LoginViewModel Login_View_Model { get; set; }
 
-		public FeedViewModel Feed_View_Model { get; set; }
-
-		public PeopleViewModel People_View_Model { get; set; }
-
-		public ProfileViewModel Profile_View_Model { get; set; }
-
 		public static Global Current {
 			get {
 				return _instance;
@@ -40,7 +34,9 @@ namespace App.Android
 		{
 			base.OnCreate ();
 		}
-
+		//Todo: I will take cues form the AppLifecycle sample code 
+		//the way they do app initialisation is mad....
+		//basically, all this suspend and resume stuff will not be a part of any view model
 		public void suspend()
 		{
 			if (Login_View_Model != null) {

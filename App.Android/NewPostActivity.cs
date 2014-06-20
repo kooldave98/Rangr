@@ -23,7 +23,7 @@ namespace App.Android
 	public class NewPostActivity : BaseActivity
 	{
 
-		public override bool OnNavigateUp()
+		public override bool OnNavigateUp ()
 		{
 			base.OnNavigateUp ();
 
@@ -51,7 +51,7 @@ namespace App.Android
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			send_button = menu.Add ("Send").SetEnabled(false);
+			send_button = menu.Add ("Send").SetEnabled (false);
 			send_button.SetShowAsAction (ShowAsAction.IfRoom);
 
 			return base.OnCreateOptionsMenu (menu);
@@ -61,7 +61,7 @@ namespace App.Android
 
 		public override bool OnOptionsItemSelected (IMenuItem item)
 		{
-			switch (item.TitleFormatted.ToString()) { 
+			switch (item.TitleFormatted.ToString ()) { 
 			case "Send":
 				HandleSaveButtonClicked (item, EventArgs.Empty);
 				break;
@@ -81,7 +81,7 @@ namespace App.Android
 			}
 		}
 
-		private void HandlePostTextChanged(object sender, EventArgs e)
+		private void HandlePostTextChanged (object sender, EventArgs e)
 		{
 			var text = ((EditText)sender).Text;
 
@@ -95,18 +95,18 @@ namespace App.Android
 			}
 
 		}
-			
+
 
 		private NewPostViewModel view_model;
 
-		protected override ViewModelBase the_view_model {
-			get 
-			{
-				if (view_model == null) {
-					view_model = new NewPostViewModel (PersistentStorage.Current);
-				}
-				return view_model;
+		protected override ViewModelBase init_view_model ()
+		{
+
+			if (view_model == null) {
+				view_model = new NewPostViewModel (PersistentStorage.Current);
 			}
+			return view_model;
+			
 		}
 	}
 }
