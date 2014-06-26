@@ -8,7 +8,7 @@
     <ProjectGuid>{BBB2AAF6-9DA6-4DBC-9C64-A751791DD47D}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>App.Core.iOS</RootNamespace>
+    <RootNamespace>App.Common</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>App.Core.iOS</AssemblyName>
   </PropertyGroup>
@@ -106,6 +106,9 @@
     </Compile>
     <Compile Include="..\..\App.Common\Users.cs">
       <Link>Services\Users.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\AppGlobal.cs">
+      <Link>AppGlobal.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

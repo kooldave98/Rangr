@@ -5,15 +5,14 @@ using System.Text;
 using System.Collections.ObjectModel;
 using App.Core.Portable;
 using App.Core.Portable.Persistence;
-using App.Common.Shared;
 
 namespace App.Common
 {
 	public class ProfileViewModel : ViewModelBase
 	{
-		public ProfileViewModel (IPersistentStorage the_persistent_storage_instance)
+		public ProfileViewModel ()
 		{
-			var person = Session.GetInstance (the_persistent_storage_instance).GetCurrentUser ();
+			var person = Session.GetInstance ().GetCurrentUser ();
 
 			if (person == null) {
 				throw new ArgumentNullException ("person");

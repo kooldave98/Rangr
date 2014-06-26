@@ -2,7 +2,7 @@ using System;
 using SQLite;
 using App.Core.Portable.Models;
 
-namespace App.Android
+namespace App.Common
 {
 	public class KeyValue : BaseEntity
 	{

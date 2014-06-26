@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using App.Core.Portable.Network;
@@ -18,7 +17,7 @@ namespace App.iOS
 
 		public LoginViewController (Action the_init_callback)
 		{
-			view_model = new LoginViewModel (GeoLocation.GetInstance (), PersistentStorage.Current);
+			view_model = new LoginViewModel ();
 
 			init_callback = the_init_callback;
 		}
@@ -61,7 +60,7 @@ namespace App.iOS
 
 			view_model.UserDisplayName = username.Text;
 
-			await view_model.Login ();
+			await view_model.CreateUser ();
 
 			init_callback ();
 

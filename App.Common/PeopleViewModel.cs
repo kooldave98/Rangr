@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using App.Core.Portable.Network;
@@ -30,12 +29,12 @@ namespace App.Common
 
 		public event EventHandler<EventArgs> OnConnectionsReceived;
 
-		public PeopleViewModel (IGeoLocation the_geolocation_instance, IPersistentStorage the_persistent_storage_instance)
+		public PeopleViewModel ()
 		{
 			ConnectedUsers = new List<Connection> ();
-			_sessionInstance = Session.GetInstance (the_persistent_storage_instance);
+			_sessionInstance = Session.GetInstance ();
 			_httpRequest = HttpRequest.Current;
-			_geoLocationInstance = the_geolocation_instance;
+			_geoLocationInstance = GeoLocation.GetInstance();
 
 			ConnectionServices = new Connections (_httpRequest);
 

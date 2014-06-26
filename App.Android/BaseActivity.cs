@@ -55,7 +55,7 @@ namespace App.Android
 
 		protected void ResurrectActivity (Type activityType)
 		{
-			var i = new Intent (Global.Current, activityType);
+			var i = new Intent (Application.Context, activityType);
 			i.SetFlags (ActivityFlags.ReorderToFront);
 			StartActivity (i);
 		}
@@ -84,11 +84,11 @@ namespace App.Android
 				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 			}
 
-			if (this.GetType () != typeof(LoginActivity)) {
-				the_view_model.ResurrectViewModel ();
-			}
+			the_view_model.ResurrectViewModel ();
 
-			Global.Current.resume ();
+			if (this.GetType () != typeof(LoginActivity)) {
+				AppGlobal.Current.Resume ();
+			}
 			//notify ("OnResume");
 		}
 
@@ -102,11 +102,12 @@ namespace App.Android
 			if (progress != null)
 				progress.Dismiss ();
 
-			if (this.GetType () != typeof(LoginActivity)) {
-				the_view_model.TombstoneViewModel ();
-			}
 
-			Global.Current.suspend ();
+			the_view_model.TombstoneViewModel ();
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				AppGlobal.Current.Pause ();					
+			}
 		}
 
 		protected override void OnStart ()
@@ -196,7 +197,7 @@ namespace App.Android
 
 		protected void ResurrectActivity (Type activityType)
 		{
-			var i = new Intent (Global.Current, activityType);
+			var i = new Intent (Application.Context, activityType);
 			i.SetFlags (ActivityFlags.ReorderToFront);
 			StartActivity (i);
 		}
@@ -225,11 +226,11 @@ namespace App.Android
 				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 			}
 
-			if (this.GetType () != typeof(LoginActivity)) {
-				the_view_model.ResurrectViewModel ();
-			}
+			the_view_model.ResurrectViewModel ();
 
-			Global.Current.resume ();
+			if (this.GetType () != typeof(LoginActivity)) {
+				AppGlobal.Current.Resume ();
+			}
 			//notify ("OnResume");
 		}
 
@@ -243,11 +244,12 @@ namespace App.Android
 			if (progress != null)
 				progress.Dismiss ();
 
-			if (this.GetType () != typeof(LoginActivity)) {
-				the_view_model.TombstoneViewModel ();
-			}
 
-			Global.Current.suspend ();
+			the_view_model.TombstoneViewModel ();
+
+			if (this.GetType () != typeof(LoginActivity)) {
+				AppGlobal.Current.Pause ();					
+			}
 		}
 
 		protected override void OnStart ()

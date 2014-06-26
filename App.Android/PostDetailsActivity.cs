@@ -12,7 +12,6 @@ using Android.Views;
 using Android.Widget;
 using App.Common;
 using App.Core.Portable.Models;
-using App.Core.Android;
 using System.Xml.Serialization;
 
 namespace App.Android

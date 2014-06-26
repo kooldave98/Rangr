@@ -3,7 +3,7 @@ using App.Core.Portable.Models;
 using App.Core.Portable.Device;
 using App.Core.Portable.Persistence;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 	public class Session : ISession
 	{
@@ -11,7 +11,7 @@ namespace App.Common.Shared
 
 		public User GetCurrentUser(bool allowDefault = false)
 		{
-			var user = PersistentStorage.Load<User> (CurrentUserKey);
+			var user = persistentStorage.Load<User> (CurrentUserKey);
 
 			if (!allowDefault && user == null) {
 				throw new InvalidOperationException ("User Session does not exist");
@@ -22,23 +22,23 @@ namespace App.Common.Shared
 
 		public void PersistCurrentUser(User user)
 		{
-			PersistentStorage.Save(CurrentUserKey, user);
+			persistentStorage.Save(CurrentUserKey, user);
 		}
 
-		public static ISession GetInstance(IPersistentStorage persistent_storage_instance)
+		public static ISession GetInstance()
 		{
-			return _instance ?? (_instance = new Session(persistent_storage_instance));
+			return _instance ?? (_instance = new Session());
 		}
 
-		private IPersistentStorage PersistentStorage;
+		private IPersistentStorage persistentStorage;
 
 		private const string CurrentUserKey = "currentuser";
 
 		private static ISession _instance = null;
 
-		private Session(IPersistentStorage persistent_storage_instance)
+		private Session()
 		{
-			PersistentStorage = persistent_storage_instance;
+			persistentStorage = PersistentStorage.Current;
 		}
 	}
 }

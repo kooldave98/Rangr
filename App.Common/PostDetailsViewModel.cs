@@ -3,7 +3,6 @@ using App.Core.Portable.Models;
 using System.IO;
 using App.Core.Portable.Device;
 using App.Core.Portable.Persistence;
-using App.Common.Shared;
 
 namespace App.Common
 {

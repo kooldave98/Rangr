@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using App.Core.Portable.Network;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 	public class HttpRequest : IHttpRequest
     {

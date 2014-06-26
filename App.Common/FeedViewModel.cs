@@ -1,5 +1,4 @@
 ﻿using System;
-using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using App.Core.Portable.Network;
@@ -85,7 +84,7 @@ namespace App.Common
 		}
 
 
-		public FeedViewModel (IGeoLocation the_geolocation_instance, IPersistentStorage the_persistent_storage_instance)
+		public FeedViewModel ()
 		{
 			Posts = new List<SeenPost> ();
 
@@ -93,18 +92,13 @@ namespace App.Common
 			LatestPosts = new List<SeenPost> ();
 			//end workaround
 
-//			_geoLocationInstance = the_geolocation_instance;
 
+			_sessionInstance = Session.GetInstance ();
 
-			_sessionInstance = Session.GetInstance (the_persistent_storage_instance);
-
-			//ConnectionServices = new Connections (HttpRequest.Current);
 			SeenPostServices = new SeenPosts (HttpRequest.Current);
 		}
-
-		//IGeoLocation _geoLocationInstance;
+			
 		ISession _sessionInstance;
-		//Connections ConnectionServices;
 		SeenPosts SeenPostServices;
 	}
 }

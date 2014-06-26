@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 
 	/// <summary>

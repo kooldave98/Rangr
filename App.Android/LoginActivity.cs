@@ -6,8 +6,6 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using App.Common.Shared;
-using App.Core.Android;
 using App.Core.Portable.Device;
 using App.Common;
 
@@ -31,9 +29,9 @@ namespace App.Android
 
 			//Check if the user exists first before populating the view
 
-			if (view_model.CurrentUserExists) {
+			if (AppGlobal.Current.CurrentUserExists) {
 
-				await view_model.Login ();
+				AppGlobal.Current.InitConnection ();
 				StartActivity (typeof(PostFeedActivity));
 				Finish ();
 			} else {
@@ -86,28 +84,17 @@ namespace App.Android
 
 				hide_keyboard_and_show_progress ();
 
-				await view_model.Login ();
+				await view_model.CreateUser ();
 
-				//RunOnUiThread (() => {
 				StartActivity (typeof(PostFeedActivity));
-				//});
+
 				Finish ();
 			}
 		}
-
-		private void hide_keyboard_and_show_progress ()
-		{
-			//this hides the keyboard
-			var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
-			imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
-			login.Visibility = ViewStates.Invisible;
-			progressIndicator.Visibility = ViewStates.Visible;
-		}
-
 		protected override void OnResume ()
 		{
 			base.OnResume ();
-			if (!view_model.CurrentUserExists) {
+			if (!AppGlobal.Current.CurrentUserExists) {
 				password.Text =
 				userName.Text = string.Empty;
 
@@ -120,6 +107,8 @@ namespace App.Android
 		{
 			base.OnPause ();
 		}
+
+		#region"editor and keyboard stuff"
 
 		/// <summary>
 		/// Observes the TextView's ImeAction so an action can be taken on keypress.
@@ -146,46 +135,27 @@ namespace App.Android
 			return false;
 		}
 
-		private LoginViewModel view_model{
-			get{ 
-				return (LoginViewModel) init_view_model ();
-			}
-		}
 
+		private void hide_keyboard_and_show_progress ()
+		{
+			//this hides the keyboard
+			var imm = (InputMethodManager)GetSystemService (Context.InputMethodService);
+			imm.HideSoftInputFromWindow (password.WindowToken, HideSoftInputFlags.NotAlways);
+			login.Visibility = ViewStates.Invisible;
+			progressIndicator.Visibility = ViewStates.Visible;
+		}
+		#endregion
+
+		private LoginViewModel view_model;
 
 		protected override ViewModelBase init_view_model ()
 		{
-			if (Global.Current.Login_View_Model == null) {
-				Global.Current.Login_View_Model = new LoginViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
+			if (view_model == null) {
+				view_model = new LoginViewModel ();
 			}
 
-			return Global.Current.Login_View_Model;
+			return view_model;
 		}
+
 	}
 }
-
-
-////Create the user interface in code
-//var layout = new LinearLayout (this);
-//layout.Orientation = Orientation.Vertical;
-//
-//var aLabel = new TextView (this);
-//aLabel.Text = "Enter a display name to continue";
-//
-//var textBox = new EditText (this);
-//
-//var aButton = new Button (this);
-//aButton.Text = "Continue";
-//aButton.Click += async (sender, e) => {
-//	if (!string.IsNullOrWhiteSpace(textBox.Text)){
-//		var userID = await new UserRepository(_httpRequest).CreateUser(textBox.Text);
-//		user = await new UserRepository(_httpRequest).GetUserById(userID.ID);
-//		_sessionInstance.AddCurrentUser(user);
-//		StartActivity (typeof(MainActivity));
-//	}
-//};
-//layout.AddView (aLabel);
-//layout.AddView (textBox);
-//layout.AddView (aButton);
-//SetContentView (layout);
-//

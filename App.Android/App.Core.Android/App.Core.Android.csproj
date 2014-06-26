@@ -8,7 +8,7 @@
     <ProjectGuid>{9174B72C-57C4-4F6A-BBAF-578E8855E5E5}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>App.Core.Android</RootNamespace>
+    <RootNamespace>App.Common</RootNamespace>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
@@ -65,7 +65,6 @@
     <Compile Include="GeoLocation.cs" />
     <Compile Include="PersistentStorage.cs" />
     <Compile Include="TextViewWriter.cs" />
-    <Compile Include="PersistentStorage_OLD.cs" />
     <Compile Include="..\..\App.Common\CommonClient.cs">
       <Link>CommonClient.cs</Link>
     </Compile>
@@ -117,6 +116,10 @@
     <Compile Include="..\..\App.Common\EditProfileViewModel.cs">
       <Link>ViewModels\EditProfileViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\..\App.Common\AppGlobal.cs">
+      <Link>AppGlobal.cs</Link>
+    </Compile>
+    <Compile Include="DbORM.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

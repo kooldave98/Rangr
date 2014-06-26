@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using App.Core.Portable.Models;
-using App.Common.Shared;
 using System.Globalization;
 using MonoTouch.Foundation;
+using App.Common;
 
 namespace App.iOS
 {

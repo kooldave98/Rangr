@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace App.Android
+namespace App.Common
 {
 	/// <summary>
 	/// This class was how I was storing user prefrences using a SQLite DB

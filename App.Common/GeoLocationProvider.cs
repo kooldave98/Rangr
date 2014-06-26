@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using App.Core.Portable.Device;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 	/// <summary>
 	/// https://github.com/xamarin/Xamarin.Mobile/blob/master/MonoDroid/Samples/GeolocationSample/MainActivity.cs

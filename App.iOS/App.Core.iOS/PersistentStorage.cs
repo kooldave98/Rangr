@@ -4,8 +4,9 @@ using MonoTouch.Foundation;
 using App.Core.Portable.Persistence;
 using Newtonsoft.Json;
 
-namespace App.iOS
+namespace App.Common
 {
+	//TODO: Commonise this with the android one, they are too similar to be duplicated
 	public class PersistentStorage : IPersistentStorage
 	{
 		private static IPersistentStorage _instance = null;

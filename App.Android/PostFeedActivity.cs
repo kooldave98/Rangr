@@ -12,8 +12,6 @@ using System.Collections.Generic;
 using Xamarin.ActionBarPullToRefresh.Library;
 using System.Threading.Tasks;
 using App.Common;
-using App.Common.Shared;
-using App.Core.Android;
 
 namespace App.Android
 {
@@ -126,18 +124,14 @@ namespace App.Android
 		protected override ViewModelBase init_view_model ()
 		{
 			if (view_model == null) {
-				view_model = new FeedViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
+				view_model = new FeedViewModel ();
 			}
 
 			return view_model;		
 		}
 
-		//private ProgressDialog progress;
 		private PostFeedAdapter postListAdapter;
 		private ListView postListView;
 		private PullToRefreshAttacher mPullToRefreshAttacher;
 	}
 }
-
-
-//(FeedViewModel)the_view_model

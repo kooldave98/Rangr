@@ -6,8 +6,9 @@ using Newtonsoft.Json;
 using Android.App;
 using Android.Content;
 
-namespace App.Core.Android
+namespace App.Common
 {
+	//TODO: Commonise this with the ios one, they are too similar to be duplicated
 	public class PersistentStorage : IPersistentStorage
 	{
 

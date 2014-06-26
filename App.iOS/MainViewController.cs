@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using App.Common.Shared;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using MonoTouch.Foundation;
@@ -22,7 +21,7 @@ namespace App.iOS
 
 		public MainViewController () : base ("MainViewController", null)
 		{
-			view_model = new FeedViewModel(GeoLocation.GetInstance (), PersistentStorage.Current);
+			view_model = new FeedViewModel();
 				
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 

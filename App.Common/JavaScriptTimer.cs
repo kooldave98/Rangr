@@ -1,7 +1,7 @@
 using System;
-using System.Threading;
+//using System.Threading;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 	public static class JavaScriptTimer
 	{

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using App.Common;
-using App.Common.Shared;
 using App.Core.Portable.Device;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

@@ -3,7 +3,7 @@ using SQLite;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace App.Android
+namespace App.Common
 {
 	/// <summary>
 	/// TaskDatabase builds on SQLite.Net and represents a specific database, in our case, the Task DB.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using App.Core.Portable.Device;
-using App.Common.Shared;
 using App.Core.Portable.Persistence;
 using App.Core.Portable.Models;
 
@@ -25,7 +24,7 @@ namespace App.Common
 
 		public EditProfileViewModel (IPersistentStorage the_persistent_storage_instance)
 		{
-			SessionInstance = Session.GetInstance (the_persistent_storage_instance);
+			SessionInstance = Session.GetInstance ();
 			user_services = new Users (HttpRequest.Current);
 
 			CurrentUserToBeEdited = SessionInstance.GetCurrentUser ();

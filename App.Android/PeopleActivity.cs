@@ -10,8 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using App.Core.Android;
-using App.Common.Shared;
 
 namespace App.Android
 {
@@ -80,7 +78,7 @@ namespace App.Android
 		protected override ViewModelBase init_view_model ()
 		{
 			if (view_model == null) {
-				view_model = new PeopleViewModel (GeoLocation.GetInstance (Global.Current), PersistentStorage.Current);
+				view_model = new PeopleViewModel ();
 			}
 
 			return view_model;

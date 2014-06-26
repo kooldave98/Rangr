@@ -4,7 +4,7 @@ using System.Threading;
 using Android.Widget;
 
 
-namespace App.Android
+namespace App.Common
 {
 	public class TextViewWriter : TextWriter
 	{

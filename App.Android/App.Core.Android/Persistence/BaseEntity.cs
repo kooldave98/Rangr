@@ -1,7 +1,7 @@
 using System;
 using SQLite;
 
-namespace App.Android
+namespace App.Common
 {
 	/// <summary>
 	/// Business entity base class. Provides the ID property.

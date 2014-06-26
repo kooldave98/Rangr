@@ -10,7 +10,6 @@ using Android.Views;
 using Android.Widget;
 using Android.Content.PM;
 using App.Common;
-using App.Core.Android;
 
 namespace App.Android
 {
@@ -43,9 +42,12 @@ namespace App.Android
 		{
 			base.OnActivityResult (requestCode, resultCode, data);
 			if (resultCode == Result.Ok) {
-				//Nuke our cache
-				//if the profile doesn't update with the new details, then uncomment this
-				//Global.Current.Profile_View_Model = null;
+
+				//Nuke our cache: Unideal implementation
+
+				view_model = null;
+				init_view_model ();
+
 
 				//refresh list view
 				listView.Adapter = listAdapter = new ProfileAdapter (view_model.PropertyGroups);
@@ -87,7 +89,7 @@ namespace App.Android
 		{
 
 			if (view_model == null) {
-				view_model = new ProfileViewModel (PersistentStorage.Current);
+				view_model = new ProfileViewModel ();
 			}
 
 			return view_model;

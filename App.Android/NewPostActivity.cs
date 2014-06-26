@@ -12,8 +12,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using App.Common.Shared;
-using App.Core.Android;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 

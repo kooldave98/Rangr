@@ -6,7 +6,7 @@ using App.Core.Portable.Models;
 using App.Core.Portable.Network;
 using Newtonsoft.Json;
 
-namespace App.Common.Shared
+namespace App.Common
 {
 	public class Connections
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Android
+namespace App.Common
 {
 	public interface IBaseEntity {
 		int ID { get; set; }

@@ -4,9 +4,9 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Threading;
 using App.Core.Portable.Device;
-using App.Common.Shared;
 using System.Linq;
 using System.Collections.Generic;
+using App.Common;
 
 namespace App.iOS
 {
@@ -18,7 +18,7 @@ namespace App.iOS
 	{
 		UIWindow window;
 		MainViewController mainViewController;
-		ISession _sessionInstance = Session.GetInstance(PersistentStorage.Current);
+		ISession _sessionInstance = Session.GetInstance();
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
