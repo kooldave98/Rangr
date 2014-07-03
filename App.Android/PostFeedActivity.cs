@@ -73,7 +73,6 @@ namespace App.Android
 			view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
 			await view_model.RefreshPosts ();
-
 		}
 
 		protected override void OnPause ()

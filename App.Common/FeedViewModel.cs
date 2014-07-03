@@ -22,17 +22,20 @@ namespace App.Common
 
 		public async Task RefreshPosts ()
 		{
-			var posts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection().connection_id.ToString (), start_index.ToString ());
+			try{
+				//var posts =
+				//We are using latest posts here because we need a variable outside the try block
+				//so we just decided to make use of the latest posts variable
+				LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection().connection_id.ToString (), start_index.ToString ());
+			}catch(Exception e){
+				//We get exceptions here sometimes because the 5 minute idle time on the server has elapsed
+			}
 
-			foreach (var post in posts) {
+			foreach (var post in LatestPosts) {
 				start_index = post.id + 1;
 
 				Posts.Insert (0, post);
 			}
-
-			//1.2non android breaking ios workaround
-			LatestPosts = posts;
-			//end workaround
 
 			if (OnNewPostsReceived != null) {
 				OnNewPostsReceived (this, EventArgs.Empty);

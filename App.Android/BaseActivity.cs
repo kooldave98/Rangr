@@ -16,6 +16,7 @@ namespace App.Android
 
 		protected override void OnCreate (Bundle bundle)
 		{
+			notify ("OnCreate");
 			base.OnCreate (bundle);
 
 			the_view_model = init_view_model ();
@@ -78,6 +79,7 @@ namespace App.Android
 
 		protected override void OnResume ()
 		{
+			notify ("OnResume");
 			base.OnResume ();
 
 			if (!isBusyHandlerSet) {
@@ -89,11 +91,11 @@ namespace App.Android
 			if (this.GetType () != typeof(LoginActivity)) {
 				AppGlobal.Current.Resume ();
 			}
-			//notify ("OnResume");
 		}
 
 		protected override void OnPause ()
 		{
+			notify ("OnPause");
 			base.OnPause ();
 
 			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
@@ -126,7 +128,7 @@ namespace App.Android
 			Finish ();
 		}
 
-		private void notify (String methodName)
+		protected void notify (String methodName)
 		{
 			var name = this.LocalClassName;
 
@@ -158,6 +160,7 @@ namespace App.Android
 
 		protected override void OnCreate (Bundle bundle)
 		{
+			notify ("OnCreate");
 			base.OnCreate (bundle);
 
 			the_view_model = init_view_model ();
@@ -220,6 +223,7 @@ namespace App.Android
 
 		protected override void OnResume ()
 		{
+			notify ("OnResume");
 			base.OnResume ();
 
 			if (!isBusyHandlerSet) {
@@ -231,11 +235,11 @@ namespace App.Android
 			if (this.GetType () != typeof(LoginActivity)) {
 				AppGlobal.Current.Resume ();
 			}
-			//notify ("OnResume");
 		}
 
 		protected override void OnPause ()
 		{
+			notify ("OnPause");
 			base.OnPause ();
 
 			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
