@@ -31,7 +31,7 @@ namespace App.Android
 
 			if (AppGlobal.Current.CurrentUserExists) {
 
-				AppGlobal.Current.InitConnection ();
+				await AppGlobal.Current.InitConnection ();
 				StartActivity (typeof(PostFeedActivity));
 				Finish ();
 			} else {

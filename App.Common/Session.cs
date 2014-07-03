@@ -7,7 +7,22 @@ namespace App.Common
 {
 	public class Session : ISession
 	{
-		public ConnectionIdentity CurrentConnection { get; set;}
+
+		public void PersistCurrentConnection(ConnectionIdentity connection_id)
+		{
+			persistentStorage.Save(CurrentConnectionKey, connection_id);
+		}
+
+		public ConnectionIdentity GetCurrentConnection()
+		{
+			var connection = persistentStorage.Load<ConnectionIdentity> (CurrentConnectionKey);
+
+			if (connection == null) {
+				throw new InvalidOperationException ("ConnectionID in this Session does not exist");
+			}
+
+			return connection;
+		}
 
 		public User GetCurrentUser(bool allowDefault = false)
 		{
@@ -32,7 +47,9 @@ namespace App.Common
 
 		private IPersistentStorage persistentStorage;
 
-		private const string CurrentUserKey = "currentuser";
+		private const string CurrentUserKey = "current_user";
+
+		private const string CurrentConnectionKey = "current_connection";
 
 		private static ISession _instance = null;
 

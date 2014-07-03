@@ -268,7 +268,7 @@ namespace App.Android
 			Finish ();
 		}
 
-		private void notify (String methodName)
+		protected void notify (String methodName)
 		{
 			var name = this.LocalClassName;
 

@@ -22,7 +22,7 @@ namespace App.Common
 
 		public async Task RefreshPosts ()
 		{
-			var posts = await SeenPostServices.Get (_sessionInstance.CurrentConnection.connection_id.ToString (), start_index.ToString ());
+			var posts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection().connection_id.ToString (), start_index.ToString ());
 
 			foreach (var post in posts) {
 				start_index = post.id + 1;

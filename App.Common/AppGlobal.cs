@@ -5,6 +5,7 @@ using App.Core.Portable.Device;
 
 #if __ANDROID__
 using Android.App;
+
 #else
 
 #endif
@@ -16,10 +17,8 @@ namespace App.Common
 	/// </summary>
 	public class AppGlobal
 	{
-		public bool CurrentUserExists 
-		{ 
-			get
-			{ 
+		public bool CurrentUserExists { 
+			get { 
 				var user = sessionInstance.GetCurrentUser (true);
 				if (user != null) {
 					return true;
@@ -29,28 +28,29 @@ namespace App.Common
 			}
 		}
 
-		public void InitConnection ()
+		public async Task InitConnection ()
 		{
-			new Task (async() => {
+			//new Task (async() => {
 
-				var user = sessionInstance.GetCurrentUser ();
+			var user = sessionInstance.GetCurrentUser ();
 
-				var location = await _geoLocationInstance.GetCurrentPosition ();
+			var location = await _geoLocationInstance.GetCurrentPosition ();
 
-				sessionInstance.CurrentConnection = 
-					await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-				InitHeartBeat();
+			sessionInstance.PersistCurrentConnection (connection_id);
 
-			}).Start ();
+			InitHeartBeat ();
+
+			//}).Start ();
 
 		}
 
-		private void InitHeartBeat()
+		private void InitHeartBeat ()
 		{
 			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
-				sessionInstance.CurrentConnection = await ConnectionServices
-					.Update (sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.position.geolocation_value, geo_value.position.geolocation_accuracy.ToString ());
+				await ConnectionServices
+					.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), geo_value.position.geolocation_value, geo_value.position.geolocation_accuracy.ToString ());
 
 			};
 
@@ -61,20 +61,20 @@ namespace App.Common
 			start_timer ();
 		}
 
-		private Timer TimerDisposable { get; set;}
+		private Timer TimerDisposable { get; set; }
 
 		private void start_timer ()
 		{
 			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
-				sessionInstance.CurrentConnection = await ConnectionServices
-					.Update (sessionInstance.CurrentConnection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
+				await ConnectionServices
+					.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
 
 			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
 		}
 
-		public void Pause()
+		public void Pause ()
 		{
 			//Todo need to Null Guard the timer and stuff generally.
 			if (!paused) {
@@ -90,7 +90,7 @@ namespace App.Common
 
 		}
 
-		public void Resume()
+		public void Resume ()
 		{
 			if (paused) {
 
@@ -103,25 +103,28 @@ namespace App.Common
 
 		// declarations
 		public event EventHandler<EventArgs> Initialized = delegate {};
+
 		protected readonly string logTag = "!!!!!!! App";
 
 		// properties
 		public bool IsInitialized { get; set; }
 
-		public static AppGlobal Current
-		{
+		public static AppGlobal Current {
 			get { return current; }
-		} private static AppGlobal current;
+		}
+
+		private static AppGlobal current;
 
 		static AppGlobal ()
 		{
-			current = new AppGlobal();
+			current = new AppGlobal ();
 		}
-		protected AppGlobal () 
+
+		protected AppGlobal ()
 		{
 			_geoLocationInstance = GeoLocation.GetInstance ();
 			ConnectionServices = new Connections (HttpRequest.Current);
-			sessionInstance = Session.GetInstance();
+			sessionInstance = Session.GetInstance ();
 
 			// any work here is likely to be blocking (static constructors run on whatever thread that first 
 			// access its instance members, which in our case is an activity doing an initialization check),

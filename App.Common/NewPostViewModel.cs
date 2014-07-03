@@ -18,7 +18,7 @@ namespace App.Common
 				throw new InvalidOperationException ("Cannot create an empty post");
 			}
 				
-			await post_services.Create (PostText, SessionInstance.CurrentConnection.connection_id.ToString ());
+			await post_services.Create (PostText, SessionInstance.GetCurrentConnection().connection_id.ToString ());
 		}
 
 		public NewPostViewModel (IPersistentStorage the_persistent_storage_instance)
