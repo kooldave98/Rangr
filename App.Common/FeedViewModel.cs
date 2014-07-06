@@ -22,14 +22,16 @@ namespace App.Common
 
 		public async Task RefreshPosts ()
 		{
-			try{
-				//var posts =
-				//We are using latest posts here because we need a variable outside the try block
-				//so we just decided to make use of the latest posts variable
-				LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection().connection_id.ToString (), start_index.ToString ());
-			}catch(Exception e){
-				//We get exceptions here sometimes because the 5 minute idle time on the server has elapsed
+			ConnectionIdentity conn;
+			//Todo: Need to guard Get Current Connection
+
+			if(!AppGlobal.Current.IsConnectionEstablished)
+			{
+				throw new InvalidOperationException ("Cannot refresh posts, connection has expired");
 			}
+
+			LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
+			
 
 			foreach (var post in LatestPosts) {
 				start_index = post.id + 1;
@@ -44,44 +46,44 @@ namespace App.Common
 
 		public event EventHandler<EventArgs> OnNewPostsReceived;
 
-//		public async Task init ()
-//		{
-//			IsBusy = true;
-//			var location = await _geoLocationInstance.GetCurrentPosition ();
-//
-//			var user = _sessionInstance.GetCurrentUser ();
-//
-//			//CreateConnection here
-//			_sessionInstance.CurrentConnection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
-//
-//			await this.RefreshPosts ();
-//
-//			IsBusy = false;
-//
-//			//init heartbeat here
-//
-//			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
-//				_sessionInstance.CurrentConnection = await ConnectionServices
-//					.Update (_sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
-//
-//			});	
-//
-//
-//			JavaScriptTimer.SetInterval (async () => {
-//				var position = await _geoLocationInstance.GetCurrentPosition ();		
-//
-//				_sessionInstance.CurrentConnection = await ConnectionServices
-//					.Update (_sessionInstance.CurrentConnection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
-//
-//			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-//		}
+		//		public async Task init ()
+		//		{
+		//			IsBusy = true;
+		//			var location = await _geoLocationInstance.GetCurrentPosition ();
+		//
+		//			var user = _sessionInstance.GetCurrentUser ();
+		//
+		//			//CreateConnection here
+		//			_sessionInstance.CurrentConnection = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+		//
+		//			await this.RefreshPosts ();
+		//
+		//			IsBusy = false;
+		//
+		//			//init heartbeat here
+		//
+		//			_geoLocationInstance.OnGeoPositionChanged (async (geo_value) => {
+		//				_sessionInstance.CurrentConnection = await ConnectionServices
+		//					.Update (_sessionInstance.CurrentConnection.connection_id.ToString (), geo_value.geolocation_value, geo_value.geolocation_accuracy.ToString ());
+		//
+		//			});
+		//
+		//
+		//			JavaScriptTimer.SetInterval (async () => {
+		//				var position = await _geoLocationInstance.GetCurrentPosition ();
+		//
+		//				_sessionInstance.CurrentConnection = await ConnectionServices
+		//					.Update (_sessionInstance.CurrentConnection.connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
+		//
+		//			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+		//		}
 
-		public override void ResurrectViewModel()
+		public override void ResurrectViewModel ()
 		{
 			//throw new NotImplementedException ();
 		}
 
-		public override void TombstoneViewModel()
+		public override void TombstoneViewModel ()
 		{
 			//throw new NotImplementedException ();
 		}
@@ -100,7 +102,7 @@ namespace App.Common
 
 			SeenPostServices = new SeenPosts (HttpRequest.Current);
 		}
-			
+
 		ISession _sessionInstance;
 		SeenPosts SeenPostServices;
 	}

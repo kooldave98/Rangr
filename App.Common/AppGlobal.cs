@@ -28,62 +28,96 @@ namespace App.Common
 			}
 		}
 
-		public async Task InitConnection ()
+		public void CreateConnection ()
 		{
-			//new Task (async() => {
+			new Task (async() => {
 
-			var user = sessionInstance.GetCurrentUser ();
+				var user = sessionInstance.GetCurrentUser ();
 
-			var location = await _geoLocationInstance.GetCurrentPosition ();
+				var location = await _geoLocationInstance.GetCurrentPosition ();
 
-			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-			sessionInstance.PersistCurrentConnection (connection_id);
+				sessionInstance.PersistCurrentConnection (connection_id);
 
-			InitHeartBeat ();
+				BroadcastConnectionEstablishedIfNeeded ();
 
-			//}).Start ();
+				InitHeartBeat ();
+
+			}).Start ();
 
 		}
 
 		private void InitHeartBeat ()
 		{
-			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
-				await ConnectionServices
-					.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), geo_value.position.geolocation_value, geo_value.position.geolocation_accuracy.ToString ());
+			//This should really be a Guard though
+			if (!CurrentUserExists) {
+				throw new InvalidOperationException ("User / or connection doesn't exist");
+			}
 
+
+			#region"init_geo_listener"
+			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
+				await update_connection (geo_value.position);
 			};
 
 			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
 
 			_geoLocationInstance.StartListening ();
+			#endregion
 
-			start_timer ();
-		}
-
-		private Timer TimerDisposable { get; set; }
-
-		private void start_timer ()
-		{
+			#region"init_timer"
 			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
+
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 
-				await ConnectionServices
-					.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), position.geolocation_value, position.geolocation_accuracy.ToString ());
+				await update_connection (position);
 
-			}, 270000);//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+				BroadcastConnectionEstablishedIfNeeded ();
+
+
+				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+			}, 270000, !IsConnectionEstablished);
+			#endregion
+		}
+
+		private Timer TimerDisposable;
+
+		private async Task update_connection (GeoValue position)
+		{
+			await ConnectionServices
+				.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
+				position.geolocation_value, position.geolocation_accuracy.ToString ());
+		}
+
+		private void BroadcastConnectionEstablishedIfNeeded ()
+		{
+			if (!IsConnectionEstablished) {
+				IsConnectionEstablished = true;
+
+				this.ConnectionEstablished (this, new EventArgs ());
+			}
 		}
 
 		public void Pause ()
 		{
 			//Todo need to Null Guard the timer and stuff generally.
 			if (!paused) {
-				TimerDisposable.Stop ();
-				TimerDisposable.Dispose ();
-				TimerDisposable = null;
 
+				#region"pause timer"
+				if (TimerDisposable != null) {
+					TimerDisposable.Stop ();
+					TimerDisposable.Dispose ();
+					TimerDisposable = null;
+				}
+				#endregion
+
+				#region"suspend_geolocator"
 				_geoLocationInstance.StopListening ();
-				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
+				if (geoPositionChangedEventHandler != null)
+					_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
+				#endregion
+
 
 				paused = true;
 			}
@@ -94,20 +128,25 @@ namespace App.Common
 		{
 			if (paused) {
 
-				InitHeartBeat ();
-
+				if (CurrentUserExists) {
+					InitHeartBeat ();
+				}
 				paused = false;
 			}
 
 		}
 
 		// declarations
-		public event EventHandler<EventArgs> Initialized = delegate {};
+		//public event EventHandler<EventArgs> Initialized = delegate {};
+
+		public event EventHandler<EventArgs> ConnectionEstablished = delegate {};
 
 		protected readonly string logTag = "!!!!!!! App";
 
 		// properties
-		public bool IsInitialized { get; set; }
+		public bool IsConnectionEstablished { get; set; }
+
+		//public bool IsInitialized { get; set; }
 
 		public static AppGlobal Current {
 			get { return current; }
@@ -139,9 +178,10 @@ namespace App.Common
 				//Thread.Sleep (2500);
 
 
-				this.IsInitialized = true;
+				//this.IsInitialized = true;
 
-				this.Initialized (this, new EventArgs ());
+				//this.Initialized (this, new EventArgs ());
+
 				//Log.Debug (logTag, "App initialized, setting Initialized = true");
 			}).Start ();
 		}

@@ -19,6 +19,11 @@ namespace App.Android
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class PostDetailsActivity : BaseActivity
 	{
+		protected override void OnConnectionEstablished()
+		{
+
+		}
+
 		public override bool OnNavigateUp ()
 		{
 			base.OnNavigateUp ();

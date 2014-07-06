@@ -23,7 +23,12 @@ namespace App.Android
 		private Button login;
 		private ProgressBar progressIndicator;
 
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnConnectionEstablished()
+		{
+
+		}
+
+		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
@@ -31,7 +36,7 @@ namespace App.Android
 
 			if (AppGlobal.Current.CurrentUserExists) {
 
-				await AppGlobal.Current.InitConnection ();
+				AppGlobal.Current.CreateConnection ();
 				StartActivity (typeof(PostFeedActivity));
 				Finish ();
 			} else {

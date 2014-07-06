@@ -6,7 +6,7 @@ namespace App.Common
 	public static class JavaScriptTimer
 	{
 		//http://www.dailycoding.com/Posts/easytimer__javascript_style_settimeout_and_setinterval_in_c.aspx
-		public static IDisposable SetInterval (Action method, int delayInMilliseconds)
+		public static IDisposable SetInterval (Action method, int delayInMilliseconds, bool eagerly = false)
 		{
 			System.Timers.Timer timer = new System.Timers.Timer (delayInMilliseconds);
 			timer.Elapsed += (source, e) => {
@@ -15,6 +15,11 @@ namespace App.Common
 
 			timer.Enabled = true;
 			timer.Start ();
+
+			//execute callback eagerly
+			if (eagerly){
+				method ();
+			}
 
 			// Returns a stop handle which can be used for stopping
 			// the timer, if required

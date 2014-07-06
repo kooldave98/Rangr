@@ -16,8 +16,14 @@ using App.Common;
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PostFeedActivity : BaseListActivity
+	public class PostFeedActivity : BaseActivity
 	{
+
+		protected override async void OnConnectionEstablished()
+		{
+			await view_model.RefreshPosts ();
+		}
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -26,10 +32,12 @@ namespace App.Android
 
 			SetContentView (Resource.Layout.PostList);
 
-			postListView = ListView;//FindViewById<ListView> (Resource.Id.PostList);
+			postListView = FindViewById<ListView> (Resource.Id.list);
+
+			postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
 
 			#region setup list adapter
-			ListAdapter = postListAdapter = new PostFeedAdapter (this, view_model.Posts);
+			postListAdapter = new PostFeedAdapter (this, view_model.Posts);
 			//----------
 			//Hook up our adapter to our ListView
 			//---------
@@ -72,7 +80,9 @@ namespace App.Android
 
 			view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-			await view_model.RefreshPosts ();
+			if (AppGlobal.Current.IsConnectionEstablished) {
+				await view_model.RefreshPosts ();
+			}
 		}
 
 		protected override void OnPause ()
