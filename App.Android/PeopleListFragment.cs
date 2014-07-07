@@ -32,11 +32,9 @@ namespace App.Android
 			return peopleListView;
 		}
 
-		public async override void OnViewCreated (View view, Bundle savedInstanceState)
+		public override void OnViewCreated (View view, Bundle savedInstanceState)
 		{
 			base.OnViewCreated (view, savedInstanceState);
-
-			await view_model.RefreshConnectedUsers();
 
 			ListView.DividerHeight = 0;
 			ListView.Divider = null;
@@ -44,14 +42,29 @@ namespace App.Android
 
 			ListAdapter = list_adapter;
 
-			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
+			HandleOnConnectionsReceived = (object sender, EventArgs e) => {
+				list_adapter.NotifyDataSetChanged ();
+			};
 		}
-
-
-		private void HandleOnConnectionsReceived(object sender, EventArgs e)
+			
+		public override async void OnResume()
 		{
-			list_adapter.NotifyDataSetChanged();
+			base.OnResume ();
+
+			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
+
+			await view_model.RefreshConnectedUsers();
+
 		}
+
+		public override void OnPause ()
+		{
+			base.OnPause ();
+			view_model.OnConnectionsReceived -= HandleOnConnectionsReceived;
+		}
+
+
+		private EventHandler<EventArgs> HandleOnConnectionsReceived;
 
 		public PeopleListFragment(PeopleViewModel the_view_model)
 		{
