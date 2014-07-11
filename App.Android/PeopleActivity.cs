@@ -33,8 +33,12 @@ namespace App.Android
 			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 
-			AddTab ("List", new PeopleListFragment (view_model));
-			AddTab ("Map", new PeopleMapFragment (view_model));
+			list_fragment = new PeopleListFragment (view_model);
+			map_fragment = new PeopleMapFragment (view_model);
+
+
+			AddTab ("List", list_fragment);
+			AddTab ("Map", map_fragment);
 
 			if (bundle != null)
 				this.ActionBar.SelectTab (this.ActionBar.GetTabAt (bundle.GetInt ("tab")));
@@ -77,6 +81,9 @@ namespace App.Android
 
 			return base.OnCreateOptionsMenu (menu);
 		}
+
+		private PeopleListFragment list_fragment;
+		private PeopleMapFragment map_fragment;
 
 		private PeopleViewModel view_model;
 

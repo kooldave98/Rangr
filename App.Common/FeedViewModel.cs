@@ -22,7 +22,6 @@ namespace App.Common
 
 		public async Task RefreshPosts ()
 		{
-			ConnectionIdentity conn;
 			//Todo: Need to guard Get Current Connection
 
 			if(!AppGlobal.Current.IsConnectionEstablished)
