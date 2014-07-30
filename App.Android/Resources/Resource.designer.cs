@@ -381,40 +381,43 @@ namespace App.Android
 			public const int Icon = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int login_button = 2130837550;
+			public const int Icon2x = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int loginbox = 2130837551;
+			public const int login_button = 2130837551;
 			
 			// aapt resource value: 0x7f020030
-			public const int monkey = 2130837552;
+			public const int loginbox = 2130837552;
 			
 			// aapt resource value: 0x7f020031
-			public const int Placeholder = 2130837553;
+			public const int monkey = 2130837553;
 			
 			// aapt resource value: 0x7f020032
-			public const int processing = 2130837554;
+			public const int Placeholder = 2130837554;
 			
 			// aapt resource value: 0x7f020033
-			public const int ProductImage = 2130837555;
+			public const int processing = 2130837555;
 			
 			// aapt resource value: 0x7f020034
-			public const int purple_shirt = 2130837556;
+			public const int ProductImage = 2130837556;
 			
 			// aapt resource value: 0x7f020035
-			public const int questionmark = 2130837557;
+			public const int purple_shirt = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int shirt_image = 2130837558;
+			public const int questionmark = 2130837558;
 			
 			// aapt resource value: 0x7f020037
-			public const int twitter = 2130837559;
+			public const int shirt_image = 2130837559;
 			
 			// aapt resource value: 0x7f020038
-			public const int user_default_avatar = 2130837560;
+			public const int twitter = 2130837560;
 			
 			// aapt resource value: 0x7f020039
-			public const int wrench = 2130837561;
+			public const int user_default_avatar = 2130837561;
+			
+			// aapt resource value: 0x7f02003a
+			public const int wrench = 2130837562;
 			
 			static Drawable()
 			{
