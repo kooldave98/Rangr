@@ -12,7 +12,7 @@ namespace App.Core.Portable.Models
 
 		public string geolocation_accuracy_in_metres { get; set;}
 
-		public string status_message { get; set;}
+		public string user_status_message { get; set;}
 
 		public string telephone_number { get; set;}
 

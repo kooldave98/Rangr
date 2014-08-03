@@ -90,7 +90,9 @@
       <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="ActivityLifeCycle.cs" />
-    <Compile Include="EditProfileActivity.cs" />
+    <Compile Include="EditProfileActivity.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

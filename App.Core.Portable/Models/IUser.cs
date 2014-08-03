@@ -6,7 +6,7 @@ namespace App.Core.Portable
 	{
 		string user_display_name { get; set;}
 
-		string status_message { get; set;}
+		string user_status_message { get; set;}
 
 		string telephone_number { get; set;}
 

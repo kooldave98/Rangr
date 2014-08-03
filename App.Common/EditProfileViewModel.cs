@@ -16,7 +16,7 @@ namespace App.Common
 				throw new InvalidOperationException ("User is null");
 			}
 
-			await user_services.Update (CurrentUserToBeEdited.user_id.ToString(), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.status_message);
+			await user_services.Update (CurrentUserToBeEdited.user_id.ToString(), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.user_status_message);
 
 			var user = CurrentUserToBeEdited = await user_services.Get (CurrentUserToBeEdited.user_id.ToString ());
 			SessionInstance.PersistCurrentUser (user);

@@ -53,7 +53,7 @@ namespace App.Android
 			display_name_field.FocusChange += HandleDisplayNameChanged;
 
 			status_message_field = FindViewById<EditText> (Resource.Id.statusMessage);
-			status_message_field.SetText (view_model.CurrentUserToBeEdited.status_message, TextView.BufferType.Normal);
+			status_message_field.SetText (view_model.CurrentUserToBeEdited.user_status_message, TextView.BufferType.Normal);
 			status_message_field.FocusChange += HandleStatusMessageChanged;
 
 
@@ -83,8 +83,8 @@ namespace App.Android
 			if (!the_sender.HasFocus) {
 				var text = the_sender.Text;
 
-				if (!string.IsNullOrWhiteSpace (text) && text != view_model.CurrentUserToBeEdited.status_message) {
-					view_model.CurrentUserToBeEdited.status_message = text;
+				if (!string.IsNullOrWhiteSpace (text) && text != view_model.CurrentUserToBeEdited.user_status_message) {
+					view_model.CurrentUserToBeEdited.user_status_message = text;
 
 					await view_model.UpdateUser ();
 

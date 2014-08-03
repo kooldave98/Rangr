@@ -18,9 +18,9 @@ namespace App.Common
 				throw new ArgumentNullException ("person");
 			}
 
-			person.status_message = "Hey there, I'm on Walkr";
-			person.twitter_name = "@walkr";
-			person.telephone_number = "0123456789";
+			//person.user_status_message = "Hey there, I'm on Walkr";
+			//person.twitter_name = "@walkr";
+			//person.telephone_number = "0123456789";
 
 			Person = person;
 
@@ -29,7 +29,7 @@ namespace App.Common
 			var general = new PropertyGroup ("General");
 
 			general.Add ("Display Name", person.user_display_name, PropertyType.Generic);
-			general.Add ("Status", person.status_message, PropertyType.Generic);
+			general.Add ("Status", string.IsNullOrWhiteSpace (person.user_status_message) ? "Hey there, I'm on Walkr" : person.user_status_message, PropertyType.Generic);
 
 			if (general.Properties.Count > 0) {
 				PropertyGroups.Add (general);
@@ -56,13 +56,13 @@ namespace App.Common
 		static string CleanUrl (string url)
 		{
 			var trimmed = (url ?? "").Trim ();
-			if (trimmed.Length == 0) return "";
+			if (trimmed.Length == 0)
+				return "";
 
 			var upper = trimmed.ToUpperInvariant ();
 			if (!upper.StartsWith ("HTTP")) {
 				return "http://" + trimmed;
-			}
-			else {
+			} else {
 				return trimmed;
 			}
 		}
@@ -70,26 +70,26 @@ namespace App.Common
 		static string CleanTwitter (string username)
 		{
 			var trimmed = (username ?? "").Trim ();
-			if (trimmed.Length == 0) return "";
+			if (trimmed.Length == 0)
+				return "";
 
 			if (!trimmed.StartsWith ("@")) {
 				return "@" + trimmed;
-			}
-			else {
+			} else {
 				return trimmed;
 			}
 		}
-			
+
 		public IUser Person { get; private set; }
 
 		public ObservableCollection<PropertyGroup> PropertyGroups { get; private set; }
 
-		public override void ResurrectViewModel()
+		public override void ResurrectViewModel ()
 		{
 			//throw new NotImplementedException ();
 		}
 
-		public override void TombstoneViewModel()
+		public override void TombstoneViewModel ()
 		{
 			//throw new NotImplementedException ();
 		}
@@ -99,6 +99,7 @@ namespace App.Common
 	public class PropertyGroup : IEnumerable<Property>
 	{
 		public string Title { get; private set; }
+
 		public ObservableCollection<Property> Properties { get; private set; }
 
 		public PropertyGroup (string title)
@@ -128,7 +129,9 @@ namespace App.Common
 	public class Property
 	{
 		public string Name { get; private set; }
+
 		public string Value { get; private set; }
+
 		public PropertyType Type { get; private set; }
 
 		public Property (string name, string value, PropertyType type)

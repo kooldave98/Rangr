@@ -54,7 +54,7 @@ namespace App.Android
 			//Assign item's values to the various subviews
 			txtName.SetText (item.user_display_name, TextView.BufferType.Normal);
 			txtDescription.SetText (item.text, TextView.BufferType.Normal);
-			view.FindViewById<ImageView>(Resource.Id.UserImageButton).SetImageResource(Resource.Drawable.Placeholder);
+			//view.FindViewById<ImageView>(Resource.Id.UserImageButton).SetImageResource(Resource.Drawable.Placeholder);
 			//Finally return the view
 			return view;
 		}

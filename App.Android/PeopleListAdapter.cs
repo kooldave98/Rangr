@@ -48,11 +48,11 @@ namespace App.Android
 
 			view.FindViewById<TextView> (Resource.Id.personName).Text = person.user_display_name;
 			view.FindViewById<TextView> (Resource.Id.distance).Text = person.geolocation_accuracy_in_metres + " metres";
-			view.FindViewById<TextView> (Resource.Id.status).Text = "Available";
+			view.FindViewById<TextView> (Resource.Id.status).Text = string.IsNullOrWhiteSpace(person.user_status_message) ? "Hey there, I'm on Walkr": person.user_status_message;
 
-			var personImage = view.FindViewById<ImageView> (Resource.Id.personImage);
+			//var personImage = view.FindViewById<ImageView> (Resource.Id.personImage);
 
-			personImage.SetImageResource (Resource.Drawable.Placeholder);
+			//personImage.SetImageResource (Resource.Drawable.Placeholder);
 			//No need to wait for the async download to return the view
 			#pragma warning disable 4014
 			//personImage.SetImageFromUrlAsync (product.ImageForSize (Images.ScreenWidth));

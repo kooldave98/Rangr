@@ -10,13 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
-        <ImageButton
-            android:src="@drawable/Placeholder"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:id="@+id/UserImageButton"
-            android:background="@null"
-            android:scaleType="fitCenter" />
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
@@ -36,7 +29,9 @@
                 android:minLines="1"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:typeface="sans"
+                android:textSize="30dp" />
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -50,5 +45,7 @@
         android:textColor="#666"
         android:ellipsize="none"
         android:layout_marginTop="16dp"
-        style="@style/WalkrSubTitleStyle" />
+        style="@style/WalkrSubTitleStyle"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
 </LinearLayout>

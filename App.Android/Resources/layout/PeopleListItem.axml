@@ -12,14 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dip"
         android:id="@+id/SwipeContent">
-        <ImageView
-            android:src="@drawable/Placeholder"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:id="@+id/personImage"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp" />
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
@@ -47,8 +39,9 @@
                     android:id="@+id/personName"
                     android:layout_weight="1"
                     android:layout_gravity="bottom"
-                    android:textSize="18sp"
-                    android:textColor="#fff1f8f8" />
+                    android:textSize="30dp"
+                    android:textColor="#fff1f8f8"
+                    android:typeface="sans" />
                 <TextView
                     android:text="Free"
                     android:id="@+id/distance"

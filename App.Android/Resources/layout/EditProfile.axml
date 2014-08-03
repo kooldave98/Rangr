@@ -3,45 +3,19 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
-        <ImageButton
-            android:src="@drawable/Placeholder"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:id="@+id/UserImageButton"
-            android:background="@null"
-            android:scaleType="fitCenter" />
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/linearLayout2"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginLeft="8dip">
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/displayName"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="display name"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:layout_marginTop="10dp"
-                android:textSize="16dp"
-                android:imeOptions="actionNext"
-                android:inputType="text" />
-        </LinearLayout>
-    </LinearLayout>
+        android:id="@+id/displayName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="display name"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:imeOptions="actionNext"
+        android:inputType="text" />
     <EditText
         android:inputType="text"
         android:layout_width="fill_parent"

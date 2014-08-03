@@ -13,13 +13,6 @@
         android:id="@+id/linearLayout1"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="20dip">
-        <ImageButton
-            android:src="@drawable/Placeholder"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:id="@+id/UserImageButton"
-            android:background="@null"
-            android:scaleType="fitCenter" />
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
@@ -32,13 +25,15 @@
             android:layout_marginLeft="8dip">
             <TextView
                 android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/UserNameText"
                 android:minLines="1"
                 android:maxLines="1"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:typeface="sans"
+                android:textStyle="normal"
+                android:textSize="30dp" />
             <TextView
                 android:text="Small Text"
                 android:textAppearance="?android:attr/textAppearanceSmall"

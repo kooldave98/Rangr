@@ -39,7 +39,7 @@ namespace App.Common
 			{
 				new KeyValuePair<string, string>( "user_id", user_id ),
 				new KeyValuePair<string, string>( "user_display_name", user_display_name ),
-				new KeyValuePair<string, string>( "status_message", status_message )
+				new KeyValuePair<string, string>( "user_status_message", status_message )
 			};
 
 
