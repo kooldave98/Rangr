@@ -24,11 +24,6 @@ namespace App.Common
 		{
 			//Todo: Need to guard Get Current Connection
 
-			if(!AppGlobal.Current.IsConnectionEstablished)
-			{
-				throw new InvalidOperationException ("Cannot refresh posts, connection has expired");
-			}
-
 			LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
 			
 

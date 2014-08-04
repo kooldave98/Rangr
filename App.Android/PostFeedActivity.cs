@@ -19,11 +19,6 @@ namespace App.Android
 	public class PostFeedActivity : BaseActivity
 	{
 
-		protected override async void OnConnectionEstablished()
-		{
-			await view_model.RefreshPosts ();
-		}
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -80,9 +75,8 @@ namespace App.Android
 
 			view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-			if (AppGlobal.Current.IsConnectionEstablished) {
-				await view_model.RefreshPosts ();
-			}
+			await view_model.RefreshPosts ();
+
 		}
 
 		protected override void OnPause ()

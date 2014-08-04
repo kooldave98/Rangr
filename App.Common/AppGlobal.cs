@@ -28,23 +28,21 @@ namespace App.Common
 			}
 		}
 
-		public void CreateConnection ()
+		public async Task CreateConnection ()
 		{
-			new Task (async() => {
+			//new Task (async() => {
 
-				var user = sessionInstance.GetCurrentUser ();
+			var user = sessionInstance.GetCurrentUser ();
 
-				var location = await _geoLocationInstance.GetCurrentPosition ();
+			var location = await _geoLocationInstance.GetCurrentPosition ();
 
-				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-				sessionInstance.PersistCurrentConnection (connection_id);
+			sessionInstance.PersistCurrentConnection (connection_id);
 
-				BroadcastConnectionEstablishedIfNeeded ();
+			InitHeartBeat ();
 
-				InitHeartBeat ();
-
-			}).Start ();
+			//}).Start ();
 
 		}
 
@@ -73,11 +71,9 @@ namespace App.Common
 
 				await update_connection (position);
 
-				BroadcastConnectionEstablishedIfNeeded ();
-
 
 				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-			}, 270000, !IsConnectionEstablished);
+			}, 270000);
 			#endregion
 		}
 
@@ -88,15 +84,6 @@ namespace App.Common
 			await ConnectionServices
 				.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
 				position.geolocation_value, position.geolocation_accuracy.ToString ());
-		}
-
-		private void BroadcastConnectionEstablishedIfNeeded ()
-		{
-			if (!IsConnectionEstablished) {
-				IsConnectionEstablished = true;
-
-				this.ConnectionEstablished (this, new EventArgs ());
-			}
 		}
 
 		public void Pause ()
@@ -139,12 +126,7 @@ namespace App.Common
 		// declarations
 		//public event EventHandler<EventArgs> Initialized = delegate {};
 
-		public event EventHandler<EventArgs> ConnectionEstablished = delegate {};
-
 		protected readonly string logTag = "!!!!!!! App";
-
-		// properties
-		public bool IsConnectionEstablished { get; set; }
 
 		//public bool IsInitialized { get; set; }
 

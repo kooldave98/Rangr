@@ -16,10 +16,6 @@ namespace App.Android
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class ProfileActivity : BaseActivity
 	{
-		protected override void OnConnectionEstablished()
-		{
-
-		}
 
 		protected override void OnCreate (Bundle bundle)
 		{

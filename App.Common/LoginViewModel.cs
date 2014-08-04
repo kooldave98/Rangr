@@ -19,7 +19,7 @@ namespace App.Common
 				var user = await UserServices.Get (userID.user_id.ToString ());
 				sessionInstance.PersistCurrentUser (user);
 
-				AppGlobal.Current.CreateConnection ();
+				await AppGlobal.Current.CreateConnection ();
 			}
 			else {
 				throw new InvalidOperationException ("You must enter a Display Name to create a new user");

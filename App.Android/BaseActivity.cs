@@ -18,11 +18,7 @@ namespace App.Android
 
 		protected abstract ViewModelBase init_view_model ();
 
-		protected abstract void OnConnectionEstablished ();
-
 		private ProgressDialog progress;
-
-		protected EventHandler<EventArgs> connectionEstablishedEventHandler;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -56,28 +52,6 @@ namespace App.Android
 			the_view_model.ResurrectViewModel ();
 
 			AppGlobal.Current.Resume ();
-
-			if (this.GetType () != typeof(LoginActivity)) {
-
-				if (!AppGlobal.Current.IsConnectionEstablished) {
-
-					// show the loading overlay on the UI thread
-					progress = ProgressDialog.Show (this, "Loading", "Please Wait...", true); 
-
-					// when the app has initialized, hide the progress bar and call Finished Initialzing
-					connectionEstablishedEventHandler = (s, e) => {
-						// call finished initializing so that any derived activities have a chance to do work
-						RunOnUiThread (() => {
-							this.OnConnectionEstablished ();
-							// hide the progress bar
-							if (progress != null)
-								progress.Dismiss ();
-						});
-					};
-					AppGlobal.Current.ConnectionEstablished += connectionEstablishedEventHandler;
-
-				}
-			}
 		}
 
 		protected override void OnPause ()
@@ -95,10 +69,6 @@ namespace App.Android
 			the_view_model.TombstoneViewModel ();
 
 			AppGlobal.Current.Pause ();
-
-			if (this.connectionEstablishedEventHandler != null) {
-				AppGlobal.Current.ConnectionEstablished -= connectionEstablishedEventHandler;
-			}
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
