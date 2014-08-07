@@ -15,7 +15,10 @@ using App.Common;
 
 namespace App.Android
 {
-	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]
+	[Activity (Label = "@string/app_name", 
+				MainLauncher = true, 
+				ScreenOrientation = ScreenOrientation.Portrait)]
+
 	public class PostFeedActivity : BaseActivity
 	{
 
@@ -68,14 +71,29 @@ namespace App.Android
 		{
 			base.OnResume ();
 
-			NewPostsReceivedHandler = (object sender, EventArgs e) => {
-				//Refresh list view data
-				postListAdapter.NotifyDataSetChanged ();
-			};
+			if (AppGlobal.Current.CurrentUserExists) {
 
-			view_model.OnNewPostsReceived += NewPostsReceivedHandler;
+				view_model.IsBusy = true;
 
-			await view_model.RefreshPosts ();
+				if (!AppGlobal.Current.ConnectionInitialised) {
+					await AppGlobal.Current.CreateConnection ();
+				}
+
+				NewPostsReceivedHandler = (object sender, EventArgs e) => {
+					//Refresh list view data
+					postListAdapter.NotifyDataSetChanged ();
+				};
+
+				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
+
+				await view_model.RefreshPosts ();
+
+				view_model.IsBusy = false;
+
+			}
+			else{
+				StartActivity (typeof(LoginActivity));
+			}
 
 		}
 

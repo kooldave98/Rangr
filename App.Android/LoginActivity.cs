@@ -11,8 +11,7 @@ using App.Common;
 
 namespace App.Android
 {
-	[Activity (Label = "@string/app_name"
-				, MainLauncher = true
+	[Activity (Label = "@string/app_name"				
 				, NoHistory = true
 				, ScreenOrientation = ScreenOrientation.Portrait
 				, LaunchMode = LaunchMode.SingleTop)]			
@@ -23,60 +22,50 @@ namespace App.Android
 		private Button login;
 		private ProgressBar progressIndicator;
 
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			//Check if the user exists first before populating the view
+			// Set our view from the "main" layout resource
+			SetContentView (Resource.Layout.Login);
 
-			if (AppGlobal.Current.CurrentUserExists) {
-
-				view_model.IsBusy = true;
-				await AppGlobal.Current.CreateConnection ();
-				view_model.IsBusy = false;
-				StartActivity (typeof(PostFeedActivity));
-				Finish ();
-			} else {
-				// Set our view from the "main" layout resource
-				SetContentView (Resource.Layout.Login);
-
-				// Get our controls from the layout resource,
-				// and attach an event to it
-				login = FindViewById<Button> (Resource.Id.logIn);
-				userName = FindViewById<EditText> (Resource.Id.userName);
-				password = FindViewById<EditText> (Resource.Id.password);
-				progressIndicator = FindViewById<ProgressBar> (Resource.Id.loginProgress);
-				var loginHelp = FindViewById<ImageButton> (Resource.Id.loginQuestion);
+			// Get our controls from the layout resource,
+			// and attach an event to it
+			login = FindViewById<Button> (Resource.Id.logIn);
+			userName = FindViewById<EditText> (Resource.Id.userName);
+			password = FindViewById<EditText> (Resource.Id.password);
+			progressIndicator = FindViewById<ProgressBar> (Resource.Id.loginProgress);
+			var loginHelp = FindViewById<ImageButton> (Resource.Id.loginQuestion);
 
 
 
-				//Set edit action listener to allow the next & go buttons on the input keyboard to interact with login.
-				userName.SetOnEditorActionListener (this);
-				password.SetOnEditorActionListener (this);
+			//Set edit action listener to allow the next & go buttons on the input keyboard to interact with login.
+			userName.SetOnEditorActionListener (this);
+			password.SetOnEditorActionListener (this);
 
-				userName.TextChanged += (sender, e) => {
-					view_model.UserDisplayName = userName.Text;
-				};
-				password.TextChanged += (sender, e) => {
-					//loginViewModel.Password = password.Text;
-				};
+			userName.TextChanged += (sender, e) => {
+				view_model.UserDisplayName = userName.Text;
+			};
+			password.TextChanged += (sender, e) => {
+				//loginViewModel.Password = password.Text;
+			};
 
-				loginHelp.Click += (sender, e) => {
-					var builder = new AlertDialog.Builder (this)
+			loginHelp.Click += (sender, e) => {
+				var builder = new AlertDialog.Builder (this)
 					.SetTitle ("Need Help?")
 					.SetMessage ("Enter your desired display name and your given beta testing key.")
 					.SetPositiveButton ("Ok", (innerSender, innere) => {
-					});
-					var dialog = builder.Create ();
-					dialog.Show ();
-				};
+				});
+				var dialog = builder.Create ();
+				dialog.Show ();
+			};
 
-				// Perform the login and dismiss the keyboard
-				login.Click += DoLogin;
+			// Perform the login and dismiss the keyboard
+			login.Click += DoLogin;
 
-				//request focus to the edit text to start on username.
-				userName.RequestFocus ();
-			}
+			//request focus to the edit text to start on username.
+			userName.RequestFocus ();
+
 
 		}
 
@@ -87,12 +76,14 @@ namespace App.Android
 				hide_keyboard_and_show_progress ();
 
 				await view_model.CreateUser ();
+				await AppGlobal.Current.CreateConnection ();
 
-				StartActivity (typeof(PostFeedActivity));
+				//StartActivity (typeof(PostFeedActivity));
 
 				Finish ();
 			}
 		}
+
 		protected override void OnResume ()
 		{
 			base.OnResume ();
@@ -146,6 +137,7 @@ namespace App.Android
 			login.Visibility = ViewStates.Invisible;
 			progressIndicator.Visibility = ViewStates.Visible;
 		}
+
 		#endregion
 
 		private LoginViewModel view_model;

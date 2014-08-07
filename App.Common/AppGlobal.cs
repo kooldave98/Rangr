@@ -30,15 +30,18 @@ namespace App.Common
 
 		public async Task CreateConnection ()
 		{
+			ConnectionInitialised = true;
 			//new Task (async() => {
 
-			var user = sessionInstance.GetCurrentUser ();
 
-			var location = await _geoLocationInstance.GetCurrentPosition ();
+				var user = sessionInstance.GetCurrentUser ();
 
-			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+				var location = await _geoLocationInstance.GetCurrentPosition ();
 
-			sessionInstance.PersistCurrentConnection (connection_id);
+				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+
+				sessionInstance.PersistCurrentConnection (connection_id);
+
 
 			InitHeartBeat ();
 
@@ -129,6 +132,8 @@ namespace App.Common
 		protected readonly string logTag = "!!!!!!! App";
 
 		//public bool IsInitialized { get; set; }
+
+		public bool ConnectionInitialised = false;
 
 		public static AppGlobal Current {
 			get { return current; }

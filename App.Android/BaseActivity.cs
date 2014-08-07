@@ -51,7 +51,9 @@ namespace App.Android
 
 			the_view_model.ResurrectViewModel ();
 
-			AppGlobal.Current.Resume ();
+			if (AppGlobal.Current.ConnectionInitialised) {
+				AppGlobal.Current.Resume ();
+			}
 		}
 
 		protected override void OnPause ()
@@ -68,7 +70,9 @@ namespace App.Android
 
 			the_view_model.TombstoneViewModel ();
 
-			AppGlobal.Current.Pause ();
+			if (AppGlobal.Current.ConnectionInitialised) {
+				AppGlobal.Current.Pause ();
+			}
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)

@@ -12,7 +12,7 @@ namespace App.Core.Portable.Device
 		//Will persist this, as this will rarely change
 		void PersistCurrentConnection (ConnectionIdentity connection_id);
 
-		ConnectionIdentity GetCurrentConnection();
+		ConnectionIdentity GetCurrentConnection(bool allowDefault = false);
 	}
 }
 

@@ -13,12 +13,12 @@ namespace App.Common
 			persistentStorage.Save(CurrentConnectionKey, connection_id);
 		}
 
-		public ConnectionIdentity GetCurrentConnection()
+		public ConnectionIdentity GetCurrentConnection(bool allowDefault = false)
 		{
 			var connection = persistentStorage.Load<ConnectionIdentity> (CurrentConnectionKey);
 
-			if (connection == null) {
-				throw new InvalidOperationException ("ConnectionID in this Session does not exist");
+			if (!allowDefault && connection == null) {
+				throw new InvalidOperationException ("Connection ID does not exist");
 			}
 
 			return connection;
