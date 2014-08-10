@@ -83,13 +83,11 @@ namespace App.Android
 				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
 				ConnectionInitialisedHandler = async (object sender, EventArgs e) => {
-					//N/B: In [AppGlobal.update_connection], what happens if the update connection executes before binding this event ?
+					//N/B: In [AppGlobal.update_connection], what happens if the 
+					//update connection executes before binding this event ?
 					//Well, Refresh posts in here will never happen, that's what.
-					view_model.IsBusy = true;
 
 					await view_model.RefreshPosts ();
-
-					view_model.IsBusy = false;
 				};
 
 				AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;

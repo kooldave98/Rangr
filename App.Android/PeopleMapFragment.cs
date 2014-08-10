@@ -83,8 +83,11 @@ namespace App.Android
 		//for more info on configuring Google maps
 		private async void SetupMap()
 		{
+			//No need to refresh here again, as it would have been refreshed in the list fragment
+			//This would also save us the trouble of Initialising the connection if the app has been 
+			//idle for too long(> 4.5 mins) and this fragment is the first thing that wakes the app up
 
-			await view_model.RefreshConnectedUsers();
+			//await view_model.RefreshConnectedUsers();
 
 			if (_map == null)
 			{

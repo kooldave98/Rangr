@@ -38,29 +38,43 @@ namespace App.Android
 
 			ListView.DividerHeight = 0;
 			ListView.Divider = null;
-			list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
-
-			ListAdapter = list_adapter;
 
 			HandleOnConnectionsReceived = (object sender, EventArgs e) => {
+				list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
+
+				ListAdapter = list_adapter;
+
 				list_adapter.NotifyDataSetChanged ();
 			};
 		}
+
+		private EventHandler<EventArgs> ConnectionInitialisedHandler;
 			
-		public override async void OnResume()
+		public override void OnResume()
 		{
 			base.OnResume ();
+			//For some reason, doing the refresh posts OnResume doesn't work
+			//So doing it in OnViewCreated
 
 			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
 
-			await view_model.RefreshConnectedUsers();
 
+			ConnectionInitialisedHandler = async (object sender, EventArgs e) => {
+				//N/B: In [AppGlobal.update_connection], what happens if the 
+				//update connection executes before binding this event ?
+				//Well, Refresh posts in here will never happen, that's what.
+
+				await view_model.RefreshConnectedUsers();
+			};
+
+			AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;
 		}
 
 		public override void OnPause ()
 		{
 			base.OnPause ();
 			view_model.OnConnectionsReceived -= HandleOnConnectionsReceived;
+			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
 		}
 
 

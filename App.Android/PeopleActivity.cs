@@ -47,7 +47,7 @@ namespace App.Android
 			base.OnSaveInstanceState (outState);
 		}
 
-		void AddTab (string tabText, Fragment view)
+		private void AddTab (string tabText, Fragment view)
 		{
 			var tab = this.ActionBar.NewTab ();            
 			tab.SetText (tabText);
@@ -67,6 +67,11 @@ namespace App.Android
 			};
 
 			this.ActionBar.AddTab (tab);
+		}
+
+		protected override void OnResume()
+		{
+			base.OnResume ();
 		}
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
