@@ -30,10 +30,9 @@ namespace App.Common
 
 		public async Task CreateConnection ()
 		{
-			ConnectionInitialised = true;
 			//new Task (async() => {
 
-
+			if (sessionInstance.GetCurrentConnection (true) == null) {
 				var user = sessionInstance.GetCurrentUser ();
 
 				var location = await _geoLocationInstance.GetCurrentPosition ();
@@ -42,20 +41,34 @@ namespace App.Common
 
 				sessionInstance.PersistCurrentConnection (connection_id);
 
+				ConnectionInitialised = true;
+				OnConnectionInitialized (this, new EventArgs ());
 
-			InitHeartBeat ();
+				InitHeartBeat (false);
+			} else {
+				InitHeartBeat (true);
+			}
 
 			//}).Start ();
-
 		}
 
-		private void InitHeartBeat ()
+		private void InitHeartBeat (bool eagerly = false)
 		{
 			//This should really be a Guard though
 			if (!CurrentUserExists) {
 				throw new InvalidOperationException ("User / or connection doesn't exist");
 			}
 
+			#region"init_timer"
+			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
+
+				var position = await _geoLocationInstance.GetCurrentPosition ();		
+
+				await update_connection (position);
+
+				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
+			}, 270000, eagerly);//Eager timer interval polling
+			#endregion
 
 			#region"init_geo_listener"
 			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
@@ -66,18 +79,6 @@ namespace App.Common
 
 			_geoLocationInstance.StartListening ();
 			#endregion
-
-			#region"init_timer"
-			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
-
-				var position = await _geoLocationInstance.GetCurrentPosition ();		
-
-				await update_connection (position);
-
-
-				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-			}, 270000);
-			#endregion
 		}
 
 		private Timer TimerDisposable;
@@ -87,13 +88,17 @@ namespace App.Common
 			await ConnectionServices
 				.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
 				position.geolocation_value, position.geolocation_accuracy.ToString ());
+
+			if(!ConnectionInitialised)
+			{
+				ConnectionInitialised = true;
+				OnConnectionInitialized (this, new EventArgs());
+			}
 		}
 
 		public void Pause ()
 		{
-			//Todo need to Null Guard the timer and stuff generally.
-			if (!paused) {
-
+			if (ConnectionInitialised) {
 				#region"pause timer"
 				if (TimerDisposable != null) {
 					TimerDisposable.Stop ();
@@ -108,22 +113,16 @@ namespace App.Common
 					_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
 				#endregion
 
-
-				paused = true;
+				ConnectionInitialised = false;
 			}
-
 		}
 
 		public void Resume ()
 		{
-			if (paused) {
-
-				if (CurrentUserExists) {
-					InitHeartBeat ();
-				}
-				paused = false;
+			if(!ConnectionInitialised)
+			{
+				InitHeartBeat (true);
 			}
-
 		}
 
 		// declarations
@@ -133,7 +132,9 @@ namespace App.Common
 
 		//public bool IsInitialized { get; set; }
 
-		public bool ConnectionInitialised = false;
+
+		public event EventHandler<EventArgs> OnConnectionInitialized = delegate {};
+		public bool ConnectionInitialised { get; private set;}
 
 		public static AppGlobal Current {
 			get { return current; }
@@ -178,7 +179,6 @@ namespace App.Common
 		private ISession sessionInstance;
 		private Connections ConnectionServices;
 		private IGeoLocation _geoLocationInstance;
-		private bool paused = true;
 	}
 }
 

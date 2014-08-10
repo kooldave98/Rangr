@@ -67,17 +67,13 @@ namespace App.Android
 
 		private EventHandler<EventArgs> NewPostsReceivedHandler;
 
-		protected override async void OnResume ()
+		private EventHandler<EventArgs> ConnectionInitialisedHandler;
+
+		protected override void OnResume ()
 		{
 			base.OnResume ();
 
 			if (AppGlobal.Current.CurrentUserExists) {
-
-				view_model.IsBusy = true;
-
-				if (!AppGlobal.Current.ConnectionInitialised) {
-					await AppGlobal.Current.CreateConnection ();
-				}
 
 				NewPostsReceivedHandler = (object sender, EventArgs e) => {
 					//Refresh list view data
@@ -86,9 +82,17 @@ namespace App.Android
 
 				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-				await view_model.RefreshPosts ();
+				ConnectionInitialisedHandler = async (object sender, EventArgs e) => {
+					//N/B: In [AppGlobal.update_connection], what happens if the update connection executes before binding this event ?
+					//Well, Refresh posts in here will never happen, that's what.
+					view_model.IsBusy = true;
 
-				view_model.IsBusy = false;
+					await view_model.RefreshPosts ();
+
+					view_model.IsBusy = false;
+				};
+
+				AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;
 
 			}
 			else{
@@ -102,6 +106,7 @@ namespace App.Android
 			base.OnPause ();
 
 			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
+			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
 
 		}
 

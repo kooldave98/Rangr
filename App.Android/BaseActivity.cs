@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using App.Common;
+using System.Threading.Tasks;
 
 namespace App.Android
 {
@@ -51,7 +52,7 @@ namespace App.Android
 
 			the_view_model.ResurrectViewModel ();
 
-			if (AppGlobal.Current.ConnectionInitialised) {
+			if (AppGlobal.Current.CurrentUserExists) {
 				AppGlobal.Current.Resume ();
 			}
 		}
@@ -67,12 +68,9 @@ namespace App.Android
 			if (progress != null)
 				progress.Dismiss ();
 
-
 			the_view_model.TombstoneViewModel ();
 
-			if (AppGlobal.Current.ConnectionInitialised) {
-				AppGlobal.Current.Pause ();
-			}
+			AppGlobal.Current.Pause ();
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
@@ -93,7 +91,7 @@ namespace App.Android
 
 			return base.OnMenuItemSelected (featureId, item);
 		}
-			
+
 		protected void ResurrectActivity (Type activityType)
 		{
 			var i = new Intent (Application.Context, activityType);

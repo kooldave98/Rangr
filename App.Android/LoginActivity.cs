@@ -78,8 +78,6 @@ namespace App.Android
 				await view_model.CreateUser ();
 				await AppGlobal.Current.CreateConnection ();
 
-				//StartActivity (typeof(PostFeedActivity));
-
 				Finish ();
 			}
 		}
