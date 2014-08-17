@@ -66,12 +66,19 @@ namespace App.Android
 		{
 			base.OnPause ();
 			_map = null;
+
+			//cleanup_map ();
 		}
 
 		public override void OnDestroyView() 
 		{
 
 			base.OnDestroyView ();
+			//cleanup_map ();
+		}
+
+		private void cleanup_map()
+		{
 			Fragment fragment = Activity.FragmentManager.FindFragmentById (Resource.Id.map) as MapFragment;  
 			FragmentTransaction ft = FragmentManager.BeginTransaction();
 
@@ -81,7 +88,7 @@ namespace App.Android
 
 		//See: http://docs.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/
 		//for more info on configuring Google maps
-		private async void SetupMap()
+		private void SetupMap()
 		{
 			//No need to refresh here again, as it would have been refreshed in the list fragment
 			//This would also save us the trouble of Initialising the connection if the app has been 

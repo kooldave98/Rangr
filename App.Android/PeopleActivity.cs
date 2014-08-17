@@ -74,6 +74,13 @@ namespace App.Android
 			base.OnResume ();
 		}
 
+		protected override void OnPause()
+		{
+			base.OnPause ();
+
+			Finish ();
+		}
+
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
 			MenuInflater.Inflate (Resource.Menu.menu, menu);

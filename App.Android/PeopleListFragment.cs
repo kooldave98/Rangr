@@ -75,6 +75,17 @@ namespace App.Android
 			base.OnPause ();
 			view_model.OnConnectionsReceived -= HandleOnConnectionsReceived;
 			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
+
+			//cleanup_map ();
+		}
+
+		private void cleanup_map()
+		{
+			Fragment fragment = this;
+			FragmentTransaction ft = FragmentManager.BeginTransaction();
+
+			ft.Remove(fragment);
+			ft.Commit();
 		}
 
 
