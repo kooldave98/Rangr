@@ -70,11 +70,13 @@ namespace App.Android
 		private async void HandleSaveButtonClicked (object sender, EventArgs e)
 		{
 			if (!string.IsNullOrWhiteSpace (view_model.PostText)) {
-				await view_model.CreatePost ();
+				var successful = await view_model.CreatePost ();
 
-				SetResult (Result.Ok);
+				if (successful) {
+					SetResult (Result.Ok);
 
-				Finish ();
+					Finish ();
+				}
 			}
 		}
 

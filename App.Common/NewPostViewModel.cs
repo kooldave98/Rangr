@@ -12,13 +12,20 @@ namespace App.Common
 
 		public string PostText { get; set; }
 
-		public async Task CreatePost ()
+		public async Task<bool> CreatePost ()
 		{
 			if (string.IsNullOrWhiteSpace (PostText)) {
 				throw new InvalidOperationException ("Cannot create an empty post");
 			}
 				
-			await post_services.Create (PostText, SessionInstance.GetCurrentConnection().connection_id.ToString ());
+			var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection().connection_id.ToString ());
+
+
+			if (result != null) {
+				return true;
+			}
+
+			return false;
 		}
 
 		public NewPostViewModel (IPersistentStorage the_persistent_storage_instance)
@@ -27,16 +34,6 @@ namespace App.Common
 			post_services = new Posts (HttpRequest.Current);
 
 			CurrentUser = SessionInstance.GetCurrentUser ();
-		}
-
-		public override void ResurrectViewModel()
-		{
-			//throw new NotImplementedException ();
-		}
-
-		public override void TombstoneViewModel()
-		{
-			//throw new NotImplementedException ();
 		}
 
 		private ISession SessionInstance;

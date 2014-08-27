@@ -10,59 +10,89 @@ using Newtonsoft.Json;
 namespace App.Common
 {
 	public class Users
-    {
-		public async Task<User> Get(string user_id)
-        {
-			var url = string.Format("{0}/?user_id={1}", base_rest_url, user_id);
-            string data = await _httpRequest.Get(url);
-            var user = JsonConvert.DeserializeObject<User>(data);
-            return user;
-        }
+	{
+		public async Task<User> Get (string user_id)
+		{
+			User user = null;
 
-		public async Task<UserIdentity> Create(string user_display_name)
-        {
-            var requestBody = new List<KeyValuePair<string, string>>()
-			{
-				new KeyValuePair<string, string>("user_display_name", user_display_name)
+			var url = string.Format ("{0}/?user_id={1}", base_rest_url, user_id);
+
+			try {
+
+				string data = await _httpRequest.Get (url);
+				user = JsonConvert.DeserializeObject<User> (data);
+
+			} catch (Exception) {
+
+				AppEvents.Current.TriggerConnectionFailedEvent ();
+				//Todo: log exception
+			}
+			return user;
+		}
+
+		public async Task<UserIdentity> Create (string user_display_name)
+		{
+			UserIdentity user_identity = null;
+
+			var requestBody = new List<KeyValuePair<string, string>> () {
+				new KeyValuePair<string, string> ("user_display_name", user_display_name)
 			};
 
-			var url = string.Format("{0}/", base_rest_url);
-			var data = await _httpRequest.Post(url, requestBody);
-        
-			var user_identity = JsonConvert.DeserializeObject<UserIdentity>(data);
+			var url = string.Format ("{0}/", base_rest_url);
+
+			try {
+
+				var data = await _httpRequest.Post (url, requestBody);        
+				user_identity = JsonConvert.DeserializeObject<UserIdentity> (data);
+
+			} catch (Exception) {
+
+				AppEvents.Current.TriggerConnectionFailedEvent ();
+				//Todo: log exception
+			}
+
 			return user_identity;
-        }
+		}
 
 		public async Task<UserIdentity> Update (string user_id, string user_display_name, string status_message)
 		{
-			var requestBody = new List<KeyValuePair<string, string>> () 
-			{
-				new KeyValuePair<string, string>( "user_id", user_id ),
-				new KeyValuePair<string, string>( "user_display_name", user_display_name ),
-				new KeyValuePair<string, string>( "user_status_message", status_message )
+			UserIdentity user_identity = null;
+
+			var requestBody = new List<KeyValuePair<string, string>> () {
+				new KeyValuePair<string, string> ("user_id", user_id),
+				new KeyValuePair<string, string> ("user_display_name", user_display_name),
+				new KeyValuePair<string, string> ("user_status_message", status_message)
 			};
 
 
 			var url = String.Format ("{0}/", base_rest_url);
-			string data = await _httpRequest.Put (url, requestBody);  
 
-			var user_identity = JsonConvert.DeserializeObject<UserIdentity> (data);
+			try {
+
+				string data = await _httpRequest.Put (url, requestBody);
+				user_identity = JsonConvert.DeserializeObject<UserIdentity> (data);
+
+			} catch (Exception) {
+
+				AppEvents.Current.TriggerConnectionFailedEvent ();
+				//Todo: log exception
+			}
 			return user_identity;
 		}
 
 
 		private const string restful_resource = "users";
 		private IHttpRequest _httpRequest;
-		private string base_rest_url
-		{
-			get
-			{
+
+		private string base_rest_url {
+			get {
 				return string.Format ("{0}/{1}", Resources.baseUrl, restful_resource);
 			}
 		}
-		public Users(IHttpRequest httpRequest)
+
+		public Users (IHttpRequest httpRequest)
 		{
 			_httpRequest = httpRequest;
 		}
-    }
+	}
 }

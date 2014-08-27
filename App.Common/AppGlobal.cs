@@ -17,10 +17,13 @@ namespace App.Common
 	/// </summary>
 	public class AppGlobal
 	{
-		public bool CurrentUserExists { 
+		public bool CurrentUserAndConnectionExists { 
 			get { 
 				var user = sessionInstance.GetCurrentUser (true);
-				if (user != null) {
+
+				var connection = sessionInstance.GetCurrentConnection (true);
+
+				if (user != null && connection != null) {
 					return true;
 				}
 
@@ -32,19 +35,22 @@ namespace App.Common
 		{
 			//new Task (async() => {
 
-			if (sessionInstance.GetCurrentConnection (true) == null) {
+			if (!CurrentUserAndConnectionExists) {
 				var user = sessionInstance.GetCurrentUser ();
 
 				var location = await _geoLocationInstance.GetCurrentPosition ();
 
 				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-				sessionInstance.PersistCurrentConnection (connection_id);
+				if (connection_id == null) {
+					sessionInstance.PersistCurrentConnection (connection_id);
+				
+					ConnectionInitialised = true;
+					OnConnectionInitialized (this, new EventArgs ());
 
-				ConnectionInitialised = true;
-				OnConnectionInitialized (this, new EventArgs ());
+					InitHeartBeat (false);
+				}
 
-				InitHeartBeat (false);
 			} else {
 				InitHeartBeat (true);
 			}
@@ -55,7 +61,7 @@ namespace App.Common
 		private void InitHeartBeat (bool eagerly = false)
 		{
 			//This should really be a Guard though
-			if (!CurrentUserExists) {
+			if (!CurrentUserAndConnectionExists) {
 				throw new InvalidOperationException ("User / or connection doesn't exist");
 			}
 
@@ -63,7 +69,8 @@ namespace App.Common
 			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
 
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
-
+				//@@@@--------->>>>>>>>>>>>>>>>>WHEN IN FLIGHT MODE THE ABOVE LINE THROWS EXCEPTIONS AT TIMES
+				//NEED TO ADD ERROR HANDLING TO GEOLOCATOR TOO
 				await update_connection (position);
 
 				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
@@ -85,42 +92,46 @@ namespace App.Common
 
 		private async Task update_connection (GeoValue position)
 		{
-			await ConnectionServices
-				.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
-				position.geolocation_value, position.geolocation_accuracy.ToString ());
 
-			if(!ConnectionInitialised)
-			{
-				ConnectionInitialised = true;
-				OnConnectionInitialized (this, new EventArgs());
+			var conn_id = await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
+				              position.geolocation_value, position.geolocation_accuracy.ToString ());
+
+			//conn_id will be null if the Service command failed for some unknown reason
+
+			 
+			if (!ConnectionInitialised) {
+				if (conn_id != null) {
+					//we don't wanna initialise if the conn_id was null
+					ConnectionInitialised = true;
+					OnConnectionInitialized (this, new EventArgs ());
+				}
 			}
 		}
 
 		public void Pause ()
 		{
-			if (ConnectionInitialised) {
-				#region"pause timer"
-				if (TimerDisposable != null) {
-					TimerDisposable.Stop ();
-					TimerDisposable.Dispose ();
-					TimerDisposable = null;
-				}
-				#endregion
 
-				#region"suspend_geolocator"
-				_geoLocationInstance.StopListening ();
-				if (geoPositionChangedEventHandler != null)
-					_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
-				#endregion
-
-				ConnectionInitialised = false;
+			#region"pause timer"
+			if (TimerDisposable != null) {
+				TimerDisposable.Stop ();
+				TimerDisposable.Dispose ();
+				TimerDisposable = null;
 			}
+			#endregion
+
+			#region"suspend_geolocator"
+			_geoLocationInstance.StopListening ();
+			if (geoPositionChangedEventHandler != null)
+				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
+			#endregion
+
+			ConnectionInitialised = false;
+
 		}
 
 		public void Resume ()
 		{
-			if(!ConnectionInitialised)
-			{
+			if (!ConnectionInitialised) {
 				InitHeartBeat (true);
 			}
 		}
@@ -134,7 +145,8 @@ namespace App.Common
 
 
 		public event EventHandler<EventArgs> OnConnectionInitialized = delegate {};
-		public bool ConnectionInitialised { get; private set;}
+
+		public bool ConnectionInitialised { get; private set; }
 
 		public static AppGlobal Current {
 			get { return current; }

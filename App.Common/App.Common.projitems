@@ -30,5 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EditProfileViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
   </ItemGroup>
 </Project>

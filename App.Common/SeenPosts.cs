@@ -10,28 +10,40 @@ using Newtonsoft.Json;
 namespace App.Common
 {
 	public class SeenPosts
-    {
-		public async Task<List<SeenPost>> Get(string connection_id, string start_index)
-        {
-			var url = String.Format("{0}/?connection_id={1}&start_index={2}", base_rest_url, connection_id, start_index);
-            string data = await _httpRequest.Get(url);
+	{
+		public async Task<List<SeenPost>> Get (string connection_id, string start_index)
+		{
+			var seen_posts = new List<SeenPost> ();
 
-			var seen_posts = JsonConvert.DeserializeObject<List<SeenPost>>(data);
+
+			var url = String.Format ("{0}/?connection_id={1}&start_index={2}", base_rest_url, connection_id, start_index);
+
+			try {
+
+				string data = await _httpRequest.Get (url);
+				seen_posts = JsonConvert.DeserializeObject<List<SeenPost>> (data);
+
+			} catch (Exception) {
+				AppEvents.Current.TriggerConnectionFailedEvent ();
+				//Todo: log exception
+				//Todo: Probably load any few posts that have been cached locally
+			}
+
 			return seen_posts;
-        }
+		}
 
 		private const string restful_resource = "seenposts";
 		private IHttpRequest _httpRequest;
-		private string base_rest_url
-		{
-			get
-			{
+
+		private string base_rest_url {
+			get {
 				return string.Format ("{0}/{1}", Resources.baseUrl, restful_resource);
 			}
 		}
-		public SeenPosts(IHttpRequest httpRequest)
+
+		public SeenPosts (IHttpRequest httpRequest)
 		{
 			_httpRequest = httpRequest;
 		}
-    }
+	}
 }

@@ -11,28 +11,32 @@ namespace App.Common
 	{
 		public string UserDisplayName { get; set; }
 
-		public async Task CreateUser()
+		public async Task<bool> CreateUser()
 		{
-			if (!string.IsNullOrWhiteSpace (UserDisplayName))
+			if (string.IsNullOrWhiteSpace (UserDisplayName))
 			{
-				var userID = await UserServices.Create (UserDisplayName);
-				var user = await UserServices.Get (userID.user_id.ToString ());
-				sessionInstance.PersistCurrentUser (user);
-			}
-			else {
 				throw new InvalidOperationException ("You must enter a Display Name to create a new user");
 			}
 
-		}
+			var userID = await UserServices.Create (UserDisplayName);
 
-		public override void TombstoneViewModel()
-		{
+			if(userID == null)
+			{
+				return false;
+			}
 
-		}
 
-		public override void ResurrectViewModel()
-		{
+			var user = await UserServices.Get (userID.user_id.ToString ());
 
+			if(user == null)
+			{
+				return false;
+			}
+
+			sessionInstance.PersistCurrentUser (user);
+
+
+			return true;
 		}
 
 		public LoginViewModel ()

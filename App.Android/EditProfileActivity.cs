@@ -66,9 +66,11 @@ namespace App.Android
 				if (!string.IsNullOrWhiteSpace (text) && text != view_model.CurrentUserToBeEdited.user_display_name) {
 					view_model.CurrentUserToBeEdited.user_display_name = text;
 
-					await view_model.UpdateUser ();
+					var result = await view_model.UpdateUser ();
 
-					SetResult (Result.Ok);
+					if (result) {
+						SetResult (Result.Ok);
+					}
 				}
 			}
 		}
@@ -82,9 +84,11 @@ namespace App.Android
 				if (!string.IsNullOrWhiteSpace (text) && text != view_model.CurrentUserToBeEdited.user_status_message) {
 					view_model.CurrentUserToBeEdited.user_status_message = text;
 
-					await view_model.UpdateUser ();
+					var result = await view_model.UpdateUser ();
 
-					SetResult (Result.Ok);
+					if (result) {
+						SetResult (Result.Ok);
+					}
 				}
 			}
 		}

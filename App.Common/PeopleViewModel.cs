@@ -53,12 +53,12 @@ namespace App.Common
 			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
 		}
 
-		public override void ResurrectViewModel()
+		public override void ResumeState()
 		{
 			_geoLocationInstance.OnGeoPositionChanged += geoPositionChangedEventHandler;
 		}
 
-		public override void TombstoneViewModel()
+		public override void PauseState()
 		{
 			_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
 		}

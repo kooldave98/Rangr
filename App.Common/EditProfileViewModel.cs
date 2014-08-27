@@ -10,16 +10,27 @@ namespace App.Common
 	{
 		public User CurrentUserToBeEdited { get; set;}
 
-		public async Task UpdateUser ()
+		public async Task<bool> UpdateUser ()
 		{
 			if (CurrentUserToBeEdited == null) {
 				throw new InvalidOperationException ("User is null");
 			}
 
-			await user_services.Update (CurrentUserToBeEdited.user_id.ToString(), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.user_status_message);
+			var result = await user_services.Update (CurrentUserToBeEdited.user_id.ToString(), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.user_status_message);
+
+			if(result == null)
+			{
+				return false;
+			}
 
 			var user = CurrentUserToBeEdited = await user_services.Get (CurrentUserToBeEdited.user_id.ToString ());
-			SessionInstance.PersistCurrentUser (user);
+
+			if (user != null) {
+				//if the refresher query failed dont persist it
+				SessionInstance.PersistCurrentUser (user);
+			}
+
+			return true;
 		}
 
 		public EditProfileViewModel (IPersistentStorage the_persistent_storage_instance)
@@ -28,16 +39,6 @@ namespace App.Common
 			user_services = new Users (HttpRequest.Current);
 
 			CurrentUserToBeEdited = SessionInstance.GetCurrentUser ();
-		}
-
-		public override void ResurrectViewModel()
-		{
-			//throw new NotImplementedException ();
-		}
-
-		public override void TombstoneViewModel()
-		{
-			//throw new NotImplementedException ();
 		}
 
 		private ISession SessionInstance;

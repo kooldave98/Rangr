@@ -74,7 +74,7 @@ namespace App.Android
 				StartActivityForResult (typeof(EditProfileActivity), 0);
 				break;
 			case "Console":
-				ShowToast (false);
+				ShowToast ("Console not available");
 				break;
 			}
 

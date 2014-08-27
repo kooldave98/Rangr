@@ -73,7 +73,7 @@ namespace App.Android
 		{
 			base.OnResume ();
 
-			if (AppGlobal.Current.CurrentUserExists) {
+			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
 
 				NewPostsReceivedHandler = (object sender, EventArgs e) => {
 					//Refresh list view data
@@ -105,7 +105,6 @@ namespace App.Android
 
 			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
 			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
-
 		}
 
 		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
@@ -136,7 +135,7 @@ namespace App.Android
 				StartActivityForResult (typeof(NewPostActivity), 0);
 				break;
 			case "Console":
-				ShowToast (false);
+				ShowToast ("Console not available");
 				break;
 			}
 

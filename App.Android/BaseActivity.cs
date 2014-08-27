@@ -15,6 +15,8 @@ namespace App.Android
 
 		private EventHandler isBusyChangedEventHandler;
 
+		private EventHandler<EventArgs> ConnectionFailedHandler;
+
 		private ViewModelBase the_view_model;
 
 		protected abstract ViewModelBase init_view_model ();
@@ -50,9 +52,15 @@ namespace App.Android
 				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 			}
 
-			the_view_model.ResurrectViewModel ();
+			ConnectionFailedHandler = (sender, e) => {
+				ShowToast("Unable to connect..");
+			};
 
-			if (AppGlobal.Current.CurrentUserExists) {
+			AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
+
+			the_view_model.ResumeState ();
+
+			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
 				AppGlobal.Current.Resume ();
 			}
 		}
@@ -63,12 +71,15 @@ namespace App.Android
 			base.OnPause ();
 
 			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
+
 			isBusyHandlerSet = false;
+
+			the_view_model.PauseState ();
 
 			if (progress != null)
 				progress.Dismiss ();
 
-			the_view_model.TombstoneViewModel ();
+			AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
 
 			AppGlobal.Current.Pause ();
 		}
@@ -100,10 +111,10 @@ namespace App.Android
 		}
 
 
-		protected void ShowToast (bool really)
+		protected void ShowToast (string message)
 		{
-			if (really) {
-				var t = Toast.MakeText (this, "A toast", ToastLength.Short);
+			if (true) {
+				var t = Toast.MakeText (this, message, ToastLength.Long);
 				t.SetGravity (GravityFlags.Center, 0, 0);
 				t.Show ();
 			}
@@ -111,20 +122,24 @@ namespace App.Android
 
 		protected void notify (String methodName)
 		{
-//			var name = this.LocalClassName;
-//
-//			var noti = new Notification.Builder (this)
-//				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
-//				.SetSmallIcon (Resource.Drawable.ic_action_logo)
-//				.SetContentText (name).Build ();
-//
-//			var notificationManager = (NotificationManager)GetSystemService (NotificationService);
-//			notificationManager.Notify ((int)CurrentTimeMillis (), noti);
+			//just disable this for now by the if condition
+			if (1 == 0) {
+				var name = this.LocalClassName;
+
+				var noti = new Notification.Builder (this)
+				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
+				.SetSmallIcon (Resource.Drawable.ic_action_logo)
+				.SetContentText (name).Build ();
+
+				var notificationManager = (NotificationManager)GetSystemService (NotificationService);
+				notificationManager.Notify ((int)CurrentTimeMillis (), noti);
+			}
 		}
 
 		private static readonly DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-		public static long CurrentTimeMillis ()
+		//Search online for C# equivalent of Javas CurrentTimeMillis
+		private static long CurrentTimeMillis ()
 		{
 			return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
 		}

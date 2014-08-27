@@ -75,17 +75,20 @@ namespace App.Android
 
 				hide_keyboard_and_show_progress ();
 
-				await view_model.CreateUser ();
-				await AppGlobal.Current.CreateConnection ();
+				var create_user_successful = await view_model.CreateUser ();
 
-				Finish ();
+				if (create_user_successful) {
+					await AppGlobal.Current.CreateConnection ();
+
+					Finish ();
+				}
 			}
 		}
 
 		protected override void OnResume ()
 		{
 			base.OnResume ();
-			if (!AppGlobal.Current.CurrentUserExists) {
+			if (!AppGlobal.Current.CurrentUserAndConnectionExists) {
 				password.Text =
 				userName.Text = string.Empty;
 

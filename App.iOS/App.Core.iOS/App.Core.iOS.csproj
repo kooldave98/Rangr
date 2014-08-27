@@ -111,6 +111,9 @@
     <Compile Include="..\..\App.Common\AppGlobal.cs">
       <Link>AppGlobal.cs</Link>
     </Compile>
+    <Compile Include="..\..\App.Common\ServicesBase.cs">
+      <Link>Services\ServicesBase.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

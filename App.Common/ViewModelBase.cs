@@ -28,6 +28,7 @@ namespace App.Common {
 	/// </summary>
 	public abstract class ViewModelBase : INotifyPropertyChanged
 	{
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
@@ -144,8 +145,14 @@ namespace App.Common {
 			}
 		}
 
-		public abstract void TombstoneViewModel();
+		public virtual void PauseState()
+		{
+			//No default implementation, but derived instances may override this
+		}
 
-		public abstract void ResurrectViewModel();
+		public virtual void ResumeState()
+		{
+			//No default implementation, but derived instances may override this
+		}
 	}
 }
