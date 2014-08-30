@@ -24,7 +24,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Posts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProfileViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SeenPosts.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Users.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModelBase.cs" />

@@ -11,11 +11,11 @@ namespace App.Android
 {
 	public abstract class BaseActivity : Activity
 	{
-		private bool isBusyHandlerSet = false;
-
 		private EventHandler isBusyChangedEventHandler;
 
 		private EventHandler<EventArgs> ConnectionFailedHandler;
+
+		private EventHandler<EventArgs> GeolocatorFailedHandler;
 
 		private ViewModelBase the_view_model;
 
@@ -29,18 +29,7 @@ namespace App.Android
 			base.OnCreate (bundle);
 
 			the_view_model = init_view_model ();
-
-			isBusyChangedEventHandler = (sender, e) => {
-
-				if (the_view_model.IsBusy) {
-					progress = ProgressDialog.Show (this, "Loading...", "Busy", true);
-				} else {
-					progress.Dismiss ();
-				}
-			};
-
-			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
-			isBusyHandlerSet = true;
+				
 		}
 
 		protected override void OnResume ()
@@ -48,19 +37,33 @@ namespace App.Android
 			notify ("OnResume");
 			base.OnResume ();
 
-			if (!isBusyHandlerSet) {
-				the_view_model.IsBusyChanged += isBusyChangedEventHandler;
-			}
+			isBusyChangedEventHandler = (sender, e) => {
+
+				if (the_view_model.IsBusy) {
+					show_progress();
+				} else {
+					dismiss_progress();
+				}
+			};
+
+			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 
 			ConnectionFailedHandler = (sender, e) => {
-				ShowToast("Unable to connect..");
+				ShowToast ("Unable to connect..");
+			};
+
+			GeolocatorFailedHandler = (sender, e) => {
+				ShowToast ("Unable to determine location..");
 			};
 
 			AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
 
+			AppEvents.Current.GeolocatorFailed += GeolocatorFailedHandler;
+
 			the_view_model.ResumeState ();
 
 			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
+				//This is majorly to prevent not logged in activities from calling resume
 				AppGlobal.Current.Resume ();
 			}
 		}
@@ -72,14 +75,13 @@ namespace App.Android
 
 			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
 
-			isBusyHandlerSet = false;
-
 			the_view_model.PauseState ();
 
-			if (progress != null)
-				progress.Dismiss ();
+			dismiss_progress ();
 
 			AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
+
+			AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
 
 			AppGlobal.Current.Pause ();
 		}
@@ -110,6 +112,16 @@ namespace App.Android
 			StartActivity (i);
 		}
 
+		protected void show_progress(string title = "Loading...", string message = "Busy")
+		{
+			progress = ProgressDialog.Show (this, title, message, true);
+		}
+
+		protected void dismiss_progress()
+		{
+			if (progress != null)
+				progress.Dismiss ();
+		}
 
 		protected void ShowToast (string message)
 		{

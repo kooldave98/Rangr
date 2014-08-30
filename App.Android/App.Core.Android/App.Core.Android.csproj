@@ -120,8 +120,8 @@
       <Link>AppGlobal.cs</Link>
     </Compile>
     <Compile Include="DbORM.cs" />
-    <Compile Include="..\..\App.Common\WebService.cs">
-      <Link>Services\ServicesBase.cs</Link>
+    <Compile Include="..\..\App.Common\AppEvents.cs">
+      <Link>AppEvents.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

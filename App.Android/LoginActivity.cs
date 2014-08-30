@@ -78,7 +78,7 @@ namespace App.Android
 				var create_user_successful = await view_model.CreateUser ();
 
 				if (create_user_successful) {
-					await AppGlobal.Current.CreateConnection ();
+					await AppGlobal.Current.CreateNewConnectionFromLogin ();
 
 					Finish ();
 				}

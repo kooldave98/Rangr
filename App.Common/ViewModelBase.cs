@@ -115,7 +115,7 @@ namespace App.Common {
 		public bool IsBusy
 		{
 			get { return isBusy; }
-			set
+			protected set
 			{
 				if (isBusy != value) {
 					isBusy = value;

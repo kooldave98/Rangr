@@ -43,7 +43,7 @@ namespace App.Android
 			#endregion
 
 			#region Setup pull to refresh
-			mPullToRefreshAttacher = new PullToRefreshAttacher (this, postListView);
+			mPullToRefreshAttacher = new PullToRefreshAttacher(this, postListView);
 
 			mPullToRefreshAttacher.Refresh += async (sender, e) => {
 				await view_model.RefreshPosts ();
@@ -71,7 +71,17 @@ namespace App.Android
 
 		protected override void OnResume ()
 		{
+			//Doing this before to prevent the blank screen
+			//cause the base can take a while
+			show_progress ();
+
 			base.OnResume ();
+
+			JavaScriptTimer.SetTimeout (delegate {
+				RunOnUiThread (() => {
+					dismiss_progress();
+				});
+			}, 3000);//die out after 3 secs
 
 			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
 
@@ -88,6 +98,11 @@ namespace App.Android
 					//Well, Refresh posts in here will never happen, that's what.
 
 					await view_model.RefreshPosts ();
+					JavaScriptTimer.SetTimeout (delegate {
+						RunOnUiThread (() => {
+							dismiss_progress();
+						});
+					}, 500);
 				};
 
 				AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;

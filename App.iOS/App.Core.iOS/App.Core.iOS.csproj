@@ -111,8 +111,8 @@
     <Compile Include="..\..\App.Common\AppGlobal.cs">
       <Link>AppGlobal.cs</Link>
     </Compile>
-    <Compile Include="..\..\App.Common\ServicesBase.cs">
-      <Link>Services\ServicesBase.cs</Link>
+    <Compile Include="..\..\App.Common\AppEvents.cs">
+      <Link>AppEvents.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ namespace App.Common
 		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
 		private Geolocator geolocator;
+
 		public event EventHandler<GeoPositionChangedEventArgs> OnGeoPositionChanged;
 		public event EventHandler<StatusChangedEventArgs> OnStatusChanged;
 		//private SynchronizationContext _context;
@@ -37,7 +38,7 @@ namespace App.Common
 			geolocator.PositionChanged += (sender, args) => {
 				geoPosition = args.Position;
 
-				if(PositionIsInvalid){
+				if (PositionIsInvalid) {
 
 					NotifyInaccurate ();
 
@@ -48,7 +49,10 @@ namespace App.Common
 
 					NotifyAccurate ();
 
-					var geo_value = new GeoValue { geolocation_value = geolocationValue, geolocation_accuracy = Convert.ToInt32(geoPosition.Accuracy)};
+					var geo_value = new GeoValue {
+						geolocation_value = geolocationValue,
+						geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
+					};
 
 					NotifyPositionChanged (geo_value);
 
@@ -64,26 +68,50 @@ namespace App.Common
 
 		public async Task<GeoValue> GetCurrentPosition ()
 		{
+			GeoValue geo_value = null;
+
+
+			if (!this.geolocator.IsGeolocationAvailable || !this.geolocator.IsGeolocationEnabled) {
+				NotifyStatusChanged (Status.ERROR, "Location services are unavailable");
+				return geo_value;
+			}
+
 			if (geoPosition == null) {
-				await GetPosition ();
+				try {
+					geoPosition = await geolocator.GetPositionAsync (10000);
+				} catch (Exception) {
+					NotifyStatusChanged (Status.ERROR, "Could not determine location");
+					return geo_value;
+				}
 			}
 
 			if (PositionIsInvalid) {
-				await GetPosition ();
+				try {
+					geoPosition = await geolocator.GetPositionAsync (10000);
+				} catch (Exception) {
+					NotifyStatusChanged (Status.ERROR, "Could not determine location");
+					return geo_value;
+				}
 			}
 
 			if (PositionIsInvalid) {
 				NotifyInaccurate ();
-				throw new ArgumentOutOfRangeException ("geoPosition", "GeoPosition is invalid");
+				return geo_value;
 			}
 
 			var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
 			//geolocationValue = sample_geoposition;
-			return new GeoValue { geolocation_value = geolocationValue, geolocation_accuracy = Convert.ToInt32(geoPosition.Accuracy)};
+			geo_value = new GeoValue {
+				geolocation_value = geolocationValue,
+				geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
+			};
+
+
+			return geo_value;
 		}
 
-		private bool PositionIsInvalid{
-			get{
+		private bool PositionIsInvalid {
+			get {
 				//var timespan = DateTime.UtcNow - geoPosition.Timestamp;
 				//return geoPosition.Accuracy > 100 || timespan.Minutes > 1;
 				return false;
@@ -110,6 +138,10 @@ namespace App.Common
 
 		private void NotifyStatusChanged (Status status, string statusMessage)
 		{
+			if (status == Status.ERROR) {
+				AppEvents.Current.TriggerGeolocatorFailedEvent ();
+			}
+
 			if (OnStatusChanged != null) {
 				OnStatusChanged (this, new StatusChangedEventArgs (status));
 			}
@@ -122,30 +154,30 @@ namespace App.Common
 			}
 		}
 
-		private async Task GetPosition ()
-		{
+		//		private async Task GetPosition ()
+		//		{
+		//
+		//			var t = geolocator.GetPositionAsync (10000);
+		//
+		//			if (t.IsFaulted) {
+		//				NotifyStatusChanged (Status.ERROR, ((GeolocationException)t.Exception.InnerException).Error.ToString ());
+		//			} else if (t.IsCanceled) {
+		//				NotifyStatusChanged (Status.ERROR, "Geolocator was cancelled");
+		//			} else {
+		//				geoPosition = await t;
+		//			}
+		//
+		//		}
 
-			var t = geolocator.GetPositionAsync (10000);
-
-			if (t.IsFaulted) {
-				NotifyStatusChanged (Status.ERROR, ((GeolocationException)t.Exception.InnerException).Error.ToString ());
-			} else if (t.IsCanceled) {
-				NotifyStatusChanged (Status.ERROR, "Geolocator was cancelled");
-			} else {
-				geoPosition = await t;
-			}
-		
-		}
-
-//		private void ToggleListening ()
-//		{
-//
-//			if (!this.geolocator.IsListening) {
-//				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
-//			} else {
-//				this.geolocator.StopListening ();
-//			}
-//		}
+		//		private void ToggleListening ()
+		//		{
+		//
+		//			if (!this.geolocator.IsListening) {
+		//				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
+		//			} else {
+		//				this.geolocator.StopListening ();
+		//			}
+		//		}
 
 		public void StopListening ()
 		{
@@ -155,9 +187,15 @@ namespace App.Common
 			} 
 		}
 
-		public void StartListening()
+		public void StartListening ()
 		{
 			if (!this.geolocator.IsListening) {
+
+				if (!this.geolocator.IsGeolocationAvailable || !this.geolocator.IsGeolocationEnabled) {
+					NotifyStatusChanged (Status.ERROR, "Location services are unavailable");
+					return;
+				}
+
 				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
 			}
 		}

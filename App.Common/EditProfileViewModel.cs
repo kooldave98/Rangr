@@ -33,7 +33,7 @@ namespace App.Common
 			return true;
 		}
 
-		public EditProfileViewModel (IPersistentStorage the_persistent_storage_instance)
+		public EditProfileViewModel ()
 		{
 			SessionInstance = Session.GetInstance ();
 			user_services = new Users (HttpRequest.Current);

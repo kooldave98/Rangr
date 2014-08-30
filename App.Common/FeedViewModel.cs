@@ -23,7 +23,6 @@ namespace App.Common
 		public async Task RefreshPosts ()
 		{
 			//Todo: Need to guard Get Current Connection
-
 			LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
 			
 

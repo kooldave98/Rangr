@@ -19,11 +19,10 @@ namespace App.Common
 	{
 		public bool CurrentUserAndConnectionExists { 
 			get { 
+				var connection = sessionInstance.GetCurrentConnection (true);
 				var user = sessionInstance.GetCurrentUser (true);
 
-				var connection = sessionInstance.GetCurrentConnection (true);
-
-				if (user != null && connection != null) {
+				if (connection != null && user != null) {
 					return true;
 				}
 
@@ -31,29 +30,27 @@ namespace App.Common
 			}
 		}
 
-		public async Task CreateConnection ()
+		public async Task CreateNewConnectionFromLogin ()
 		{
+			if(sessionInstance.GetCurrentUser (true) == null){
+				throw new InvalidOperationException ("User doesn't exist");
+			}
 			//new Task (async() => {
 
-			if (!CurrentUserAndConnectionExists) {
-				var user = sessionInstance.GetCurrentUser ();
+			var user = sessionInstance.GetCurrentUser ();
 
-				var location = await _geoLocationInstance.GetCurrentPosition ();
+			var location = await _geoLocationInstance.GetCurrentPosition ();
 
-				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-				if (connection_id == null) {
-					sessionInstance.PersistCurrentConnection (connection_id);
+			if (connection_id != null) {
+				sessionInstance.PersistCurrentConnection (connection_id);
 				
-					ConnectionInitialised = true;
-					OnConnectionInitialized (this, new EventArgs ());
+				ConnectionInitialised = true;
+				OnConnectionInitialized (this, new EventArgs ());
 
-					InitHeartBeat (false);
-				}
-
-			} else {
-				InitHeartBeat (true);
-			}
+				InitHeartBeat (false);
+			}				
 
 			//}).Start ();
 		}
@@ -70,7 +67,11 @@ namespace App.Common
 
 				var position = await _geoLocationInstance.GetCurrentPosition ();		
 				//@@@@--------->>>>>>>>>>>>>>>>>WHEN IN FLIGHT MODE THE ABOVE LINE THROWS EXCEPTIONS AT TIMES
-				//NEED TO ADD ERROR HANDLING TO GEOLOCATOR TOO
+
+				if (position == null) {
+					return;
+				}
+
 				await update_connection (position);
 
 				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
@@ -132,7 +133,7 @@ namespace App.Common
 		public void Resume ()
 		{
 			if (!ConnectionInitialised) {
-				InitHeartBeat (true);
+				InitHeartBeat ();
 			}
 		}
 

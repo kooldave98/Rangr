@@ -110,7 +110,12 @@ namespace App.Android
 						_map.AddMarker (GetMarker(connection));								
 					}
 
-					var my_location = GetPosition (view_model.CurrentLocation.geolocation_value);
+					var my_location = GetPosition ("0,0");
+
+					if(view_model.CurrentLocation != null)
+					{
+						my_location = GetPosition (view_model.CurrentLocation.geolocation_value);
+					}
 
 					// We create an instance of CameraUpdate, and move the map to it.
 					CameraPosition cameraPosition = new CameraPosition.Builder()

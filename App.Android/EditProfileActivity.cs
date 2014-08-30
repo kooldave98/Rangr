@@ -116,7 +116,7 @@ namespace App.Android
 		{
 
 			if (view_model == null) {
-				view_model = new EditProfileViewModel (PersistentStorage.Current);
+				view_model = new EditProfileViewModel ();
 			}
 			return view_model;
 
