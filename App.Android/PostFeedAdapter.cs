@@ -7,18 +7,18 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	public class PostFeedAdapter : BaseAdapter<SeenPost>
+	public class PostFeedAdapter : BaseAdapter<Post>
 	{
 		Activity context = null;
-		IList<SeenPost> _posts = new List<SeenPost>();
+		IList<Post> _posts = new List<Post>();
 
-		public PostFeedAdapter (Activity context, IList<SeenPost> posts) : base ()
+		public PostFeedAdapter (Activity context, IList<Post> posts) : base ()
 		{
 			this.context = context;
 			this._posts = posts;
 		}
 
-		public override SeenPost this[int position]
+		public override Post this[int position]
 		{
 			get { return _posts[position]; }
 		}

@@ -47,7 +47,7 @@ namespace App.Android
 
 
 
-		public static Intent CreateIntent (Context context, SeenPost post)
+		public static Intent CreateIntent (Context context, Post post)
 		{
 			var postStream = PostDetailsViewModel.Serialize (post);
 
@@ -63,12 +63,12 @@ namespace App.Android
 		protected override ViewModelBase init_view_model ()
 		{
 			if (view_model == null) {
-				SeenPost post;
+				Post post;
 				if (Intent.HasExtra ("Post")) {
 					var postBytes = Intent.GetByteArrayExtra ("Post");
 					post = PostDetailsViewModel.Deserialize (postBytes);
 				} else {
-					post = new SeenPost ();
+					post = new Post ();
 				}
 
 				view_model = new PostDetailsViewModel (post);

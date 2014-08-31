@@ -47,10 +47,13 @@
     <Compile Include="Models\ConnectionIdentity.cs">
       <DependentUpon>Connection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\SeenPost.cs" />
     <Compile Include="Models\IUser.cs">
       <DependentUpon>User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostIdentity.cs">
+      <DependentUpon>Post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Post.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup />

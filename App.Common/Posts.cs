@@ -10,9 +10,30 @@ namespace App.Common
 {
 	public class Posts
 	{
-		public async Task<string> Create (string text, string connection_id)
+		public async Task<List<Post>> Get (string connection_id, string start_index)
 		{
-			string return_value = null;
+			var posts = new List<Post> ();
+
+
+			var url = String.Format ("{0}/?connection_id={1}&start_index={2}", base_rest_url, connection_id, start_index);
+
+			try {
+
+				string data = await _httpRequest.Get (url);
+				posts = JsonConvert.DeserializeObject<List<Post>> (data);
+
+			} catch (Exception) {
+				AppEvents.Current.TriggerConnectionFailedEvent ();
+				//Todo: log exception
+				//Todo: Probably load any few posts that have been cached locally
+			}
+
+			return posts;
+		}
+
+		public async Task<PostIdentity> Create (string text, string connection_id)
+		{
+			PostIdentity post_id = null;
 
 			var requestBody = new List<KeyValuePair<string, string>> () {
 				new KeyValuePair<string, string> ("connection_id", connection_id),
@@ -23,8 +44,8 @@ namespace App.Common
 
 			try {
 
-				await _httpRequest.Post (url, requestBody);
-				return_value = "success";
+				var data = await _httpRequest.Post (url, requestBody);
+				post_id = JsonConvert.DeserializeObject<PostIdentity> (data);
 
 			} catch (Exception) {
 
@@ -32,7 +53,7 @@ namespace App.Common
 				//Todo: log exception
 			}
 
-			return return_value;
+			return post_id;
 		}
 
 

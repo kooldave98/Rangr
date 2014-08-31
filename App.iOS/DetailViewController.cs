@@ -28,7 +28,7 @@ namespace App.iOS
 			ConfigureView ();
 		}
 
-		public void SetDetailItem (SeenPost newDetailItem)
+		public void SetDetailItem (Post newDetailItem)
 		{
 			if (view_model.CurrentPost != newDetailItem) {
 				view_model.CurrentPost = newDetailItem;

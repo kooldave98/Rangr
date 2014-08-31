@@ -24,7 +24,7 @@ namespace App.iOS
 			return (PostCellView)Nib.Instantiate (null, null) [0];
 		}
 
-		public void BindDataToCell(SeenPost post)
+		public void BindDataToCell(Post post)
 		{
 			UserNameView.Text = post.user_display_name;
 			UserPostTextView.Text = post.text;

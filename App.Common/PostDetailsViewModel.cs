@@ -8,29 +8,29 @@ namespace App.Common
 {
 	public class PostDetailsViewModel : ViewModelBase
 	{
-		public SeenPost CurrentPost { get; set;}
+		public Post CurrentPost { get; set;}
 
-		public PostDetailsViewModel (SeenPost the_seen_post)
+		public PostDetailsViewModel (Post the_seen_post)
 		{
 			CurrentPost = the_seen_post;
 		}
 
 		public PostDetailsViewModel ()
 		{
-			CurrentPost = new SeenPost();
+			CurrentPost = new Post();
 		}
 
 		#region ReUseableHelpers
-		public static SeenPost Deserialize(byte[] postBytes)
+		public static Post Deserialize(byte[] postBytes)
 		{
-			var serializer = new System.Xml.Serialization.XmlSerializer (typeof(SeenPost));
+			var serializer = new System.Xml.Serialization.XmlSerializer (typeof(Post));
 
-			return (SeenPost)serializer.Deserialize (new MemoryStream (postBytes));
+			return (Post)serializer.Deserialize (new MemoryStream (postBytes));
 		}
 
-		public static byte[] Serialize(SeenPost post)
+		public static byte[] Serialize(Post post)
 		{
-			var serializer = new System.Xml.Serialization.XmlSerializer (typeof(SeenPost));
+			var serializer = new System.Xml.Serialization.XmlSerializer (typeof(Post));
 			var postStream = new MemoryStream ();
 			serializer.Serialize (postStream, post);
 

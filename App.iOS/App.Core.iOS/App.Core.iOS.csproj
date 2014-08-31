@@ -102,9 +102,6 @@
     <Compile Include="..\..\App.Common\Posts.cs">
       <Link>Services\Posts.cs</Link>
     </Compile>
-    <Compile Include="..\..\App.Common\SeenPosts.cs">
-      <Link>Services\SeenPosts.cs</Link>
-    </Compile>
     <Compile Include="..\..\App.Common\Users.cs">
       <Link>Services\Users.cs</Link>
     </Compile>

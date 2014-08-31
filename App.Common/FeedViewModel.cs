@@ -15,19 +15,19 @@ namespace App.Common
 		public int start_index { get; set; }
 
 		//1.1non android breaking ios workaround
-		public IList<SeenPost> LatestPosts { get; set; }
+		public IList<Post> LatestPosts { get; set; }
 		//end workaround
 
-		public IList<SeenPost> Posts { get; set; }
+		public IList<Post> Posts { get; set; }
 
 		public async Task RefreshPosts ()
 		{
 			//Todo: Need to guard Get Current Connection
-			LatestPosts = await SeenPostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
+			LatestPosts = await PostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
 			
 
 			foreach (var post in LatestPosts) {
-				start_index = post.id + 1;
+				start_index = post.post_id + 1;
 
 				Posts.Insert (0, post);
 			}
@@ -41,21 +41,21 @@ namespace App.Common
 
 		public FeedViewModel ()
 		{
-			Posts = new List<SeenPost> ();
+			Posts = new List<Post> ();
 
 			//1.3 non android breaking ios workaround
-			LatestPosts = new List<SeenPost> ();
+			LatestPosts = new List<Post> ();
 			//end workaround
 
 
 			_sessionInstance = Session.GetInstance ();
 
-			SeenPostServices = new SeenPosts (HttpRequest.Current);
+			PostServices = new Posts (HttpRequest.Current);
 
 		}
 
 		ISession _sessionInstance;
-		SeenPosts SeenPostServices;
+		Posts PostServices;
 	}
 }
 
