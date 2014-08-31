@@ -45,38 +45,19 @@ namespace App.Common
 
 			if (connection_id != null) {
 				sessionInstance.PersistCurrentConnection (connection_id);
-				
-				ConnectionInitialised = true;
-				OnConnectionInitialized (this, new EventArgs ());
 
-				InitHeartBeat (false);
+				InitPositionChangedListener ();
 			}				
 
 			//}).Start ();
 		}
 
-		private void InitHeartBeat (bool eagerly = false)
+		private void InitPositionChangedListener ()
 		{
 			//This should really be a Guard though
 			if (!CurrentUserAndConnectionExists) {
 				throw new InvalidOperationException ("User / or connection doesn't exist");
 			}
-
-			#region"init_timer"
-			TimerDisposable = (Timer)JavaScriptTimer.SetInterval (async () => {
-
-				var position = await _geoLocationInstance.GetCurrentPosition ();		
-				//@@@@--------->>>>>>>>>>>>>>>>>WHEN IN FLIGHT MODE THE ABOVE LINE THROWS EXCEPTIONS AT TIMES
-
-				if (position == null) {
-					return;
-				}
-
-				await update_connection (position);
-
-				//4.5 minuets (4min 30sec) [since 1000 is 1 second]
-			}, 270000, eagerly);//Eager timer interval polling
-			#endregion
 
 			#region"init_geo_listener"
 			geoPositionChangedEventHandler = async (object sender, GeoPositionChangedEventArgs geo_value) => {
@@ -89,51 +70,27 @@ namespace App.Common
 			#endregion
 		}
 
-		private Timer TimerDisposable;
-
 		private async Task update_connection (GeoValue position)
 		{
-
-			var conn_id = await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
+			//var conn_id = 
+				await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
 				              position.geolocation_value, position.geolocation_accuracy.ToString ());
-
 			//conn_id will be null if the Service command failed for some unknown reason
-
-			 
-			if (!ConnectionInitialised) {
-				if (conn_id != null) {
-					//we don't wanna initialise if the conn_id was null
-					ConnectionInitialised = true;
-					OnConnectionInitialized (this, new EventArgs ());
-				}
-			}
 		}
 
 		public void Pause ()
 		{
-
-			#region"pause timer"
-			if (TimerDisposable != null) {
-				TimerDisposable.Stop ();
-				TimerDisposable.Dispose ();
-				TimerDisposable = null;
-			}
-			#endregion
-
 			#region"suspend_geolocator"
 			_geoLocationInstance.StopListening ();
 			if (geoPositionChangedEventHandler != null)
 				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
 			#endregion
-
-			ConnectionInitialised = false;
-
 		}
 
 		public void Resume ()
 		{
-			if (!ConnectionInitialised) {
-				InitHeartBeat ();
+			if (CurrentUserAndConnectionExists) {
+				InitPositionChangedListener ();
 			}
 		}
 
@@ -143,11 +100,6 @@ namespace App.Common
 		protected readonly string logTag = "!!!!!!! App";
 
 		//public bool IsInitialized { get; set; }
-
-
-		public event EventHandler<EventArgs> OnConnectionInitialized = delegate {};
-
-		public bool ConnectionInitialised { get; private set; }
 
 		public static AppGlobal Current {
 			get { return current; }

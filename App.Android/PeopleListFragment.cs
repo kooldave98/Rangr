@@ -47,10 +47,8 @@ namespace App.Android
 				list_adapter.NotifyDataSetChanged ();
 			};
 		}
-
-		private EventHandler<EventArgs> ConnectionInitialisedHandler;
 			
-		public override void OnResume()
+		public async override void OnResume()
 		{
 			base.OnResume ();
 			//For some reason, doing the refresh posts OnResume doesn't work
@@ -58,23 +56,13 @@ namespace App.Android
 
 			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
 
-
-			ConnectionInitialisedHandler = async (object sender, EventArgs e) => {
-				//N/B: In [AppGlobal.update_connection], what happens if the 
-				//update connection executes before binding this event ?
-				//Well, Refresh posts in here will never happen, that's what.
-
-				await view_model.RefreshConnectedUsers();
-			};
-
-			AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;
+			await view_model.RefreshConnectedUsers();
 		}
 
 		public override void OnPause ()
 		{
 			base.OnPause ();
 			view_model.OnConnectionsReceived -= HandleOnConnectionsReceived;
-			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
 
 			//cleanup_map ();
 		}

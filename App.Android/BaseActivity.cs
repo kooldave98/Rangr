@@ -62,10 +62,7 @@ namespace App.Android
 
 			the_view_model.ResumeState ();
 
-			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
-				//This is majorly to prevent not logged in activities from calling resume
-				AppGlobal.Current.Resume ();
-			}
+			AppGlobal.Current.Resume ();
 		}
 
 		protected override void OnPause ()

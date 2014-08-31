@@ -67,9 +67,7 @@ namespace App.Android
 
 		private EventHandler<EventArgs> NewPostsReceivedHandler;
 
-		private EventHandler<EventArgs> ConnectionInitialisedHandler;
-
-		protected override void OnResume ()
+		protected async override void OnResume ()
 		{
 			//Doing this before to prevent the blank screen
 			//cause the base can take a while
@@ -92,20 +90,13 @@ namespace App.Android
 
 				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-				ConnectionInitialisedHandler = async (object sender, EventArgs e) => {
-					//N/B: In [AppGlobal.update_connection], what happens if the 
-					//update connection executes before binding this event ?
-					//Well, Refresh posts in here will never happen, that's what.
+				await view_model.RefreshPosts ();
 
-					await view_model.RefreshPosts ();
-					JavaScriptTimer.SetTimeout (delegate {
-						RunOnUiThread (() => {
-							dismiss_progress();
-						});
-					}, 500);
-				};
-
-				AppGlobal.Current.OnConnectionInitialized += ConnectionInitialisedHandler;
+				JavaScriptTimer.SetTimeout (delegate {
+					RunOnUiThread (() => {
+						dismiss_progress();
+					});
+				}, 500);
 
 			}
 			else{
@@ -119,7 +110,6 @@ namespace App.Android
 			base.OnPause ();
 
 			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
-			AppGlobal.Current.OnConnectionInitialized -= ConnectionInitialisedHandler;
 		}
 
 		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
