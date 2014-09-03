@@ -95,11 +95,11 @@ namespace App.Common
 		}
 
 		// declarations
-		//public event EventHandler<EventArgs> Initialized = delegate {};
+		public event EventHandler<EventArgs> GeoLocatorInitialized = delegate {};
 
 		protected readonly string logTag = "!!!!!!! App";
 
-		//public bool IsInitialized { get; set; }
+		public bool IsGeoLocatorInitialized { get; set; }
 
 		public static AppGlobal Current {
 			get { return current; }
@@ -121,21 +121,20 @@ namespace App.Common
 			// any work here is likely to be blocking (static constructors run on whatever thread that first 
 			// access its instance members, which in our case is an activity doing an initialization check),
 			// so we want to do it on a background thread
-			new Task (() => { 
+			new Task (async () => { 
 
 				//pre-fetch current position
-				_geoLocationInstance.GetCurrentPosition ();
+				var position = await _geoLocationInstance.GetCurrentPosition ();
 				// add a little wait time, to illustrate a loading event
 				// TODO: Replace this with real work in your app, such as starting services,
 				// database init, web calls, etc.
 				//Thread.Sleep (2500);
 
-
-				//this.IsInitialized = true;
-
-				//this.Initialized (this, new EventArgs ());
-
-				//Log.Debug (logTag, "App initialized, setting Initialized = true");
+				if(position != null){
+					this.IsGeoLocatorInitialized = true;
+					this.GeoLocatorInitialized (this, new EventArgs ());
+					//Log.Debug (logTag, "App initialized, setting Initialized = true");
+				}
 			}).Start ();
 		}
 

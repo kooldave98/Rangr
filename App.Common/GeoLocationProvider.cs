@@ -80,6 +80,15 @@ namespace App.Common
 				try {
 					geoPosition = await geolocator.GetPositionAsync (10000);
 				} catch (Exception) {
+					NotifyStatusChanged (Status.ERROR, "Could not determine location, trying again");
+					//return geo_value;TRY AGAIN FOR LONGER !!!!
+				}
+			}
+
+			if (geoPosition == null) {
+				try {
+					geoPosition = await geolocator.GetPositionAsync (20000);
+				} catch (Exception) {
 					NotifyStatusChanged (Status.ERROR, "Could not determine location");
 					return geo_value;
 				}
