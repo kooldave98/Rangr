@@ -1,6 +1,6 @@
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
-using Microsoft.AspNet.SignalR.Client;
+//using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;

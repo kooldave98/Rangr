@@ -91,9 +91,6 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Microsoft.AspNet.SignalR.Client.iOS">
-      <HintPath>..\..\GitHub Repositories\SignalR\src\Microsoft.AspNet.SignalR.Client.iOS\bin\iPhone\Debug\Microsoft.AspNet.SignalR.Client.iOS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
