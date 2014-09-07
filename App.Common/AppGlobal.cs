@@ -32,7 +32,7 @@ namespace App.Common
 
 		public async Task CreateNewConnectionFromLogin ()
 		{
-			if(sessionInstance.GetCurrentUser (true) == null){
+			if (sessionInstance.GetCurrentUser (true) == null) {
 				throw new InvalidOperationException ("User doesn't exist");
 			}
 			//new Task (async() => {
@@ -73,8 +73,8 @@ namespace App.Common
 		private async Task update_connection (GeoValue position)
 		{
 			//var conn_id = 
-				await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
-				              position.geolocation_value, position.geolocation_accuracy.ToString ());
+			await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
+				position.geolocation_value, position.geolocation_accuracy.ToString ());
 			//conn_id will be null if the Service command failed for some unknown reason
 		}
 
@@ -85,21 +85,38 @@ namespace App.Common
 			if (geoPositionChangedEventHandler != null)
 				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
 			#endregion
+
+			IsGeoLocatorRefreshed = false;
 		}
 
 		public void Resume ()
 		{
 			if (CurrentUserAndConnectionExists) {
 				InitPositionChangedListener ();
+
+				JavaScriptTimer.SetTimeout (async delegate {
+					//has been put into a callback to definitely happen after
+					//activities have been registered
+					var position = await _geoLocationInstance.GetCurrentPosition ();
+
+					if (position != null) {
+						this.IsGeoLocatorRefreshed = true;
+						this.GeoLocatorRefreshed (this, new EventArgs ());
+					} else {
+						AppEvents.Current.TriggerGeolocatorFailedEvent ();
+					}
+				}, 1000);//1 second
+
 			}
 		}
 
 		// declarations
-		public event EventHandler<EventArgs> GeoLocatorInitialized = delegate {};
+		public event EventHandler<EventArgs> GeoLocatorRefreshed = delegate {};
 
 		protected readonly string logTag = "!!!!!!! App";
 
-		public bool IsGeoLocatorInitialized { get; set; }
+		public bool IsGeoLocatorRefreshed { get; private set; }
+
 
 		public static AppGlobal Current {
 			get { return current; }
@@ -123,18 +140,18 @@ namespace App.Common
 			// so we want to do it on a background thread
 			new Task (async () => { 
 
-				//pre-fetch current position
-				var position = await _geoLocationInstance.GetCurrentPosition ();
 				// add a little wait time, to illustrate a loading event
 				// TODO: Replace this with real work in your app, such as starting services,
 				// database init, web calls, etc.
 				//Thread.Sleep (2500);
+				//TODO: Loop until a position is fixed
+				//as positioning is fundamental to our business
+				//pre-fetch current position
 
-				if(position != null){
-					this.IsGeoLocatorInitialized = true;
-					this.GeoLocatorInitialized (this, new EventArgs ());
-					//Log.Debug (logTag, "App initialized, setting Initialized = true");
-				}
+				//preload the location
+				await _geoLocationInstance.GetCurrentPosition ();
+
+				//Log.Debug (logTag, "App initialized, setting Initialized = true");
 			}).Start ();
 		}
 

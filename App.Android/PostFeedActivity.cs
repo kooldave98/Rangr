@@ -16,8 +16,8 @@ using App.Common;
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", 
-				MainLauncher = true, 
-				ScreenOrientation = ScreenOrientation.Portrait)]
+		MainLauncher = true, 
+		ScreenOrientation = ScreenOrientation.Portrait)]
 
 	public class PostFeedActivity : BaseActivity
 	{
@@ -43,7 +43,7 @@ namespace App.Android
 			#endregion
 
 			#region Setup pull to refresh
-			mPullToRefreshAttacher = new PullToRefreshAttacher(this, postListView);
+			mPullToRefreshAttacher = new PullToRefreshAttacher (this, postListView);
 
 			mPullToRefreshAttacher.Refresh += async (sender, e) => {
 				await view_model.RefreshPosts ();
@@ -67,7 +67,9 @@ namespace App.Android
 
 		private EventHandler<EventArgs> NewPostsReceivedHandler;
 
-		protected async override void OnResume ()
+		private EventHandler<EventArgs> GeoLocatorRefreshedHandler;
+
+		protected override void OnResume ()
 		{
 			//Doing this before to prevent the blank screen
 			//cause the base can take a while
@@ -77,29 +79,35 @@ namespace App.Android
 
 			JavaScriptTimer.SetTimeout (delegate {
 				RunOnUiThread (() => {
-					dismiss_progress();
+					dismiss_progress ();
 				});
-			}, 3000);//die out after 3 secs
+			}, 10000);//die out after 10 secs
 
 			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
 
 				NewPostsReceivedHandler = (object sender, EventArgs e) => {
 					//Refresh list view data
-					postListAdapter.NotifyDataSetChanged ();
+					RunOnUiThread (() => {
+						postListAdapter.NotifyDataSetChanged ();
+					});
 				};
 
 				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-				await view_model.RefreshPosts ();
+				GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
+					await view_model.RefreshPosts ();
 
-				JavaScriptTimer.SetTimeout (delegate {
-					RunOnUiThread (() => {
-						dismiss_progress();
-					});
-				}, 500);
+					JavaScriptTimer.SetTimeout (delegate {
+						RunOnUiThread (() => {
+							dismiss_progress ();
+						});
+					}, 500);//1/2 a second
+				};
 
-			}
-			else{
+				AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
+
+
+			} else {
 				StartActivity (typeof(LoginActivity));
 			}
 
@@ -110,6 +118,7 @@ namespace App.Android
 			base.OnPause ();
 
 			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
+			AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
 		}
 
 		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)

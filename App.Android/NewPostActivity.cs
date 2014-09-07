@@ -69,15 +69,22 @@ namespace App.Android
 
 		private async void HandleSaveButtonClicked (object sender, EventArgs e)
 		{
+			send_button.SetEnabled (false);
 			if (!string.IsNullOrWhiteSpace (view_model.PostText)) {
-				var successful = await view_model.CreatePost ();
 
-				if (successful) {
-					SetResult (Result.Ok);
+				if (AppGlobal.Current.IsGeoLocatorRefreshed) {
+					var successful = await view_model.CreatePost ();
 
-					Finish ();
+					if (successful) {
+						SetResult (Result.Ok);
+
+						Finish ();
+					}
+				} else {
+					AppEvents.Current.TriggerGeolocatorFailedEvent ();
 				}
 			}
+			send_button.SetEnabled (true);
 		}
 
 		private void HandlePostTextChanged (object sender, EventArgs e)

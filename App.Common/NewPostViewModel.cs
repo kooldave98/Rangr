@@ -8,7 +8,7 @@ namespace App.Common
 {
 	public class NewPostViewModel : ViewModelBase
 	{
-		public User CurrentUser { get; private set;}
+		public User CurrentUser { get; private set; }
 
 		public string PostText { get; set; }
 
@@ -16,10 +16,9 @@ namespace App.Common
 		{
 			if (string.IsNullOrWhiteSpace (PostText)) {
 				throw new InvalidOperationException ("Cannot create an empty post");
-			}
-				
-			var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection().connection_id.ToString ());
+			}				
 
+			var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id.ToString ());
 
 			if (result != null) {
 				return true;

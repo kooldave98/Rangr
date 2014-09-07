@@ -21,7 +21,7 @@ namespace App.Android
 			RetainInstance = true;
 		}
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			var peopleListView = inflater.Inflate (Resource.Layout.PeopleList, container, false);
 
@@ -42,44 +42,51 @@ namespace App.Android
 			HandleOnConnectionsReceived = (object sender, EventArgs e) => {
 				list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
 
-				ListAdapter = list_adapter;
-
-				list_adapter.NotifyDataSetChanged ();
+				Activity.RunOnUiThread (() => {
+					ListAdapter = list_adapter;
+					list_adapter.NotifyDataSetChanged ();
+				});
 			};
 		}
-			
-		public async override void OnResume()
+
+		private EventHandler<EventArgs> GeoLocatorRefreshedHandler;
+
+		public override void OnResume ()
 		{
 			base.OnResume ();
 			//For some reason, doing the refresh posts OnResume doesn't work
 			//So doing it in OnViewCreated
 
 			view_model.OnConnectionsReceived += HandleOnConnectionsReceived;
+				
+			GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
+				await view_model.RefreshConnectedUsers ();
+			};
 
-			await view_model.RefreshConnectedUsers();
+			AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
 		}
 
 		public override void OnPause ()
 		{
 			base.OnPause ();
 			view_model.OnConnectionsReceived -= HandleOnConnectionsReceived;
-
+			AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
 			//cleanup_map ();
 		}
 
-		private void cleanup_map()
+		private void cleanup_map ()
 		{
 			Fragment fragment = this;
-			FragmentTransaction ft = FragmentManager.BeginTransaction();
+			FragmentTransaction ft = FragmentManager.BeginTransaction ();
 
-			ft.Remove(fragment);
-			ft.Commit();
+			ft.Remove (fragment);
+			ft.Commit ();
 		}
 
 
 		private EventHandler<EventArgs> HandleOnConnectionsReceived;
 
-		public PeopleListFragment(PeopleViewModel the_view_model)
+		public PeopleListFragment (PeopleViewModel the_view_model)
 		{
 			view_model = the_view_model;
 		}
