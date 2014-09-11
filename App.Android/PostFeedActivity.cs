@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using Xamarin.ActionBarPullToRefresh.Library;
 using System.Threading.Tasks;
 using App.Common;
+using CustomViews;
+using App.Core.Portable.Models;
 
 namespace App.Android
 {
@@ -30,9 +32,11 @@ namespace App.Android
 
 			SetContentView (Resource.Layout.PostList);
 
-			postListView = FindViewById<ListView> (Resource.Id.list);
+			postListView = FindViewById<EndlessListView> (Resource.Id.list);
 
-			postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
+			//postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
+			postListView.SetListEndLoadingView (Resource.Layout.loading_layout);
+
 
 			#region setup list adapter
 			postListAdapter = new PostFeedAdapter (this, view_model.Posts);
@@ -41,6 +45,7 @@ namespace App.Android
 			//---------
 			postListView.Adapter = postListAdapter;
 			#endregion
+
 
 			#region Setup pull to refresh
 			mPullToRefreshAttacher = new PullToRefreshAttacher (this, postListView);
@@ -55,6 +60,15 @@ namespace App.Android
 
 			};
 			#endregion
+
+			postListView.OnListEndReached += async (sender, e) => {
+				await view_model.OlderPosts ();
+				JavaScriptTimer.SetTimeout (delegate {
+					RunOnUiThread (() => {
+						((EndlessListView)sender).SetEndlessListLoaderComplete ();
+					});
+				}, 1500);//1.5 secs
+			};
 
 			// wire up post click handler
 			postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
@@ -78,9 +92,7 @@ namespace App.Android
 			base.OnResume ();
 
 			JavaScriptTimer.SetTimeout (delegate {
-				RunOnUiThread (() => {
-					dismiss_progress ();
-				});
+				dismiss_progress ();
 			}, 10000);//die out after 10 secs
 
 			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
@@ -98,9 +110,7 @@ namespace App.Android
 					await view_model.RefreshPosts ();
 
 					JavaScriptTimer.SetTimeout (delegate {
-						RunOnUiThread (() => {
-							dismiss_progress ();
-						});
+						dismiss_progress ();
 					}, 500);//1/2 a second
 				};
 
@@ -168,7 +178,7 @@ namespace App.Android
 		}
 
 		private PostFeedAdapter postListAdapter;
-		private ListView postListView;
+		private EndlessListView postListView;
 		private PullToRefreshAttacher mPullToRefreshAttacher;
 	}
 }

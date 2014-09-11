@@ -40,9 +40,9 @@ namespace App.Android
 			isBusyChangedEventHandler = (sender, e) => {
 
 				if (the_view_model.IsBusy) {
-					show_progress();
+					show_progress ();
 				} else {
-					dismiss_progress();
+					dismiss_progress ();
 				}
 			};
 
@@ -109,24 +109,33 @@ namespace App.Android
 			StartActivity (i);
 		}
 
-		protected void show_progress(string title = "Loading...", string message = "Busy")
+		protected void show_progress (string title = "Loading...", string message = "Busy")
 		{
-			progress = ProgressDialog.Show (this, title, message, true);
+			RunOnUiThread (() => {
+				progress = ProgressDialog.Show (this, title, message, true);
+			});
+
 		}
 
-		protected void dismiss_progress()
+		protected void dismiss_progress ()
 		{
-			if (progress != null)
-				progress.Dismiss ();
+			RunOnUiThread (() => {
+				if (progress != null)
+					progress.Dismiss ();
+			});
+
 		}
 
 		protected void ShowToast (string message)
 		{
-			if (true) {
-				var t = Toast.MakeText (this, message, ToastLength.Long);
-				t.SetGravity (GravityFlags.Center, 0, 0);
-				t.Show ();
-			}
+			RunOnUiThread (() => {
+				if (true) {
+					var t = Toast.MakeText (this, message, ToastLength.Long);
+					t.SetGravity (GravityFlags.Center, 0, 0);
+					t.Show ();
+				}
+			});
+
 		}
 
 		protected void notify (String methodName)

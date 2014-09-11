@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using App.Core.Portable.Network;
@@ -10,9 +11,15 @@ namespace App.Common
 {
 	//The ios workarounds are because I didn't want to be repopulating the list each time.
 	//So I am caching the latest posts every time a pull is made.
+
 	public class FeedViewModel : ViewModelBase
 	{
-		public int start_index { get; set; }
+		public enum RefreshDirection
+		{
+			FORWARD,
+			BACKWARD
+		}
+		//public int start_index { get; set; }
 
 		//1.1non android breaking ios workaround
 		public IList<Post> LatestPosts { get; set; }
@@ -20,21 +27,66 @@ namespace App.Common
 
 		public IList<Post> Posts { get; set; }
 
+		private bool is_loading = false;
+
+		private bool first_load = true;
+
 		public async Task RefreshPosts ()
 		{
-			//Todo: Need to guard Get Current Connection
-			LatestPosts = await PostServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString (), start_index.ToString ());
-			
+			if (!first_load) {
+				//Todo: Need to guard Get Current Connection
+				var newer_posts = 
+					LatestPosts = 
+						await PostServices.Get (connection_id, 
+						forward_start_index.ToString (), 
+						backward_traversal: false, 
+						latest_entries: first_load);
 
-			foreach (var post in LatestPosts) {
-				start_index = post.post_id + 1;
+				foreach (var post in newer_posts) {
+					first_load = false;
+					Posts.Insert (0, post);
+				}
 
-				Posts.Insert (0, post);
+				if (OnNewPostsReceived != null) {
+					OnNewPostsReceived (this, EventArgs.Empty);
+				}
+			} else {
+
+				await OlderPosts ();			
+			}
+		}
+
+		public async Task OlderPosts ()
+		{
+			if (first_load || backward_start_index > 0) {
+				var older_posts = 
+					await PostServices
+							.Get (connection_id, 
+						backward_start_index.ToString (), 
+						backward_traversal: true, 
+						latest_entries: first_load);
+
+				foreach (var post in older_posts) {
+					first_load = false;
+					Posts.Add (post);
+				}
 			}
 
 			if (OnNewPostsReceived != null) {
 				OnNewPostsReceived (this, EventArgs.Empty);
 			}
+		}
+
+		private int forward_start_index {
+			get{ return Posts.FirstOrDefault () != null ? Posts.First ().post_id + 1 : 0; }
+		}
+
+		private int backward_start_index {
+			get{ return Posts.LastOrDefault () != null ? Posts.Last ().post_id - 1 : 0; }
+		}
+
+		private string connection_id {
+			get{ return _sessionInstance.GetCurrentConnection ().connection_id.ToString (); }
 		}
 
 		public event EventHandler<EventArgs> OnNewPostsReceived;
@@ -51,7 +103,6 @@ namespace App.Common
 			_sessionInstance = Session.GetInstance ();
 
 			PostServices = new Posts (HttpRequest.Current);
-
 		}
 
 		ISession _sessionInstance;

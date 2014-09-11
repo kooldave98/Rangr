@@ -90,6 +90,7 @@
     <Compile Include="EditProfileActivity.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\EndlessListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -226,6 +227,8 @@
     <AndroidResource Include="Resources\drawable\twitter.png" />
     <AndroidResource Include="Resources\layout\EditProfile.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\Icon2x.png" />
+    <AndroidResource Include="Resources\layout\loading_layout.axml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

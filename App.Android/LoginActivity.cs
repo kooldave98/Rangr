@@ -82,6 +82,8 @@ namespace App.Android
 
 					Finish ();
 				}
+
+				hide_progress ();
 			}
 		}
 
@@ -92,8 +94,7 @@ namespace App.Android
 				password.Text =
 				userName.Text = string.Empty;
 
-				login.Visibility = ViewStates.Visible;
-				progressIndicator.Visibility = ViewStates.Invisible;
+				hide_progress ();
 			}
 		}
 
@@ -127,6 +128,12 @@ namespace App.Android
 				return true;
 			}
 			return false;
+		}
+
+		private void hide_progress ()
+		{
+			login.Visibility = ViewStates.Visible;
+			progressIndicator.Visibility = ViewStates.Invisible;
 		}
 
 
