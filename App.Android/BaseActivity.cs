@@ -62,7 +62,7 @@ namespace App.Android
 
 			the_view_model.ResumeState ();
 
-			AppGlobal.Current.Resume ();
+			AppGlobal.Current.Resume (this);
 		}
 
 		protected override void OnPause ()
@@ -80,7 +80,7 @@ namespace App.Android
 
 			AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
 
-			AppGlobal.Current.Pause ();
+			AppGlobal.Current.Pause (this);
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
@@ -141,17 +141,16 @@ namespace App.Android
 		protected void notify (String methodName)
 		{
 			//just disable this for now by the if condition
-			if (1 == 0) {
-				var name = this.LocalClassName;
 
-				var noti = new Notification.Builder (this)
-				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
-				.SetSmallIcon (Resource.Drawable.ic_action_logo)
-				.SetContentText (name).Build ();
-
-				var notificationManager = (NotificationManager)GetSystemService (NotificationService);
-				notificationManager.Notify ((int)CurrentTimeMillis (), noti);
-			}
+//				var name = this.LocalClassName;
+//
+//				var noti = new Notification.Builder (this)
+//				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
+//				.SetSmallIcon (Resource.Drawable.ic_action_logo)
+//				.SetContentText (name).Build ();
+//
+//				var notificationManager = (NotificationManager)GetSystemService (NotificationService);
+//				notificationManager.Notify ((int)CurrentTimeMillis (), noti);
 		}
 
 		private static readonly DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

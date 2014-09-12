@@ -27,8 +27,6 @@ namespace App.Common
 
 		public IList<Post> Posts { get; set; }
 
-		private bool is_loading = false;
-
 		private bool first_load = true;
 
 		public async Task RefreshPosts ()

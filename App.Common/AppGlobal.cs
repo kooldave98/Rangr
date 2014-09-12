@@ -2,9 +2,11 @@
 using System.Timers;
 using System.Threading.Tasks;
 using App.Core.Portable.Device;
+using System.Collections.Generic;
 
 #if __ANDROID__
 using Android.App;
+
 
 #else
 
@@ -78,16 +80,30 @@ namespace App.Common
 			//conn_id will be null if the Service command failed for some unknown reason
 		}
 
-		public void Pause ()
-		{
-			#region"suspend_geolocator"
-			_geoLocationInstance.StopListening ();
-			if (geoPositionChangedEventHandler != null)
-				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
-			#endregion
+		#if __ANDROID__
+		private List<Activity> running_activities = new List<Activity> ();
 
-			IsGeoLocatorRefreshed = false;
+		public void Resume (Activity the_activity)
+		{
+			lock (running_activities) {
+				running_activities.Add (the_activity);
+			}
+			Resume ();
 		}
+
+		public void Pause (Activity the_activity)
+		{
+			lock (running_activities) {
+				running_activities.Remove (the_activity);
+			}
+
+			JavaScriptTimer.SetTimeout (delegate {
+				if (running_activities.Count == 0) {
+					Pause ();
+				}
+			}, 5000);//5 seconds
+		}
+		#endif
 
 		public void Resume ()
 		{
@@ -109,6 +125,18 @@ namespace App.Common
 
 			}
 		}
+
+		public void Pause ()
+		{
+			#region"suspend_geolocator"
+			_geoLocationInstance.StopListening ();
+			if (geoPositionChangedEventHandler != null)
+				_geoLocationInstance.OnGeoPositionChanged -= geoPositionChangedEventHandler;
+			#endregion
+
+			IsGeoLocatorRefreshed = false;
+		}
+
 
 		// declarations
 		public event EventHandler<EventArgs> GeoLocatorRefreshed = delegate {};
