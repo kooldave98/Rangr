@@ -91,6 +91,9 @@
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\EndlessListView.cs" />
+    <Compile Include="PostMapFragment.cs">
+      <DependentUpon>PostDetailsActivity.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -201,9 +204,6 @@
     <AndroidResource Include="Resources\layout\PeopleListItem.axml">
       <DependentUpon>People.axml</DependentUpon>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\PeopleMap.axml">
-      <DependentUpon>People.axml</DependentUpon>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\EmailPropertyListItem.axml">
       <DependentUpon>Profile.axml</DependentUpon>
     </AndroidResource>
@@ -229,6 +229,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\Icon2x.png" />
     <AndroidResource Include="Resources\layout\loading_layout.axml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\layout\GoogleMap.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

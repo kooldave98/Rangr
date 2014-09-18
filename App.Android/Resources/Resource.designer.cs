@@ -438,14 +438,14 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060022
-			public const int Divider = 2131099682;
+			// aapt resource value: 0x7f060023
+			public const int Divider = 2131099683;
 			
 			// aapt resource value: 0x7f06000d
 			public const int EmailButton = 2131099661;
 			
-			// aapt resource value: 0x7f06000e
-			public const int HeaderTextView = 2131099662;
+			// aapt resource value: 0x7f06000f
+			public const int HeaderTextView = 2131099663;
 			
 			// aapt resource value: 0x7f06000c
 			public const int NameTextView = 2131099660;
@@ -453,8 +453,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060024
 			public const int PhoneButton = 2131099684;
 			
-			// aapt resource value: 0x7f06001a
-			public const int PostText = 2131099674;
+			// aapt resource value: 0x7f06001b
+			public const int PostText = 2131099675;
 			
 			// aapt resource value: 0x7f060025
 			public const int PostTextLabel = 2131099685;
@@ -462,41 +462,41 @@ namespace App.Android
 			// aapt resource value: 0x7f060027
 			public const int ProfileList = 2131099687;
 			
-			// aapt resource value: 0x7f06001d
-			public const int SwipeContent = 2131099677;
+			// aapt resource value: 0x7f06001e
+			public const int SwipeContent = 2131099678;
 			
-			// aapt resource value: 0x7f060019
-			public const int UserNameText = 2131099673;
+			// aapt resource value: 0x7f06001a
+			public const int UserNameText = 2131099674;
 			
 			// aapt resource value: 0x7f06000b
 			public const int ValueTextView = 2131099659;
 			
-			// aapt resource value: 0x7f060012
-			public const int dialogImage = 2131099666;
-			
-			// aapt resource value: 0x7f060011
-			public const int dialogLayout = 2131099665;
-			
 			// aapt resource value: 0x7f060013
-			public const int dialogTitle = 2131099667;
+			public const int dialogImage = 2131099667;
+			
+			// aapt resource value: 0x7f060012
+			public const int dialogLayout = 2131099666;
+			
+			// aapt resource value: 0x7f060014
+			public const int dialogTitle = 2131099668;
 			
 			// aapt resource value: 0x7f060007
 			public const int displayName = 2131099655;
 			
-			// aapt resource value: 0x7f060020
-			public const int distance = 2131099680;
+			// aapt resource value: 0x7f060021
+			public const int distance = 2131099681;
 			
 			// aapt resource value: 0x7f060028
 			public const int feed_menu_item = 2131099688;
 			
-			// aapt resource value: 0x7f06001b
-			public const int fragmentContainer = 2131099675;
+			// aapt resource value: 0x7f06001c
+			public const int fragmentContainer = 2131099676;
 			
 			// aapt resource value: 0x7f060004
 			public const int hybrid = 2131099652;
 			
-			// aapt resource value: 0x7f06001c
-			public const int imageView1 = 2131099676;
+			// aapt resource value: 0x7f06001d
+			public const int imageView1 = 2131099677;
 			
 			// aapt resource value: 0x7f060009
 			public const int linearLayout1 = 2131099657;
@@ -504,23 +504,23 @@ namespace App.Android
 			// aapt resource value: 0x7f06000a
 			public const int linearLayout2 = 2131099658;
 			
-			// aapt resource value: 0x7f06001e
-			public const int linearLayout3 = 2131099678;
+			// aapt resource value: 0x7f06001f
+			public const int linearLayout3 = 2131099679;
 			
 			// aapt resource value: 0x7f060026
 			public const int list = 2131099686;
 			
-			// aapt resource value: 0x7f060016
-			public const int logIn = 2131099670;
-			
 			// aapt resource value: 0x7f060017
-			public const int loginProgress = 2131099671;
+			public const int logIn = 2131099671;
 			
 			// aapt resource value: 0x7f060018
-			public const int loginQuestion = 2131099672;
+			public const int loginProgress = 2131099672;
 			
-			// aapt resource value: 0x7f060023
-			public const int map = 2131099683;
+			// aapt resource value: 0x7f060019
+			public const int loginQuestion = 2131099673;
+			
+			// aapt resource value: 0x7f06000e
+			public const int map = 2131099662;
 			
 			// aapt resource value: 0x7f060000
 			public const int none = 2131099648;
@@ -528,20 +528,20 @@ namespace App.Android
 			// aapt resource value: 0x7f060001
 			public const int normal = 2131099649;
 			
-			// aapt resource value: 0x7f060015
-			public const int password = 2131099669;
+			// aapt resource value: 0x7f060016
+			public const int password = 2131099670;
 			
 			// aapt resource value: 0x7f060029
 			public const int people_menu_item = 2131099689;
 			
-			// aapt resource value: 0x7f06001f
-			public const int personName = 2131099679;
+			// aapt resource value: 0x7f060020
+			public const int personName = 2131099680;
 			
 			// aapt resource value: 0x7f06002a
 			public const int profile_menu_item = 2131099690;
 			
-			// aapt resource value: 0x7f060010
-			public const int progressBar1 = 2131099664;
+			// aapt resource value: 0x7f060011
+			public const int progressBar1 = 2131099665;
 			
 			// aapt resource value: 0x7f060006
 			public const int ptr_progress = 2131099654;
@@ -552,8 +552,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060002
 			public const int satellite = 2131099650;
 			
-			// aapt resource value: 0x7f060021
-			public const int status = 2131099681;
+			// aapt resource value: 0x7f060022
+			public const int status = 2131099682;
 			
 			// aapt resource value: 0x7f060008
 			public const int statusMessage = 2131099656;
@@ -561,11 +561,11 @@ namespace App.Android
 			// aapt resource value: 0x7f060003
 			public const int terrain = 2131099651;
 			
-			// aapt resource value: 0x7f060014
-			public const int userName = 2131099668;
+			// aapt resource value: 0x7f060015
+			public const int userName = 2131099669;
 			
-			// aapt resource value: 0x7f06000f
-			public const int view1 = 2131099663;
+			// aapt resource value: 0x7f060010
+			public const int view1 = 2131099664;
 			
 			static Id()
 			{
@@ -606,28 +606,28 @@ namespace App.Android
 			public const int EmailPropertyListItem = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int GroupHeaderListItem = 2130903043;
+			public const int GoogleMap = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int loading_layout = 2130903044;
+			public const int GroupHeaderListItem = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Login = 2130903045;
+			public const int loading_layout = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int NewPost = 2130903046;
+			public const int Login = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int People = 2130903047;
+			public const int NewPost = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int PeopleList = 2130903048;
+			public const int People = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int PeopleListItem = 2130903049;
+			public const int PeopleList = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int PeopleMap = 2130903050;
+			public const int PeopleListItem = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
 			public const int PhonePropertyListItem = 2130903051;

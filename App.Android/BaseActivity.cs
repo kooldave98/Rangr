@@ -115,6 +115,14 @@ namespace App.Android
 				progress = ProgressDialog.Show (this, title, message, true);
 			});
 
+			//Auto dismiss progress after it has taken too long
+			JavaScriptTimer.SetTimeout (delegate {
+				var toast = progress != null;
+				dismiss_progress ();
+				if (toast)
+					ShowToast ("This operation is taking too long, this may be due to network problems.");
+			}, 100000);//die out after 100 secs
+
 		}
 
 		protected void dismiss_progress ()

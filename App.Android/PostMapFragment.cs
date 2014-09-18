@@ -16,7 +16,7 @@ using App.Core.Portable.Models;
 
 namespace App.Android
 {
-	public class PeopleMapFragment : Fragment
+	public class PostMapFragment : Fragment
 	{
 		private GoogleMap _map;
 
@@ -42,18 +42,7 @@ namespace App.Android
 
 		public override void OnViewCreated (View view, Bundle savedInstanceState)
 		{
-
 			base.OnViewCreated (view, savedInstanceState);
-
-			//ListView.DividerHeight = 0;
-//			ListView.Divider = null;
-//			var peopleListAdapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
-//
-//			ListAdapter = peopleListAdapter;
-//
-//			view_model.OnConnectionsReceived += (sender, e) => {
-//				peopleListAdapter.NotifyDataSetChanged();
-//			};
 		}
 
 		public override void OnResume ()
@@ -70,13 +59,6 @@ namespace App.Android
 			cleanup_map ();
 		}
 
-		public override void OnDestroyView ()
-		{
-
-			base.OnDestroyView ();
-			//cleanup_map ();
-		}
-
 		private void cleanup_map ()
 		{
 			Fragment fragment = Activity.FragmentManager.FindFragmentById (Resource.Id.map) as MapFragment;  
@@ -90,11 +72,6 @@ namespace App.Android
 		//for more info on configuring Google maps
 		private void SetupMap ()
 		{
-			//No need to refresh here again, as it would have been refreshed in the list fragment
-			//This would also save us the trouble of Initialising the connection if the app has been 
-			//idle for too long(> 4.5 mins) and this fragment is the first thing that wakes the app up
-
-			//await view_model.RefreshConnectedUsers();
 
 			if (_map == null) {
 				_map = (Activity.FragmentManager.FindFragmentById (Resource.Id.map) as MapFragment).Map;
@@ -102,22 +79,16 @@ namespace App.Android
 				if (_map != null) {
 					_map.MapType = GoogleMap.MapTypeNormal;
 
-					_map.MyLocationEnabled = true;
+					_map.MyLocationEnabled = false;
 
-					foreach (var connection in view_model.ConnectedUsers) {
-						_map.AddMarker (GetMarker (connection));								
-					}
+					_map.AddMarker (GetMarker (post));
 
-					var my_location = GetPosition ("0,0");
-
-					if (view_model.CurrentLocation != null) {
-						my_location = GetPosition (view_model.CurrentLocation.geolocation_value);
-					}
+					var map_centre_location = GetPosition (post.geolocation);
 
 					// We create an instance of CameraUpdate, and move the map to it.
 					CameraPosition cameraPosition = new CameraPosition.Builder ()
-						.Target (my_location)      // Sets the center of the map to Mountain View
-						.Zoom (15)                   // Sets the zoom
+						.Target (map_centre_location)      // Sets the center of the map to Mountain View
+						.Zoom (15)                 // Sets the zoom
 					                                //.Bearing(90)                // Sets the orientation of the camera to east
 					                                //.Tilt(30)                   // Sets the tilt of the camera to 30 degrees
 						.Build ();                   // Creates a CameraPosition from the builder
@@ -129,12 +100,12 @@ namespace App.Android
 
 		}
 
-		private MarkerOptions GetMarker (Connection connected_user)
+		private MarkerOptions GetMarker (Post the_post)
 		{
 
 			return new MarkerOptions ()
-				.SetPosition (GetPosition (connected_user.geolocation_string))
-				.SetTitle (connected_user.user_display_name);
+				.SetPosition (GetPosition (the_post.geolocation))
+				.SetTitle (the_post.text);
 			//.InvokeIcon(BitmapDescriptorFactory
 			//.DefaultMarker(BitmapDescriptorFactory
 			//.HueCyan)));;
@@ -146,12 +117,12 @@ namespace App.Android
 			return new LatLng (double.Parse (array [1]), double.Parse (array [0]));
 		}
 
-		public PeopleMapFragment (PeopleViewModel the_view_model)
+		public PostMapFragment (Post the_post)
 		{
-			view_model = the_view_model;
+			post = the_post;
 		}
 
-		PeopleViewModel view_model;
+		Post post;
 	}
 }
 

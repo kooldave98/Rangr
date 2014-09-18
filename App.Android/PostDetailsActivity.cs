@@ -14,6 +14,8 @@ using App.Common;
 using App.Core.Portable.Models;
 using System.Xml.Serialization;
 
+
+
 namespace App.Android
 {
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
@@ -38,11 +40,29 @@ namespace App.Android
 
 			ActionBar.SetDisplayHomeAsUpEnabled (true);
 
+			set_map ();
+
 			FindViewById<TextView> (Resource.Id.UserNameText).SetText (view_model.CurrentPost.user_display_name, TextView.BufferType.Normal);
 
 			postTextLabel = FindViewById<TextView> (Resource.Id.PostTextLabel);
 
 			postTextLabel.Text = view_model.CurrentPost.text;
+		}
+
+		protected override void OnPause ()
+		{
+			base.OnPause ();
+
+			Finish ();
+		}
+
+		public void set_map ()
+		{
+			var transaction = FragmentManager.BeginTransaction ();
+
+			transaction.Replace (Resource.Id.fragmentContainer, new PostMapFragment (view_model.CurrentPost));
+
+			transaction.Commit ();
 		}
 
 

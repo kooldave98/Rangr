@@ -91,10 +91,6 @@ namespace App.Android
 
 			base.OnResume ();
 
-			JavaScriptTimer.SetTimeout (delegate {
-				dismiss_progress ();
-			}, 10000);//die out after 10 secs
-
 			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
 
 				NewPostsReceivedHandler = (object sender, EventArgs e) => {
