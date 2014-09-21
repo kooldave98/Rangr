@@ -53,7 +53,7 @@ namespace App.Android
 			//Assign item's values to the various subviews
 			txtName.SetText (item.user_display_name, TextView.BufferType.Normal);
 			txtDescription.SetText (item.text, TextView.BufferType.Normal);
-			view.FindViewById<ImageView> (Resource.Id.profilePic).SetImageResource (Resource.Drawable.Placeholder);
+			view.FindViewById<ImageView> (Resource.Id.profilePic).SetImageResource (Resource.Drawable.user_default_avatar);
 			//Finally return the view
 			return view;
 		}

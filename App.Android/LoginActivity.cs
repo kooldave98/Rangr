@@ -13,8 +13,8 @@ namespace App.Android
 {
 	[Activity (Label = "@string/app_name"				
 				, NoHistory = true
-				, ScreenOrientation = ScreenOrientation.Portrait
-				, LaunchMode = LaunchMode.SingleTop)]			
+				, ScreenOrientation = ScreenOrientation.Portrait)]
+	//, LaunchMode = LaunchMode.SingleTop)]			
 	public class LoginActivity : BaseActivity, TextView.IOnEditorActionListener
 	{
 
