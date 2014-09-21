@@ -2,14 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item 
 		android:id="@+id/feed_menu_item"
-      	android:title="Feed"
+      	android:title="@string/feed_menu_item"
       	android:showAsAction="never" />
 	<item 	
 		android:id="@+id/people_menu_item"
-  		android:title="People"
+  		android:title="@string/people_menu_item"
   		android:showAsAction="never" />
 	<item 	
 		android:id="@+id/profile_menu_item"
-  		android:title="Profile"
+  		android:title="@string/profile_menu_item"
   		android:showAsAction="never" />
+	<item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+
 </menu>

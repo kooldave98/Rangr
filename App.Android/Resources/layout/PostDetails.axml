@@ -45,7 +45,6 @@
         android:textColor="#666"
         android:ellipsize="none"
         android:layout_marginTop="16dp"
-        style="@style/WalkrSubTitleStyle"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
     <FrameLayout
