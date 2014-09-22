@@ -12,7 +12,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using Android.Views.InputMethods;
 

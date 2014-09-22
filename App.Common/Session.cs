@@ -1,19 +1,18 @@
 using System;
 using App.Core.Portable.Models;
-using App.Core.Portable.Device;
 using App.Core.Portable.Persistence;
 
 namespace App.Common
 {
-	public class Session : ISession
+	public class Session
 	{
 
-		public void PersistCurrentConnection(ConnectionIdentity connection_id)
+		public void PersistCurrentConnection (ConnectionIdentity connection_id)
 		{
-			persistentStorage.Save(CurrentConnectionKey, connection_id);
+			persistentStorage.Save (CurrentConnectionKey, connection_id);
 		}
 
-		public ConnectionIdentity GetCurrentConnection(bool allowDefault = false)
+		public ConnectionIdentity GetCurrentConnection (bool allowDefault = false)
 		{
 			var connection = persistentStorage.Load<ConnectionIdentity> (CurrentConnectionKey);
 
@@ -24,7 +23,7 @@ namespace App.Common
 			return connection;
 		}
 
-		public User GetCurrentUser(bool allowDefault = false)
+		public User GetCurrentUser (bool allowDefault = false)
 		{
 			var user = persistentStorage.Load<User> (CurrentUserKey);
 
@@ -35,14 +34,14 @@ namespace App.Common
 			return user;
 		}
 
-		public void PersistCurrentUser(User user)
+		public void PersistCurrentUser (User user)
 		{
-			persistentStorage.Save(CurrentUserKey, user);
+			persistentStorage.Save (CurrentUserKey, user);
 		}
 
-		public static ISession GetInstance()
+		public static Session GetInstance ()
 		{
-			return _instance ?? (_instance = new Session());
+			return _instance ?? (_instance = new Session ());
 		}
 
 		private IPersistentStorage persistentStorage;
@@ -51,9 +50,9 @@ namespace App.Common
 
 		private const string CurrentConnectionKey = "current_connection";
 
-		private static ISession _instance = null;
+		private static Session _instance = null;
 
-		private Session()
+		private Session ()
 		{
 			persistentStorage = PersistentStorage.Current;
 		}

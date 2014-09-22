@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using App.Core.Portable.Device;
 using App.Common;
 
 namespace App.Android

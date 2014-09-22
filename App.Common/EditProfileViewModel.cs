@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using App.Core.Portable.Device;
 using App.Core.Portable.Persistence;
 using App.Core.Portable.Models;
 
@@ -8,7 +7,7 @@ namespace App.Common
 {
 	public class EditProfileViewModel : ViewModelBase
 	{
-		public User CurrentUserToBeEdited { get; set;}
+		public User CurrentUserToBeEdited { get; set; }
 
 		public async Task<bool> UpdateUser ()
 		{
@@ -16,10 +15,9 @@ namespace App.Common
 				throw new InvalidOperationException ("User is null");
 			}
 
-			var result = await user_services.Update (CurrentUserToBeEdited.user_id.ToString(), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.user_status_message);
+			var result = await user_services.Update (CurrentUserToBeEdited.user_id.ToString (), CurrentUserToBeEdited.user_display_name, CurrentUserToBeEdited.user_status_message);
 
-			if(result == null)
-			{
+			if (result == null) {
 				return false;
 			}
 
@@ -36,12 +34,12 @@ namespace App.Common
 		public EditProfileViewModel ()
 		{
 			SessionInstance = Session.GetInstance ();
-			user_services = new Users (HttpRequest.Current);
+			user_services = new Users ();
 
 			CurrentUserToBeEdited = SessionInstance.GetCurrentUser ();
 		}
 
-		private ISession SessionInstance;
+		private Session SessionInstance;
 		private Users user_services;
 	}
 }

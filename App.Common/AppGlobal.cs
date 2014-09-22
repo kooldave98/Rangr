@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using System.Threading.Tasks;
-using App.Core.Portable.Device;
 using System.Collections.Generic;
 
 #if __ANDROID__
@@ -160,7 +159,7 @@ namespace App.Common
 		protected AppGlobal ()
 		{
 			_geoLocationInstance = GeoLocation.GetInstance ();
-			ConnectionServices = new Connections (HttpRequest.Current);
+			ConnectionServices = new Connections ();
 			sessionInstance = Session.GetInstance ();
 
 			// any work here is likely to be blocking (static constructors run on whatever thread that first 
@@ -185,9 +184,9 @@ namespace App.Common
 
 		private EventHandler<GeoPositionChangedEventArgs> geoPositionChangedEventHandler;
 
-		private ISession sessionInstance;
+		private Session sessionInstance;
 		private Connections ConnectionServices;
-		private IGeoLocation _geoLocationInstance;
+		private GeoLocation _geoLocationInstance;
 	}
 }
 

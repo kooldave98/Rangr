@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Core.Portable;
 using App.Core.Portable.Models;
-using App.Core.Portable.Network;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace App.Common
 {
@@ -30,9 +30,10 @@ namespace App.Common
 				string data = await _httpRequest.Get (url);
 				posts = JsonConvert.DeserializeObject<List<Post>> (data);
 
-			} catch (Exception) {
+			} catch (Exception e) {
+
 				AppEvents.Current.TriggerConnectionFailedEvent ();
-				//Todo: log exception
+				Debug.WriteLine (e.Message);
 				//Todo: Probably load any few posts that have been cached locally
 			}
 
@@ -55,10 +56,10 @@ namespace App.Common
 				var data = await _httpRequest.Post (url, requestBody);
 				post_id = JsonConvert.DeserializeObject<PostIdentity> (data);
 
-			} catch (Exception) {
+			} catch (Exception e) {
 
 				AppEvents.Current.TriggerConnectionFailedEvent ();
-				//Todo: log exception
+				Debug.WriteLine (e.Message);
 			}
 
 			return post_id;
@@ -66,18 +67,17 @@ namespace App.Common
 
 
 		private const string restful_resource = "posts";
-		private IHttpRequest _httpRequest;
+
+		private HttpRequest _httpRequest {
+			get {
+				return HttpRequest.Current;
+			}
+		}
 
 		private string base_rest_url {
 			get {
 				return string.Format ("{0}/{1}", Resources.baseUrl, restful_resource);
 			}
 		}
-
-		public Posts (IHttpRequest httpRequest)
-		{
-			_httpRequest = httpRequest;
-		}
-
 	}
 }

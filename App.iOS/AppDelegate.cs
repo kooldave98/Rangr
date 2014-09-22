@@ -3,7 +3,6 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Threading;
-using App.Core.Portable.Device;
 using System.Linq;
 using System.Collections.Generic;
 using App.Common;
@@ -18,11 +17,11 @@ namespace App.iOS
 	{
 		UIWindow window;
 		MainViewController mainViewController;
-		ISession _sessionInstance = Session.GetInstance();
+		Session _sessionInstance = Session.GetInstance ();
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			if(!UIDevice.CurrentDevice.CheckSystemVersion(7,0))
+			if (!UIDevice.CurrentDevice.CheckSystemVersion (7, 0))
 				Theme.Apply ();
 
 			//

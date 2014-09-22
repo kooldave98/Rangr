@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Core.Portable;
 using App.Core.Portable.Models;
-using App.Core.Portable.Network;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace App.Common
 {
@@ -21,9 +21,9 @@ namespace App.Common
 				var data = await _httpRequest.Get (url);
 				connections = JsonConvert.DeserializeObject<List<Connection>> (data);
 
-			} catch (Exception) {
+			} catch (Exception e) {
 				AppEvents.Current.TriggerConnectionFailedEvent ();
-				//Todo: log exception
+				Debug.WriteLine (e.Message);
 			}
 
 			return connections;
@@ -46,10 +46,10 @@ namespace App.Common
 				var data = await _httpRequest.Post (url, requestBody);  
 				connection_identity = JsonConvert.DeserializeObject<ConnectionIdentity> (data);
 
-			} catch (Exception) {
+			} catch (Exception e) {
 
 				AppEvents.Current.TriggerConnectionFailedEvent ();
-				//Todo: log exception
+				Debug.WriteLine (e.Message);
 			}
 
 			return connection_identity;
@@ -73,10 +73,10 @@ namespace App.Common
 				string data = await _httpRequest.Put (url, requestBody);
 				connection_identity = JsonConvert.DeserializeObject<ConnectionIdentity> (data);
 
-			} catch (Exception) {
+			} catch (Exception e) {
 
 				AppEvents.Current.TriggerConnectionFailedEvent ();
-				//Todo: log exception
+				Debug.WriteLine (e.Message);
 			}
 
 			return connection_identity;
@@ -84,17 +84,17 @@ namespace App.Common
 
 
 		private const string restful_resource = "connections";
-		private IHttpRequest _httpRequest;
+
+		private HttpRequest _httpRequest {
+			get {
+				return HttpRequest.Current;
+			}
+		}
 
 		private string base_rest_url {
 			get {
 				return string.Format ("{0}/{1}", Resources.baseUrl, restful_resource);
 			}
-		}
-
-		public Connections (IHttpRequest httpRequest)
-		{
-			_httpRequest = httpRequest;
 		}
 	}
 }

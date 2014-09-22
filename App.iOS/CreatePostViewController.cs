@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using App.Common;
-using App.Core.Portable.Device;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -12,8 +11,8 @@ namespace App.iOS
 		private NewPostViewModel view_model;
 		private Action success_callback;
 
-		public CreatePostViewController (Action the_success_callback) 
-				: base ("CreatePostViewController", null)
+		public CreatePostViewController (Action the_success_callback)
+			: base ("CreatePostViewController", null)
 		{
 			view_model = new NewPostViewModel (PersistentStorage.Current);
 			success_callback = the_success_callback;
@@ -29,8 +28,7 @@ namespace App.iOS
 
 		private async void Login (object sender, EventArgs e)
 		{
-			if (!string.IsNullOrWhiteSpace (NewPostTbx.Text)) 
-			{
+			if (!string.IsNullOrWhiteSpace (NewPostTbx.Text)) {
 				view_model.PostText = this.NewPostTbx.Text;
 
 				await view_model.CreatePost ();		

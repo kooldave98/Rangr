@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using App.Core.Portable.Device;
 using App.Core.Portable.Models;
-using App.Core.Portable.Network;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using App.Core.Portable.Persistence;
@@ -36,7 +34,7 @@ namespace App.Common
 			_httpRequest = HttpRequest.Current;
 			_geoLocationInstance = GeoLocation.GetInstance ();
 
-			ConnectionServices = new Connections (_httpRequest);
+			ConnectionServices = new Connections ();
 
 			setup_location_updates ();
 
@@ -65,10 +63,10 @@ namespace App.Common
 
 		//		private EventHandler<GeoPositionChangedEventArgs> geoPositionChangedEventHandler;
 
-		IGeoLocation _geoLocationInstance;
-		ISession _sessionInstance;
+		GeoLocation _geoLocationInstance;
+		Session _sessionInstance;
 		Connections ConnectionServices;
-		IHttpRequest _httpRequest;
+		HttpRequest _httpRequest;
 	}
 }
 

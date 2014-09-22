@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using App.Core.Portable.Device;
 using App.Core.Portable.Persistence;
 using App.Core.Portable.Models;
 
@@ -30,12 +29,12 @@ namespace App.Common
 		public NewPostViewModel (IPersistentStorage the_persistent_storage_instance)
 		{
 			SessionInstance = Session.GetInstance ();
-			post_services = new Posts (HttpRequest.Current);
+			post_services = new Posts ();
 
 			CurrentUser = SessionInstance.GetCurrentUser ();
 		}
 
-		private ISession SessionInstance;
+		private Session SessionInstance;
 		private Posts post_services;
 	}
 }

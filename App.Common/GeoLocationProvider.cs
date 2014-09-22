@@ -4,14 +4,13 @@ using System.Linq;
 using Xamarin.Geolocation;
 using System.Threading;
 using System.Threading.Tasks;
-using App.Core.Portable.Device;
 
 namespace App.Common
 {
 	/// <summary>
 	/// https://github.com/xamarin/Xamarin.Mobile/blob/master/MonoDroid/Samples/GeolocationSample/MainActivity.cs
 	/// </summary>
-	public partial class GeoLocation : IGeoLocation
+	public partial class GeoLocation
 	{
 		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
@@ -210,6 +209,39 @@ namespace App.Common
 		}
 	}
 
+	public enum Status
+	{
+		ERROR,
+		RELIABLE,
+		UNRELIABLE
+	}
+
+	public class GeoPositionChangedEventArgs : EventArgs
+	{
+		public GeoValue position { get; private set; }
+
+		public GeoPositionChangedEventArgs (GeoValue the_position)
+		{
+			position = the_position;
+		}
+	}
+
+	public class StatusChangedEventArgs : EventArgs
+	{
+		public Status status { get; private set; }
+
+		public StatusChangedEventArgs (Status the_status)
+		{
+			status = the_status;
+		}
+	}
+
+	public class GeoValue
+	{
+		public string geolocation_value { get; set; }
+
+		public int geolocation_accuracy { get; set; }
+	}
 
 }
 

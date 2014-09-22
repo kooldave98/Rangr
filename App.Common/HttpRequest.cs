@@ -1,56 +1,58 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using App.Core.Portable.Network;
+using System;
 
 namespace App.Common
 {
-	public class HttpRequest : IHttpRequest
-    {
+	public class HttpRequest
+	{
 		private static HttpClient httpClient;
-        
 
-		public async Task<string> Put(string baseUrl, List<KeyValuePair<string, string>> data)
+
+		public async Task<string> Put (string baseUrl, List<KeyValuePair<string, string>> data)
 		{
-			var response = await httpClient.PutAsync(baseUrl, new FormUrlEncodedContent(data));
-			response.EnsureSuccessStatusCode();
-			var responseString = await response.Content.ReadAsStringAsync();
+			var response = await httpClient.PutAsync (baseUrl, new FormUrlEncodedContent (data));
+			response.EnsureSuccessStatusCode ();
+			var responseString = await response.Content.ReadAsStringAsync ();
 
 			return responseString;
 		}
 
 
-        public async Task<string> Post(string baseUrl, List<KeyValuePair<string, string>> data)
-        {
-			var response = await httpClient.PostAsync(baseUrl, new FormUrlEncodedContent(data));
-            response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return responseString;
-        }
-
-        public async Task<string> Get(string baseUrl)
-        {
-			var response = await httpClient.GetAsync(baseUrl);
-            response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return responseString;
-        }
-
-
-		private static IHttpRequest _instance = null;
-		public static IHttpRequest Current
+		public async Task<string> Post (string baseUrl, List<KeyValuePair<string, string>> data)
 		{
-			get{
-				return _instance ?? (_instance = new HttpRequest ());
+			var response = await httpClient.PostAsync (baseUrl, new FormUrlEncodedContent (data));
+			response.EnsureSuccessStatusCode ();
+			var responseString = await response.Content.ReadAsStringAsync ();
+
+			return responseString;
+		}
+
+		public async Task<string> Get (string baseUrl)
+		{
+			var response = await httpClient.GetAsync (baseUrl);
+			response.EnsureSuccessStatusCode ();
+			var responseString = await response.Content.ReadAsStringAsync ();
+
+			return responseString;
+		}
+
+
+		private static HttpRequest _instance = null;
+
+		public static HttpRequest Current {
+			get {
+				//return _instance ?? (_instance = new HttpRequest ());
+				return (_instance = new HttpRequest ());
 			}
 		}
 
-		private HttpRequest()
+		private HttpRequest ()
 		{
-			httpClient = new HttpClient(new HttpClientHandler());
+			httpClient = new HttpClient (new HttpClientHandler ());
+			httpClient.Timeout = TimeSpan.FromSeconds (10);
 		}
 
-    }
+	}
 }

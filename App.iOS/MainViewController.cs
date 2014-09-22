@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using App.Core.Portable.Device;
 using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using App.Core.Portable.Network;
 using System.Threading.Tasks;
 using App.Common;
 
@@ -21,7 +19,7 @@ namespace App.iOS
 
 		public MainViewController () : base ("MainViewController", null)
 		{
-			view_model = new FeedViewModel();
+			view_model = new FeedViewModel ();
 				
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 

@@ -9,11 +9,11 @@ using Android.Content.PM;
 using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
-using Xamarin.ActionBarPullToRefresh.Library;
 using System.Threading.Tasks;
 using App.Common;
 using CustomViews;
 using App.Core.Portable.Models;
+using Android.Support.V4.Widget;
 
 namespace App.Android
 {
@@ -48,17 +48,21 @@ namespace App.Android
 
 
 			#region Setup pull to refresh
-			mPullToRefreshAttacher = new PullToRefreshAttacher (this, postListView);
 
-			mPullToRefreshAttacher.Refresh += async (sender, e) => {
+			refresher = FindViewById<SwipeRefreshLayout> (Resource.Id.refresher);
+			refresher.SetColorScheme (Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
+				Resource.Color.xam_gray, Resource.Color.xam_green);
+
+			refresher.Refresh += async (sender, e) => {
 				await view_model.RefreshPosts ();
 				JavaScriptTimer.SetTimeout (delegate {
 					RunOnUiThread (() => {
-						mPullToRefreshAttacher.SetRefreshComplete ();
+						refresher.Refreshing = false;
 					});
 				}, 1500);//1.5 secs
 
 			};
+				
 			#endregion
 
 			postListView.OnListEndReached += async (sender, e) => {
@@ -83,11 +87,21 @@ namespace App.Android
 
 		private EventHandler<EventArgs> GeoLocatorRefreshedHandler;
 
+		private void show_refresher ()
+		{
+			refresher.Refreshing = true;
+		}
+
+		private void dismiss_refresher ()
+		{
+			refresher.Refreshing = false;
+		}
+
 		protected override void OnResume ()
 		{
 			//Doing this before to prevent the blank screen
 			//cause the base can take a while
-			show_progress ();
+			show_refresher ();
 
 			base.OnResume ();
 
@@ -106,7 +120,7 @@ namespace App.Android
 					await view_model.RefreshPosts ();
 
 					JavaScriptTimer.SetTimeout (delegate {
-						dismiss_progress ();
+						dismiss_refresher ();
 					}, 500);//1/2 a second
 				};
 
@@ -122,7 +136,7 @@ namespace App.Android
 		protected override void OnPause ()
 		{
 			base.OnPause ();
-
+			dismiss_refresher ();
 			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
 			AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
 		}
@@ -175,6 +189,6 @@ namespace App.Android
 
 		private PostFeedAdapter postListAdapter;
 		private EndlessListView postListView;
-		private PullToRefreshAttacher mPullToRefreshAttacher;
+		private SwipeRefreshLayout refresher;
 	}
 }

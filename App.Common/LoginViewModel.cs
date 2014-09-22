@@ -1,8 +1,6 @@
 ﻿using System;
 using App.Core.Portable.Persistence;
-using App.Core.Portable.Device;
 using App.Core.Portable.Models;
-using App.Core.Portable.Network;
 using System.Threading.Tasks;
 
 namespace App.Common
@@ -11,25 +9,22 @@ namespace App.Common
 	{
 		public string UserDisplayName { get; set; }
 
-		public async Task<bool> CreateUser()
+		public async Task<bool> CreateUser ()
 		{
-			if (string.IsNullOrWhiteSpace (UserDisplayName))
-			{
+			if (string.IsNullOrWhiteSpace (UserDisplayName)) {
 				throw new InvalidOperationException ("You must enter a Display Name to create a new user");
 			}
 
 			var userID = await UserServices.Create (UserDisplayName);
 
-			if(userID == null)
-			{
+			if (userID == null) {
 				return false;
 			}
 
 
 			var user = await UserServices.Get (userID.user_id.ToString ());
 
-			if(user == null)
-			{
+			if (user == null) {
 				return false;
 			}
 
@@ -41,13 +36,13 @@ namespace App.Common
 
 		public LoginViewModel ()
 		{
-			sessionInstance = Session.GetInstance();
+			sessionInstance = Session.GetInstance ();
 
-			UserServices = new Users (HttpRequest.Current);
+			UserServices = new Users ();
 		}
 
 		private Users UserServices;
-		private ISession sessionInstance;
+		private Session sessionInstance;
 	}
 }
 

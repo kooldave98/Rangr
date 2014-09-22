@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using App.Core.Portable.Device;
 using App.Core.Portable.Models;
-using App.Core.Portable.Network;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using App.Core.Portable.Persistence;
@@ -100,10 +98,10 @@ namespace App.Common
 
 			_sessionInstance = Session.GetInstance ();
 
-			PostServices = new Posts (HttpRequest.Current);
+			PostServices = new Posts ();
 		}
 
-		ISession _sessionInstance;
+		Session _sessionInstance;
 		Posts PostServices;
 	}
 }
