@@ -60,7 +60,6 @@
     <Compile Include="Persistence\IBaseEntity.cs" />
     <Compile Include="Persistence\Models\KeyValue.cs" />
     <Compile Include="GeoLocation.cs" />
-    <Compile Include="PersistentStorage.cs" />
     <Compile Include="TextViewWriter.cs" />
     <Compile Include="..\..\App.Common\CommonClient.cs">
       <Link>CommonClient.cs</Link>
@@ -116,6 +115,9 @@
     <Compile Include="DbORM.cs" />
     <Compile Include="..\..\App.Common\AppEvents.cs">
       <Link>AppEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.Common\PersistentStorage.cs">
+      <Link>PersistentStorage.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

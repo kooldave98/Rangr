@@ -29,5 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EditProfileViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
   </ItemGroup>
 </Project>

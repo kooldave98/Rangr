@@ -81,7 +81,10 @@ namespace App.Android
 
 					_map.MyLocationEnabled = false;
 
+					_map.UiSettings.SetAllGesturesEnabled (false);
+
 					_map.AddMarker (GetMarker (post));
+
 
 					var map_centre_location = GetPosition (post.geolocation);
 
