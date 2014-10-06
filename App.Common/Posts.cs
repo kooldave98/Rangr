@@ -32,7 +32,7 @@ namespace App.Common
 
 			} catch (Exception e) {
 
-				AppEvents.Current.TriggerConnectionFailedEvent ();
+				AppEvents.Current.TriggerConnectionFailedEvent (e.Message);
 				Debug.WriteLine (e.Message);
 				//Todo: Probably load any few posts that have been cached locally
 			}
@@ -58,7 +58,7 @@ namespace App.Common
 
 			} catch (Exception e) {
 
-				AppEvents.Current.TriggerConnectionFailedEvent ();
+				AppEvents.Current.TriggerConnectionFailedEvent (e.Message);
 				Debug.WriteLine (e.Message);
 			}
 

@@ -114,7 +114,6 @@ namespace App.Common
 				geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
 			};
 
-
 			return geo_value;
 		}
 

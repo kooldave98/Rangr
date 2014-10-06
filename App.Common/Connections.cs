@@ -22,7 +22,7 @@ namespace App.Common
 				connections = JsonConvert.DeserializeObject<List<Connection>> (data);
 
 			} catch (Exception e) {
-				AppEvents.Current.TriggerConnectionFailedEvent ();
+				AppEvents.Current.TriggerConnectionFailedEvent (e.Message);
 				Debug.WriteLine (e.Message);
 			}
 
@@ -75,7 +75,7 @@ namespace App.Common
 
 			} catch (Exception e) {
 
-				AppEvents.Current.TriggerConnectionFailedEvent ();
+				AppEvents.Current.TriggerConnectionFailedEvent (e.Message);
 				Debug.WriteLine (e.Message);
 			}
 

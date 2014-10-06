@@ -6,12 +6,12 @@ namespace App.Common
 	{
 		#region "GeolocatorFailed"
 
-		public event EventHandler<EventArgs> GeolocatorFailed;
+		public event EventHandler<AppEventArgs> GeolocatorFailed;
 
-		public void TriggerGeolocatorFailedEvent ()
+		public void TriggerGeolocatorFailedEvent (string message = "Unable to determine location..")
 		{
 			if (GeolocatorFailed != null) {
-				GeolocatorFailed (this, EventArgs.Empty);
+				GeolocatorFailed (this, new AppEventArgs (message));
 			}
 		}
 
@@ -19,12 +19,12 @@ namespace App.Common
 
 		#region "ConnectionFailed"
 
-		public event EventHandler<EventArgs> ConnectionFailed;
+		public event EventHandler<AppEventArgs> ConnectionFailed;
 
-		public void TriggerConnectionFailedEvent ()
+		public void TriggerConnectionFailedEvent (string message = "Unable to connect..")
 		{
 			if (ConnectionFailed != null) {
-				ConnectionFailed (this, EventArgs.Empty);
+				ConnectionFailed (this, new AppEventArgs (message));
 			}
 		}
 
@@ -45,6 +45,20 @@ namespace App.Common
 		}
 
 		#endregion
+	}
+
+	public class AppEventArgs : EventArgs
+	{
+		private readonly string message;
+
+		public AppEventArgs (string message)
+		{
+			this.message = message;
+		}
+
+		public string Message {
+			get { return this.message; }
+		}
 	}
 
 }

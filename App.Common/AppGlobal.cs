@@ -2,6 +2,7 @@
 using System.Timers;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 #if __ANDROID__
 using Android.App;
@@ -114,11 +115,14 @@ namespace App.Common
 					//activities have been registered
 					var position = await _geoLocationInstance.GetCurrentPosition ();
 
+					//Force the users current location to be refreshed on the server
+					await update_connection (position);
+
 					if (position != null) {
 						this.IsGeoLocatorRefreshed = true;
 						this.GeoLocatorRefreshed (this, new EventArgs ());
 					} else {
-						AppEvents.Current.TriggerGeolocatorFailedEvent ();
+						AppEvents.Current.TriggerGeolocatorFailedEvent ("Could not refresh current location");
 					}
 				}, 1000);//1 second
 

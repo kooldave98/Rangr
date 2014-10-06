@@ -13,9 +13,9 @@ namespace App.Android
 	{
 		private EventHandler isBusyChangedEventHandler;
 
-		private EventHandler<EventArgs> ConnectionFailedHandler;
+		private EventHandler<AppEventArgs> ConnectionFailedHandler;
 
-		private EventHandler<EventArgs> GeolocatorFailedHandler;
+		private EventHandler<AppEventArgs> GeolocatorFailedHandler;
 
 		private ViewModelBase the_view_model;
 
@@ -49,11 +49,11 @@ namespace App.Android
 			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 
 			ConnectionFailedHandler = (sender, e) => {
-				ShowToast ("Unable to connect..");
+				ShowToast (e.Message);
 			};
 
 			GeolocatorFailedHandler = (sender, e) => {
-				ShowToast ("Unable to determine location..");
+				ShowToast (e.Message);
 			};
 
 			AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;

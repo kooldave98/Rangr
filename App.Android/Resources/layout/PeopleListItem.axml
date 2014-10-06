@@ -39,15 +39,12 @@
                     android:id="@+id/personName"
                     android:layout_weight="1"
                     android:layout_gravity="bottom"
-                    android:textSize="30dp"
-                    android:textColor="#fff1f8f8"
-                    android:typeface="sans" />
+                    android:textSize="30dp" />
                 <TextView
                     android:text="Free"
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#09a8d6"
                     android:textSize="12sp"
                     android:layout_gravity="bottom"
                     android:textAllCaps="true" />
@@ -57,8 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/status"
-                android:textSize="11sp"
-                android:textColor="#666" />
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
     <View
