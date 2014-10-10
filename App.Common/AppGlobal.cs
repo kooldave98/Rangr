@@ -3,6 +3,7 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Xamarin;
 
 #if __ANDROID__
 using Android.App;
@@ -162,6 +163,12 @@ namespace App.Common
 
 		protected AppGlobal ()
 		{
+			#if __ANDROID__
+			Insights.Initialize ("4d76332a65b66f1deaab446e299dbbe898ba5695", Android.App.Application.Context);
+			#else
+			#endif
+
+
 			_geoLocationInstance = GeoLocation.GetInstance ();
 			ConnectionServices = new Connections ();
 			sessionInstance = Session.GetInstance ();

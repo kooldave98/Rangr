@@ -4,6 +4,7 @@ using System.Linq;
 using Xamarin.Geolocation;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin;
 
 namespace App.Common
 {
@@ -87,7 +88,8 @@ namespace App.Common
 			if (geoPosition == null) {
 				try {
 					geoPosition = await geolocator.GetPositionAsync (20000);
-				} catch (Exception) {
+				} catch (Exception e) {
+					Insights.Report (e);
 					NotifyStatusChanged (Status.ERROR, "Could not determine location");
 					return geo_value;
 				}

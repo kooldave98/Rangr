@@ -31,7 +31,6 @@ namespace App.Common
 		{
 			ConnectedUsers = new List<Connection> ();
 			_sessionInstance = Session.GetInstance ();
-			_httpRequest = HttpRequest.Current;
 			_geoLocationInstance = GeoLocation.GetInstance ();
 
 			ConnectionServices = new Connections ();
@@ -66,7 +65,6 @@ namespace App.Common
 		GeoLocation _geoLocationInstance;
 		Session _sessionInstance;
 		Connections ConnectionServices;
-		HttpRequest _httpRequest;
 	}
 }
 
