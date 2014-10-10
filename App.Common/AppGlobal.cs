@@ -44,13 +44,15 @@ namespace App.Common
 
 			var location = await _geoLocationInstance.GetCurrentPosition ();
 
-			var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+			if (location != null) {
+				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
 
-			if (connection_id != null) {
-				sessionInstance.PersistCurrentConnection (connection_id);
+				if (connection_id != null) {
+					sessionInstance.PersistCurrentConnection (connection_id);
 
-				InitPositionChangedListener ();
-			}				
+					InitPositionChangedListener ();
+				}	
+			}
 
 			//}).Start ();
 		}
