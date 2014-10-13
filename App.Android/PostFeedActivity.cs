@@ -125,10 +125,6 @@ namespace App.Android
 				};
 
 				AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
-
-
-			} else {
-				StartActivity (typeof(LoginActivity));
 			}
 
 		}

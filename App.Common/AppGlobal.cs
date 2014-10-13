@@ -76,11 +76,9 @@ namespace App.Common
 		}
 
 		private async Task update_connection (GeoValue position)
-		{
-			//var conn_id = 
+		{ 
 			await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
 				position.geolocation_value, position.geolocation_accuracy.ToString ());
-			//conn_id will be null if the Service command failed for some unknown reason
 		}
 
 		#if __ANDROID__
@@ -111,7 +109,8 @@ namespace App.Common
 		public void Resume ()
 		{
 			if (CurrentUserAndConnectionExists) {
-				InitPositionChangedListener ();
+
+				InitPositionChangedListener ();				
 
 				JavaScriptTimer.SetTimeout (async delegate {
 					//has been put into a callback to definitely happen after
