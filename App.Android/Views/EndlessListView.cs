@@ -9,77 +9,65 @@ using App.Common;
 
 namespace CustomViews
 {
-	public class EndlessListView : ListView, AbsListView.IOnScrollListener
+
+	public interface IEndlessListView
+	{
+
+	}
+
+	public class EndlessListView : ListView
 	{
 		private View footer;
-		private bool isLoading;
+		private View load_more_button;
+		private View load_more_progress;
 
-		public event EventHandler<EventArgs> OnListEndReached = delegate{};
+		public event EventHandler<EventArgs> OnLoadMoreTriggered = delegate{};
 
-		public void SetListEndLoadingView (int resId)
+		public void InitEndlessness (int layout_resId, int image_button_resid, int progress_indicator_resid)
 		{
 			LayoutInflater inflater = (LayoutInflater)base.Context.GetSystemService (Context.LayoutInflaterService);
-			footer = (View)inflater.Inflate (resId, null);
+			footer = (View)inflater.Inflate (layout_resId, null);
+
+			this.AddFooterView (footer);
+
+			load_more_button = FindViewById<View> (image_button_resid);
+
+			load_more_progress = FindViewById<View> (progress_indicator_resid);
+
+			load_more_progress.Visibility = ViewStates.Gone;
+				
+			load_more_button.Click += (object sender, EventArgs e) => {
+
+				load_more_button.Visibility = ViewStates.Gone;
+				load_more_progress.Visibility = ViewStates.Visible;
+
+				OnLoadMoreTriggered (this, EventArgs.Empty);
+			};
 		}
 
-
-		public void OnScroll (AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+		public void SetEndlessListLoaderComplete (bool more_data_available)
 		{
-//			if (Adapter == null)
-//				return;
-//
-//			if (Adapter.Count == 0)
-//				return;
-//
-//			int l = visibleItemCount + firstVisibleItem;
-//			if (l >= totalItemCount && !isLoading) {
-//				// It is time to add new data. We call the listener
-//
-//				this.AddFooterView (footer);
-//				isLoading = true;
-//
-//				OnListEndReached (this, EventArgs.Empty);
-//
-//			}
-		}
-
-		private const int threshold = 0;
-
-		public void OnScrollStateChanged (AbsListView view, ScrollState scrollState)
-		{
-			if (scrollState == ScrollState.Idle) {
-				if (view.LastVisiblePosition >= view.Count - 1 - threshold) {
-					if (!isLoading) {
-						isLoading = true;
-						this.AddFooterView (footer);
-						OnListEndReached (this, EventArgs.Empty);
-					}
-				}
+			if (!more_data_available) {
+				load_more_button.Visibility = ViewStates.Visible;
 			}
-		}
-
-		public void SetEndlessListLoaderComplete ()
-		{
-			this.RemoveFooterView (footer);
-			isLoading = false;
+			load_more_progress.Visibility = ViewStates.Gone;
 		}
 
 		public EndlessListView (Context ctx, IAttributeSet attrs, int defStyle)
 			: base (ctx, attrs, defStyle)
 		{
-			this.SetOnScrollListener (this);
+
 		}
 
 		public EndlessListView (Context context, IAttributeSet attrs)
 			: base (context, attrs)
 		{
-			this.SetOnScrollListener (this);
+
 		}
 
 		public EndlessListView (Context context)
 			: base (context)
-		{					
-			this.SetOnScrollListener (this);
+		{
 		}
 	}
 }

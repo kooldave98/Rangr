@@ -156,8 +156,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\Placeholder.jpg" />
     <AndroidResource Include="Resources\drawable-mdpi\user_default_avatar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\user_default_avatar.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\user_default_avatar.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\empty_basket.png" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\questionmark.png" />
     <AndroidResource Include="Resources\drawable-mdpi\questionmark.png" />
@@ -165,6 +163,12 @@
     <AndroidResource Include="Resources\values-sw720dp-land\dimens.xml" />
     <AndroidResource Include="Resources\values-v11\styles.xml" />
     <AndroidResource Include="Resources\values-v14\styles.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_refresh.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_refresh.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_refresh.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_error.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -181,7 +185,6 @@
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-ldpi\" />
     <Folder Include="Resources\values-sw600dp\" />
     <Folder Include="Resources\values-sw720dp-land\" />
     <Folder Include="Resources\values-v11\" />

@@ -307,37 +307,40 @@ namespace App.Android
 			public const int common_signin_btn_text_pressed_light = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int empty_basket = 2130837529;
+			public const int ic_action_error = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int ic_plusone_medium_off_client = 2130837530;
+			public const int ic_action_refresh = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int ic_plusone_small_off_client = 2130837531;
+			public const int ic_plusone_medium_off_client = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int ic_plusone_standard_off_client = 2130837532;
+			public const int ic_plusone_small_off_client = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int ic_plusone_tall_off_client = 2130837533;
+			public const int ic_plusone_standard_off_client = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int Icon = 2130837534;
+			public const int ic_plusone_tall_off_client = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int Icon2x = 2130837535;
+			public const int Icon = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int Placeholder = 2130837536;
+			public const int Icon2x = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int questionmark = 2130837537;
+			public const int Placeholder = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int twitter = 2130837538;
+			public const int questionmark = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int user_default_avatar = 2130837539;
+			public const int twitter = 2130837539;
+			
+			// aapt resource value: 0x7f020024
+			public const int user_default_avatar = 2130837540;
 			
 			static Drawable()
 			{
@@ -352,8 +355,8 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050021
-			public const int Divider = 2131034145;
+			// aapt resource value: 0x7f050022
+			public const int Divider = 2131034146;
 			
 			// aapt resource value: 0x7f05000b
 			public const int EmailButton = 2131034123;
@@ -364,59 +367,59 @@ namespace App.Android
 			// aapt resource value: 0x7f05000a
 			public const int NameTextView = 2131034122;
 			
-			// aapt resource value: 0x7f050022
-			public const int PhoneButton = 2131034146;
+			// aapt resource value: 0x7f050023
+			public const int PhoneButton = 2131034147;
+			
+			// aapt resource value: 0x7f05001a
+			public const int PostText = 2131034138;
+			
+			// aapt resource value: 0x7f050024
+			public const int PostTextLabel = 2131034148;
+			
+			// aapt resource value: 0x7f05002d
+			public const int ProfileList = 2131034157;
+			
+			// aapt resource value: 0x7f05001d
+			public const int SwipeContent = 2131034141;
 			
 			// aapt resource value: 0x7f050019
-			public const int PostText = 2131034137;
-			
-			// aapt resource value: 0x7f050023
-			public const int PostTextLabel = 2131034147;
-			
-			// aapt resource value: 0x7f05002c
-			public const int ProfileList = 2131034156;
-			
-			// aapt resource value: 0x7f05001c
-			public const int SwipeContent = 2131034140;
-			
-			// aapt resource value: 0x7f050018
-			public const int UserNameText = 2131034136;
+			public const int UserNameText = 2131034137;
 			
 			// aapt resource value: 0x7f050009
 			public const int ValueTextView = 2131034121;
 			
-			// aapt resource value: 0x7f050030
-			public const int action_settings = 2131034160;
-			
-			// aapt resource value: 0x7f050011
-			public const int dialogImage = 2131034129;
-			
-			// aapt resource value: 0x7f050010
-			public const int dialogLayout = 2131034128;
+			// aapt resource value: 0x7f050031
+			public const int action_settings = 2131034161;
 			
 			// aapt resource value: 0x7f050012
-			public const int dialogTitle = 2131034130;
+			public const int dialogImage = 2131034130;
+			
+			// aapt resource value: 0x7f050011
+			public const int dialogLayout = 2131034129;
+			
+			// aapt resource value: 0x7f050013
+			public const int dialogTitle = 2131034131;
 			
 			// aapt resource value: 0x7f050005
 			public const int displayName = 2131034117;
 			
-			// aapt resource value: 0x7f05001f
-			public const int distance = 2131034143;
+			// aapt resource value: 0x7f050020
+			public const int distance = 2131034144;
 			
-			// aapt resource value: 0x7f05002b
-			public const int feedImage1 = 2131034155;
+			// aapt resource value: 0x7f05002c
+			public const int feedImage1 = 2131034156;
 			
-			// aapt resource value: 0x7f05002d
-			public const int feed_menu_item = 2131034157;
+			// aapt resource value: 0x7f05002e
+			public const int feed_menu_item = 2131034158;
 			
-			// aapt resource value: 0x7f05001a
-			public const int fragmentContainer = 2131034138;
+			// aapt resource value: 0x7f05001b
+			public const int fragmentContainer = 2131034139;
 			
 			// aapt resource value: 0x7f050004
 			public const int hybrid = 2131034116;
 			
-			// aapt resource value: 0x7f05001b
-			public const int imageView1 = 2131034139;
+			// aapt resource value: 0x7f05001c
+			public const int imageView1 = 2131034140;
 			
 			// aapt resource value: 0x7f050007
 			public const int linearLayout1 = 2131034119;
@@ -424,26 +427,32 @@ namespace App.Android
 			// aapt resource value: 0x7f050008
 			public const int linearLayout2 = 2131034120;
 			
-			// aapt resource value: 0x7f05001d
-			public const int linearLayout3 = 2131034141;
+			// aapt resource value: 0x7f05001e
+			public const int linearLayout3 = 2131034142;
 			
-			// aapt resource value: 0x7f050025
-			public const int list = 2131034149;
+			// aapt resource value: 0x7f050026
+			public const int list = 2131034150;
 			
-			// aapt resource value: 0x7f050015
-			public const int logIn = 2131034133;
+			// aapt resource value: 0x7f05000f
+			public const int loadMoreButton = 2131034127;
+			
+			// aapt resource value: 0x7f050010
+			public const int loadMoreProgress = 2131034128;
 			
 			// aapt resource value: 0x7f050016
-			public const int loginProgress = 2131034134;
+			public const int logIn = 2131034134;
 			
 			// aapt resource value: 0x7f050017
-			public const int loginQuestion = 2131034135;
+			public const int loginProgress = 2131034135;
+			
+			// aapt resource value: 0x7f050018
+			public const int loginQuestion = 2131034136;
 			
 			// aapt resource value: 0x7f05000c
 			public const int map = 2131034124;
 			
-			// aapt resource value: 0x7f050027
-			public const int name = 2131034151;
+			// aapt resource value: 0x7f050028
+			public const int name = 2131034152;
 			
 			// aapt resource value: 0x7f050000
 			public const int none = 2131034112;
@@ -451,32 +460,29 @@ namespace App.Android
 			// aapt resource value: 0x7f050001
 			public const int normal = 2131034113;
 			
-			// aapt resource value: 0x7f050014
-			public const int password = 2131034132;
-			
-			// aapt resource value: 0x7f05002e
-			public const int people_menu_item = 2131034158;
-			
-			// aapt resource value: 0x7f05001e
-			public const int personName = 2131034142;
-			
-			// aapt resource value: 0x7f050026
-			public const int profilePic = 2131034150;
+			// aapt resource value: 0x7f050015
+			public const int password = 2131034133;
 			
 			// aapt resource value: 0x7f05002f
-			public const int profile_menu_item = 2131034159;
+			public const int people_menu_item = 2131034159;
 			
-			// aapt resource value: 0x7f05000f
-			public const int progressBar1 = 2131034127;
+			// aapt resource value: 0x7f05001f
+			public const int personName = 2131034143;
 			
-			// aapt resource value: 0x7f050024
-			public const int refresher = 2131034148;
+			// aapt resource value: 0x7f050027
+			public const int profilePic = 2131034151;
+			
+			// aapt resource value: 0x7f050030
+			public const int profile_menu_item = 2131034160;
+			
+			// aapt resource value: 0x7f050025
+			public const int refresher = 2131034149;
 			
 			// aapt resource value: 0x7f050002
 			public const int satellite = 2131034114;
 			
-			// aapt resource value: 0x7f050020
-			public const int status = 2131034144;
+			// aapt resource value: 0x7f050021
+			public const int status = 2131034145;
 			
 			// aapt resource value: 0x7f050006
 			public const int statusMessage = 2131034118;
@@ -484,17 +490,17 @@ namespace App.Android
 			// aapt resource value: 0x7f050003
 			public const int terrain = 2131034115;
 			
-			// aapt resource value: 0x7f050028
-			public const int timestamp = 2131034152;
-			
 			// aapt resource value: 0x7f050029
-			public const int txtStatusMsg = 2131034153;
+			public const int timestamp = 2131034153;
 			
 			// aapt resource value: 0x7f05002a
-			public const int txtUrl = 2131034154;
+			public const int txtStatusMsg = 2131034154;
 			
-			// aapt resource value: 0x7f050013
-			public const int userName = 2131034131;
+			// aapt resource value: 0x7f05002b
+			public const int txtUrl = 2131034155;
+			
+			// aapt resource value: 0x7f050014
+			public const int userName = 2131034132;
 			
 			// aapt resource value: 0x7f05000e
 			public const int view1 = 2131034126;

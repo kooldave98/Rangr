@@ -86,6 +86,9 @@ namespace App.Android
 
 			dismiss_progress ();
 
+			//Potentially easier way to unsubscribe event handlers
+			//http://www.h3mm3.com/2011/06/unsubscribing-to-events-in-c.html
+
 			AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
 
 			AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;

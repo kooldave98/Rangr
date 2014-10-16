@@ -52,8 +52,10 @@ namespace App.Common
 			}
 		}
 
-		public async Task OlderPosts ()
+		public async Task<bool> OlderPosts ()
 		{
+			var older_posts_remaining = true;
+
 			if (first_load || backward_start_index > 0) {
 				var older_posts = 
 					await PostServices
@@ -66,11 +68,15 @@ namespace App.Common
 					first_load = false;
 					Posts.Add (post);
 				}
+
+				older_posts_remaining = older_posts.Any ();
 			}
 
 			if (OnNewPostsReceived != null) {
 				OnNewPostsReceived (this, EventArgs.Empty);
 			}
+
+			return older_posts_remaining;
 		}
 
 		private int forward_start_index {
