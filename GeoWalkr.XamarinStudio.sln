@@ -136,6 +136,6 @@ Global
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = App.Android\App.Android.csproj
+		StartupItem = walkr.android\walkr.android.csproj
 	EndGlobalSection
 EndGlobal

@@ -16,6 +16,8 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
 
+        <!--See url below for how to create styles and themes -->
+        <!-- http://www.therealjoshua.com/2012/01/styling-android-with-defaults/ -->
     </style>
 
     <style name="CodeFont" parent="@android:style/TextAppearance.Medium">

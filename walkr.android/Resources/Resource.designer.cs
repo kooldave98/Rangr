@@ -28,6 +28,25 @@ namespace walkr.android
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int action_list = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int planets_array = 2131034113;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -41,11 +60,75 @@ namespace walkr.android
 			}
 		}
 		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int action_bar_default_height = 2130968576;
+			
+			// aapt resource value: 0x7f040004
+			public const int action_bar_subtitle_bottom_margin = 2130968580;
+			
+			// aapt resource value: 0x7f040002
+			public const int action_bar_subtitle_text_size = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int action_bar_subtitle_top_margin = 2130968579;
+			
+			// aapt resource value: 0x7f040001
+			public const int action_bar_title_text_size = 2130968577;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int action_search = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int drawer_shadow = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int earth = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int ic_drawer = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int ic_launcher = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Icon = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int jupiter = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int mars = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int mercury = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int neptune = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int saturn = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int uranus = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int venus = 2130837516;
 			
 			static Drawable()
 			{
@@ -60,8 +143,35 @@ namespace walkr.android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			// aapt resource value: 0x7f080008
+			public const int action_bar_subtitle = 2131230728;
+			
+			// aapt resource value: 0x7f080007
+			public const int action_bar_title = 2131230727;
+			
+			// aapt resource value: 0x7f080009
+			public const int action_websearch = 2131230729;
+			
+			// aapt resource value: 0x7f080001
+			public const int content_frame = 2131230721;
+			
+			// aapt resource value: 0x7f080000
+			public const int drawer_layout = 2131230720;
+			
+			// aapt resource value: 0x7f080006
+			public const int fragmentContainer = 2131230726;
+			
+			// aapt resource value: 0x7f080004
+			public const int image = 2131230724;
+			
+			// aapt resource value: 0x7f080002
+			public const int left_drawer = 2131230722;
+			
+			// aapt resource value: 0x7f080005
+			public const int myButton = 2131230725;
+			
+			// aapt resource value: 0x7f080003
+			public const int spinner_title = 2131230723;
 			
 			static Id()
 			{
@@ -77,7 +187,22 @@ namespace walkr.android
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int drawer_layout = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int drawer_list_item = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int drop_down_item = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int fragment_planet = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int main_layout = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int spinner_item = 2130903045;
 			
 			static Layout()
 			{
@@ -89,14 +214,42 @@ namespace walkr.android
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int main = 2131165184;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f060004
+			public const int action_websearch = 2131099652;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f060001
+			public const int app_name = 2131099649;
+			
+			// aapt resource value: 0x7f060005
+			public const int app_not_available = 2131099653;
+			
+			// aapt resource value: 0x7f060003
+			public const int drawer_close = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int drawer_open = 2131099650;
+			
+			// aapt resource value: 0x7f060000
+			public const int hello = 2131099648;
 			
 			static String()
 			{

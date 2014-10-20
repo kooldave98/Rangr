@@ -9,12 +9,6 @@ using App.Common;
 
 namespace CustomViews
 {
-
-	public interface IEndlessListView
-	{
-
-	}
-
 	public class EndlessListView : ListView
 	{
 		private View footer;

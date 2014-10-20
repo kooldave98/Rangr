@@ -169,6 +169,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_action_error.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_action_error.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_help.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_help.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

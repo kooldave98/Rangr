@@ -49,11 +49,11 @@ namespace App.Android
 			the_view_model.IsBusyChanged += isBusyChangedEventHandler;
 
 			ConnectionFailedHandler = (sender, e) => {
-				ShowToast (e.Message);
+				ShowToast ("An attempt to establish a network connection failed.");
 			};
 
 			GeolocatorFailedHandler = (sender, e) => {
-				ShowToast (e.Message);
+				ShowToast ("An attempt to retrieve your geolocation failed.");
 			};
 
 			AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;

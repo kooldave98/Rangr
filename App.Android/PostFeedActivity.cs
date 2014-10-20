@@ -23,7 +23,6 @@ namespace App.Android
 
 	public class PostFeedActivity : BaseActivity
 	{
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -33,6 +32,18 @@ namespace App.Android
 			SetContentView (Resource.Layout.PostList);
 
 			postListView = FindViewById<EndlessListView> (Resource.Id.list);
+
+			//postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
+			postListView.InitEndlessness (Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
+
+			postListView.OnLoadMoreTriggered += async (sender, e) => {
+				var older_posts_remaining = await view_model.OlderPosts ();
+				JavaScriptTimer.SetTimeout (delegate {
+					RunOnUiThread (() => {
+						((EndlessListView)sender).SetEndlessListLoaderComplete (older_posts_remaining);
+					});
+				}, 1500);//1.5 secs
+			};
 
 			#region setup list adapter
 			postListAdapter = new PostFeedAdapter (this, view_model.Posts);
@@ -61,14 +72,6 @@ namespace App.Android
 				
 			#endregion
 
-			postListView.OnLoadMoreTriggered += async (sender, e) => {
-				var older_posts_remaining = await view_model.OlderPosts ();
-				JavaScriptTimer.SetTimeout (delegate {
-					RunOnUiThread (() => {
-						((EndlessListView)sender).SetEndlessListLoaderComplete (older_posts_remaining);
-					});
-				}, 1500);//1.5 secs
-			};
 
 			// wire up post click handler
 			postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
@@ -114,8 +117,6 @@ namespace App.Android
 
 				GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
 					await view_model.RefreshPosts ();
-					//postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
-					postListView.InitEndlessness (Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
 					JavaScriptTimer.SetTimeout (delegate {
 						dismiss_refresher ();

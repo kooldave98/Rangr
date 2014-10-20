@@ -310,37 +310,40 @@ namespace App.Android
 			public const int ic_action_error = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int ic_action_refresh = 2130837530;
+			public const int ic_action_help = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int ic_plusone_medium_off_client = 2130837531;
+			public const int ic_action_refresh = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int ic_plusone_small_off_client = 2130837532;
+			public const int ic_plusone_medium_off_client = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int ic_plusone_standard_off_client = 2130837533;
+			public const int ic_plusone_small_off_client = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int ic_plusone_tall_off_client = 2130837534;
+			public const int ic_plusone_standard_off_client = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int Icon = 2130837535;
+			public const int ic_plusone_tall_off_client = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int Icon2x = 2130837536;
+			public const int Icon = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int Placeholder = 2130837537;
+			public const int Icon2x = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int questionmark = 2130837538;
+			public const int Placeholder = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int twitter = 2130837539;
+			public const int questionmark = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int user_default_avatar = 2130837540;
+			public const int twitter = 2130837540;
+			
+			// aapt resource value: 0x7f020025
+			public const int user_default_avatar = 2130837541;
 			
 			static Drawable()
 			{
