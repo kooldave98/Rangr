@@ -20,7 +20,7 @@ namespace walkr.android
 		private ListView mDrawerList;
 		private ActionBarDrawerToggle mDrawerToggle;
 
-		private string mDrawerTitle;
+		//private string mDrawerTitle;
 		private string mTitle;
 		private string[] mPlanetTitles;
 
@@ -32,7 +32,7 @@ namespace walkr.android
 
 			mDrawerLayout = FindViewById<DrawerLayout> (Resource.Id.drawer_layout);
 
-			mTitle = mDrawerTitle = Title;
+			mTitle = Title;//mDrawerTitle = Title;
 			mPlanetTitles = Resources.GetStringArray (Resource.Array.planets_array);
 			mDrawerLayout = FindViewById<DrawerLayout> (Resource.Id.drawer_layout);
 			mDrawerList = FindViewById<ListView> (Resource.Id.left_drawer);

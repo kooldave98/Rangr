@@ -85,6 +85,8 @@ namespace App.Android
 
 					_map.AddMarker (GetMarker (post));
 
+					_map.AddCircle (GetUncertaintyRadius (post));
+
 
 					var map_centre_location = GetPosition (post.geolocation);
 
@@ -101,6 +103,8 @@ namespace App.Android
 			}
 
 
+
+
 		}
 
 		private MarkerOptions GetMarker (Post the_post)
@@ -112,6 +116,16 @@ namespace App.Android
 			//.InvokeIcon(BitmapDescriptorFactory
 			//.DefaultMarker(BitmapDescriptorFactory
 			//.HueCyan)));;
+		}
+
+		private CircleOptions GetUncertaintyRadius (Post the_post)
+		{
+			// Instantiates a new CircleOptions object and defines the center and radius
+			CircleOptions circleOptions = new CircleOptions ();
+			circleOptions.InvokeCenter (GetPosition (the_post.geolocation));
+			circleOptions.InvokeRadius (the_post.geolocation_accuracy_in_metres); // In meters
+
+			return circleOptions;
 		}
 
 		private LatLng GetPosition (string geo_string)
