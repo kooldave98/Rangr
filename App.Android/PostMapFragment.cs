@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using App.Common;
 using App.Core.Portable.Models;
+using Android.Graphics;
 
 namespace App.Android
 {
@@ -124,7 +125,14 @@ namespace App.Android
 			CircleOptions circleOptions = new CircleOptions ();
 			circleOptions.InvokeCenter (GetPosition (the_post.geolocation));
 			circleOptions.InvokeRadius (the_post.geolocation_accuracy_in_metres); // In meters
-
+			circleOptions.InvokeStrokeWidth (1.0f);
+			circleOptions.InvokeStrokeColor (0x550000FF);
+			// Fill color of the circle
+			// 0x represents, this is an hexadecimal code
+			// 55 represents percentage of transparency. For 100% transparency, specify 00.
+			// For 0% transparency ( ie, opaque ) , specify ff
+			// The remaining 6 characters(00ff00) specify the fill color
+			circleOptions.InvokeFillColor (0x550000FF);
 			return circleOptions;
 		}
 
