@@ -92,10 +92,10 @@
     <Reference Include="monotouch" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.6.0\lib\MonoTouch10\Xamarin.Insights.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoTouch10\Xamarin.Insights.dll</HintPath>
     </Reference>
     <Reference Include="PLCrashReporter">
-      <HintPath>..\packages\Xamarin.Insights.1.6.0\lib\MonoTouch10\PLCrashReporter.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoTouch10\PLCrashReporter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

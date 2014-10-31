@@ -13,7 +13,7 @@ using Android.Content.Res;
 
 namespace walkr.android
 {
-	[Activity (Label = "Home", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "Home", Icon = "@drawable/icon")]
 	public class DrawerActivity : Activity, ListView.IOnItemClickListener
 	{
 		private DrawerLayout mDrawerLayout;

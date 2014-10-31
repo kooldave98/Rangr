@@ -110,6 +110,9 @@ namespace App.Android
 			case Resource.Id.profile_menu_item:
 				ResurrectActivity (typeof(ProfileActivity));
 				break;
+			case Resource.Id.action_settings:
+				ResurrectActivity (typeof(AboutAppActivity));
+				break;
 			}
 
 			return base.OnMenuItemSelected (featureId, item);

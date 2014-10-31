@@ -31,11 +31,11 @@ namespace walkr.android
 		public partial class Array
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int action_list = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int action_list = 2131099648;
 			
-			// aapt resource value: 0x7f050001
-			public const int planets_array = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int planets_array = 2131099649;
 			
 			static Array()
 			{
@@ -63,20 +63,20 @@ namespace walkr.android
 		public partial class Dimension
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int action_bar_default_height = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int action_bar_default_height = 2131034112;
 			
-			// aapt resource value: 0x7f040004
-			public const int action_bar_subtitle_bottom_margin = 2130968580;
+			// aapt resource value: 0x7f050004
+			public const int action_bar_subtitle_bottom_margin = 2131034116;
 			
-			// aapt resource value: 0x7f040002
-			public const int action_bar_subtitle_text_size = 2130968578;
+			// aapt resource value: 0x7f050002
+			public const int action_bar_subtitle_text_size = 2131034114;
 			
-			// aapt resource value: 0x7f040003
-			public const int action_bar_subtitle_top_margin = 2130968579;
+			// aapt resource value: 0x7f050003
+			public const int action_bar_subtitle_top_margin = 2131034115;
 			
-			// aapt resource value: 0x7f040001
-			public const int action_bar_title_text_size = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int action_bar_title_text_size = 2131034113;
 			
 			static Dimension()
 			{
@@ -143,35 +143,35 @@ namespace walkr.android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080008
-			public const int action_bar_subtitle = 2131230728;
+			// aapt resource value: 0x7f090008
+			public const int action_bar_subtitle = 2131296264;
 			
-			// aapt resource value: 0x7f080007
-			public const int action_bar_title = 2131230727;
+			// aapt resource value: 0x7f090007
+			public const int action_bar_title = 2131296263;
 			
-			// aapt resource value: 0x7f080009
-			public const int action_websearch = 2131230729;
+			// aapt resource value: 0x7f090009
+			public const int action_websearch = 2131296265;
 			
-			// aapt resource value: 0x7f080001
-			public const int content_frame = 2131230721;
+			// aapt resource value: 0x7f090001
+			public const int content_frame = 2131296257;
 			
-			// aapt resource value: 0x7f080000
-			public const int drawer_layout = 2131230720;
+			// aapt resource value: 0x7f090000
+			public const int drawer_layout = 2131296256;
 			
-			// aapt resource value: 0x7f080006
-			public const int fragmentContainer = 2131230726;
+			// aapt resource value: 0x7f090006
+			public const int fragmentContainer = 2131296262;
 			
-			// aapt resource value: 0x7f080004
-			public const int image = 2131230724;
+			// aapt resource value: 0x7f090004
+			public const int image = 2131296260;
 			
-			// aapt resource value: 0x7f080002
-			public const int left_drawer = 2131230722;
+			// aapt resource value: 0x7f090002
+			public const int left_drawer = 2131296258;
 			
-			// aapt resource value: 0x7f080005
-			public const int myButton = 2131230725;
+			// aapt resource value: 0x7f090005
+			public const int myButton = 2131296261;
 			
-			// aapt resource value: 0x7f080003
-			public const int spinner_title = 2131230723;
+			// aapt resource value: 0x7f090003
+			public const int spinner_title = 2131296259;
 			
 			static Id()
 			{
@@ -217,8 +217,8 @@ namespace walkr.android
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int main = 2131165184;
+			// aapt resource value: 0x7f080000
+			public const int main = 2131230720;
 			
 			static Menu()
 			{
@@ -233,23 +233,23 @@ namespace walkr.android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int action_websearch = 2131099652;
+			// aapt resource value: 0x7f070004
+			public const int action_websearch = 2131165188;
 			
-			// aapt resource value: 0x7f060001
-			public const int app_name = 2131099649;
+			// aapt resource value: 0x7f070001
+			public const int app_name = 2131165185;
 			
-			// aapt resource value: 0x7f060005
-			public const int app_not_available = 2131099653;
+			// aapt resource value: 0x7f070005
+			public const int app_not_available = 2131165189;
 			
-			// aapt resource value: 0x7f060003
-			public const int drawer_close = 2131099651;
+			// aapt resource value: 0x7f070003
+			public const int drawer_close = 2131165187;
 			
-			// aapt resource value: 0x7f060002
-			public const int drawer_open = 2131099650;
+			// aapt resource value: 0x7f070002
+			public const int drawer_open = 2131165186;
 			
-			// aapt resource value: 0x7f060000
-			public const int hello = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int hello = 2131165184;
 			
 			static String()
 			{
@@ -257,6 +257,22 @@ namespace walkr.android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Xml
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int preferences_general = 2130968576;
+			
+			static Xml()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Xml()
 			{
 			}
 		}

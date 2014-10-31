@@ -147,6 +147,20 @@ namespace App.Android
 
 		#endregion
 
+
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			MenuInflater.Inflate (Resource.Menu.menu, menu);
+
+			menu.FindItem (Resource.Id.feed_menu_item).SetVisible (false);
+			menu.FindItem (Resource.Id.people_menu_item).SetVisible (false);
+			menu.FindItem (Resource.Id.profile_menu_item).SetVisible (false);
+
+			return base.OnCreateOptionsMenu (menu);
+
+			//return true;
+		}
+
 		private LoginViewModel view_model;
 
 		protected override ViewModelBase init_view_model ()

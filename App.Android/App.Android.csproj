@@ -19,7 +19,6 @@
     <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
@@ -35,6 +34,7 @@
     <ConsolePause>false</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -57,7 +57,7 @@
       <HintPath>..\Components\xamandroidsupportv4-18-20.0.0.4\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.6.0\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +97,7 @@
     <Compile Include="PostMapFragment.cs">
       <DependentUpon>PostDetailsActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="AboutAppActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -171,6 +172,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_action_help.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_action_help.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_help.png" />
+    <AndroidResource Include="Resources\xml\preferences_general.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -191,6 +193,7 @@
     <Folder Include="Resources\values-sw720dp-land\" />
     <Folder Include="Resources\values-v11\" />
     <Folder Include="Resources\values-v14\" />
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleplayservices">
