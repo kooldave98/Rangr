@@ -173,6 +173,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_action_help.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_help.png" />
     <AndroidResource Include="Resources\xml\preferences_general.xml" />
+    <AndroidResource Include="Resources\layout\empty_layout.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

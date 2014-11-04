@@ -39,9 +39,9 @@ namespace CustomViews
 			};
 		}
 
-		public void SetEndlessListLoaderComplete (bool more_data_available)
+		public void SetEndlessListLoaderComplete (bool more_data_available = true)
 		{
-			if (!more_data_available) {
+			if (more_data_available) {
 				load_more_button.Visibility = ViewStates.Visible;
 			}
 			load_more_progress.Visibility = ViewStates.Gone;

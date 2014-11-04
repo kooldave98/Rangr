@@ -12,30 +12,10 @@
             android:id="@android:id/list"
             android:layout_weight="1" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ViewStub
         android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="56dp">
-        <ImageView
-            android:src="@drawable/ic_action_error"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/imageView1"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
-        <TextView
-            android:text="There's no one around you"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:attr/textAppearanceLarge" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Why not invite your friends and/or neighbours" />
-    </LinearLayout>
+        android:layout="@layout/empty_layout" />
 </FrameLayout>

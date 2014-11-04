@@ -14,6 +14,7 @@ using App.Common;
 using CustomViews;
 using App.Core.Portable.Models;
 using Android.Support.V4.Widget;
+using AndroidResource = Android.Resource;
 
 namespace App.Android
 {
@@ -33,14 +34,14 @@ namespace App.Android
 
 			postListView = FindViewById<EndlessListView> (Resource.Id.list);
 
-			//postListView.EmptyView = FindViewById<LinearLayout> (Resource.Id.empty);
+			postListView.EmptyView = FindViewById<View> (AndroidResource.Id.Empty);
 			postListView.InitEndlessness (Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
 			postListView.OnLoadMoreTriggered += async (sender, e) => {
-				var older_posts_remaining = await view_model.OlderPosts ();
+				await view_model.OlderPosts ();
 				JavaScriptTimer.SetTimeout (delegate {
 					RunOnUiThread (() => {
-						((EndlessListView)sender).SetEndlessListLoaderComplete (older_posts_remaining);
+						((EndlessListView)sender).SetEndlessListLoaderComplete ();
 					});
 				}, 1500);//1.5 secs
 			};
