@@ -59,6 +59,7 @@
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Android.Export" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -98,6 +99,7 @@
       <DependentUpon>PostDetailsActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="AboutAppActivity.cs" />
+    <Compile Include="SimulationActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -174,6 +176,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_help.png" />
     <AndroidResource Include="Resources\xml\preferences_general.xml" />
     <AndroidResource Include="Resources\layout\empty_layout.xml" />
+    <AndroidResource Include="Resources\layout\simulation_activity.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

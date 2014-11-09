@@ -22,6 +22,8 @@ namespace App.Common
 		//private SynchronizationContext _context;
 		private static bool positionReliable = false;
 		private static Position geoPosition;
+		private static Position simulated_geoPosition;
+		private static bool is_simulation = false;
 
 		private void Init ()
 		{
@@ -39,32 +41,84 @@ namespace App.Common
 				geoPosition = args.Position;
 
 				if (PositionIsInvalid) {
-
 					NotifyInaccurate ();
-
-
 				} else {
-					var geolocationValue = string.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
-					//geolocationValue = sample_geoposition;//TO BE REMOVED
+					if (!is_simulation) {
+						pre_notify_position_changed ();
+					}
+				}
+			};
 
-					NotifyAccurate ();
 
-					var geo_value = new GeoValue {
-						geolocation_value = geolocationValue,
-						geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
-					};
 
-					NotifyPositionChanged (geo_value);
+			AppEvents.Current.LocationSimulated += (sender, args) => {
+
+				if (args.Message == "L") {
+
+					is_simulation = false;
+				
+				} else {
+
+					simulate_position (args.Message);
 
 				}
 
-
+				pre_notify_position_changed ();
 			};
-		
+
+			var persisted_sim = PersistentStorage.Current.Load<string> ("simulation");
+			persisted_sim = string.IsNullOrWhiteSpace (persisted_sim) ? "L" : persisted_sim;
+			if (persisted_sim != "L") {
+				simulate_position (persisted_sim);
+			}
 		
 		}
 
+		private void simulate_position (string key)
+		{
+			var locations = new Dictionary<string, string> () {
+				{ "A","-2.22872, 53.47863" },
+				{ "B","-2.22819, 53.47925" },
+				{ "C","-2.22695, 53.47922" },
+				{ "D","-2.22633, 53.47869" },
+			};
 
+			is_simulation = true;
+			var lat_lng = GetLatLng (locations [key]);
+
+			var pos = new Position ();
+
+			pos.Latitude = lat_lng.Item1;
+			pos.Longitude = lat_lng.Item2;
+			pos.Accuracy = 5;
+
+			simulated_geoPosition = pos;
+		}
+
+		private Tuple<double, double> GetLatLng (string geo_string)
+		{
+			var array = geo_string.Split (',');
+			return new Tuple<double, double> (double.Parse (array [1]), double.Parse (array [0]));
+		}
+
+		private void pre_notify_position_changed ()
+		{
+			var geolocationValue = string.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+			//geolocationValue = sample_geoposition;//TO BE REMOVED
+
+			if (is_simulation) {
+				geolocationValue = string.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
+			}
+
+			NotifyAccurate ();
+
+			var geo_value = new GeoValue {
+				geolocation_value = geolocationValue,
+				geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
+			};
+
+			NotifyPositionChanged (geo_value);
+		}
 
 		public async Task<GeoValue> GetCurrentPosition ()
 		{
@@ -110,6 +164,11 @@ namespace App.Common
 			}
 
 			var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+
+			if (is_simulation) {
+				geolocationValue = String.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
+			}
+
 			//geolocationValue = sample_geoposition;
 			geo_value = new GeoValue {
 				geolocation_value = geolocationValue,

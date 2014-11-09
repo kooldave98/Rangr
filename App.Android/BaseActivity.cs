@@ -25,7 +25,7 @@ namespace App.Android
 
 		protected override void OnCreate (Bundle bundle)
 		{
-			notify ("OnCreate");
+			//notify ("OnCreate");
 			base.OnCreate (bundle);
 
 			the_view_model = init_view_model ();
@@ -34,7 +34,7 @@ namespace App.Android
 
 		protected override void OnResume ()
 		{
-			notify ("OnResume");
+			//notify ("OnResume");
 			base.OnResume ();
 
 			isBusyChangedEventHandler = (sender, e) => {
@@ -53,7 +53,8 @@ namespace App.Android
 			};
 
 			GeolocatorFailedHandler = (sender, e) => {
-				ShowToast ("An attempt to retrieve your geolocation failed.");
+				ShowToast ("An attempt to retrieve your geolocation failed. " +
+				"\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
 			};
 
 			AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
@@ -77,7 +78,7 @@ namespace App.Android
 
 		protected override void OnPause ()
 		{
-			notify ("OnPause");
+			//notify ("OnPause");
 			base.OnPause ();
 
 			the_view_model.IsBusyChanged -= isBusyChangedEventHandler;
@@ -109,6 +110,9 @@ namespace App.Android
 				break;
 			case Resource.Id.profile_menu_item:
 				ResurrectActivity (typeof(ProfileActivity));
+				break;
+			case Resource.Id.action_simulation:
+				ResurrectActivity (typeof(SimulationActivity));
 				break;
 			case Resource.Id.action_settings:
 				ResurrectActivity (typeof(AboutAppActivity));
@@ -154,19 +158,36 @@ namespace App.Android
 
 		}
 
+		protected void ShowAlert (string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
+		{
+			var builder = new AlertDialog.Builder (this)
+				.SetTitle (title)
+				.SetMessage (message)
+				.SetPositiveButton (ok_button_text, (innerSender, innere) => {
+				RunOnUiThread (() => {
+					if (ok_button_action != null) {
+						ok_button_action ();
+					}
+				});
+				
+			});
+			var dialog = builder.Create ();
+			dialog.Show ();
+		}
+
 		protected void notify (String methodName)
 		{
 			//just disable this for now by the if condition
 
-//				var name = this.LocalClassName;
-//
-//				var noti = new Notification.Builder (this)
-//				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
-//				.SetSmallIcon (Resource.Drawable.ic_action_logo)
-//				.SetContentText (name).Build ();
-//
-//				var notificationManager = (NotificationManager)GetSystemService (NotificationService);
-//				notificationManager.Notify ((int)CurrentTimeMillis (), noti);
+			var name = this.LocalClassName;
+
+			var noti = new Notification.Builder (this)
+				.SetContentTitle (methodName + " " + name).SetAutoCancel (true)
+				.SetSmallIcon (Resource.Drawable.Icon)
+				.SetContentText (name).Build ();
+
+			var notificationManager = (NotificationManager)GetSystemService (NotificationService);
+			notificationManager.Notify ((int)CurrentTimeMillis (), noti);
 		}
 
 		private static readonly DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

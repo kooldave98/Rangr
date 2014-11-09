@@ -12,6 +12,10 @@
 		android:id="@+id/profile_menu_item"
   		android:title="@string/profile_menu_item"
   		android:showAsAction="never" />
+  	<item
+        android:id="@+id/action_simulation"
+        android:showAsAction="never"
+        android:title="Simulation"/>
 	<item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

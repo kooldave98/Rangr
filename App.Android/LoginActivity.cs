@@ -50,13 +50,7 @@ namespace App.Android
 			};
 
 			loginHelp.Click += (sender, e) => {
-				var builder = new AlertDialog.Builder (this)
-					.SetTitle ("Need Help?")
-					.SetMessage ("Enter your desired display name and your given beta testing key.")
-					.SetPositiveButton ("Ok", (innerSender, innere) => {
-				});
-				var dialog = builder.Create ();
-				dialog.Show ();
+				ShowAlert ("Need Help?", "Enter your desired display name and your given beta testing key.");
 			};
 
 			// Perform the login and dismiss the keyboard
@@ -68,21 +62,30 @@ namespace App.Android
 
 		}
 
-		private async void DoLogin (object sender, EventArgs e)
+		private void DoLogin (object sender, EventArgs e)
 		{
 			if (!string.IsNullOrEmpty (userName.Text)) {
 
-				hide_keyboard_and_show_progress ();
+				if (!string.IsNullOrEmpty (password.Text) && password.Text == "wertyc") {
 
-				var create_user_successful = await view_model.CreateUser ();
+					hide_keyboard_and_show_progress ();
 
-				if (create_user_successful) {
-					await AppGlobal.Current.CreateNewConnectionFromLogin ();
+					ShowAlert ("Disclaimer", "This app is in beta, it may be subject to changes, loss of data and unavailability.", "Ok", async delegate {
+						var create_user_successful = await view_model.CreateUser ();
 
-					Finish ();
+						if (create_user_successful) {
+							await AppGlobal.Current.CreateNewConnectionFromLogin ();
+
+							Finish ();
+						}
+
+						hide_progress ();
+					});
+
+
+				} else {
+					ShowAlert ("Disclaimer", "Invalid code entered. Please request a test code by emailing walkr@davidolubajo.com. Thanks");
 				}
-
-				hide_progress ();
 			}
 		}
 

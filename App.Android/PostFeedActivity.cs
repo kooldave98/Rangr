@@ -126,7 +126,12 @@ namespace App.Android
 
 				AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
 			}
-
+			//Simulation
+			var persisted_simulation = PersistentStorage.Current.Load<string> ("simulation");
+			if (!string.IsNullOrWhiteSpace (persisted_simulation) && persisted_simulation != "L") {
+				ShowToast ("Simulated location" + persisted_simulation);
+			}
+			
 		}
 
 		protected override void OnPause ()

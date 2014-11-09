@@ -30,6 +30,20 @@ namespace App.Common
 
 		#endregion
 
+		#region "SimulationTriggered"
+
+		public event EventHandler<AppEventArgs> LocationSimulated;
+
+		public void TriggerLocationSimulatedEvent (string location_string)
+		{
+			if (LocationSimulated != null) {
+				LocationSimulated (this, new AppEventArgs (location_string));
+			}
+		}
+
+		#endregion
+
+
 		#region"Instance plumbing"
 
 		public static AppEvents Current {

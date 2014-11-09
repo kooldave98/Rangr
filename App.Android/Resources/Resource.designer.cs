@@ -391,8 +391,11 @@ namespace App.Android
 			// aapt resource value: 0x7f060009
 			public const int ValueTextView = 2131099657;
 			
-			// aapt resource value: 0x7f060031
-			public const int action_settings = 2131099697;
+			// aapt resource value: 0x7f060037
+			public const int action_settings = 2131099703;
+			
+			// aapt resource value: 0x7f060036
+			public const int action_simulation = 2131099702;
 			
 			// aapt resource value: 0x7f060013
 			public const int dialogImage = 2131099667;
@@ -412,8 +415,8 @@ namespace App.Android
 			// aapt resource value: 0x7f06002c
 			public const int feedImage1 = 2131099692;
 			
-			// aapt resource value: 0x7f06002e
-			public const int feed_menu_item = 2131099694;
+			// aapt resource value: 0x7f060033
+			public const int feed_menu_item = 2131099699;
 			
 			// aapt resource value: 0x7f06001c
 			public const int fragmentContainer = 2131099676;
@@ -466,8 +469,8 @@ namespace App.Android
 			// aapt resource value: 0x7f060016
 			public const int password = 2131099670;
 			
-			// aapt resource value: 0x7f06002f
-			public const int people_menu_item = 2131099695;
+			// aapt resource value: 0x7f060034
+			public const int people_menu_item = 2131099700;
 			
 			// aapt resource value: 0x7f06001f
 			public const int personName = 2131099679;
@@ -475,8 +478,23 @@ namespace App.Android
 			// aapt resource value: 0x7f060027
 			public const int profilePic = 2131099687;
 			
+			// aapt resource value: 0x7f060035
+			public const int profile_menu_item = 2131099701;
+			
+			// aapt resource value: 0x7f06002f
+			public const int radio_A = 2131099695;
+			
 			// aapt resource value: 0x7f060030
-			public const int profile_menu_item = 2131099696;
+			public const int radio_B = 2131099696;
+			
+			// aapt resource value: 0x7f060031
+			public const int radio_C = 2131099697;
+			
+			// aapt resource value: 0x7f060032
+			public const int radio_D = 2131099698;
+			
+			// aapt resource value: 0x7f06002e
+			public const int radio_Live = 2131099694;
 			
 			// aapt resource value: 0x7f060025
 			public const int refresher = 2131099685;
@@ -589,10 +607,13 @@ namespace App.Android
 			public const int PropertyListItem = 2130903056;
 			
 			// aapt resource value: 0x7f030011
-			public const int TwitterPropertyListItem = 2130903057;
+			public const int simulation_activity = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int UrlPropertyListItem = 2130903058;
+			public const int TwitterPropertyListItem = 2130903058;
+			
+			// aapt resource value: 0x7f030013
+			public const int UrlPropertyListItem = 2130903059;
 			
 			static Layout()
 			{
