@@ -1,9 +1,11 @@
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using Xamarin;
 using System.Linq;
+using ModernHttpClient;
+using System.Net.Http;
+using Fusillade;
 
 namespace App.Common
 {
@@ -21,10 +23,11 @@ namespace App.Common
 			string responseString = null;
 
 			try {
-				var response = await httpClient.PutAsync (baseUrl, new FormUrlEncodedContent (data));
-				responseString = await response.Content.ReadAsStringAsync ();
-				response.EnsureSuccessStatusCode ();
-
+				using (var handle = Insights.TrackTime (request_string)) {	
+					var response = await httpClient.PutAsync (baseUrl, new FormUrlEncodedContent (data));
+					responseString = await response.Content.ReadAsStringAsync ();
+					response.EnsureSuccessStatusCode ();
+				}
 			} catch (Exception e) { 
 				Insights.Report (e, new Dictionary<string, string> () {
 					{ "Request", request_string },
@@ -47,10 +50,11 @@ namespace App.Common
 			string responseString = null;
 
 			try {
-				var response = await httpClient.PostAsync (baseUrl, new FormUrlEncodedContent (data));
-				responseString = await response.Content.ReadAsStringAsync ();
-				response.EnsureSuccessStatusCode ();
-
+				using (var handle = Insights.TrackTime (request_string)) {	
+					var response = await httpClient.PostAsync (baseUrl, new FormUrlEncodedContent (data));
+					responseString = await response.Content.ReadAsStringAsync ();
+					response.EnsureSuccessStatusCode ();
+				}
 			} catch (Exception e) { 
 				Insights.Report (e, new Dictionary<string, string> () {
 					{ "Request", request_string },
@@ -72,10 +76,11 @@ namespace App.Common
 			string responseString = null;
 
 			try {
-				var response = await httpClient.GetAsync (baseUrl);
-				responseString = await response.Content.ReadAsStringAsync ();
-				response.EnsureSuccessStatusCode ();
-
+				using (var handle = Insights.TrackTime (request_string)) {				
+					var response = await httpClient.GetAsync (baseUrl);
+					responseString = await response.Content.ReadAsStringAsync ();
+					response.EnsureSuccessStatusCode ();
+				}
 			} catch (Exception e) { 
 				Insights.Report (e, new Dictionary<string, string> () {
 					{ "Request", request_string },
@@ -100,7 +105,7 @@ namespace App.Common
 
 		private HttpRequest ()
 		{
-			httpClient = new HttpClient (new HttpClientHandler ());
+			httpClient = new HttpClient (NetCache.UserInitiated);
 			httpClient.Timeout = TimeSpan.FromSeconds (10);
 		}
 

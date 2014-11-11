@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin;
+using Splat;
+using ModernHttpClient;
+using System.Net.Http;
 
 #if __ANDROID__
 using Android.App;
@@ -159,6 +162,8 @@ namespace App.Common
 
 		static AppGlobal ()
 		{
+			//https://github.com/paulcbetts/Fusillade
+			Locator.CurrentMutable.RegisterConstant (new NativeMessageHandler (), typeof(HttpMessageHandler));
 			current = new AppGlobal ();
 		}
 
@@ -167,6 +172,7 @@ namespace App.Common
 			#if __ANDROID__
 			Insights.Initialize ("4d76332a65b66f1deaab446e299dbbe898ba5695", Android.App.Application.Context);
 			#else
+			Insights.Initialize("4d76332a65b66f1deaab446e299dbbe898ba5695");
 			#endif
 
 

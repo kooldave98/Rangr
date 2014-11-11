@@ -27,7 +27,7 @@ namespace App.Common
 
 		private void Init ()
 		{
-			geolocator.DesiredAccuracy = 10;
+			geolocator.DesiredAccuracy = 100;
 
 			geolocator.PositionError += (sender, args) => {
 				var errorMessage = args.Error.ToString ();
@@ -124,57 +124,58 @@ namespace App.Common
 		{
 			GeoValue geo_value = null;
 
+			using (var handle = Insights.TrackTime ("TimeToGetCurrentPosition")) {
 
-			if (!this.geolocator.IsGeolocationAvailable || !this.geolocator.IsGeolocationEnabled) {
-				NotifyStatusChanged (Status.ERROR, "Location services are unavailable");
-				return geo_value;
-			}
-
-			if (geoPosition == null) {
-				try {
-					geoPosition = await geolocator.GetPositionAsync (10000);
-				} catch (Exception) {
-					//NotifyStatusChanged (Status.ERROR, "Could not determine location, trying again");
-					//return geo_value;TRY AGAIN FOR LONGER !!!!
-				}
-			}
-
-			if (geoPosition == null) {
-				try {
-					geoPosition = await geolocator.GetPositionAsync (20000);
-				} catch (Exception e) {
-					Insights.Report (e);
-					NotifyStatusChanged (Status.ERROR, "Could not determine location");
+				if (!this.geolocator.IsGeolocationAvailable || !this.geolocator.IsGeolocationEnabled) {
+					NotifyStatusChanged (Status.ERROR, "Location services are unavailable");
 					return geo_value;
 				}
-			}
 
-			if (PositionIsInvalid) {
-				try {
-					geoPosition = await geolocator.GetPositionAsync (10000);
-				} catch (Exception) {
-					NotifyStatusChanged (Status.ERROR, "Could not determine location");
+				if (geoPosition == null) {
+					try {
+						geoPosition = await geolocator.GetPositionAsync (10000);
+					} catch (Exception) {
+						//NotifyStatusChanged (Status.ERROR, "Could not determine location, trying again");
+						//return geo_value;TRY AGAIN FOR LONGER !!!!
+					}
+				}
+
+				if (geoPosition == null) {
+					try {
+						geoPosition = await geolocator.GetPositionAsync (20000);
+					} catch (Exception e) {
+						Insights.Report (e);
+						NotifyStatusChanged (Status.ERROR, "Could not determine location");
+						return geo_value;
+					}
+				}
+
+				if (PositionIsInvalid) {
+					try {
+						geoPosition = await geolocator.GetPositionAsync (10000);
+					} catch (Exception) {
+						NotifyStatusChanged (Status.ERROR, "Could not determine location");
+						return geo_value;
+					}
+				}
+
+				if (PositionIsInvalid) {
+					NotifyInaccurate ();
 					return geo_value;
 				}
+
+				var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+
+				if (is_simulation) {
+					geolocationValue = String.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
+				}
+
+				//geolocationValue = sample_geoposition;
+				geo_value = new GeoValue {
+					geolocation_value = geolocationValue,
+					geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
+				};
 			}
-
-			if (PositionIsInvalid) {
-				NotifyInaccurate ();
-				return geo_value;
-			}
-
-			var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
-
-			if (is_simulation) {
-				geolocationValue = String.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
-			}
-
-			//geolocationValue = sample_geoposition;
-			geo_value = new GeoValue {
-				geolocation_value = geolocationValue,
-				geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
-			};
-
 			return geo_value;
 		}
 
@@ -264,7 +265,7 @@ namespace App.Common
 					return;
 				}
 
-				this.geolocator.StartListening (minTime: 30000, minDistance: 10, includeHeading: false);
+				this.geolocator.StartListening (minTime: 60000, minDistance: 100, includeHeading: false);
 			}
 		}
 	}

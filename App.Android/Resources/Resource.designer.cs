@@ -28,6 +28,7 @@ namespace App.Android
 		{
 			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
 			global::Xamarin.InsightsCore.Resource.String.Hello = global::App.Android.Resource.String.Hello;
+			global::ModernHttpClient.Resource.String.library_name = global::App.Android.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -644,17 +645,17 @@ namespace App.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f07001b
-			public const int ApplicationName = 2131165211;
-			
-			// aapt resource value: 0x7f07001a
-			public const int Hello = 2131165210;
-			
-			// aapt resource value: 0x7f070020
-			public const int action_settings = 2131165216;
-			
 			// aapt resource value: 0x7f07001c
-			public const int app_name = 2131165212;
+			public const int ApplicationName = 2131165212;
+			
+			// aapt resource value: 0x7f07001b
+			public const int Hello = 2131165211;
+			
+			// aapt resource value: 0x7f070021
+			public const int action_settings = 2131165217;
+			
+			// aapt resource value: 0x7f07001d
+			public const int app_name = 2131165213;
 			
 			// aapt resource value: 0x7f070015
 			public const int auth_client_needs_enabling_title = 2131165205;
@@ -734,14 +735,17 @@ namespace App.Android
 			// aapt resource value: 0x7f070013
 			public const int common_signin_button_text_long = 2131165203;
 			
-			// aapt resource value: 0x7f07001d
-			public const int feed_menu_item = 2131165213;
-			
 			// aapt resource value: 0x7f07001e
-			public const int people_menu_item = 2131165214;
+			public const int feed_menu_item = 2131165214;
+			
+			// aapt resource value: 0x7f07001a
+			public const int library_name = 2131165210;
 			
 			// aapt resource value: 0x7f07001f
-			public const int profile_menu_item = 2131165215;
+			public const int people_menu_item = 2131165215;
+			
+			// aapt resource value: 0x7f070020
+			public const int profile_menu_item = 2131165216;
 			
 			static String()
 			{
