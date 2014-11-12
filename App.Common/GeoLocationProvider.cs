@@ -77,10 +77,10 @@ namespace App.Common
 		private void simulate_position (string key)
 		{
 			var locations = new Dictionary<string, string> () {
-				{ "A","-2.22872, 53.47863" },
-				{ "B","-2.22819, 53.47925" },
-				{ "C","-2.22695, 53.47922" },
-				{ "D","-2.22633, 53.47869" },
+				{ "A","-2.229798, 53.477738" },
+				{ "B","-2.229396, 53.479345" },
+				{ "C","-2.227427, 53.480470" },
+				{ "D","-2.224769, 53.480107" },
 			};
 
 			is_simulation = true;
@@ -90,7 +90,7 @@ namespace App.Common
 
 			pos.Latitude = lat_lng.Item1;
 			pos.Longitude = lat_lng.Item2;
-			pos.Accuracy = 5;
+			pos.Accuracy = 1;
 
 			simulated_geoPosition = pos;
 		}

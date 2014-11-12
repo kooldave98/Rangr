@@ -392,12 +392,6 @@ namespace App.Android
 			// aapt resource value: 0x7f060009
 			public const int ValueTextView = 2131099657;
 			
-			// aapt resource value: 0x7f060037
-			public const int action_settings = 2131099703;
-			
-			// aapt resource value: 0x7f060036
-			public const int action_simulation = 2131099702;
-			
 			// aapt resource value: 0x7f060013
 			public const int dialogImage = 2131099667;
 			
@@ -502,6 +496,12 @@ namespace App.Android
 			
 			// aapt resource value: 0x7f060002
 			public const int satellite = 2131099650;
+			
+			// aapt resource value: 0x7f060037
+			public const int settings_menu_item = 2131099703;
+			
+			// aapt resource value: 0x7f060036
+			public const int simulation_menu_item = 2131099702;
 			
 			// aapt resource value: 0x7f060021
 			public const int status = 2131099681;

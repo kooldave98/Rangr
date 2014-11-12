@@ -158,6 +158,7 @@ namespace App.Android
 			menu.FindItem (Resource.Id.feed_menu_item).SetVisible (false);
 			menu.FindItem (Resource.Id.people_menu_item).SetVisible (false);
 			menu.FindItem (Resource.Id.profile_menu_item).SetVisible (false);
+			menu.FindItem (Resource.Id.simulation_menu_item).SetVisible (false);
 
 			return base.OnCreateOptionsMenu (menu);
 

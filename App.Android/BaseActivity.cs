@@ -11,6 +11,8 @@ namespace App.Android
 {
 	public abstract class BaseActivity : Activity
 	{
+		private bool is_paused = false;
+
 		private EventHandler isBusyChangedEventHandler;
 
 		private EventHandler<AppEventArgs> ConnectionFailedHandler;
@@ -74,6 +76,8 @@ namespace App.Android
 				//See the PostFeedActivity OnResume for an example of what I mean
 				StartActivity (typeof(LoginActivity));
 			} 
+
+			is_paused = false;
 		}
 
 		protected override void OnPause ()
@@ -95,6 +99,8 @@ namespace App.Android
 			AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
 
 			AppGlobal.Current.Pause (this);
+
+			is_paused = true;
 		}
 
 		//OnMenuItemSelected is the generic version of all menus (Options Menu, Context Menu)
@@ -111,10 +117,10 @@ namespace App.Android
 			case Resource.Id.profile_menu_item:
 				ResurrectActivity (typeof(ProfileActivity));
 				break;
-			case Resource.Id.action_simulation:
+			case Resource.Id.simulation_menu_item:
 				ResurrectActivity (typeof(SimulationActivity));
 				break;
-			case Resource.Id.action_settings:
+			case Resource.Id.settings_menu_item:
 				ResurrectActivity (typeof(AboutAppActivity));
 				break;
 			}
@@ -148,31 +154,35 @@ namespace App.Android
 
 		protected void ShowToast (string message)
 		{
-			RunOnUiThread (() => {
-				if (true) {
-					var t = Toast.MakeText (this, message, ToastLength.Long);
-					t.SetGravity (GravityFlags.Center, 0, 0);
-					t.Show ();
-				}
-			});
+			if (!is_paused) {
+				RunOnUiThread (() => {
+					if (true) {
+						var t = Toast.MakeText (this, message, ToastLength.Long);
+						t.SetGravity (GravityFlags.Center, 0, 0);
+						t.Show ();
+					}
+				});
+			}
 
 		}
 
 		protected void ShowAlert (string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
 		{
-			var builder = new AlertDialog.Builder (this)
+			if (!is_paused) {
+				var builder = new AlertDialog.Builder (this)
 				.SetTitle (title)
 				.SetMessage (message)
 				.SetPositiveButton (ok_button_text, (innerSender, innere) => {
-				RunOnUiThread (() => {
-					if (ok_button_action != null) {
-						ok_button_action ();
-					}
-				});
+					RunOnUiThread (() => {
+						if (ok_button_action != null) {
+							ok_button_action ();
+						}
+					});
 				
-			});
-			var dialog = builder.Create ();
-			dialog.Show ();
+				});
+				var dialog = builder.Create ();
+				dialog.Show ();
+			}
 		}
 
 		protected void notify (String methodName)

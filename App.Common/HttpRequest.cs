@@ -11,9 +11,6 @@ namespace App.Common
 {
 	public class HttpRequest
 	{
-		private static HttpClient httpClient;
-
-
 		public async Task<string> Put (string baseUrl, List<KeyValuePair<string, string>> data)
 		{
 			var request_string = "PUT: " + baseUrl;
@@ -98,10 +95,12 @@ namespace App.Common
 
 		public static HttpRequest Current {
 			get {
-				//return _instance ?? (_instance = new HttpRequest ());
-				return (_instance = new HttpRequest ());
+				return _instance ?? (_instance = new HttpRequest ());
+				//return (_instance = new HttpRequest ());
 			}
 		}
+
+		private static HttpClient httpClient;
 
 		private HttpRequest ()
 		{
