@@ -109,6 +109,8 @@
     </Compile>
     <Compile Include="AboutAppActivity.cs" />
     <Compile Include="SimulationActivity.cs" />
+    <Compile Include="SearchActivity.cs" />
+    <Compile Include="Views\AClickableSpan.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

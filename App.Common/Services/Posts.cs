@@ -8,6 +8,13 @@ using System.Diagnostics;
 
 namespace App.Common
 {
+	//category={category}
+	//&start_index={start_index}
+	//&max_results={max_results}
+	//&collection_traversal={collection_traversal}
+	//&first_load={first_load}
+	//&hash_tag_name={hash_tag_name}
+	//&connection_id={connection_id}
 	public class Posts
 	{
 		public async Task<List<Post>> Get (string connection_id, string start_index, bool backward_traversal = false, bool latest_entries = false)

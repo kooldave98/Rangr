@@ -5,6 +5,11 @@ using Android.Views;
 using Android.Widget;
 using App.Core.Portable.Models;
 using CustomViews;
+using System.Text.RegularExpressions;
+using Android.Text.Style;
+using Android.Content;
+using Android.Text;
+using Android.Text.Method;
 
 namespace App.Android
 {
@@ -52,10 +57,48 @@ namespace App.Android
 
 			//Assign item's values to the various subviews
 			txtName.SetText (item.user_display_name, TextView.BufferType.Normal);
-			txtDescription.SetText (item.text, TextView.BufferType.Normal);
+
+			List<int[]> hashtagSpans = getSpans (item.text, '#');
+
+			SpannableString postContent = new SpannableString (item.text);
+
+			for (int i = 0; i < hashtagSpans.Count; i++) {
+				int[] span = hashtagSpans [i];
+				int hashTagStart = span [0];
+				int hashTagEnd = span [1];
+
+				postContent.SetSpan (new AClickableSpan (context),
+					hashTagStart,
+					hashTagEnd, 0);
+
+			}
+
+			txtDescription.MovementMethod = LinkMovementMethod.Instance;
+			txtDescription.SetText (postContent, TextView.BufferType.Normal);
+
+
 			view.FindViewById<ImageView> (Resource.Id.profilePic).SetImageResource (Resource.Drawable.user_default_avatar);
 			//Finally return the view
 			return view;
+		}
+
+		public List<int[]> getSpans (string body, char prefix)
+		{
+			List<int[]> spans = new List<int[]> ();
+
+			Regex pattern = new Regex (prefix + "\\w+");
+			MatchCollection matches = pattern.Matches (body);
+
+			foreach (Match match in matches) {
+				var m = match.Groups [0];
+				// Check all occurrences
+
+				int[] currentSpan = new int[2];
+				currentSpan [0] = m.Index;
+				currentSpan [1] = currentSpan [0] + m.Length;
+				spans.Add (currentSpan);
+			}
+			return  spans;
 		}
 	}
 }

@@ -9,26 +9,31 @@
     <Import_RootNamespace>App.Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditProfileViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FeedViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewPostViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PeopleViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PostDetailsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProfileViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Connections.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Posts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Users.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommonClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Connections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EmptyClass.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FeedViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JavaScriptTimer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NewPostViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PeopleViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PostDetailsViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Posts.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ProfileViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Users.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModelBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EditProfileViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
   </ItemGroup>
 </Project>

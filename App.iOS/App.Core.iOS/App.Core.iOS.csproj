@@ -78,68 +78,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
+  <Import Project="..\..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="GeoLocation.cs" />
     <Compile Include="TextViewWriter.cs" />
-    <Compile Include="..\..\App.Common\CommonClient.cs">
-      <Link>CommonClient.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\GeoLocationProvider.cs">
-      <Link>GeoLocationProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\HttpRequest.cs">
-      <Link>HttpRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\JavaScriptTimer.cs">
-      <Link>JavaScriptTimer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\Session.cs">
-      <Link>Session.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\FeedViewModel.cs">
-      <Link>ViewModels\FeedViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\LoginViewModel.cs">
-      <Link>ViewModels\LoginViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\NewPostViewModel.cs">
-      <Link>ViewModels\NewPostViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\PeopleViewModel.cs">
-      <Link>ViewModels\PeopleViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\PostDetailsViewModel.cs">
-      <Link>ViewModels\PostDetailsViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\ProfileViewModel.cs">
-      <Link>ViewModels\ProfileViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\ViewModelBase.cs">
-      <Link>ViewModels\ViewModelBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\Connections.cs">
-      <Link>Services\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\Posts.cs">
-      <Link>Services\Posts.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\Users.cs">
-      <Link>Services\Users.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\AppGlobal.cs">
-      <Link>AppGlobal.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\AppEvents.cs">
-      <Link>AppEvents.cs</Link>
-    </Compile>
-    <Compile Include="..\..\App.Common\PersistentStorage.cs">
-      <Link>PersistentStorage.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamarin.mobile">
