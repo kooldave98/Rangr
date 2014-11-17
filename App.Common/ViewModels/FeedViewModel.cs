@@ -33,10 +33,10 @@ namespace App.Common
 				//Todo: Need to guard Get Current Connection
 				var newer_posts = 
 					LatestPosts = 
-						await PostServices.Get (connection_id, 
+						await PostServices
+							.Get (connection_id, 
 						forward_start_index.ToString (), 
-						backward_traversal: false, 
-						latest_entries: first_load);
+						first_load: first_load);
 
 				foreach (var post in newer_posts) {
 					first_load = false;
@@ -61,8 +61,8 @@ namespace App.Common
 					await PostServices
 							.Get (connection_id, 
 						backward_start_index.ToString (), 
-						backward_traversal: true, 
-						latest_entries: first_load);
+						first_load: first_load, 
+						traversal: CollectionTraversal.Older);
 
 				foreach (var post in older_posts) {
 					first_load = false;

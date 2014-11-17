@@ -35,10 +35,13 @@ namespace App.Common
 				//Todo: Need to guard Get Current Connection
 				var newer_posts = 
 					LatestPosts = 
-						await PostServices.Get (connection_id, 
+						await PostServices
+							.Get (connection_id, 
 						forward_start_index.ToString (), 
-						backward_traversal: false, 
-						latest_entries: first_load);
+						first_load: first_load,
+						category: GetPostsQueryCategory.ByHashTag,
+						hash_tag_name: hash_tag_search_keyword
+					);
 
 				foreach (var post in newer_posts) {
 					first_load = false;
@@ -61,10 +64,12 @@ namespace App.Common
 			if (first_load || backward_start_index > 0) {
 				var older_posts = 
 					await PostServices
-							.Get (connection_id, 
+						.Get (connection_id, 
 						backward_start_index.ToString (), 
-						backward_traversal: true, 
-						latest_entries: first_load);
+						first_load: first_load, 
+						traversal: CollectionTraversal.Older,
+						category: GetPostsQueryCategory.ByHashTag,
+						hash_tag_name: hash_tag_search_keyword);
 
 				foreach (var post in older_posts) {
 					first_load = false;
