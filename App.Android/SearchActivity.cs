@@ -50,7 +50,7 @@ namespace App.Android
 			postListView.InitEndlessness (Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
 			postListView.OnLoadMoreTriggered += async (sender, e) => {
-				await view_model.OlderPosts ();
+				//await view_model.OlderPosts ();
 				JavaScriptTimer.SetTimeout (delegate {
 					RunOnUiThread (() => {
 						((EndlessListView)sender).SetEndlessListLoaderComplete ();
@@ -74,7 +74,7 @@ namespace App.Android
 				Resource.Color.xam_gray, Resource.Color.xam_green);
 
 			refresher.Refresh += async (sender, e) => {
-				await view_model.RefreshPosts ();
+				//await view_model.RefreshPosts ();
 				JavaScriptTimer.SetTimeout (delegate {
 					RunOnUiThread (() => {
 						refresher.Refreshing = false;
