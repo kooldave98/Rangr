@@ -12,6 +12,7 @@ using System.Net.Http;
 using Android.App;
 
 
+
 #else
 
 #endif
@@ -172,7 +173,7 @@ namespace App.Common
 			#if __ANDROID__
 			Insights.Initialize ("4d76332a65b66f1deaab446e299dbbe898ba5695", Android.App.Application.Context);
 			#else
-			Insights.Initialize("4d76332a65b66f1deaab446e299dbbe898ba5695");
+
 			#endif
 
 

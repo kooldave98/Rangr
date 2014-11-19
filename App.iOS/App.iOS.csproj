@@ -48,6 +48,11 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -108,14 +113,6 @@
     <BundleResource Include="Resources\login_btn%402x.png" />
     <BundleResource Include="Resources\logo.png" />
     <BundleResource Include="Resources\logo%402x.png" />
-    <BundleResource Include="Resources\114.png" />
-    <BundleResource Include="Resources\120.png" />
-    <BundleResource Include="Resources\29.png" />
-    <BundleResource Include="Resources\50.png" />
-    <BundleResource Include="Resources\57.png" />
-    <BundleResource Include="Resources\58.png" />
-    <BundleResource Include="Resources\60.png" />
-    <BundleResource Include="Resources\72.png" />
     <BundleResource Include="Resources\backbutton.png" />
     <BundleResource Include="Resources\backbutton%402x.png" />
     <BundleResource Include="Resources\bluebar.png" />
@@ -144,9 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
+    <Compile Include="AppDelegate.cs" />
     <Compile Include="DetailViewController.cs" />
     <Compile Include="DetailViewController.designer.cs">
       <DependentUpon>DetailViewController.cs</DependentUpon>

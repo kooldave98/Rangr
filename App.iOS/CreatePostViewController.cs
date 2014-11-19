@@ -9,13 +9,11 @@ namespace App.iOS
 	public partial class CreatePostViewController : UIViewController
 	{
 		private NewPostViewModel view_model;
-		private Action success_callback;
 
-		public CreatePostViewController (Action the_success_callback)
+		public CreatePostViewController ()
 			: base ("CreatePostViewController", null)
 		{
 			view_model = new NewPostViewModel (PersistentStorage.Current);
-			success_callback = the_success_callback;
 		}
 
 		public override void ViewDidLoad ()
@@ -23,17 +21,15 @@ namespace App.iOS
 			base.ViewDidLoad ();
 
 			// Perform any additional setup after loading the view, typically from a nib.
-			this.CreatePostBtn.TouchUpInside += Login;
+			this.CreatePostBtn.TouchUpInside += Save;
 		}
 
-		private async void Login (object sender, EventArgs e)
+		private async void Save (object sender, EventArgs e)
 		{
 			if (!string.IsNullOrWhiteSpace (NewPostTbx.Text)) {
 				view_model.PostText = this.NewPostTbx.Text;
 
-				await view_model.CreatePost ();		
-
-				success_callback ();
+				await view_model.CreatePost ();
 
 				this.NavigationController.PopToRootViewController (true);
 			}

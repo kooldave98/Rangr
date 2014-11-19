@@ -7,9 +7,6 @@ using App.Core.Portable.Persistence;
 
 namespace App.Common
 {
-	//The ios workarounds are because I didn't want to be repopulating the list each time.
-	//So I am caching the latest posts every time a pull is made.
-
 	public class FeedViewModel : ViewModelBase
 	{
 		public enum RefreshDirection
@@ -17,11 +14,6 @@ namespace App.Common
 			FORWARD,
 			BACKWARD
 		}
-		//public int start_index { get; set; }
-
-		//1.1non android breaking ios workaround
-		public IList<Post> LatestPosts { get; set; }
-		//end workaround
 
 		public IList<Post> Posts { get; set; }
 
@@ -31,9 +23,8 @@ namespace App.Common
 		{
 			if (!first_load) {
 				//Todo: Need to guard Get Current Connection
-				var newer_posts = 
-					LatestPosts = 
-						await PostServices
+				var newer_posts =
+					await PostServices
 							.Get (connection_id, 
 						forward_start_index.ToString (), 
 						first_load: first_load);
@@ -96,11 +87,6 @@ namespace App.Common
 		public FeedViewModel ()
 		{
 			Posts = new List<Post> ();
-
-			//1.3 non android breaking ios workaround
-			LatestPosts = new List<Post> ();
-			//end workaround
-
 
 			_sessionInstance = Session.GetInstance ();
 

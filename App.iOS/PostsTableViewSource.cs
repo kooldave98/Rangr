@@ -10,17 +10,15 @@ namespace App.iOS
 {
 	public class PostsTableViewSource : UITableViewSource
 	{
-		readonly List<Post> objects = new List<Post> ();
+		readonly IList<Post> objects;
 		readonly MainViewController controller;
 
-		public PostsTableViewSource (MainViewController controller)
+		public PostsTableViewSource (MainViewController controller, IList<Post> objects)
 		{
 			this.controller = controller;
+			this.objects = objects;
 		}
 
-		public IList<Post> Objects {
-			get { return objects; }
-		}
 		// Customize the number of sections in the table view.
 		public override int NumberOfSections (UITableView tableView)
 		{
@@ -38,13 +36,12 @@ namespace App.iOS
 
 			var cell = tableView.DequeueReusableCell (PostCellView.Key) as PostCellView;
 
-			if (cell == null)
-			{
+			if (cell == null) {
 				cell = PostCellView.Create ();
 				cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 			}
 
-			cell.BindDataToCell(post);
+			cell.BindDataToCell (post);
 
 
 //			if (cell == null) {
@@ -62,7 +59,7 @@ namespace App.iOS
 			return cell;
 		}
 
-		public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+		public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
 		{
 			return 90;
 		}

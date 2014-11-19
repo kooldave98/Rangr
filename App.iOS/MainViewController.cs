@@ -15,39 +15,28 @@ namespace App.iOS
 	{
 		FeedViewModel view_model;
 
-		PostsTableViewSource dataSource;
-
 		public MainViewController () : base ("MainViewController", null)
 		{
 			view_model = new FeedViewModel ();
 				
 			Title = NSBundle.MainBundle.LocalizedString ("Main", "Main");
 
-			TableView.Source = dataSource = new PostsTableViewSource (this);
+			TableView.Source = new PostsTableViewSource (this, view_model.Posts);
+
+			Initialize ();
 		}
 
 		public DetailViewController DetailViewController { get; set; }
 
 		public CreatePostViewController CreatePostViewController { get; set; }
 
-		public override void DidReceiveMemoryWarning ()
+		public void Initialize ()
 		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
 
-			// Release any cached data, images, etc that aren't in use.
-
-			showModal ();
-		}
-
-		public async void Initialize ()
-		{
 			NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Add), false);
 			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
 				//if (this.NewPostViewController == null)
-				this.CreatePostViewController = new CreatePostViewController (async() => {
-					await view_model.RefreshPosts ();
-				});
+				this.CreatePostViewController = new CreatePostViewController ();
 				//this.NewPostViewController.ModalInPopover = true;
 
 				// Pass the selected object to the new view controller.
@@ -59,14 +48,6 @@ namespace App.iOS
 			NavigationItem.SetLeftBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Action), false);
 			NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) => {
 				//alert hey oh
-			};
-
-			view_model.IsBusyChanged +=	(sender, e) => {
-				if (view_model.IsBusy) {
-					//Show startup progress here
-				} else {
-					//stop progress
-				}
 			};
 
 			view_model.OnNewPostsReceived += HandleOnNewPostsReceived;
@@ -82,25 +63,37 @@ namespace App.iOS
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 			};
 
-			await view_model.RefreshPosts ();
-
 		}
 
 		private void HandleOnNewPostsReceived (object sender, EventArgs e)
 		{
-			foreach (var post in view_model.LatestPosts) {
-
-				dataSource.Objects.Insert (0, post);
-
-				using (var indexPath = NSIndexPath.FromRowSection (0, 0)) {
-					TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
-				}
-			}
+			TableView.ReloadData ();
 		}
 
-		public override void ViewDidLoad ()
+		public override async void ViewWillAppear (bool animated)
 		{
-			base.ViewDidLoad ();
+			base.ViewWillAppear (animated);
+			//Check if the user exists first before loading the login view
+			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+				await view_model.RefreshPosts ();
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+
+			} else {
+				var login = new LoginViewController ();
+				PresentViewController (login, false, null);
+			}
+
+		}
+
+		public override void DidReceiveMemoryWarning ()
+		{
+			// Releases the view if it doesn't have a superview.
+			base.DidReceiveMemoryWarning ();
+
+			// Release any cached data, images, etc that aren't in use.
+
+			showModal ();
 		}
 
 		private void showModal ()
@@ -108,8 +101,6 @@ namespace App.iOS
 			UIAlertView alert = new UIAlertView ();
 			alert.Title = "Add Something";
 			alert.AddButton ("One");
-			alert.AddButton ("Two");
-			alert.AddButton ("Three");
 			alert.Message = "Low Memory o";
 			alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;//UIAlertViewStyle.LoginAndPasswordInput;
 			alert.Show ();

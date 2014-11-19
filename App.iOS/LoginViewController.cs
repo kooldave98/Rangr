@@ -11,13 +11,9 @@ namespace App.iOS
 	{
 		private LoginViewModel view_model;
 
-		private Action init_callback;
-
-		public LoginViewController (Action the_init_callback)
+		public LoginViewController ()
 		{
 			view_model = new LoginViewModel ();
-
-			init_callback = the_init_callback;
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -58,11 +54,14 @@ namespace App.iOS
 
 			view_model.UserDisplayName = username.Text;
 
-			await view_model.CreateUser ();
+			var create_user_successful = await view_model.CreateUser ();
 
-			init_callback ();
+			if (create_user_successful) {
+				await AppGlobal.Current.CreateNewConnectionFromLogin ();
 
-			DismissViewController (true, null);
+				DismissViewController (true, null);
+			}
 		}
+
 	}
 }
