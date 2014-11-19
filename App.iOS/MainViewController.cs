@@ -15,6 +15,10 @@ namespace App.iOS
 	{
 		FeedViewModel view_model;
 
+		public DetailViewController DetailViewController { get; set; }
+
+		public CreatePostViewController CreatePostViewController { get; set; }
+
 		public MainViewController () : base ("MainViewController", null)
 		{
 			view_model = new FeedViewModel ();
@@ -25,10 +29,6 @@ namespace App.iOS
 
 			Initialize ();
 		}
-
-		public DetailViewController DetailViewController { get; set; }
-
-		public CreatePostViewController CreatePostViewController { get; set; }
 
 		public void Initialize ()
 		{

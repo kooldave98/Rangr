@@ -140,7 +140,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Main.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="DetailViewController.cs" />
     <Compile Include="DetailViewController.designer.cs">
