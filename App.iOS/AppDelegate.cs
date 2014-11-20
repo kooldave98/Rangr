@@ -28,6 +28,7 @@ namespace App.iOS
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			window.RootViewController = new UINavigationController (mainViewController);
 			window.MakeKeyAndVisible ();
+			//Roy test
 
 			return true;
 		}
