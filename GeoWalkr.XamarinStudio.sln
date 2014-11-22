@@ -156,5 +156,12 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = App.Android\App.Android.csproj
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.CommitMessageStyle = $2
+		$2.FirstFilePrefix = 
+		$2.FileSeparator = ", "
+		$2.LineAlign = 0
+		$1.inheritsSet = Mono
 	EndGlobalSection
 EndGlobal
