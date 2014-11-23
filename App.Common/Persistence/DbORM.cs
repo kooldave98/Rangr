@@ -1,5 +1,4 @@
-﻿using App.Core.Portable.Persistence;
-using SQLite;
+﻿using SQLite;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -11,12 +10,12 @@ namespace App.Common
 	/// because I didn't know how to use App prefrences on ANdroid
 	/// I am keeping this file as a reference for when I need to remember how to use SQLite
 	/// </summary>
-	public class PersistentStorage_OLD
+	public class DbORM
 	{
 
 		EntityDatabase db;
 
-		private PersistentStorage_OLD ()
+		private DbORM ()
 		{
 			var sqliteFilename = "Walkr.db3";
 			string libraryPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);

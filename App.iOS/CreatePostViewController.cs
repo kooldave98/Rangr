@@ -13,7 +13,7 @@ namespace App.iOS
 		public CreatePostViewController ()
 			: base ("CreatePostViewController", null)
 		{
-			view_model = new NewPostViewModel (PersistentStorage.Current);
+			view_model = new NewPostViewModel ();
 		}
 
 		public override void ViewDidLoad ()

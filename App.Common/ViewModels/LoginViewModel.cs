@@ -1,6 +1,4 @@
 ﻿using System;
-using App.Core.Portable.Persistence;
-using App.Core.Portable.Models;
 using System.Threading.Tasks;
 
 namespace App.Common

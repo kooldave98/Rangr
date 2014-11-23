@@ -1,7 +1,5 @@
 ﻿using System;
-using App.Core.Portable.Models;
 using System.IO;
-using App.Core.Portable.Persistence;
 
 namespace App.Common
 {

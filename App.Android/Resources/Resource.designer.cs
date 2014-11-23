@@ -28,6 +28,9 @@ namespace App.Android
 		{
 			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
 			global::Xamarin.InsightsCore.Resource.String.Hello = global::App.Android.Resource.String.Hello;
+			global::SQLite.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
+			global::SQLite.Resource.String.Hello = global::App.Android.Resource.String.Hello;
+			global::Splat.Resource.String.library_name = global::App.Android.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::App.Android.Resource.String.library_name;
 		}
 		
@@ -180,44 +183,44 @@ namespace App.Android
 		public partial class Dimension
 		{
 			
-			// aapt resource value: 0x7f090000
-			public const int activity_horizontal_margin = 2131296256;
+			// aapt resource value: 0x7f080000
+			public const int activity_horizontal_margin = 2131230720;
 			
-			// aapt resource value: 0x7f090001
-			public const int activity_vertical_margin = 2131296257;
+			// aapt resource value: 0x7f080001
+			public const int activity_vertical_margin = 2131230721;
 			
-			// aapt resource value: 0x7f09000c
-			public const int feed_item_border_width = 2131296268;
+			// aapt resource value: 0x7f08000c
+			public const int feed_item_border_width = 2131230732;
 			
-			// aapt resource value: 0x7f09000b
-			public const int feed_item_corner_radius = 2131296267;
+			// aapt resource value: 0x7f08000b
+			public const int feed_item_corner_radius = 2131230731;
 			
-			// aapt resource value: 0x7f090002
-			public const int feed_item_margin = 2131296258;
+			// aapt resource value: 0x7f080002
+			public const int feed_item_margin = 2131230722;
 			
-			// aapt resource value: 0x7f090004
-			public const int feed_item_padding_left_right = 2131296260;
+			// aapt resource value: 0x7f080004
+			public const int feed_item_padding_left_right = 2131230724;
 			
-			// aapt resource value: 0x7f090003
-			public const int feed_item_padding_top_bottom = 2131296259;
+			// aapt resource value: 0x7f080003
+			public const int feed_item_padding_top_bottom = 2131230723;
 			
-			// aapt resource value: 0x7f090006
-			public const int feed_item_profile_info_padd = 2131296262;
+			// aapt resource value: 0x7f080006
+			public const int feed_item_profile_info_padd = 2131230726;
 			
-			// aapt resource value: 0x7f090007
-			public const int feed_item_profile_name = 2131296263;
+			// aapt resource value: 0x7f080007
+			public const int feed_item_profile_name = 2131230727;
 			
-			// aapt resource value: 0x7f090005
-			public const int feed_item_profile_pic = 2131296261;
+			// aapt resource value: 0x7f080005
+			public const int feed_item_profile_pic = 2131230725;
 			
-			// aapt resource value: 0x7f090009
-			public const int feed_item_status_pad_left_right = 2131296265;
+			// aapt resource value: 0x7f080009
+			public const int feed_item_status_pad_left_right = 2131230729;
 			
-			// aapt resource value: 0x7f09000a
-			public const int feed_item_status_pad_top = 2131296266;
+			// aapt resource value: 0x7f08000a
+			public const int feed_item_status_pad_top = 2131230730;
 			
-			// aapt resource value: 0x7f090008
-			public const int feed_item_timestamp = 2131296264;
+			// aapt resource value: 0x7f080008
+			public const int feed_item_timestamp = 2131230728;
 			
 			static Dimension()
 			{
@@ -359,173 +362,173 @@ namespace App.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060022
-			public const int Divider = 2131099682;
+			// aapt resource value: 0x7f0b0022
+			public const int Divider = 2131427362;
 			
-			// aapt resource value: 0x7f06000b
-			public const int EmailButton = 2131099659;
+			// aapt resource value: 0x7f0b000b
+			public const int EmailButton = 2131427339;
 			
-			// aapt resource value: 0x7f06000e
-			public const int HeaderTextView = 2131099662;
+			// aapt resource value: 0x7f0b000e
+			public const int HeaderTextView = 2131427342;
 			
-			// aapt resource value: 0x7f06000a
-			public const int NameTextView = 2131099658;
+			// aapt resource value: 0x7f0b000a
+			public const int NameTextView = 2131427338;
 			
-			// aapt resource value: 0x7f060023
-			public const int PhoneButton = 2131099683;
+			// aapt resource value: 0x7f0b0023
+			public const int PhoneButton = 2131427363;
 			
-			// aapt resource value: 0x7f06001b
-			public const int PostText = 2131099675;
+			// aapt resource value: 0x7f0b001b
+			public const int PostText = 2131427355;
 			
-			// aapt resource value: 0x7f060024
-			public const int PostTextLabel = 2131099684;
+			// aapt resource value: 0x7f0b0024
+			public const int PostTextLabel = 2131427364;
 			
-			// aapt resource value: 0x7f06002d
-			public const int ProfileList = 2131099693;
+			// aapt resource value: 0x7f0b002d
+			public const int ProfileList = 2131427373;
 			
-			// aapt resource value: 0x7f06001d
-			public const int SwipeContent = 2131099677;
+			// aapt resource value: 0x7f0b001d
+			public const int SwipeContent = 2131427357;
 			
-			// aapt resource value: 0x7f06001a
-			public const int UserNameText = 2131099674;
+			// aapt resource value: 0x7f0b001a
+			public const int UserNameText = 2131427354;
 			
-			// aapt resource value: 0x7f060009
-			public const int ValueTextView = 2131099657;
+			// aapt resource value: 0x7f0b0009
+			public const int ValueTextView = 2131427337;
 			
-			// aapt resource value: 0x7f060013
-			public const int dialogImage = 2131099667;
+			// aapt resource value: 0x7f0b0013
+			public const int dialogImage = 2131427347;
 			
-			// aapt resource value: 0x7f060012
-			public const int dialogLayout = 2131099666;
+			// aapt resource value: 0x7f0b0012
+			public const int dialogLayout = 2131427346;
 			
-			// aapt resource value: 0x7f060014
-			public const int dialogTitle = 2131099668;
+			// aapt resource value: 0x7f0b0014
+			public const int dialogTitle = 2131427348;
 			
-			// aapt resource value: 0x7f060005
-			public const int displayName = 2131099653;
+			// aapt resource value: 0x7f0b0005
+			public const int displayName = 2131427333;
 			
-			// aapt resource value: 0x7f060020
-			public const int distance = 2131099680;
+			// aapt resource value: 0x7f0b0020
+			public const int distance = 2131427360;
 			
-			// aapt resource value: 0x7f06002c
-			public const int feedImage1 = 2131099692;
+			// aapt resource value: 0x7f0b002c
+			public const int feedImage1 = 2131427372;
 			
-			// aapt resource value: 0x7f060033
-			public const int feed_menu_item = 2131099699;
+			// aapt resource value: 0x7f0b0033
+			public const int feed_menu_item = 2131427379;
 			
-			// aapt resource value: 0x7f06001c
-			public const int fragmentContainer = 2131099676;
+			// aapt resource value: 0x7f0b001c
+			public const int fragmentContainer = 2131427356;
 			
-			// aapt resource value: 0x7f060004
-			public const int hybrid = 2131099652;
+			// aapt resource value: 0x7f0b0000
+			public const int hybrid = 2131427328;
 			
-			// aapt resource value: 0x7f06000c
-			public const int imageView1 = 2131099660;
+			// aapt resource value: 0x7f0b000c
+			public const int imageView1 = 2131427340;
 			
-			// aapt resource value: 0x7f060007
-			public const int linearLayout1 = 2131099655;
+			// aapt resource value: 0x7f0b0007
+			public const int linearLayout1 = 2131427335;
 			
-			// aapt resource value: 0x7f060008
-			public const int linearLayout2 = 2131099656;
+			// aapt resource value: 0x7f0b0008
+			public const int linearLayout2 = 2131427336;
 			
-			// aapt resource value: 0x7f06001e
-			public const int linearLayout3 = 2131099678;
+			// aapt resource value: 0x7f0b001e
+			public const int linearLayout3 = 2131427358;
 			
-			// aapt resource value: 0x7f060026
-			public const int list = 2131099686;
+			// aapt resource value: 0x7f0b0026
+			public const int list = 2131427366;
 			
-			// aapt resource value: 0x7f060010
-			public const int loadMoreButton = 2131099664;
+			// aapt resource value: 0x7f0b0010
+			public const int loadMoreButton = 2131427344;
 			
-			// aapt resource value: 0x7f060011
-			public const int loadMoreProgress = 2131099665;
+			// aapt resource value: 0x7f0b0011
+			public const int loadMoreProgress = 2131427345;
 			
-			// aapt resource value: 0x7f060017
-			public const int logIn = 2131099671;
+			// aapt resource value: 0x7f0b0017
+			public const int logIn = 2131427351;
 			
-			// aapt resource value: 0x7f060018
-			public const int loginProgress = 2131099672;
+			// aapt resource value: 0x7f0b0018
+			public const int loginProgress = 2131427352;
 			
-			// aapt resource value: 0x7f060019
-			public const int loginQuestion = 2131099673;
+			// aapt resource value: 0x7f0b0019
+			public const int loginQuestion = 2131427353;
 			
-			// aapt resource value: 0x7f06000d
-			public const int map = 2131099661;
+			// aapt resource value: 0x7f0b000d
+			public const int map = 2131427341;
 			
-			// aapt resource value: 0x7f060028
-			public const int name = 2131099688;
+			// aapt resource value: 0x7f0b0028
+			public const int name = 2131427368;
 			
-			// aapt resource value: 0x7f060000
-			public const int none = 2131099648;
+			// aapt resource value: 0x7f0b0001
+			public const int none = 2131427329;
 			
-			// aapt resource value: 0x7f060001
-			public const int normal = 2131099649;
+			// aapt resource value: 0x7f0b0002
+			public const int normal = 2131427330;
 			
-			// aapt resource value: 0x7f060016
-			public const int password = 2131099670;
+			// aapt resource value: 0x7f0b0016
+			public const int password = 2131427350;
 			
-			// aapt resource value: 0x7f060034
-			public const int people_menu_item = 2131099700;
+			// aapt resource value: 0x7f0b0034
+			public const int people_menu_item = 2131427380;
 			
-			// aapt resource value: 0x7f06001f
-			public const int personName = 2131099679;
+			// aapt resource value: 0x7f0b001f
+			public const int personName = 2131427359;
 			
-			// aapt resource value: 0x7f060027
-			public const int profilePic = 2131099687;
+			// aapt resource value: 0x7f0b0027
+			public const int profilePic = 2131427367;
 			
-			// aapt resource value: 0x7f060035
-			public const int profile_menu_item = 2131099701;
+			// aapt resource value: 0x7f0b0035
+			public const int profile_menu_item = 2131427381;
 			
-			// aapt resource value: 0x7f06002f
-			public const int radio_A = 2131099695;
+			// aapt resource value: 0x7f0b002f
+			public const int radio_A = 2131427375;
 			
-			// aapt resource value: 0x7f060030
-			public const int radio_B = 2131099696;
+			// aapt resource value: 0x7f0b0030
+			public const int radio_B = 2131427376;
 			
-			// aapt resource value: 0x7f060031
-			public const int radio_C = 2131099697;
+			// aapt resource value: 0x7f0b0031
+			public const int radio_C = 2131427377;
 			
-			// aapt resource value: 0x7f060032
-			public const int radio_D = 2131099698;
+			// aapt resource value: 0x7f0b0032
+			public const int radio_D = 2131427378;
 			
-			// aapt resource value: 0x7f06002e
-			public const int radio_Live = 2131099694;
+			// aapt resource value: 0x7f0b002e
+			public const int radio_Live = 2131427374;
 			
-			// aapt resource value: 0x7f060025
-			public const int refresher = 2131099685;
+			// aapt resource value: 0x7f0b0025
+			public const int refresher = 2131427365;
 			
-			// aapt resource value: 0x7f060002
-			public const int satellite = 2131099650;
+			// aapt resource value: 0x7f0b0003
+			public const int satellite = 2131427331;
 			
-			// aapt resource value: 0x7f060037
-			public const int settings_menu_item = 2131099703;
+			// aapt resource value: 0x7f0b0037
+			public const int settings_menu_item = 2131427383;
 			
-			// aapt resource value: 0x7f060036
-			public const int simulation_menu_item = 2131099702;
+			// aapt resource value: 0x7f0b0036
+			public const int simulation_menu_item = 2131427382;
 			
-			// aapt resource value: 0x7f060021
-			public const int status = 2131099681;
+			// aapt resource value: 0x7f0b0021
+			public const int status = 2131427361;
 			
-			// aapt resource value: 0x7f060006
-			public const int statusMessage = 2131099654;
+			// aapt resource value: 0x7f0b0006
+			public const int statusMessage = 2131427334;
 			
-			// aapt resource value: 0x7f060003
-			public const int terrain = 2131099651;
+			// aapt resource value: 0x7f0b0004
+			public const int terrain = 2131427332;
 			
-			// aapt resource value: 0x7f060029
-			public const int timestamp = 2131099689;
+			// aapt resource value: 0x7f0b0029
+			public const int timestamp = 2131427369;
 			
-			// aapt resource value: 0x7f06002a
-			public const int txtStatusMsg = 2131099690;
+			// aapt resource value: 0x7f0b002a
+			public const int txtStatusMsg = 2131427370;
 			
-			// aapt resource value: 0x7f06002b
-			public const int txtUrl = 2131099691;
+			// aapt resource value: 0x7f0b002b
+			public const int txtUrl = 2131427371;
 			
-			// aapt resource value: 0x7f060015
-			public const int userName = 2131099669;
+			// aapt resource value: 0x7f0b0015
+			public const int userName = 2131427349;
 			
-			// aapt resource value: 0x7f06000f
-			public const int view1 = 2131099663;
+			// aapt resource value: 0x7f0b000f
+			public const int view1 = 2131427343;
 			
 			static Id()
 			{
@@ -540,8 +543,8 @@ namespace App.Android
 		public partial class Integer
 		{
 			
-			// aapt resource value: 0x7f080000
-			public const int google_play_services_version = 2131230720;
+			// aapt resource value: 0x7f070000
+			public const int google_play_services_version = 2131165184;
 			
 			static Integer()
 			{
@@ -629,8 +632,8 @@ namespace App.Android
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f0b0000
-			public const int menu = 2131427328;
+			// aapt resource value: 0x7f0a0000
+			public const int menu = 2131361792;
 			
 			static Menu()
 			{
@@ -645,107 +648,107 @@ namespace App.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f07001c
-			public const int ApplicationName = 2131165212;
+			// aapt resource value: 0x7f06001c
+			public const int ApplicationName = 2131099676;
 			
-			// aapt resource value: 0x7f07001b
-			public const int Hello = 2131165211;
+			// aapt resource value: 0x7f06001b
+			public const int Hello = 2131099675;
 			
-			// aapt resource value: 0x7f070021
-			public const int action_settings = 2131165217;
+			// aapt resource value: 0x7f060021
+			public const int action_settings = 2131099681;
 			
-			// aapt resource value: 0x7f07001d
-			public const int app_name = 2131165213;
+			// aapt resource value: 0x7f06001d
+			public const int app_name = 2131099677;
 			
-			// aapt resource value: 0x7f070015
-			public const int auth_client_needs_enabling_title = 2131165205;
+			// aapt resource value: 0x7f060015
+			public const int auth_client_needs_enabling_title = 2131099669;
 			
-			// aapt resource value: 0x7f070016
-			public const int auth_client_needs_installation_title = 2131165206;
+			// aapt resource value: 0x7f060016
+			public const int auth_client_needs_installation_title = 2131099670;
 			
-			// aapt resource value: 0x7f070017
-			public const int auth_client_needs_update_title = 2131165207;
+			// aapt resource value: 0x7f060017
+			public const int auth_client_needs_update_title = 2131099671;
 			
-			// aapt resource value: 0x7f070018
-			public const int auth_client_play_services_err_notification_msg = 2131165208;
+			// aapt resource value: 0x7f060018
+			public const int auth_client_play_services_err_notification_msg = 2131099672;
 			
-			// aapt resource value: 0x7f070019
-			public const int auth_client_requested_by_msg = 2131165209;
+			// aapt resource value: 0x7f060019
+			public const int auth_client_requested_by_msg = 2131099673;
 			
-			// aapt resource value: 0x7f070014
-			public const int auth_client_using_bad_version_title = 2131165204;
+			// aapt resource value: 0x7f060014
+			public const int auth_client_using_bad_version_title = 2131099668;
 			
-			// aapt resource value: 0x7f070006
-			public const int common_google_play_services_enable_button = 2131165190;
+			// aapt resource value: 0x7f060006
+			public const int common_google_play_services_enable_button = 2131099654;
 			
-			// aapt resource value: 0x7f070005
-			public const int common_google_play_services_enable_text = 2131165189;
+			// aapt resource value: 0x7f060005
+			public const int common_google_play_services_enable_text = 2131099653;
 			
-			// aapt resource value: 0x7f070004
-			public const int common_google_play_services_enable_title = 2131165188;
+			// aapt resource value: 0x7f060004
+			public const int common_google_play_services_enable_title = 2131099652;
 			
-			// aapt resource value: 0x7f070003
-			public const int common_google_play_services_install_button = 2131165187;
+			// aapt resource value: 0x7f060003
+			public const int common_google_play_services_install_button = 2131099651;
 			
-			// aapt resource value: 0x7f070001
-			public const int common_google_play_services_install_text_phone = 2131165185;
+			// aapt resource value: 0x7f060001
+			public const int common_google_play_services_install_text_phone = 2131099649;
 			
-			// aapt resource value: 0x7f070002
-			public const int common_google_play_services_install_text_tablet = 2131165186;
+			// aapt resource value: 0x7f060002
+			public const int common_google_play_services_install_text_tablet = 2131099650;
 			
-			// aapt resource value: 0x7f070000
-			public const int common_google_play_services_install_title = 2131165184;
+			// aapt resource value: 0x7f060000
+			public const int common_google_play_services_install_title = 2131099648;
 			
-			// aapt resource value: 0x7f07000c
-			public const int common_google_play_services_invalid_account_text = 2131165196;
+			// aapt resource value: 0x7f06000c
+			public const int common_google_play_services_invalid_account_text = 2131099660;
 			
-			// aapt resource value: 0x7f07000b
-			public const int common_google_play_services_invalid_account_title = 2131165195;
+			// aapt resource value: 0x7f06000b
+			public const int common_google_play_services_invalid_account_title = 2131099659;
 			
-			// aapt resource value: 0x7f07000a
-			public const int common_google_play_services_network_error_text = 2131165194;
+			// aapt resource value: 0x7f06000a
+			public const int common_google_play_services_network_error_text = 2131099658;
 			
-			// aapt resource value: 0x7f070009
-			public const int common_google_play_services_network_error_title = 2131165193;
+			// aapt resource value: 0x7f060009
+			public const int common_google_play_services_network_error_title = 2131099657;
 			
-			// aapt resource value: 0x7f07000d
-			public const int common_google_play_services_unknown_issue = 2131165197;
+			// aapt resource value: 0x7f06000d
+			public const int common_google_play_services_unknown_issue = 2131099661;
 			
-			// aapt resource value: 0x7f070010
-			public const int common_google_play_services_unsupported_date_text = 2131165200;
+			// aapt resource value: 0x7f060010
+			public const int common_google_play_services_unsupported_date_text = 2131099664;
 			
-			// aapt resource value: 0x7f07000f
-			public const int common_google_play_services_unsupported_text = 2131165199;
+			// aapt resource value: 0x7f06000f
+			public const int common_google_play_services_unsupported_text = 2131099663;
 			
-			// aapt resource value: 0x7f07000e
-			public const int common_google_play_services_unsupported_title = 2131165198;
+			// aapt resource value: 0x7f06000e
+			public const int common_google_play_services_unsupported_title = 2131099662;
 			
-			// aapt resource value: 0x7f070011
-			public const int common_google_play_services_update_button = 2131165201;
+			// aapt resource value: 0x7f060011
+			public const int common_google_play_services_update_button = 2131099665;
 			
-			// aapt resource value: 0x7f070008
-			public const int common_google_play_services_update_text = 2131165192;
+			// aapt resource value: 0x7f060008
+			public const int common_google_play_services_update_text = 2131099656;
 			
-			// aapt resource value: 0x7f070007
-			public const int common_google_play_services_update_title = 2131165191;
+			// aapt resource value: 0x7f060007
+			public const int common_google_play_services_update_title = 2131099655;
 			
-			// aapt resource value: 0x7f070012
-			public const int common_signin_button_text = 2131165202;
+			// aapt resource value: 0x7f060012
+			public const int common_signin_button_text = 2131099666;
 			
-			// aapt resource value: 0x7f070013
-			public const int common_signin_button_text_long = 2131165203;
+			// aapt resource value: 0x7f060013
+			public const int common_signin_button_text_long = 2131099667;
 			
-			// aapt resource value: 0x7f07001e
-			public const int feed_menu_item = 2131165214;
+			// aapt resource value: 0x7f06001e
+			public const int feed_menu_item = 2131099678;
 			
-			// aapt resource value: 0x7f07001a
-			public const int library_name = 2131165210;
+			// aapt resource value: 0x7f06001a
+			public const int library_name = 2131099674;
 			
-			// aapt resource value: 0x7f07001f
-			public const int people_menu_item = 2131165215;
+			// aapt resource value: 0x7f06001f
+			public const int people_menu_item = 2131099679;
 			
-			// aapt resource value: 0x7f070020
-			public const int profile_menu_item = 2131165216;
+			// aapt resource value: 0x7f060020
+			public const int profile_menu_item = 2131099680;
 			
 			static String()
 			{
@@ -760,14 +763,14 @@ namespace App.Android
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0a0000
-			public const int AppBaseTheme = 2131361792;
+			// aapt resource value: 0x7f090000
+			public const int AppBaseTheme = 2131296256;
 			
-			// aapt resource value: 0x7f0a0001
-			public const int AppTheme = 2131361793;
+			// aapt resource value: 0x7f090001
+			public const int AppTheme = 2131296257;
 			
-			// aapt resource value: 0x7f0a0002
-			public const int CodeFont = 2131361794;
+			// aapt resource value: 0x7f090002
+			public const int CodeFont = 2131296258;
 			
 			static Style()
 			{

@@ -3,7 +3,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using System.Linq;
 using System.Collections.Generic;
-using App.Core.Portable.Models;
+using App.Common;
 using MonoTouch.ObjCRuntime;
 
 namespace App.iOS

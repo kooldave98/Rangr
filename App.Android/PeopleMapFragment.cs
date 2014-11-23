@@ -12,7 +12,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using App.Core.Portable.Models;
 
 namespace App.Android
 {

@@ -8,7 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using App.Core.Portable.Models;
+using App.Common;
 
 namespace App.Android
 {
@@ -17,7 +17,7 @@ namespace App.Android
 		Context context;
 		IList<Connection> items;
 
-		public PeopleListAdapter(Context context, IList<Connection> items) : base() 
+		public PeopleListAdapter (Context context, IList<Connection> items) : base ()
 		{
 			this.context = context;
 			this.items = items;
@@ -47,8 +47,8 @@ namespace App.Android
 			}
 
 			view.FindViewById<TextView> (Resource.Id.personName).Text = person.user_display_name;
-			view.FindViewById<TextView> (Resource.Id.distance).Text = Math.Round(person.distance_from_context_in_metres.GetValueOrDefault(0.0),1) + " metres";
-			view.FindViewById<TextView> (Resource.Id.status).Text = string.IsNullOrWhiteSpace(person.user_status_message) ? "Hey there, I'm on Walkr": person.user_status_message;
+			view.FindViewById<TextView> (Resource.Id.distance).Text = Math.Round (person.distance_from_context_in_metres.GetValueOrDefault (0.0), 1) + " metres";
+			view.FindViewById<TextView> (Resource.Id.status).Text = string.IsNullOrWhiteSpace (person.user_status_message) ? "Hey there, I'm on Walkr" : person.user_status_message;
 
 			//var personImage = view.FindViewById<ImageView> (Resource.Id.personImage);
 

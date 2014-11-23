@@ -2,12 +2,13 @@
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using App.Core.Portable.Models;
+using App.Common;
+
 //using MonoTouch.ObjCRuntime;
 
 namespace App.iOS
 {
-	[Register("PostCellView")] 
+	[Register ("PostCellView")] 
 	public partial class PostCellView : UITableViewCell
 	{
 		const string PlaceholderImagePath = "Placeholder.jpg";
@@ -24,7 +25,7 @@ namespace App.iOS
 			return (PostCellView)Nib.Instantiate (null, null) [0];
 		}
 
-		public void BindDataToCell(Post post)
+		public void BindDataToCell (Post post)
 		{
 			UserNameView.Text = post.user_display_name;
 			UserPostTextView.Text = post.text;

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using App.Core.Portable;
-using App.Core.Portable.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 

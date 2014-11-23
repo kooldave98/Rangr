@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Core.Portable.Models
+namespace App.Common
 {
 	public class Post : PostIdentity
 	{

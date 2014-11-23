@@ -6,12 +6,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin;
 
+#if __ANDROID__
+using Android.App;
+using Android.Content;
+
+#else
+#endif
+
 namespace App.Common
 {
 	/// <summary>
 	/// https://github.com/xamarin/Xamarin.Mobile/blob/master/MonoDroid/Samples/GeolocationSample/MainActivity.cs
 	/// </summary>
-	public partial class GeoLocation
+	public class GeoLocation
 	{
 		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";
 		private static GeoLocation _instance = null;
@@ -24,6 +31,40 @@ namespace App.Common
 		private static Position geoPosition;
 		private static Position simulated_geoPosition;
 		private static bool is_simulation = false;
+
+		#if __ANDROID__
+		public static GeoLocation GetInstance ()
+		{
+			return _instance ?? (_instance = new GeoLocation (Application.Context));
+		}
+
+		private GeoLocation (Context appContext)
+		{
+			if (this.geolocator != null)
+				return;
+
+			geolocator = new Geolocator (appContext);
+
+			Init ();
+		}
+		#else
+		public static GeoLocation GetInstance ()
+		{
+		return _instance ?? (_instance = new GeoLocation ());
+		}
+
+
+		private GeoLocation ()
+		{
+		if (this.geolocator != null)
+		return;
+
+		geolocator = new Geolocator ();
+
+		Init ();
+
+		}
+		#endif
 
 		private void Init ()
 		{

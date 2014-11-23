@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Threading.Tasks;

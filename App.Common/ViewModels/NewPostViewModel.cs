@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using App.Core.Portable.Persistence;
-using App.Core.Portable.Models;
 
 namespace App.Common
 {
@@ -26,7 +24,7 @@ namespace App.Common
 			return false;
 		}
 
-		public NewPostViewModel (IPersistentStorage the_persistent_storage_instance)
+		public NewPostViewModel ()
 		{
 			SessionInstance = Session.GetInstance ();
 			post_services = new Posts ();

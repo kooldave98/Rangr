@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using App.Core.Portable;
-using App.Core.Portable.Persistence;
 
 namespace App.Common
 {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using App.Core.Portable.Persistence;
-using App.Core.Portable.Models;
 
 namespace App.Common
 {

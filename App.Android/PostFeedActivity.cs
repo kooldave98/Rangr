@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Common;
 using CustomViews;
-using App.Core.Portable.Models;
 using Android.Support.V4.Widget;
 using AndroidResource = Android.Resource;
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using App.Core.Portable.Models;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using App.Common;
@@ -12,7 +11,7 @@ namespace App.iOS
 	{
 		PostDetailsViewModel view_model;
 
-		public DetailViewController () 
+		public DetailViewController ()
 			: base ("DetailViewController", null)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Detail", "Detail");

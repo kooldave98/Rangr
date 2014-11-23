@@ -102,6 +102,39 @@
     <Reference Include="PLCrashReporter">
       <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoTouch10\PLCrashReporter.dll</HintPath>
     </Reference>
+    <Reference Include="SQLite">
+      <HintPath>..\Components\sqlite-net-1.0.8.1\lib\ios\SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Mobile">
+      <HintPath>..\Components\xamarin.mobile-0.7.4\lib\ios\Xamarin.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.1.4\lib\MonoTouch\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\packages\Splat.1.5.1\lib\monotouch\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Punchclock">
+      <HintPath>..\packages\Punchclock.1.2.0\lib\Portable-net45+win+wpa81+wp80\Punchclock.dll</HintPath>
+    </Reference>
+    <Reference Include="Fusillade">
+      <HintPath>..\packages\fusillade.0.6.0\lib\Portable-net45+win+wpa81+wp80\Fusillade.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -152,7 +185,6 @@
     <Compile Include="LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="CreatePostViewController.cs" />
     <Compile Include="CreatePostViewController.designer.cs">
@@ -162,30 +194,22 @@
     <Compile Include="MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ConsoleView.cs" />
-    <Compile Include="Controls\ConsoleView.designer.cs">
-      <DependentUpon>ConsoleView.cs</DependentUpon>
-    </Compile>
     <Compile Include="PostsTableViewSource.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PostCellView.cs" />
-    <Compile Include="Controls\PostCellView.designer.cs">
+    <Compile Include="Views\ConsoleView.cs" />
+    <Compile Include="Views\ConsoleView.designer.cs">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostCellView.cs" />
+    <Compile Include="Views\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TextViewWriter.cs" />
   </ItemGroup>
+  <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="App.Core.iOS\App.Core.iOS.csproj">
-      <Project>{BBB2AAF6-9DA6-4DBC-9C64-A751791DD47D}</Project>
-      <Name>App.Core.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\App.Core.Portable\App.Core.Portable.csproj">
-      <Project>{1A81AE71-9B42-4976-8C53-5575D5D22002}</Project>
-      <Name>App.Core.Portable</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="CreatePostViewController.xib">
       <DependentUpon>CreatePostViewController.cs</DependentUpon>
@@ -196,14 +220,24 @@
     <InterfaceDefinition Include="MainViewController.xib">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="Controls\ConsoleView.xib">
+    <InterfaceDefinition Include="Views\ConsoleView.xib">
       <DependentUpon>ConsoleView.cs</DependentUpon>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="Controls\PostCellView.xib">
+    <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="sqlite-net">
+      <Version>1.0.8.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamarin.mobile">
+      <Version>0.7.4</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>

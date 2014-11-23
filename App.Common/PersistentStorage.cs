@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using App.Core.Portable.Persistence;
 using Newtonsoft.Json;
 
 #if __ANDROID__
@@ -16,12 +15,12 @@ using MonoTouch.Foundation;
 namespace App.Common
 {
 	//TODO: Commonise this with the ios one, they are too similar to be duplicated
-	public class PersistentStorage : IPersistentStorage
+	public class PersistentStorage
 	{
 
-		private static IPersistentStorage _instance = null;
+		private static PersistentStorage _instance = null;
 
-		public static IPersistentStorage Current {
+		public static PersistentStorage Current {
 			get {
 				return _instance ?? (_instance = new PersistentStorage ());
 			}
@@ -68,21 +67,21 @@ namespace App.Common
 		}
 
 		#if __ANDROID__
-		private string GetString(string key)
+		private string GetString (string key)
 		{
-		var prefs = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
-		return prefs.GetString(key, string.Empty);
+			var prefs = Application.Context.GetSharedPreferences (Application.Context.PackageName, FileCreationMode.Private);
+			return prefs.GetString (key, string.Empty);
 		}
 
-		private void SaveString(string key, string value)
+		private void SaveString (string key, string value)
 		{
-		var prefs = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
-		var prefEditor = prefs.Edit();
-		prefEditor.PutString(key, value);
-		prefEditor.Commit();
+			var prefs = Application.Context.GetSharedPreferences (Application.Context.PackageName, FileCreationMode.Private);
+			var prefEditor = prefs.Edit ();
+			prefEditor.PutString (key, value);
+			prefEditor.Commit ();
 		}
 		
-#else
+		#else
 		private static string GetString (string key)
 		{
 			var s = NSUserDefaults.StandardUserDefaults.StringForKey (key);

@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin;
+
 using Splat;
 using ModernHttpClient;
 using System.Net.Http;
 
 #if __ANDROID__
-using Android.App;
+using AndroidApp = Android.App;
 
 
 
@@ -86,9 +87,9 @@ namespace App.Common
 		}
 
 		#if __ANDROID__
-		private List<Activity> running_activities = new List<Activity> ();
+		private List<AndroidApp.Activity> running_activities = new List<AndroidApp.Activity> ();
 
-		public void Resume (Activity the_activity)
+		public void Resume (AndroidApp.Activity the_activity)
 		{
 			lock (running_activities) {
 				running_activities.Add (the_activity);
@@ -96,7 +97,7 @@ namespace App.Common
 			Resume ();
 		}
 
-		public void Pause (Activity the_activity)
+		public void Pause (AndroidApp.Activity the_activity)
 		{
 			lock (running_activities) {
 				running_activities.Remove (the_activity);
@@ -171,7 +172,7 @@ namespace App.Common
 		protected AppGlobal ()
 		{
 			#if __ANDROID__
-			Insights.Initialize ("4d76332a65b66f1deaab446e299dbbe898ba5695", Android.App.Application.Context);
+			Insights.Initialize ("4d76332a65b66f1deaab446e299dbbe898ba5695", AndroidApp.Application.Context);
 			#else
 
 			#endif

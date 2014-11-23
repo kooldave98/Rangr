@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Core.Portable
+namespace App.Common
 {
 	public static class Resources
 	{

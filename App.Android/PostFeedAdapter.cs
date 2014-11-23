@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Views;
 using Android.Widget;
-using App.Core.Portable.Models;
+using App.Common;
 using CustomViews;
 using System.Text.RegularExpressions;
 using Android.Text.Style;

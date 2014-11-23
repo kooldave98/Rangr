@@ -1,6 +1,4 @@
 using System;
-using App.Core.Portable.Models;
-using App.Core.Portable.Persistence;
 
 namespace App.Common
 {
@@ -44,7 +42,7 @@ namespace App.Common
 			return _instance ?? (_instance = new Session ());
 		}
 
-		private IPersistentStorage persistentStorage;
+		private PersistentStorage persistentStorage;
 
 		private const string CurrentUserKey = "current_user";
 

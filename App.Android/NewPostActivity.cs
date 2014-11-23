@@ -12,7 +12,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App.Common;
-using App.Core.Portable.Models;
 
 namespace App.Android
 {
@@ -108,7 +107,7 @@ namespace App.Android
 		{
 
 			if (view_model == null) {
-				view_model = new NewPostViewModel (PersistentStorage.Current);
+				view_model = new NewPostViewModel ();
 			}
 			return view_model;
 			

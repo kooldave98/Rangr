@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using App.Core.Portable.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using App.Core.Portable.Persistence;
 
 namespace App.Common
 {
