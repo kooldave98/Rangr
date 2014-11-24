@@ -24,11 +24,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommonClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EmptyClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JavaScriptTimer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Connection.cs" />

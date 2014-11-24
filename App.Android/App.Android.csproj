@@ -105,7 +105,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="BaseActivity.cs" />
-    <Compile Include="Global.cs" />
     <Compile Include="NewPostActivity.cs" />
     <Compile Include="PostDetailsActivity.cs" />
     <Compile Include="PeopleGroupsListView.cs">
