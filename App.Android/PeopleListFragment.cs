@@ -40,7 +40,7 @@ namespace App.Android
 			ListView.Divider = null;
 
 			HandleOnConnectionsReceived = (object sender, EventArgs e) => {
-				list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers);
+				list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers, view_model.CurrentLocation);
 
 				Activity.RunOnUiThread (() => {
 					ListAdapter = list_adapter;

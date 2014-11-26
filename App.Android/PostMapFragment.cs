@@ -88,7 +88,7 @@ namespace App.Android
 					_map.AddCircle (GetUncertaintyRadius (post));
 
 
-					var map_centre_location = GetPosition (post.geolocation);
+					var map_centre_location = GetPosition (post.long_lat_acc_geo_string);
 
 					// We create an instance of CameraUpdate, and move the map to it.
 					CameraPosition cameraPosition = new CameraPosition.Builder ()
@@ -111,7 +111,7 @@ namespace App.Android
 		{
 
 			return new MarkerOptions ()
-				.SetPosition (GetPosition (the_post.geolocation))
+				.SetPosition (GetPosition (the_post.long_lat_acc_geo_string))
 				.SetTitle (the_post.text);
 			//.InvokeIcon(BitmapDescriptorFactory
 			//.DefaultMarker(BitmapDescriptorFactory
@@ -122,8 +122,8 @@ namespace App.Android
 		{
 			// Instantiates a new CircleOptions object and defines the center and radius
 			CircleOptions circleOptions = new CircleOptions ();
-			circleOptions.InvokeCenter (GetPosition (the_post.geolocation));
-			circleOptions.InvokeRadius (the_post.geolocation_accuracy_in_metres); // In meters
+			circleOptions.InvokeCenter (GetPosition (the_post.long_lat_acc_geo_string));
+			circleOptions.InvokeRadius (GetAccurracy (the_post.long_lat_acc_geo_string)); // In meters
 			circleOptions.InvokeStrokeWidth (1.0f);
 			circleOptions.InvokeStrokeColor (0x550000FF);
 			// Fill color of the circle
@@ -139,6 +139,12 @@ namespace App.Android
 		{
 			var array = geo_string.Split (',');
 			return new LatLng (double.Parse (array [1]), double.Parse (array [0]));
+		}
+
+		private int GetAccurracy (string geo_string)
+		{
+			var array = geo_string.Split (',');
+			return int.Parse (array [2]);
 		}
 
 		public PostMapFragment (Post the_post)

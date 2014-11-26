@@ -50,7 +50,7 @@ namespace App.Common
 			var location = await _geoLocationInstance.GetCurrentPosition ();
 
 			if (location != null) {
-				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.geolocation_value, location.geolocation_accuracy.ToString ());
+				var connection_id = await ConnectionServices.Create (user.user_id.ToString (), location.ToLongLatAccString ());
 
 				if (connection_id != null) {
 					sessionInstance.PersistCurrentConnection (connection_id);
@@ -80,10 +80,10 @@ namespace App.Common
 			#endregion
 		}
 
-		private async Task update_connection (GeoValue position)
+		private async Task update_connection (Coordinates position)
 		{ 
 			await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
-				position.geolocation_value, position.geolocation_accuracy.ToString ());
+				position.ToLongLatAccString ());
 		}
 
 		#if __ANDROID__

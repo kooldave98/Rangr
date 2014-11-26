@@ -27,14 +27,13 @@ namespace App.Common
 			return connections;
 		}
 
-		public async Task<ConnectionIdentity> Create (string user_id, string geolocation_string, string geolocation_accuracy_in_metres)
+		public async Task<ConnectionIdentity> Create (string user_id, string long_lat_acc_geo_string)
 		{
 			ConnectionIdentity connection_identity = null;
 
 			var requestBody = new List<KeyValuePair<string, string>> () {
 				new KeyValuePair<string, string> ("user_id", user_id),
-				new KeyValuePair<string, string> ("geolocation_string", geolocation_string),
-				new KeyValuePair<string, string> ("geolocation_accuracy_in_metres", geolocation_accuracy_in_metres)
+				new KeyValuePair<string, string> ("long_lat_acc_geo_string", long_lat_acc_geo_string)
 			};            
             
 			var url = String.Format ("{0}/", base_rest_url);
@@ -53,14 +52,13 @@ namespace App.Common
 			return connection_identity;
 		}
 
-		public async Task<ConnectionIdentity> Update (string connection_id, string geolocation_string, string geolocation_accuracy_in_metres)
+		public async Task<ConnectionIdentity> Update (string connection_id, string long_lat_acc_geo_string)
 		{
 			ConnectionIdentity connection_identity = null;
 
 			var requestBody = new List<KeyValuePair<string, string>> () {
 				new KeyValuePair<string, string> ("connection_id", connection_id),
-				new KeyValuePair<string, string> ("geolocation_string", geolocation_string),
-				new KeyValuePair<string, string> ("geolocation_accuracy_in_metres", geolocation_accuracy_in_metres)
+				new KeyValuePair<string, string> ("long_lat_acc_geo_string", long_lat_acc_geo_string)
 			};
 
 

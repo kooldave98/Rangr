@@ -16,11 +16,13 @@ namespace App.Android
 	{
 		Context context;
 		IList<Connection> items;
+		Coordinates current_location;
 
-		public PeopleListAdapter (Context context, IList<Connection> items) : base ()
+		public PeopleListAdapter (Context context, IList<Connection> items, Coordinates current_location) : base ()
 		{
 			this.context = context;
 			this.items = items;
+			this.current_location = current_location;
 		}
 
 		public override long GetItemId (int position)
@@ -47,7 +49,7 @@ namespace App.Android
 			}
 
 			view.FindViewById<TextView> (Resource.Id.personName).Text = person.user_display_name;
-			view.FindViewById<TextView> (Resource.Id.distance).Text = Math.Round (person.distance_from_context_in_metres.GetValueOrDefault (0.0), 1) + " metres";
+			view.FindViewById<TextView> (Resource.Id.distance).Text = Math.Round (get_distance (person.long_lat_acc_geo_string), 1) + " metres";
 			view.FindViewById<TextView> (Resource.Id.status).Text = string.IsNullOrWhiteSpace (person.user_status_message) ? "Hey there, I'm on Walkr" : person.user_status_message;
 
 			//var personImage = view.FindViewById<ImageView> (Resource.Id.personImage);
@@ -58,6 +60,13 @@ namespace App.Android
 			//personImage.SetImageFromUrlAsync (product.ImageForSize (Images.ScreenWidth));
 			#pragma warning restore 4014
 			return view;
+		}
+
+		private double get_distance (string long_lat_acc_string)
+		{
+			var geo_value = long_lat_acc_string.ToCoordinatesFromLongLatAccString ();
+
+			return geo_value.DistanceFrom (current_location);
 		}
 	}
 

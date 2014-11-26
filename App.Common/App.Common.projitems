@@ -50,6 +50,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\IBaseEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\Models\KeyValue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\DbORM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Coordinates.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

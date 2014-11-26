@@ -8,11 +8,7 @@ namespace App.Common
 
 		public string user_display_name { get; set; }
 
-		public string geolocation_string { get; set; }
-
-		public string geolocation_accuracy_in_metres { get; set; }
-
-		public double? distance_from_context_in_metres { get; set; }
+		public string long_lat_acc_geo_string { get; set; }
 
 		public string user_status_message { get; set; }
 

@@ -1,0 +1,132 @@
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace App.Common
+{
+	/// <summary>
+	/// The coordinates class.
+	/// </summary>
+	public class Coordinates
+	{
+		public const int EquatorRadius = 6378137;
+
+		public double Latitude { get; set; }
+
+		public double Longitude { get; set; }
+
+		#region optional items
+
+		public int? Accuracy { get; set; }
+
+		public double? Altitude { get; set; }
+
+		public double? Bearing { get; set; }
+
+		public double? Speed { get; set; }
+
+		#endregion
+
+		public DateTime TimeStamp { get; set; }
+
+		public Coordinates ()
+		{
+		}
+
+		public Coordinates (double latitude, double longitude)
+		{
+			this.Latitude = latitude;
+			this.Longitude = longitude;
+		}
+
+		/// <summary>
+		/// Calculates distance between two locations.
+		/// </summary>
+		/// <returns>The <see cref="System.Double"/>The distance in meters</returns>
+		/// <param name="a">Location a</param>
+		/// <param name="b">Location b</param>
+		public static double DistanceBetween (Coordinates a, Coordinates b)
+		{
+			double distance = Math.Acos (
+				                  (Math.Sin (a.Latitude) * Math.Sin (b.Latitude)) +
+				                  (Math.Cos (a.Latitude) * Math.Cos (b.Latitude))
+				                  * Math.Cos (b.Longitude - a.Longitude));
+
+			return EquatorRadius * distance;
+		}
+
+		/// <summary>
+		/// Calculates bearing between start and stop.
+		/// </summary>
+		/// <returns>The <see cref="System.Double"/>.</returns>
+		/// <param name="start">Start coordinates.</param>
+		/// <param name="stop">Stop coordinates.</param>
+		public static double BearingBetween (Coordinates start, Coordinates stop)
+		{
+			var deltaLon = stop.Longitude - start.Longitude;
+			var cosStop = Math.Cos (stop.Latitude);
+			return Math.Atan2 (
+				(Math.Cos (start.Latitude) * Math.Sin (stop.Latitude)) -
+				(Math.Sin (start.Latitude) * cosStop * Math.Cos (deltaLon)),
+				Math.Sin (deltaLon) * cosStop);
+		}
+
+		/// <summary>
+		/// Calculates this locations distance to another coordicate.
+		/// </summary>
+		/// <returns>The distance to another coordicate</returns>
+		/// <param name="other">Other coordinates.</param>
+		public double DistanceFrom (Coordinates other)
+		{
+			return DistanceBetween (this, other);
+		}
+
+		/// <summary>
+		/// Calculates this locations bearing to another coordicate.
+		/// </summary>
+		/// <returns>Bearing degree.</returns>
+		/// <param name="other">Other coordinates.</param>
+		public double BearingFrom (Coordinates other)
+		{
+			return BearingBetween (this, other);
+		}
+
+		/// <summary>
+		/// Returns a string that represents the current object.
+		/// </summary>
+		/// <returns>
+		/// A string that represents the current object.
+		/// </returns>
+		public override string ToString ()
+		{
+			return string.Format ("({0:0.0000}, {1:0.0000})", Latitude, Longitude);
+		}
+	}
+
+
+	public static class CoordinatesExtensions
+	{
+		public static Coordinates ToCoordinatesFromLongLatAccString (this string long_lat_acc_string)
+		{
+			var split = long_lat_acc_string.Split (',');
+
+			if (split.Length != 3) {
+				throw new InvalidOperationException ("long lat acc string format is invalid");
+			}
+
+			var geo_value = new Coordinates (double.Parse (split [1]), double.Parse (split [0]));
+			geo_value.Accuracy = int.Parse (split [2]);
+
+			return geo_value;
+		}
+
+		public static string ToLongLatAccString (this Coordinates long_lat_acc_string)
+		{
+			var geo_string = string.Format ("{0},{1},{2}", long_lat_acc_string.Longitude, long_lat_acc_string.Latitude, long_lat_acc_string.Accuracy);
+
+			return geo_string;
+		}
+	}
+
+
+}
+

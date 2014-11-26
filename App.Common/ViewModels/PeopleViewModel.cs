@@ -10,7 +10,7 @@ namespace App.Common
 
 		public IList<Connection> ConnectedUsers { get; set; }
 
-		public GeoValue CurrentLocation { get; private set; }
+		public Coordinates CurrentLocation { get; private set; }
 
 		public async Task RefreshConnectedUsers ()
 		{

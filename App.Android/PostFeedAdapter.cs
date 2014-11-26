@@ -76,6 +76,8 @@ namespace App.Android
 			txtDescription.MovementMethod = LinkMovementMethod.Instance;
 			txtDescription.SetText (postContent, TextView.BufferType.Normal);
 
+			view.FindViewById<TextView> (Resource.Id.timestamp)
+				.SetText (TimeAgoConverter.Current.Convert (item.date), TextView.BufferType.Normal);
 
 			view.FindViewById<ImageView> (Resource.Id.profilePic).SetImageResource (Resource.Drawable.user_default_avatar);
 			//Finally return the view

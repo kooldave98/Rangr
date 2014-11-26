@@ -107,10 +107,10 @@ namespace App.Android
 						_map.AddMarker (GetMarker (connection));								
 					}
 
-					var my_location = GetPosition ("0,0");
+					var my_location = GetPosition (new Coordinates (0, 0));
 
 					if (view_model.CurrentLocation != null) {
-						my_location = GetPosition (view_model.CurrentLocation.geolocation_value);
+						my_location = GetPosition (view_model.CurrentLocation);
 					}
 
 					// We create an instance of CameraUpdate, and move the map to it.
@@ -132,17 +132,16 @@ namespace App.Android
 		{
 
 			return new MarkerOptions ()
-				.SetPosition (GetPosition (connected_user.geolocation_string))
+				.SetPosition (GetPosition (connected_user.long_lat_acc_geo_string.ToCoordinatesFromLongLatAccString ()))
 				.SetTitle (connected_user.user_display_name);
 			//.InvokeIcon(BitmapDescriptorFactory
 			//.DefaultMarker(BitmapDescriptorFactory
 			//.HueCyan)));;
 		}
 
-		private LatLng GetPosition (string geo_string)
+		private LatLng GetPosition (Coordinates geo_value)
 		{
-			var array = geo_string.Split (',');
-			return new LatLng (double.Parse (array [1]), double.Parse (array [0]));
+			return new LatLng (geo_value.Latitude, geo_value.Longitude);
 		}
 
 		public PeopleMapFragment (PeopleViewModel the_view_model)

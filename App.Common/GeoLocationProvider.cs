@@ -144,26 +144,23 @@ namespace App.Common
 
 		private void pre_notify_position_changed ()
 		{
-			var geolocationValue = string.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+			var geolocationValue = new Coordinates (geoPosition.Latitude, geoPosition.Longitude);
 			//geolocationValue = sample_geoposition;//TO BE REMOVED
 
 			if (is_simulation) {
-				geolocationValue = string.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
+				geolocationValue = new Coordinates (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
 			}
 
 			NotifyAccurate ();
 
-			var geo_value = new GeoValue {
-				geolocation_value = geolocationValue,
-				geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
-			};
+			geolocationValue.Accuracy = Convert.ToInt32 (geoPosition.Accuracy);
 
-			NotifyPositionChanged (geo_value);
+			NotifyPositionChanged (geolocationValue);
 		}
 
-		public async Task<GeoValue> GetCurrentPosition ()
+		public async Task<Coordinates> GetCurrentPosition ()
 		{
-			GeoValue geo_value = null;
+			Coordinates geo_value = null;
 
 			using (var handle = Insights.TrackTime ("TimeToGetCurrentPosition")) {
 
@@ -205,17 +202,14 @@ namespace App.Common
 					return geo_value;
 				}
 
-				var geolocationValue = String.Format ("{0},{1}", geoPosition.Longitude, geoPosition.Latitude);
+				geo_value = new Coordinates (geoPosition.Latitude, geoPosition.Longitude);
 
 				if (is_simulation) {
-					geolocationValue = String.Format ("{0},{1}", simulated_geoPosition.Longitude, simulated_geoPosition.Latitude);
+					geo_value = new Coordinates (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
 				}
 
 				//geolocationValue = sample_geoposition;
-				geo_value = new GeoValue {
-					geolocation_value = geolocationValue,
-					geolocation_accuracy = Convert.ToInt32 (geoPosition.Accuracy)
-				};
+				geo_value.Accuracy = Convert.ToInt32 (geoPosition.Accuracy);
 			}
 			return geo_value;
 		}
@@ -257,7 +251,7 @@ namespace App.Common
 			}
 		}
 
-		private void NotifyPositionChanged (GeoValue position)
+		private void NotifyPositionChanged (Coordinates position)
 		{
 			if (OnGeoPositionChanged != null) {
 				OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
@@ -320,9 +314,9 @@ namespace App.Common
 
 	public class GeoPositionChangedEventArgs : EventArgs
 	{
-		public GeoValue position { get; private set; }
+		public Coordinates position { get; private set; }
 
-		public GeoPositionChangedEventArgs (GeoValue the_position)
+		public GeoPositionChangedEventArgs (Coordinates the_position)
 		{
 			position = the_position;
 		}
@@ -336,13 +330,6 @@ namespace App.Common
 		{
 			status = the_status;
 		}
-	}
-
-	public class GeoValue
-	{
-		public string geolocation_value { get; set; }
-
-		public int geolocation_accuracy { get; set; }
 	}
 
 }
