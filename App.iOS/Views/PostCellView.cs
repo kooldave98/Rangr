@@ -30,6 +30,7 @@ namespace App.iOS
 			UserNameView.Text = post.user_display_name;
 			UserPostTextView.Text = post.text;
 			UserImageView.Image = UIImage.FromBundle (PlaceholderImagePath);
+			TimeAgoView.Text = TimeAgoConverter.Current.Convert (post.date);
 		}
 	}
 }
