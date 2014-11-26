@@ -107,7 +107,7 @@ namespace App.Android
 						_map.AddMarker (GetMarker (connection));								
 					}
 
-					var my_location = GetPosition (new Coordinates (0, 0));
+					var my_location = GetPosition (new GeoCoordinate (0, 0));
 
 					if (view_model.CurrentLocation != null) {
 						my_location = GetPosition (view_model.CurrentLocation);
@@ -132,14 +132,14 @@ namespace App.Android
 		{
 
 			return new MarkerOptions ()
-				.SetPosition (GetPosition (connected_user.long_lat_acc_geo_string.ToCoordinatesFromLongLatAccString ()))
+				.SetPosition (GetPosition (connected_user.long_lat_acc_geo_string.ToGeoCoordinateFromLongLatAccString ()))
 				.SetTitle (connected_user.user_display_name);
 			//.InvokeIcon(BitmapDescriptorFactory
 			//.DefaultMarker(BitmapDescriptorFactory
 			//.HueCyan)));;
 		}
 
-		private LatLng GetPosition (Coordinates geo_value)
+		private LatLng GetPosition (GeoCoordinate geo_value)
 		{
 			return new LatLng (geo_value.Latitude, geo_value.Longitude);
 		}

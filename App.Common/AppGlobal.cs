@@ -80,7 +80,7 @@ namespace App.Common
 			#endregion
 		}
 
-		private async Task update_connection (Coordinates position)
+		private async Task update_connection (GeoCoordinate position)
 		{ 
 			await ConnectionServices.Update (sessionInstance.GetCurrentConnection ().connection_id.ToString (), 
 				position.ToLongLatAccString ());

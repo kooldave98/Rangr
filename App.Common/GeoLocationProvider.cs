@@ -144,11 +144,11 @@ namespace App.Common
 
 		private void pre_notify_position_changed ()
 		{
-			var geolocationValue = new Coordinates (geoPosition.Latitude, geoPosition.Longitude);
+			var geolocationValue = new GeoCoordinate (geoPosition.Latitude, geoPosition.Longitude);
 			//geolocationValue = sample_geoposition;//TO BE REMOVED
 
 			if (is_simulation) {
-				geolocationValue = new Coordinates (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
+				geolocationValue = new GeoCoordinate (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
 			}
 
 			NotifyAccurate ();
@@ -158,9 +158,9 @@ namespace App.Common
 			NotifyPositionChanged (geolocationValue);
 		}
 
-		public async Task<Coordinates> GetCurrentPosition ()
+		public async Task<GeoCoordinate> GetCurrentPosition ()
 		{
-			Coordinates geo_value = null;
+			GeoCoordinate geo_value = null;
 
 			using (var handle = Insights.TrackTime ("TimeToGetCurrentPosition")) {
 
@@ -202,10 +202,10 @@ namespace App.Common
 					return geo_value;
 				}
 
-				geo_value = new Coordinates (geoPosition.Latitude, geoPosition.Longitude);
+				geo_value = new GeoCoordinate (geoPosition.Latitude, geoPosition.Longitude);
 
 				if (is_simulation) {
-					geo_value = new Coordinates (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
+					geo_value = new GeoCoordinate (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
 				}
 
 				//geolocationValue = sample_geoposition;
@@ -251,7 +251,7 @@ namespace App.Common
 			}
 		}
 
-		private void NotifyPositionChanged (Coordinates position)
+		private void NotifyPositionChanged (GeoCoordinate position)
 		{
 			if (OnGeoPositionChanged != null) {
 				OnGeoPositionChanged (this, new GeoPositionChangedEventArgs (position));
@@ -314,9 +314,9 @@ namespace App.Common
 
 	public class GeoPositionChangedEventArgs : EventArgs
 	{
-		public Coordinates position { get; private set; }
+		public GeoCoordinate position { get; private set; }
 
-		public GeoPositionChangedEventArgs (Coordinates the_position)
+		public GeoPositionChangedEventArgs (GeoCoordinate the_position)
 		{
 			position = the_position;
 		}

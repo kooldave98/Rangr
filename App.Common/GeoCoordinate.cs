@@ -6,10 +6,8 @@ namespace App.Common
 	/// <summary>
 	/// The coordinates class.
 	/// </summary>
-	public class Coordinates
+	public class GeoCoordinate
 	{
-		public const int EquatorRadius = 6378137;
-
 		public double Latitude { get; set; }
 
 		public double Longitude { get; set; }
@@ -28,11 +26,11 @@ namespace App.Common
 
 		public DateTime TimeStamp { get; set; }
 
-		public Coordinates ()
+		public GeoCoordinate ()
 		{
 		}
 
-		public Coordinates (double latitude, double longitude)
+		public GeoCoordinate (double latitude, double longitude)
 		{
 			this.Latitude = latitude;
 			this.Longitude = longitude;
@@ -44,14 +42,16 @@ namespace App.Common
 		/// <returns>The <see cref="System.Double"/>The distance in meters</returns>
 		/// <param name="a">Location a</param>
 		/// <param name="b">Location b</param>
-		public static double DistanceBetween (Coordinates a, Coordinates b)
+		public static double DistanceBetween (GeoCoordinate a, GeoCoordinate b)
 		{
-			double distance = Math.Acos (
-				                  (Math.Sin (a.Latitude) * Math.Sin (b.Latitude)) +
-				                  (Math.Cos (a.Latitude) * Math.Cos (b.Latitude))
-				                  * Math.Cos (b.Longitude - a.Longitude));
-
-			return EquatorRadius * distance;
+			const double R_in_metres = 6371000;
+			var lat = (b.Latitude - a.Latitude).ToRadians ();
+			var lng = (b.Longitude - a.Longitude).ToRadians ();
+			var h1 = Math.Sin (lat / 2) * Math.Sin (lat / 2) +
+			         Math.Cos (a.Latitude.ToRadians ()) * Math.Cos (b.Latitude.ToRadians ()) *
+			         Math.Sin (lng / 2) * Math.Sin (lng / 2);
+			var h2 = 2 * Math.Asin (Math.Min (1, Math.Sqrt (h1)));
+			return R_in_metres * h2;
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace App.Common
 		/// <returns>The <see cref="System.Double"/>.</returns>
 		/// <param name="start">Start coordinates.</param>
 		/// <param name="stop">Stop coordinates.</param>
-		public static double BearingBetween (Coordinates start, Coordinates stop)
+		public static double BearingBetween (GeoCoordinate start, GeoCoordinate stop)
 		{
 			var deltaLon = stop.Longitude - start.Longitude;
 			var cosStop = Math.Cos (stop.Latitude);
@@ -75,7 +75,7 @@ namespace App.Common
 		/// </summary>
 		/// <returns>The distance to another coordicate</returns>
 		/// <param name="other">Other coordinates.</param>
-		public double DistanceFrom (Coordinates other)
+		public double DistanceFrom (GeoCoordinate other)
 		{
 			return DistanceBetween (this, other);
 		}
@@ -85,7 +85,7 @@ namespace App.Common
 		/// </summary>
 		/// <returns>Bearing degree.</returns>
 		/// <param name="other">Other coordinates.</param>
-		public double BearingFrom (Coordinates other)
+		public double BearingFrom (GeoCoordinate other)
 		{
 			return BearingBetween (this, other);
 		}
@@ -100,12 +100,12 @@ namespace App.Common
 		{
 			return string.Format ("({0:0.0000}, {1:0.0000})", Latitude, Longitude);
 		}
+
 	}
 
-
-	public static class CoordinatesExtensions
+	public static class GeoCoordinateExtensions
 	{
-		public static Coordinates ToCoordinatesFromLongLatAccString (this string long_lat_acc_string)
+		public static GeoCoordinate ToGeoCoordinateFromLongLatAccString (this string long_lat_acc_string)
 		{
 			var split = long_lat_acc_string.Split (',');
 
@@ -113,13 +113,13 @@ namespace App.Common
 				throw new InvalidOperationException ("long lat acc string format is invalid");
 			}
 
-			var geo_value = new Coordinates (double.Parse (split [1]), double.Parse (split [0]));
+			var geo_value = new GeoCoordinate (double.Parse (split [1]), double.Parse (split [0]));
 			geo_value.Accuracy = int.Parse (split [2]);
 
 			return geo_value;
 		}
 
-		public static string ToLongLatAccString (this Coordinates long_lat_acc_string)
+		public static string ToLongLatAccString (this GeoCoordinate long_lat_acc_string)
 		{
 			var geo_string = string.Format ("{0},{1},{2}", long_lat_acc_string.Longitude, long_lat_acc_string.Latitude, long_lat_acc_string.Accuracy);
 
@@ -128,5 +128,12 @@ namespace App.Common
 	}
 
 
-}
+	public static class NumericExtensions
+	{
+		public static double ToRadians (this double val)
+		{
+			return (Math.PI / 180) * val;
+		}
+	}
 
+}

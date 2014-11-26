@@ -16,9 +16,9 @@ namespace App.Android
 	{
 		Context context;
 		IList<Connection> items;
-		Coordinates current_location;
+		GeoCoordinate current_location;
 
-		public PeopleListAdapter (Context context, IList<Connection> items, Coordinates current_location) : base ()
+		public PeopleListAdapter (Context context, IList<Connection> items, GeoCoordinate current_location) : base ()
 		{
 			this.context = context;
 			this.items = items;
@@ -64,7 +64,7 @@ namespace App.Android
 
 		private double get_distance (string long_lat_acc_string)
 		{
-			var geo_value = long_lat_acc_string.ToCoordinatesFromLongLatAccString ();
+			var geo_value = long_lat_acc_string.ToGeoCoordinateFromLongLatAccString ();
 
 			return geo_value.DistanceFrom (current_location);
 		}
