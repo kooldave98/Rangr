@@ -107,9 +107,6 @@
     <Compile Include="BaseActivity.cs" />
     <Compile Include="NewPostActivity.cs" />
     <Compile Include="PostDetailsActivity.cs" />
-    <Compile Include="PeopleGroupsListView.cs">
-      <DependentUpon>PostFeedActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="PostFeedActivity.cs" />
     <Compile Include="PeopleActivity.cs" />
     <Compile Include="ProfileActivity.cs" />
@@ -141,6 +138,9 @@
     <Compile Include="SearchActivity.cs" />
     <Compile Include="Views\AClickableSpan.cs" />
     <Compile Include="Views\TextViewWriter.cs" />
+    <Compile Include="Views\PeopleGroupsListView.cs" />
+    <Compile Include="Views\HyperTextView.cs" />
+    <Compile Include="Views\TextViewHyperlinkOnTouchListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

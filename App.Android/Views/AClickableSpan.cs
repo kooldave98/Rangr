@@ -5,15 +5,15 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 
-namespace App.Android
+namespace CustomViews
 {
 	public class AClickableSpan : ClickableSpan
 	{
-		Context context;
+		private Action<string> on_click_handler;
 
-		public AClickableSpan (Context ctx) : base ()
+		public AClickableSpan (Action<string> OnClickHandler) : base ()
 		{
-			context = ctx;
+			on_click_handler = OnClickHandler;
 		}
 
 		public override void UpdateDrawState (TextPaint ds)
@@ -22,16 +22,15 @@ namespace App.Android
 			ds.SetARGB (255, 30, 144, 255);
 		}
 
-
 		public override void OnClick (View widget)
 		{
-			TextView tv = (TextView)widget;
-			ISpanned s = (ISpanned)tv.TextFormatted;
-			int start = s.GetSpanStart (this);
-			int end = s.GetSpanEnd (this);
-			String theWord = s.SubSequenceFormatted (start + 1, end).ToString ();
+			var tv = (TextView)widget;
+			var s = (ISpanned)tv.TextFormatted;
+			var start = s.GetSpanStart (this);
+			var end = s.GetSpanEnd (this);
+			var span_word = s.SubSequenceFormatted (start + 1, end).ToString ();
 
-			context.StartActivity (SearchActivity.CreateIntent (context, theWord));
+			on_click_handler (span_word);
 		}
 	}
 }
