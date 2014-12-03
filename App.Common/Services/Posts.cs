@@ -51,6 +51,13 @@ namespace App.Common
 
                 if (first_load)
                 {
+                    //Clear all entries
+                    EntityDatabase.Current.GetItems<Post>().ToList().ForEach(p =>
+                        {
+                            EntityDatabase.Current.DeleteItem<Post>(p.ID);
+                        });
+
+                    //Save a fresh new set
                     posts.ForEach(p =>
                         {
                             EntityDatabase.Current.SaveItem(p);
