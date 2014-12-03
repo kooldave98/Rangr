@@ -77,9 +77,7 @@ namespace App.Android
                 postContent.SetSpan(new AClickableSpan((tag) =>
                         {
                             context.StartActivity(SearchActivity.CreateIntent(context, tag));
-                        }),
-                    hashTagStart,
-                    hashTagEnd, 0);
+                        }), hashTagStart, hashTagEnd, 0);
 
             }
 

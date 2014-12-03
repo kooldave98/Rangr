@@ -13,7 +13,7 @@ using Android.Text.Style;
 //http://stackoverflow.com/questions/8558732/listview-textview-with-linkmovementmethod-makes-list-item-unclickable
 namespace CustomViews
 {
-    public class HyperTextView : TextView
+    class HyperTextView : TextView
     {
         public bool DontConsumeNonUrlClicks = true;
         public bool LinkHit;
@@ -45,7 +45,7 @@ namespace CustomViews
     
     }
 
-    public class LocalLinkMovementMethod : LinkMovementMethod
+    class LocalLinkMovementMethod : LinkMovementMethod
     {
         public static LocalLinkMovementMethod sInstance;
 

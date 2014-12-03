@@ -125,7 +125,6 @@
     <Compile Include="PostFeedAdapter.cs">
       <DependentUpon>PostFeedActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActivityLifeCycle.cs" />
     <Compile Include="EditProfileActivity.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
