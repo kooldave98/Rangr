@@ -96,12 +96,6 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoTouch10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="PLCrashReporter">
-      <HintPath>..\packages\Xamarin.Insights.1.7.3.98\lib\MonoTouch10\PLCrashReporter.dll</HintPath>
-    </Reference>
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.1\lib\ios\SQLite.dll</HintPath>
     </Reference>
@@ -134,6 +128,12 @@
     </Reference>
     <Reference Include="Fusillade">
       <HintPath>..\packages\fusillade.0.6.0\lib\Portable-net45+win+wpa81+wp80\Fusillade.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.8.2.105\lib\MonoTouch10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporter">
+      <HintPath>..\packages\Xamarin.Insights.1.8.2.105\lib\MonoTouch10\PLCrashReporter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -238,8 +238,15 @@
     <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="SignInViewController.xib" />
-    <InterfaceDefinition Include="StreamViewController.xib" />
+    <InterfaceDefinition Include="SignInViewController.xib">
+      <DependentUpon>SignInViewController.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="StreamViewController.xib">
+      <DependentUpon>StreamViewController.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="ComposeViewController.xib">
+      <DependentUpon>ComposeViewController.cs</DependentUpon>
+    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

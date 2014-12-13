@@ -49,21 +49,21 @@ namespace App.Common
                 string data = await _httpRequest.Get(url);
                 posts = JsonConvert.DeserializeObject<List<Post>>(data);
 
-                if (first_load)
-                {
-                    //Clear all entries
-                    EntityDatabase.Current.GetItems<Post>().ToList().ForEach(p =>
-                        {
-                            EntityDatabase.Current.DeleteItem<Post>(p.ID);
-                        });
-
-                    //Save a fresh new set
-                    posts.ForEach(p =>
-                        {
-                            EntityDatabase.Current.SaveItem(p);
-                        });
-
-                }
+//                if (first_load)
+//                {
+//                    //Clear all entries
+//                    EntityDatabase.Current.GetItems<Post>().ToList().ForEach(p =>
+//                        {
+//                            EntityDatabase.Current.DeleteItem<Post>(p.ID);
+//                        });
+//
+//                    //Save a fresh new set
+//                    posts.ForEach(p =>
+//                        {
+//                            EntityDatabase.Current.SaveItem(p);
+//                        });
+//
+//                }
 
             }
             catch (Exception e)
@@ -72,10 +72,10 @@ namespace App.Common
                 AppEvents.Current.TriggerConnectionFailedEvent(e.Message);
                 Debug.WriteLine(e.Message);
 				
-                if (first_load)
-                {
-                    posts = EntityDatabase.Current.GetItems<Post>().ToList();
-                }
+//                if (first_load)
+//                {
+//                    posts = EntityDatabase.Current.GetItems<Post>().ToList();
+//                }
             }
 
             return posts;

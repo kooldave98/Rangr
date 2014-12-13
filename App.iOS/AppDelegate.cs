@@ -9,62 +9,40 @@ using App.Common;
 
 namespace App.iOS
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the
-	// User Interface of the application, as well as listening (and optionally responding) to
-	// application events from iOS.
-	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
-	{
-		UIWindow window;
-		UINavigationController navigationController;
+    [Register("AppDelegate")]
+    public partial class AppDelegate : UIApplicationDelegate
+    {
+        UIWindow window;
 
-		public UINavigationController NavigationController 
-		{
-			get
-			{
-				return navigationController;
-			}
-			set
-			{
-				navigationController = value;
-			}
-		}
+        public UINavigationController NavigationController { get; set; }
 
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            window = new UIWindow(UIScreen.MainScreen.Bounds);
+            NavigationController = new UINavigationController();
 
-		//MainViewController mainViewController;
-		//SignInViewController mainViewController;
+            window.RootViewController = NavigationController;
 
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{
-			//
-			// Build the UI
-			//
+            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
+                NavigationController.PushViewController(new StreamViewController(), false);
+            }
+            else
+            {
+                NavigationController.PushViewController(new SignInViewController(), false);
+            }
 
-			//mainViewController = new StreamViewController ();
+            window.MakeKeyAndVisible();
 
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			navigationController = new UINavigationController ();
+            return true;
+        }
 
-			window.RootViewController = navigationController;
+        public override void WillEnterForeground(UIApplication application)
+        {
+        }
 
-			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
-				navigationController.PushViewController (new StreamViewController (), false);
-			} else {
-				navigationController.PushViewController (new SignInViewController (), false);
-			}
-
-			window.MakeKeyAndVisible ();
-
-			return true;
-		}
-
-		public override void WillEnterForeground (UIApplication application)
-		{
-		}
-
-		public override void DidEnterBackground (UIApplication application)
-		{
-		}
-			
-	}
+        public override void DidEnterBackground(UIApplication application)
+        {
+        }
+    }
 }
