@@ -206,6 +206,18 @@
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\TextViewWriter.cs" />
+    <Compile Include="SignInViewController.cs" />
+    <Compile Include="SignInViewController.designer.cs">
+      <DependentUpon>SignInViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StreamViewController.cs" />
+    <Compile Include="StreamViewController.designer.cs">
+      <DependentUpon>StreamViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComposeViewController.cs" />
+    <Compile Include="ComposeViewController.designer.cs">
+      <DependentUpon>ComposeViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -226,6 +238,8 @@
     <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
+    <InterfaceDefinition Include="SignInViewController.xib" />
+    <InterfaceDefinition Include="StreamViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

@@ -16,19 +16,44 @@ namespace App.iOS
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		UIWindow window;
-		MainViewController mainViewController;
+		UINavigationController navigationController;
+
+		public UINavigationController NavigationController 
+		{
+			get
+			{
+				return navigationController;
+			}
+			set
+			{
+				navigationController = value;
+			}
+		}
+
+
+		//MainViewController mainViewController;
+		//SignInViewController mainViewController;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			//
 			// Build the UI
 			//
-			mainViewController = new MainViewController ();
+
+			//mainViewController = new StreamViewController ();
 
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			window.RootViewController = new UINavigationController (mainViewController);
+			navigationController = new UINavigationController ();
+
+			window.RootViewController = navigationController;
+
+			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
+				navigationController.PushViewController (new StreamViewController (), false);
+			} else {
+				navigationController.PushViewController (new SignInViewController (), false);
+			}
+
 			window.MakeKeyAndVisible ();
-			//Roy test
 
 			return true;
 		}
