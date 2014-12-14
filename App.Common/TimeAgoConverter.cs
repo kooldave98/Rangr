@@ -7,89 +7,104 @@ using System.IO;
 /// </summary>
 namespace App.Common
 {
-	public class TimeAgoConverter
-	{
+    public class TimeAgoConverter
+    {
 
-		private static TimeAgoConverter _instance;
+        private static TimeAgoConverter _instance;
 
-		public static TimeAgoConverter Current {
-			get {
-				return _instance ?? (_instance = new TimeAgoConverter ());
-			}
-		}
+        public static TimeAgoConverter Current
+        {
+            get
+            {
+                return _instance ?? (_instance = new TimeAgoConverter());
+            }
+        }
 
-		private TimeAgoConverter ()
-		{
-		}
+        private TimeAgoConverter()
+        {
+        }
 
-		protected virtual string GetString (TimeAgo timeAgo, int time)
-		{
-			return timeAgo == TimeAgo.Now
+        protected virtual string GetString(TimeAgo timeAgo, int time)
+        {
+            var plural_string = time > 1 ? "s" : string.Empty;
+
+            return timeAgo == TimeAgo.Now
 				? "Just Now"
-					: String.Format ("{0} {1} ago", time, timeAgo.ToString ().ToLower ());
-		}
+                    : String.Format("{0} {1}{2} ago", time, timeAgo.ToString().ToLower(), plural_string);
+        }
 
 
-		public string Convert (object value)
-		{
-			DateTime when;
-			if (!this.TryGetDateTime (value, out when))
-				return String.Empty;
+        public string Convert(object value)
+        {
+            DateTime when;
+            if (!this.TryGetDateTime(value, out when))
+                return String.Empty;
 
-			var difference = (DateTime.UtcNow - when).TotalSeconds;
-			var format = TimeAgo.Days;
-			var time = 0;
+            var difference = (DateTime.UtcNow - when).TotalSeconds;
+            var format = TimeAgo.Day;
+            var time = 0;
 
-			if (difference < 30.0) {
-				format = TimeAgo.Now;
-			} else if (difference < 100) {
-				format = TimeAgo.Seconds;
-				time = (int)difference;
-			} else if (difference < 3600) {
-				format = TimeAgo.Minutes;
-				time = (int)(difference / 60);
-			} else if (difference < 24 * 3600) {
-				format = TimeAgo.Hours;
-				time = (int)(difference / (3600));
-			} else {
-				format = TimeAgo.Days;
-				time = (int)(difference / (3600 * 24));
-			}
-			// TODO: future dates
-			// TODO: weeks, months, years
-			return this.GetString (format, time);
-		}
+            if (difference < 30.0)
+            {
+                format = TimeAgo.Now;
+            }
+            else if (difference < 100)
+            {
+                format = TimeAgo.Second;
+                time = (int)difference;
+            }
+            else if (difference < 3600)
+            {
+                format = TimeAgo.Minute;
+                time = (int)(difference / 60);
+            }
+            else if (difference < 24 * 3600)
+            {
+                format = TimeAgo.Hour;
+                time = (int)(difference / (3600));
+            }
+            else
+            {
+                format = TimeAgo.Day;
+                time = (int)(difference / (3600 * 24));
+            }
+            // TODO: future dates
+            // TODO: weeks, months, years
+            return this.GetString(format, time);
+        }
 
 
-		protected virtual bool TryGetDateTime (object value, out DateTime date)
-		{
-			date = DateTime.MinValue;
+        protected virtual bool TryGetDateTime(object value, out DateTime date)
+        {
+            date = DateTime.MinValue;
 
-			if (value == null)
-				return true;
+            if (value == null)
+                return true;
 
-			if (value is DateTime) {
-				date = (DateTime)value;
+            if (value is DateTime)
+            {
+                date = (DateTime)value;
 
-				return true;
-			}
+                return true;
+            }
 
-			if (value is DateTimeOffset) {
-				var offset = (DateTimeOffset)value;
-				date = offset.UtcDateTime;
-				return true;
-			}
-			throw new InvalidDataException ("Invalid data type - " + value.GetType ());
-		}
-	}
+            if (value is DateTimeOffset)
+            {
+                var offset = (DateTimeOffset)value;
+                date = offset.UtcDateTime;
+                return true;
+            }
+            throw new InvalidDataException("Invalid data type - " + value.GetType());
+        }
+    }
 
-	public enum TimeAgo
-	{
-		Now,
-		Seconds,
-		Minutes,
-		Hours,
-		Days
-	}
+    public enum TimeAgo
+    {
+        Now,
+        Second,
+        Minute,
+        Hour,
+        Day
+    }
 }
 
