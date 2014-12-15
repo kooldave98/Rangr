@@ -6,6 +6,7 @@ using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
 using App.Common;
+using Google.Maps;
 
 namespace App.iOS
 {
@@ -14,23 +15,27 @@ namespace App.iOS
     {
         UIWindow window;
 
+        const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
+
         public UINavigationController NavigationController { get; set; }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            MapServices.ProvideAPIKey(MapsApiKey);
+
             window = new UIWindow(UIScreen.MainScreen.Bounds);
-            NavigationController = new UINavigationController();
+            NavigationController = new UINavigationController(new MainViewController());
 
             window.RootViewController = NavigationController;
 
-            if (AppGlobal.Current.CurrentUserAndConnectionExists)
-            {
-                NavigationController.PushViewController(new StreamViewController(), false);
-            }
-            else
-            {
-                NavigationController.PushViewController(new SignInViewController(), false);
-            }
+//            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+//            {
+//                NavigationController.PushViewController(new StreamViewController(), false);
+//            }
+//            else
+//            {
+//                NavigationController.PushViewController(new SignInViewController(), false);
+//            }
 
             window.MakeKeyAndVisible();
 
