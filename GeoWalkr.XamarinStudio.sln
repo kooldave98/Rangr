@@ -99,7 +99,7 @@ Global
 		{9469397C-3B52-463E-884C-41987ADA2CB6} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = App.iOS\App.iOS.csproj
+		StartupItem = App.Android\App.Android.csproj
 		Policies = $0
 		$0.VersionControlPolicy = $1
 		$1.CommitMessageStyle = $2
