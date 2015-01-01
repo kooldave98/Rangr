@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Android", "App.Android\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "walkr.android", "walkr.android\walkr.android.csproj", "{F0088905-185C-4E66-BBE0-E07611DDA541}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.droid", "rangr.droid\rangr.droid.csproj", "{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{4283452C-295D-4F0B-B67B-203E2F86C793}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.iOS", "App.iOS\App.iOS.csproj", "{E64FD81B-35F7-483A-8EED-E726621BFDD4}"
@@ -27,6 +29,22 @@ Global
 		AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Debug|x86.Build.0 = Debug|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|iPhone.Build.0 = Release|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|x86.ActiveCfg = Release|Any CPU
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Release|x86.Build.0 = Release|Any CPU
 		{9469397C-3B52-463E-884C-41987ADA2CB6}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{9469397C-3B52-463E-884C-41987ADA2CB6}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{9469397C-3B52-463E-884C-41987ADA2CB6}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
@@ -95,11 +113,12 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
 		{F0088905-185C-4E66-BBE0-E07611DDA541} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
+		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 		{9469397C-3B52-463E-884C-41987ADA2CB6} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = App.Android\App.Android.csproj
+		StartupItem = rangr.droid\rangr.droid.csproj
 		Policies = $0
 		$0.VersionControlPolicy = $1
 		$1.CommitMessageStyle = $2

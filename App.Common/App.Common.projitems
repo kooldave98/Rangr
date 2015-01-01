@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
