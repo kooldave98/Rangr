@@ -94,24 +94,22 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\Activities\MainActivity.cs" />
-    <Compile Include="Code\Adapters\PostsAdapter.cs">
-      <DependentUpon>..\..\..\App.Android\PostFeedActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Fragments\BaseFragment.cs" />
-    <Compile Include="Code\Fragments\LoginFragment.cs" />
-    <Compile Include="Code\Fragments\PostsFragment.cs" />
-    <Compile Include="Code\Views\AClickableSpan.cs" />
-    <Compile Include="Code\Views\EndlessListView.cs" />
-    <Compile Include="Code\Views\HyperTextView.cs" />
-    <Compile Include="Code\Views\PeopleGroupsListView.cs" />
-    <Compile Include="Code\Views\TextViewHyperlinkOnTouchListener.cs" />
-    <Compile Include="Code\Views\TextViewWriter.cs" />
-    <Compile Include="Code\Fragments\SearchFragment.cs" />
-    <Compile Include="Code\Fragments\PostDetailFragment.cs" />
-    <Compile Include="Code\Fragments\PostMapFragment.cs">
+    <Compile Include="AppCode\Activities\MainActivity.cs" />
+    <Compile Include="AppCode\Fragments\BaseFragment.cs" />
+    <Compile Include="AppCode\Fragments\LoginFragment.cs" />
+    <Compile Include="AppCode\Fragments\PostsFragment.cs" />
+    <Compile Include="AppCode\Views\AClickableSpan.cs" />
+    <Compile Include="AppCode\Views\EndlessListView.cs" />
+    <Compile Include="AppCode\Views\HyperTextView.cs" />
+    <Compile Include="AppCode\Views\PeopleGroupsListView.cs" />
+    <Compile Include="AppCode\Views\TextViewHyperlinkOnTouchListener.cs" />
+    <Compile Include="AppCode\Views\TextViewWriter.cs" />
+    <Compile Include="AppCode\Fragments\SearchFragment.cs" />
+    <Compile Include="AppCode\Fragments\PostDetailFragment.cs" />
+    <Compile Include="AppCode\Fragments\PostMapFragment.cs">
       <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\Activities\AboutAppActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -168,7 +166,7 @@
   <ItemGroup>
     <Folder Include="Resources\anim\" />
     <Folder Include="Resources\menu\" />
-    <Folder Include="Code\" />
+    <Folder Include="AppCode\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleplayservices">

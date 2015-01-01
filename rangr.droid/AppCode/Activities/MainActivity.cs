@@ -53,7 +53,7 @@ namespace rangr.droid
             switch (item.ItemId)
             {
                 case Resource.Id.settings_menu_item:
-                    //ShowBasket();
+                    StartActivity(typeof(AboutAppActivity));
                     return true;
                 case Android.Resource.Id.Home:
                     //pop full backstack when going home.   
