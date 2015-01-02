@@ -110,6 +110,7 @@
       <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="AppCode\Activities\AboutAppActivity.cs" />
+    <Compile Include="AppCode\Views\AppActionBarDrawerToggle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -124,7 +125,6 @@
     <AndroidResource Include="Resources\anim\enter.xml" />
     <AndroidResource Include="Resources\anim\exit.xml" />
     <AndroidResource Include="Resources\menu\main.xml" />
-    <AndroidResource Include="Resources\layout\main.axml" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\drawable\bg_parent_rounded_corner.xml" />
     <AndroidResource Include="Resources\drawable\twitter.png" />
@@ -160,6 +160,22 @@
     <AndroidResource Include="Resources\layout\posts.axml" />
     <AndroidResource Include="Resources\layout\post_item.axml" />
     <AndroidResource Include="Resources\layout\empty.xml" />
+    <AndroidResource Include="Resources\layout\main_with_drawer.axml" />
+    <AndroidResource Include="Resources\layout\main_drawer_list_item.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\action_search.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\drawer_shadow.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_drawer.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\action_search.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\drawer_shadow.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_drawer.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\action_search.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\drawer_shadow.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_drawer.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\values\string_arrays.xml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

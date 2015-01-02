@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="navigation_drawer_list">
+        <item>Feed</item>
+        <item>People</item>
+        <item>Profile</item>
+        <item>Settings</item>
+    </string-array>
+</resources>
+

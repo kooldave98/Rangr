@@ -161,13 +161,12 @@ namespace rangr.droid
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
         }
 
-        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        public override void OnPrepareOptionsMenu(IMenu menu)
         {
-            menu.Add("New Post").SetShowAsAction(ShowAsAction.IfRoom);
-            inflater.Inflate(Resource.Menu.main, menu);
-            //var cartItem = menu.FindItem(Resource.Id.cart_menu_item);
+            base.OnPrepareOptionsMenu(menu);
 
-            base.OnCreateOptionsMenu(menu, inflater);
+            var cartItem = menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(true);
+            var otherItem = menu.FindItem(Resource.Id.boom_menu_item).SetVisible(false);
         }
 
         public PostsFragment()
