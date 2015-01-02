@@ -65,105 +65,15 @@ namespace rangr.droid
             {
                 if (!AppGlobal.Current.CurrentUserAndConnectionExists)
                 {
-                    selectItem(0);
-                    //show_login();
+                    show_login();
                 }
                 else
                 {
-                    show_feed();
+                    selectItem(0);
+                    //show_feed();
                 }
             }
         }
-
-        protected override void OnSaveInstanceState(Bundle outState)
-        {
-            base.OnSaveInstanceState(outState);
-            outState.PutInt("baseFragment", baseFragment);
-        }
-
-        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
-        {
-            base.OnRestoreInstanceState(savedInstanceState);
-            baseFragment = savedInstanceState.GetInt("baseFragment");
-        }
-
-        public override void OnBackPressed()
-        {
-            base.OnBackPressed();
-            SetupActionBar(FragmentManager.BackStackEntryCount != 0);
-        }
-
-        public int SwitchScreens(Android.App.Fragment fragment, bool animated = true, bool isRoot = false)
-        {
-            var transaction = FragmentManager.BeginTransaction();
-
-            if (animated)
-            {
-                int animIn, animOut;
-                GetAnimationsForFragment(fragment, out animIn, out animOut);
-                transaction.SetCustomAnimations(animIn, animOut);
-            }
-            transaction.Replace(Resource.Id.content_frame, fragment);
-            if (!isRoot)
-                transaction.AddToBackStack(null);
-
-            SetupActionBar(!isRoot);
-
-            return transaction.Commit();
-        }
-
-        private void GetAnimationsForFragment(Android.App.Fragment fragment, out int animIn, out int animOut)
-        {
-            animIn = Resource.Animation.enter;
-            animOut = Resource.Animation.exit;
-
-            switch (fragment.GetType().Name)
-            {
-                case "PostDetailsFragment":
-                    animIn = Resource.Animation.post_detail_in;
-                    animOut = Resource.Animation.post_detail_out;
-                    break;
-            }
-        }
-
-        public void SetupActionBar(bool showUp = false)
-        {
-            this.ActionBar.SetDisplayHomeAsUpEnabled(showUp);
-            //this.ActionBar.SetDisplayShowHomeEnabled (showUp);
-        }
-
-        private void show_feed()
-        {
-            var fragment = new PostsFragment();
-            fragment.HashTagSelected += (ht) => show_search(ht);
-            fragment.PostItemSelected += (p) => show_detail(p);
-            baseFragment = fragment.Id;
-            SwitchScreens(fragment, true, true);
-        }
-
-        private void show_search(string hash_tag)
-        {
-            var fragment = new SearchFragment(hash_tag);
-            fragment.HashTagSelected += (ht) => show_search(ht);
-            SwitchScreens(fragment, true);
-        }
-
-        private void show_detail(Post post)
-        {
-            var fragment = new PostDetailFragment(post);
-            SwitchScreens(fragment, true);
-        }
-
-        private void show_login()
-        {
-            var fragment = new LoginFragment();
-            baseFragment = fragment.Id;
-            fragment.LoginSucceeded += () => show_feed();
-            SwitchScreens(fragment, true, true);
-        }
-
-        private int baseFragment;
-
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -188,7 +98,7 @@ namespace rangr.droid
         {
             // The action bar home/up action should open or close the drawer.
             // ActionBarDrawerToggle will take care of this.
-            if (drawer_toggle.OnOptionsItemSelected(item))
+            if (drawer_toggle.DrawerIndicatorEnabled && drawer_toggle.OnOptionsItemSelected(item))
             {
                 return true;
             }
@@ -200,13 +110,107 @@ namespace rangr.droid
                     StartActivity(typeof(AboutAppActivity));
                     return true;
                 case Android.Resource.Id.Home:
-                    //pop full backstack when going home.   
-                    FragmentManager.PopBackStack(baseFragment, PopBackStackFlags.Inclusive);
-                    SetupActionBar();
+                    //either pop full backstack when going home.   
+
+                    //FragmentManager.PopBackStack(baseFragment, PopBackStackFlags.Inclusive);
+                    //drawer_toggle.DrawerIndicatorEnabled = true;
+
+                    //or go back to previous fragment
+                    OnBackPressed();
+
                     return true;
             }
 
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+
+            drawer_toggle.DrawerIndicatorEnabled = true;
+        }
+
+        public int SwitchScreens(Android.App.Fragment fragment, bool animated = true, bool isRoot = false)
+        {
+            var transaction = FragmentManager.BeginTransaction();
+
+            if (animated)
+            {
+                int animIn, animOut;
+                GetAnimationsForFragment(fragment, out animIn, out animOut);
+                transaction.SetCustomAnimations(animIn, animOut);
+            }
+            transaction.Replace(Resource.Id.content_frame, fragment);
+
+            if (!isRoot)
+            {
+                transaction.AddToBackStack(null);
+            }
+
+            return transaction.Commit();
+        }
+
+        private void GetAnimationsForFragment(Android.App.Fragment fragment, out int animIn, out int animOut)
+        {
+            animIn = Resource.Animation.enter;
+            animOut = Resource.Animation.exit;
+
+            switch (fragment.GetType().Name)
+            {
+                case "PostDetailsFragment":
+                    animIn = Resource.Animation.post_detail_in;
+                    animOut = Resource.Animation.post_detail_out;
+                    break;
+            }
+        }
+
+        private void show_feed()
+        {
+            var fragment = new PostsFragment();
+            fragment.HashTagSelected += (ht) => show_search(ht);
+            fragment.PostItemSelected += (p) => show_detail(p);
+            baseFragment = fragment.Id;
+            SwitchScreens(fragment, true, true);
+        }
+
+        private void show_search(string hash_tag)
+        {
+            drawer_toggle.DrawerIndicatorEnabled = false;
+
+            var fragment = new SearchFragment(hash_tag);
+            fragment.HashTagSelected += (ht) => show_search(ht);
+            SwitchScreens(fragment, true);
+        }
+
+        private void show_detail(Post post)
+        {
+            drawer_toggle.DrawerIndicatorEnabled = false;
+
+            var fragment = new PostDetailFragment(post);
+            SwitchScreens(fragment, true);
+        }
+
+        private void show_login()
+        {
+            var fragment = new LoginFragment();
+            baseFragment = fragment.Id;
+            fragment.LoginSucceeded += () => show_feed();
+            SwitchScreens(fragment, true, true);
+        }
+
+        private int baseFragment;
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+            outState.PutInt("baseFragment", baseFragment);
+        }
+
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            base.OnRestoreInstanceState(savedInstanceState);
+            baseFragment = savedInstanceState.GetInt("baseFragment");
         }
 
 
@@ -224,7 +228,7 @@ namespace rangr.droid
                     show_feed();
                     break;
                 default:
-                    return;
+                    break;
             }
 
             // Highlight the selected item, update the title, and close the drawer
