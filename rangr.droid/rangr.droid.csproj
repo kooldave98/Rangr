@@ -154,7 +154,6 @@
     <AndroidResource Include="Resources\values-v14\styles.xml" />
     <AndroidResource Include="Resources\xml\preferences_general.xml" />
     <AndroidResource Include="Resources\layout\login.axml" />
-    <AndroidResource Include="Resources\layout\google_map.axml" />
     <AndroidResource Include="Resources\layout\loading.axml" />
     <AndroidResource Include="Resources\layout\post_detail.axml" />
     <AndroidResource Include="Resources\layout\posts.axml" />

@@ -16,91 +16,43 @@ using Android.Graphics;
 
 namespace rangr.droid
 {
-    public class PostMapFragment : BaseFragment
+    //See: http://docs.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/ for more info on configuring Google maps
+    //Solution:http://stackoverflow.com/questions/13733299/initialize-mapfragment-programmatically-with-maps-api-v2
+    public class PostMapFragment : MapFragment
     {
-        private GoogleMap _map;
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);				
-        }
-
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            RetainInstance = true;
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnCreateView(inflater, container, savedInstanceState);
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = inflater.Inflate(Resource.Layout.google_map, null);
             return view;
         }
 
-        public override void OnResume()
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
-            base.OnResume();
-            SetupMap();
-        }
+            base.OnViewCreated(view, savedInstanceState);
 
-        public override void OnPause()
-        {
-            base.OnPause();
-            _map = null;
+            Map.MapType = GoogleMap.MapTypeNormal;
 
-            cleanup_map();
-        }
+            Map.MyLocationEnabled = false;
 
-        private void cleanup_map()
-        {
-            Fragment fragment = Activity.FragmentManager.FindFragmentById(Resource.Id.map) as MapFragment;  
-            FragmentTransaction ft = FragmentManager.BeginTransaction();
+            Map.UiSettings.SetAllGesturesEnabled(false);
 
-            ft.Remove(fragment);
-            ft.Commit();
-        }
+            Map.AddMarker(GetMarker(post));
 
-        //See: http://docs.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/
-        //for more info on configuring Google maps
-        private void SetupMap()
-        {
-
-            if (_map == null)
-            {
-                _map = (Activity.FragmentManager.FindFragmentById(Resource.Id.map) as MapFragment).Map;
-
-                if (_map != null)
-                {
-                    _map.MapType = GoogleMap.MapTypeNormal;
-
-                    _map.MyLocationEnabled = false;
-
-                    _map.UiSettings.SetAllGesturesEnabled(false);
-
-                    _map.AddMarker(GetMarker(post));
-
-                    _map.AddCircle(GetUncertaintyRadius(post));
+            Map.AddCircle(GetUncertaintyRadius(post));
 
 
-                    var map_centre_location = GetPosition(post.long_lat_acc_geo_string);
+            var map_centre_location = GetPosition(post.long_lat_acc_geo_string);
 
-                    // We create an instance of CameraUpdate, and move the map to it.
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-						.Target(map_centre_location)      // Sets the center of the map to Mountain View
-						.Zoom(15)                 // Sets the zoom
-                                                    //.Bearing(90)                // Sets the orientation of the camera to east
-                                                    //.Tilt(30)                   // Sets the tilt of the camera to 30 degrees
-						.Build();                   // Creates a CameraPosition from the builder
+            // We create an instance of CameraUpdate, and move the map to it.
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                .Target(map_centre_location)      // Sets the center of the map to Mountain View
+                .Zoom(15)                 // Sets the zoom
+                                            //.Bearing(90)                // Sets the orientation of the camera to east
+                                            //.Tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .Build();                   // Creates a CameraPosition from the builder
 
-                    _map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
-                }
-            }
-
-
-
-
+            Map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
         }
 
         private MarkerOptions GetMarker(Post the_post)

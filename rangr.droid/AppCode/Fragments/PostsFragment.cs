@@ -38,6 +38,13 @@ namespace rangr.droid
         {
             var view = inflater.Inflate(Resource.Layout.posts, null);
 
+            return view;
+        }
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+
             postListView = view.FindViewById<EndlessListView>(Resource.Id.list);
 
             postListView.EmptyView = view.FindViewById<View>(Android.Resource.Id.Empty);
@@ -92,8 +99,6 @@ namespace rangr.droid
                 var post = view_model.Posts[e.Position];
                 PostItemSelected(post);
             };
-
-            return view;
         }
 
         private EventHandler<EventArgs> NewPostsReceivedHandler;
