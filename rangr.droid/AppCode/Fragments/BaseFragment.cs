@@ -110,6 +110,7 @@ namespace rangr.droid
             Guard.IsNotNull(view_model, "view_model");
             //notify ("OnCreate");
             base.OnCreate(bundle);
+            SetHasOptionsMenu(true);
         }
 
         public override void OnResume()

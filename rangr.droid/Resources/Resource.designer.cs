@@ -379,43 +379,49 @@ namespace rangr.droid
 			public const int ic_action_help = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int ic_action_refresh = 2130837533;
+			public const int ic_action_location_found = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int ic_drawer = 2130837534;
+			public const int ic_action_new = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int ic_launcher = 2130837535;
+			public const int ic_action_refresh = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int ic_plusone_medium_off_client = 2130837536;
+			public const int ic_drawer = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int ic_plusone_small_off_client = 2130837537;
+			public const int ic_launcher = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int ic_plusone_standard_off_client = 2130837538;
+			public const int ic_plusone_medium_off_client = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int ic_plusone_tall_off_client = 2130837539;
+			public const int ic_plusone_small_off_client = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int Icon = 2130837540;
+			public const int ic_plusone_standard_off_client = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int Icon2x = 2130837541;
+			public const int ic_plusone_tall_off_client = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int Placeholder = 2130837542;
+			public const int Icon = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int questionmark = 2130837543;
+			public const int Icon2x = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int twitter = 2130837544;
+			public const int Placeholder = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int user_default_avatar = 2130837545;
+			public const int questionmark = 2130837545;
+			
+			// aapt resource value: 0x7f02002a
+			public const int twitter = 2130837546;
+			
+			// aapt resource value: 0x7f02002b
+			public const int user_default_avatar = 2130837547;
 			
 			static Drawable()
 			{
@@ -435,9 +441,6 @@ namespace rangr.droid
 			
 			// aapt resource value: 0x7f0d0015
 			public const int UserNameText = 2131558421;
-			
-			// aapt resource value: 0x7f0d0021
-			public const int boom_menu_item = 2131558433;
 			
 			// aapt resource value: 0x7f0d0011
 			public const int content_frame = 2131558417;
@@ -516,9 +519,6 @@ namespace rangr.droid
 			
 			// aapt resource value: 0x7f0d0003
 			public const int satellite = 2131558403;
-			
-			// aapt resource value: 0x7f0d0022
-			public const int settings_menu_item = 2131558434;
 			
 			// aapt resource value: 0x7f0d0004
 			public const int terrain = 2131558404;
@@ -730,6 +730,12 @@ namespace rangr.droid
 			
 			// aapt resource value: 0x7f07001c
 			public const int library_name = 2131165212;
+			
+			// aapt resource value: 0x7f070026
+			public const int posts_title = 2131165222;
+			
+			// aapt resource value: 0x7f070027
+			public const int search_title = 2131165223;
 			
 			static String()
 			{

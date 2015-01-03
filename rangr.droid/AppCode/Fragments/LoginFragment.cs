@@ -18,13 +18,10 @@ namespace rangr.droid
 {
     public class LoginFragment : VMFragment<LoginViewModel>, TextView.IOnEditorActionListener
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            Activity.ActionBar.SetTitle(Resource.String.app_name);
+
             var view = inflater.Inflate(Resource.Layout.login, null);
 
             login = view.FindViewById<Button>(Resource.Id.logIn);
@@ -157,6 +154,13 @@ namespace rangr.droid
             imm.HideSoftInputFromWindow(password.WindowToken, HideSoftInputFlags.NotAlways);
             login.Visibility = ViewStates.Invisible;
             progressIndicator.Visibility = ViewStates.Visible;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            base.OnPrepareOptionsMenu(menu);
+
+            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
         }
 
         public LoginFragment()

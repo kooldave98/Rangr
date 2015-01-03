@@ -17,15 +17,10 @@ namespace rangr.droid
 {
     public class PostDetailFragment : VMFragment<PostDetailsViewModel>
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            Activity.ActionBar.Title = string.Empty;
+
             var view = inflater.Inflate(Resource.Layout.post_detail, null);
 
             set_map();
@@ -37,6 +32,13 @@ namespace rangr.droid
             postTextLabel.Text = view_model.CurrentPost.text;
 
             return view;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            base.OnPrepareOptionsMenu(menu);
+
+            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
         }
 
         private void set_map()

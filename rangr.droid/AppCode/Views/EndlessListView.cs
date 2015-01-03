@@ -4,7 +4,6 @@ using Android.Content;
 using Android.Util;
 using Android.Views;
 using System.Collections.Generic;
-using App.Common;
 
 namespace CustomViews
 {

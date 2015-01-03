@@ -14,5 +14,8 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="app_not_available">Sorry, there\'s no viewer available</string>
 
+    <string name="posts_title">Feed</string>
+    <string name="search_title">Search</string>
+
 
 </resources>

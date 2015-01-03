@@ -22,22 +22,11 @@ namespace rangr.droid
 {
     public class PostsFragment : VMFragment<FeedViewModel>
     {
-        public override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            //Todo: Move hardcoded string to resource file
-            Activity.Title = "Feed";
-            //Activity.ActionBar.SetTitle(Resource.String.app_name);
-
-            RetainInstance = true;
-            SetHasOptionsMenu(true);
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = inflater.Inflate(Resource.Layout.posts, null);
+            Activity.ActionBar.SetTitle(Resource.String.posts_title);
 
+            var view = inflater.Inflate(Resource.Layout.posts, null);
             return view;
         }
 
@@ -170,8 +159,7 @@ namespace rangr.droid
         {
             base.OnPrepareOptionsMenu(menu);
 
-            var cartItem = menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(true);
-            var otherItem = menu.FindItem(Resource.Id.boom_menu_item).SetVisible(false);
+            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(true);
         }
 
         public PostsFragment()

@@ -13,6 +13,14 @@ using Android.Support.V4.App;
 using Android.Content.Res;
 using Android.Support.V4.View;
 
+
+/// <todo>
+/// 1. Stabilise app, make it error proof.
+/// 2. Sort out titles from fragments.
+/// 3. Sort out menus
+/// 4. Introduce action bar spinner on Posts Fragment
+/// </todo>
+
 namespace rangr.droid
 {
     [Activity(Label = "@string/app_name", 
@@ -26,39 +34,9 @@ namespace rangr.droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.main_with_drawer);
 
-            drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            action_bar_title = Title;// = "@string/app_name";
 
-            action_bar_title = Title = "@string/app_name";
-            //navigation_items = Resources.GetStringArray(Resource.Array.navigation_drawer_list);
-            drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            drawer_list = FindViewById<ListView>(Resource.Id.left_drawer);
-
-            // set a custom shadow that overlays the main content when the drawer opens
-            drawer_layout.SetDrawerShadow(Resource.Drawable.drawer_shadow, GravityCompat.Start);
-            // set up the drawer's list view with items and click listener
-            drawer_list.Adapter = new ArrayAdapter<String>(this,
-                Resource.Layout.main_drawer_list_item, navigation_items);
-            drawer_list.OnItemClickListener = this;
-
-            // enable ActionBar app icon to behave as action to toggle nav drawer
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
-            ActionBar.SetHomeButtonEnabled(true);
-
-            // ActionBarDrawerToggle ties together the the proper interactions
-            // between the sliding drawer and the action bar app icon
-            drawer_toggle = new MyActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawer_layout,         /* DrawerLayout object */
-                Resource.Drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                Resource.String.drawer_open,  /* "open drawer" description for accessibility */
-                Resource.String.drawer_close
-            );
-            drawer_layout.SetDrawerListener(drawer_toggle);
-
-//            if (bundle == null)
-//            {
-//                selectItem(0);
-//            }
+            setup_navigation_drawer();
 
             //Retain fragments so don't set home if state is stored.
             if (FragmentManager.BackStackEntryCount == 0)
@@ -69,11 +47,12 @@ namespace rangr.droid
                 }
                 else
                 {
-                    selectItem(0);
+                    select_drawer_item(0);
                     //show_feed();
                 }
             }
         }
+
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -81,15 +60,13 @@ namespace rangr.droid
             return base.OnCreateOptionsMenu(menu);
         }
 
-        /* Called whenever we call invalidateOptionsMenu() */
-
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
             // If the nav drawer is open, hide action items related to the content view
-            var drawerOpen = drawer_layout.IsDrawerOpen(drawer_list);
+            //var drawerOpen = drawer_layout.IsDrawerOpen(drawer_list);
 
-            menu.FindItem(Resource.Id.settings_menu_item).SetVisible(!drawerOpen);
-            menu.FindItem(Resource.Id.boom_menu_item).SetVisible(!drawerOpen);
+//            menu.FindItem(Resource.Id.settings_menu_item).SetVisible(!drawerOpen);
+//            menu.FindItem(Resource.Id.boom_menu_item).SetVisible(!drawerOpen);
 
             return base.OnPrepareOptionsMenu(menu);
         }
@@ -106,9 +83,6 @@ namespace rangr.droid
 
             switch (item.ItemId)
             {
-                case Resource.Id.settings_menu_item:
-                    StartActivity(typeof(AboutAppActivity));
-                    return true;
                 case Android.Resource.Id.Home:
                     //either pop full backstack when going home.   
 
@@ -167,65 +141,76 @@ namespace rangr.droid
 
         private void show_feed()
         {
+            drawer_toggle.DrawerIndicatorEnabled = true;
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetHomeButtonEnabled(true);
+
             var fragment = new PostsFragment();
             fragment.HashTagSelected += (ht) => show_search(ht);
             fragment.PostItemSelected += (p) => show_detail(p);
-            baseFragment = fragment.Id;
+            //baseFragment = fragment.Id;
             SwitchScreens(fragment, true, true);
         }
 
         private void show_search(string hash_tag)
         {
-            drawer_toggle.DrawerIndicatorEnabled = false;
-
             var fragment = new SearchFragment(hash_tag);
             fragment.HashTagSelected += (ht) => show_search(ht);
             SwitchScreens(fragment, true);
+
+            drawer_toggle.DrawerIndicatorEnabled = false;
         }
 
         private void show_detail(Post post)
         {
-            drawer_toggle.DrawerIndicatorEnabled = false;
-
             var fragment = new PostDetailFragment(post);
             SwitchScreens(fragment, true);
+
+            drawer_toggle.DrawerIndicatorEnabled = false;
         }
 
         private void show_login()
         {
+            drawer_toggle.DrawerIndicatorEnabled = false;
+            ActionBar.SetDisplayHomeAsUpEnabled(false);
+            ActionBar.SetHomeButtonEnabled(false);
+
             var fragment = new LoginFragment();
-            baseFragment = fragment.Id;
+            //baseFragment = fragment.Id;
             fragment.LoginSucceeded += () => show_feed();
             SwitchScreens(fragment, true, true);
         }
 
-        private int baseFragment;
-
-        protected override void OnSaveInstanceState(Bundle outState)
-        {
-            base.OnSaveInstanceState(outState);
-            outState.PutInt("baseFragment", baseFragment);
-        }
-
-        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
-        {
-            base.OnRestoreInstanceState(savedInstanceState);
-            baseFragment = savedInstanceState.GetInt("baseFragment");
-        }
-
+        //private int baseFragment;
 
         public void OnItemClick(AdapterView parent, View view, int position, long id)
         {
-            selectItem(position);
+            select_drawer_item(position);
         }
 
-        /** Swaps fragments in the main content view */
-        private void selectItem(int position)
+
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            // Pass any configuration change to the drawer toggls
+            drawer_toggle.OnConfigurationChanged(newConfig);
+        }
+
+        public void SetTitle(string title)
+        {
+            action_bar_title = title;
+            ActionBar.Title = action_bar_title;
+        }
+
+        private void select_drawer_item(int position)
         {
             switch (position)
             {
                 case 0:
                     show_feed();
+                    break;
+                case 3:
+                    StartActivity(typeof(AboutAppActivity));
                     break;
                 default:
                     break;
@@ -237,27 +222,35 @@ namespace rangr.droid
             drawer_layout.CloseDrawer(drawer_list);
         }
 
-
-        public void SetTitle(string title)
+        private void setup_navigation_drawer()
         {
-            action_bar_title = title;
-            ActionBar.Title = action_bar_title;
-        }
+            drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawer_list = FindViewById<ListView>(Resource.Id.left_drawer);
 
+            // set a custom shadow that overlays the main content when the drawer opens
+            drawer_layout.SetDrawerShadow(Resource.Drawable.drawer_shadow, GravityCompat.Start);
+            // set up the drawer's list view with items and click listener
+            drawer_list.Adapter = new ArrayAdapter<String>(this,
+                Resource.Layout.main_drawer_list_item, navigation_items);
+            drawer_list.OnItemClickListener = this;
 
-        protected override void OnPostCreate(Bundle savedInstanceState)
-        {
-            base.OnPostCreate(savedInstanceState);
-            // Sync the toggle state after onRestoreInstanceState has occurred.
+            // enable ActionBar app icon to behave as action to toggle nav drawer
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetHomeButtonEnabled(true);
+
+            // ActionBarDrawerToggle ties together the the proper interactions
+            // between the sliding drawer and the action bar app icon
+            drawer_toggle = new MyActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawer_layout,         /* DrawerLayout object */
+                Resource.Drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
+                Resource.String.drawer_open,  /* "open drawer" description for accessibility */
+                Resource.String.drawer_close
+            );
+            drawer_layout.SetDrawerListener(drawer_toggle);
+
             drawer_toggle.SyncState();
-        }
-
-
-        public override void OnConfigurationChanged(Configuration newConfig)
-        {
-            base.OnConfigurationChanged(newConfig);
-            // Pass any configuration change to the drawer toggls
-            drawer_toggle.OnConfigurationChanged(newConfig);
         }
 
         private DrawerLayout drawer_layout;

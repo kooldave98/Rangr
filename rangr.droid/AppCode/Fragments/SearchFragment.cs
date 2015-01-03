@@ -23,8 +23,8 @@ namespace rangr.droid
         {
             base.OnCreate(savedInstanceState);
             //Todo: Move hardcoded string to resource file
-            Activity.Title = string.Format("Search:{0}", view_model.hash_tag_search_keyword);
-            //Activity.ActionBar.SetTitle(Resource.String.app_name);
+            Activity.ActionBar.Title = string.Format("Search: #{0}", view_model.hash_tag_search_keyword);
+            //Activity.ActionBar.SetTitle(Resource.String.search_title);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -152,6 +152,13 @@ namespace rangr.droid
             dismiss_refresher();
             view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
+        }
+
+        public override void OnPrepareOptionsMenu(IMenu menu)
+        {
+            base.OnPrepareOptionsMenu(menu);
+
+            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
         }
 
         public SearchFragment(string the_hash_tag)
