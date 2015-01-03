@@ -34,25 +34,20 @@ namespace rangr.droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.main_with_drawer);
 
-            action_bar_title = Title;// = "@string/app_name";
+            action_bar_title = Title;
 
             setup_navigation_drawer();
 
-            //Retain fragments so don't set home if state is stored.
-            if (FragmentManager.BackStackEntryCount == 0)
+            if (!AppGlobal.Current.CurrentUserAndConnectionExists)
             {
-                if (!AppGlobal.Current.CurrentUserAndConnectionExists)
-                {
-                    show_login();
-                }
-                else
-                {
-                    select_drawer_item(0);
-                    //show_feed();
-                }
+                show_login();
             }
-        }
+            else
+            {
+                select_drawer_item(0);
+            }
 
+        }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -65,8 +60,8 @@ namespace rangr.droid
             // If the nav drawer is open, hide action items related to the content view
             //var drawerOpen = drawer_layout.IsDrawerOpen(drawer_list);
 
-//            menu.FindItem(Resource.Id.settings_menu_item).SetVisible(!drawerOpen);
-//            menu.FindItem(Resource.Id.boom_menu_item).SetVisible(!drawerOpen);
+            //menu.FindItem(Resource.Id.settings_menu_item).SetVisible(!drawerOpen);
+            //menu.FindItem(Resource.Id.boom_menu_item).SetVisible(!drawerOpen);
 
             return base.OnPrepareOptionsMenu(menu);
         }
@@ -79,8 +74,8 @@ namespace rangr.droid
             {
                 return true;
             }
-            // Handle action buttons
 
+            // Handle action buttons
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
@@ -127,9 +122,11 @@ namespace rangr.droid
 
         private void GetAnimationsForFragment(Android.App.Fragment fragment, out int animIn, out int animOut)
         {
+            //set default anims
             animIn = Resource.Animation.enter;
             animOut = Resource.Animation.exit;
 
+            //set specific anims
             switch (fragment.GetType().Name)
             {
                 case "PostDetailsFragment":
@@ -148,7 +145,6 @@ namespace rangr.droid
             var fragment = new PostsFragment();
             fragment.HashTagSelected += (ht) => show_search(ht);
             fragment.PostItemSelected += (p) => show_detail(p);
-            //baseFragment = fragment.Id;
             SwitchScreens(fragment, true, true);
         }
 
@@ -176,18 +172,14 @@ namespace rangr.droid
             ActionBar.SetHomeButtonEnabled(false);
 
             var fragment = new LoginFragment();
-            //baseFragment = fragment.Id;
-            fragment.LoginSucceeded += () => show_feed();
+            fragment.LoginSucceeded += () => select_drawer_item(0);
             SwitchScreens(fragment, true, true);
         }
-
-        //private int baseFragment;
 
         public void OnItemClick(AdapterView parent, View view, int position, long id)
         {
             select_drawer_item(position);
         }
-
 
         public override void OnConfigurationChanged(Configuration newConfig)
         {
@@ -210,14 +202,17 @@ namespace rangr.droid
                     show_feed();
                     break;
                 case 3:
+                    drawer_list.SetItemChecked(last_checked_drawer_item, true);
                     StartActivity(typeof(AboutAppActivity));
-                    break;
+                    return;
                 default:
                     break;
             }
 
             // Highlight the selected item, update the title, and close the drawer
+            last_checked_drawer_item = position;
             drawer_list.SetItemChecked(position, true);
+
             SetTitle(navigation_items[position]);
             drawer_layout.CloseDrawer(drawer_list);
         }
@@ -233,6 +228,8 @@ namespace rangr.droid
             // set up the drawer's list view with items and click listener
             drawer_list.Adapter = new ArrayAdapter<String>(this,
                 Resource.Layout.main_drawer_list_item, navigation_items);
+            drawer_list.ChoiceMode = ChoiceMode.Single;
+
             drawer_list.OnItemClickListener = this;
 
             // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -258,6 +255,7 @@ namespace rangr.droid
         private ActionBarDrawerToggle drawer_toggle;
 
         private string action_bar_title;
+        private int last_checked_drawer_item = 0;
         private string[] navigation_items = new string[]{ "Feed", "People", "Profile", "Settings" };
     }
 }
