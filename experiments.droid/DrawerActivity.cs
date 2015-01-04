@@ -176,14 +176,14 @@ namespace experiments.droid
 
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container,
-                                     Bundle savedInstanceState)
+                                          Bundle savedInstanceState)
         {
             View rootView = inflater.Inflate(Resource.Layout.fragment_planet, container, false);
             int i = Arguments.GetInt(ARG_PLANET_NUMBER);
             string planet = Resources.GetStringArray(Resource.Array.planets_array)[i];
 
             int imageId = Resources.GetIdentifier(planet.ToLower(),
-                     "drawable", Activity.PackageName);
+                              "drawable", Activity.PackageName);
             (rootView.FindViewById<ImageView>(Resource.Id.image)).SetImageResource(imageId);
             Activity.Title = planet;
             return rootView;

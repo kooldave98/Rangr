@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace experiments.droid
 {
-    [Activity(Label = "Home", Icon = "@drawable/icon")]
+    [Activity(Label = "Home", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity, Android.App.ActionBar.IOnNavigationListener
     {
         int count = 1;
@@ -96,10 +96,10 @@ namespace experiments.droid
             // gives us some performance gains by not always inflating a new view
             // will sound familiar to MonoTouch developers with UITableViewCell.DequeueReusableCell()
             var view = (convertView ??
-              context.LayoutInflater.Inflate(
-                  Resource.Layout.spinner_item,
-                  parent,
-                  false)) as LinearLayout;
+                       context.LayoutInflater.Inflate(
+                           Resource.Layout.spinner_item,
+                           parent,
+                           false)) as LinearLayout;
 	
             // Find references to each subview in the list item's view
             var txtName = view.FindViewById<TextView>(Resource.Id.action_bar_title);
@@ -165,7 +165,7 @@ namespace experiments.droid
 
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container,
-                                     Bundle savedInstanceState)
+                                          Bundle savedInstanceState)
         {
             // This is called to define the layout for the fragment;
             // we just create a TextView and set its text to be the fragment tag

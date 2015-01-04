@@ -15,6 +15,7 @@ using Android.Support.V4.View;
 
 
 /// <todo>
+/// 0. Don't relload Feed when it is selected in drawer
 /// 1. Stabilise app, make it error proof.
 /// 2. Sort out titles from fragments.
 /// 3. Sort out menus
@@ -53,17 +54,6 @@ namespace rangr.droid
         {
             MenuInflater.Inflate(Resource.Menu.main, menu);
             return base.OnCreateOptionsMenu(menu);
-        }
-
-        public override bool OnPrepareOptionsMenu(IMenu menu)
-        {
-            // If the nav drawer is open, hide action items related to the content view
-            //var drawerOpen = drawer_layout.IsDrawerOpen(drawer_list);
-
-            //menu.FindItem(Resource.Id.settings_menu_item).SetVisible(!drawerOpen);
-            //menu.FindItem(Resource.Id.boom_menu_item).SetVisible(!drawerOpen);
-
-            return base.OnPrepareOptionsMenu(menu);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -138,14 +128,17 @@ namespace rangr.droid
 
         private void show_feed()
         {
-            drawer_toggle.DrawerIndicatorEnabled = true;
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
-            ActionBar.SetHomeButtonEnabled(true);
+            if (current_drawer_item != 0)
+            {
+                drawer_toggle.DrawerIndicatorEnabled = true;
+                ActionBar.SetDisplayHomeAsUpEnabled(true);
+                ActionBar.SetHomeButtonEnabled(true);
 
-            var fragment = new PostsFragment();
-            fragment.HashTagSelected += (ht) => show_search(ht);
-            fragment.PostItemSelected += (p) => show_detail(p);
-            SwitchScreens(fragment, true, true);
+                var fragment = new PostsFragment();
+                fragment.HashTagSelected += (ht) => show_search(ht);
+                fragment.PostItemSelected += (p) => show_detail(p);
+                SwitchScreens(fragment, true, true);
+            }
         }
 
         private void show_search(string hash_tag)
@@ -202,15 +195,13 @@ namespace rangr.droid
                     show_feed();
                     break;
                 case 3:
-                    drawer_list.SetItemChecked(last_checked_drawer_item, true);
+                    drawer_list.SetItemChecked(current_drawer_item, true);
                     StartActivity(typeof(AboutAppActivity));
                     return;
-                default:
-                    break;
             }
 
             // Highlight the selected item, update the title, and close the drawer
-            last_checked_drawer_item = position;
+            current_drawer_item = position;
             drawer_list.SetItemChecked(position, true);
 
             SetTitle(navigation_items[position]);
@@ -255,7 +246,7 @@ namespace rangr.droid
         private ActionBarDrawerToggle drawer_toggle;
 
         private string action_bar_title;
-        private int last_checked_drawer_item = 0;
+        private int current_drawer_item = -1;
         private string[] navigation_items = new string[]{ "Feed", "People", "Profile", "Settings" };
     }
 }
