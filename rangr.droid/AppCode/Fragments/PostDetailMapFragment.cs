@@ -18,7 +18,7 @@ namespace rangr.droid
 {
     //See: http://docs.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/ for more info on configuring Google maps
     //Solution:http://stackoverflow.com/questions/13733299/initialize-mapfragment-programmatically-with-maps-api-v2
-    public class PostMapFragment : MapFragment
+    public class PostDetailMapFragment : MapFragment
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -95,7 +95,7 @@ namespace rangr.droid
             return int.Parse(array[2]);
         }
 
-        public PostMapFragment(Post the_post)
+        public PostDetailMapFragment(Post the_post)
         {
             post = the_post;
         }

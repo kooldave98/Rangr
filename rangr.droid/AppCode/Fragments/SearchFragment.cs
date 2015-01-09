@@ -17,6 +17,8 @@ using Android.Support.V4.Widget;
 
 namespace rangr.droid
 {
+    //Todo: Pull out a common abstract PostListFragment
+    //and let there be a FeedFragment and a SearchFragment
     public class SearchFragment : VMFragment<SearchViewModel>
     {
         public override void OnCreate(Bundle savedInstanceState)
@@ -29,7 +31,7 @@ namespace rangr.droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = inflater.Inflate(Resource.Layout.posts, null);
+            var view = inflater.Inflate(Resource.Layout.post_list, null);
 
             postListView = view.FindViewById<EndlessListView>(Resource.Id.list);
 

@@ -20,13 +20,13 @@ using System.Text.RegularExpressions;
 
 namespace rangr.droid
 {
-    public class PostsFragment : VMFragment<FeedViewModel>
+    public class PostListFragment : VMFragment<FeedViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Activity.ActionBar.SetTitle(Resource.String.posts_title);
 
-            var view = inflater.Inflate(Resource.Layout.posts, null);
+            var view = inflater.Inflate(Resource.Layout.post_list, null);
             return view;
         }
 
@@ -160,7 +160,7 @@ namespace rangr.droid
             inflater.Inflate(Resource.Menu.posts, menu);
         }
 
-        public PostsFragment()
+        public PostListFragment()
         {
             if (view_model == null)
             {
@@ -215,7 +215,7 @@ namespace rangr.droid
             // will sound familiar to MonoTouch developers with UITableViewCell.DequeueReusableCell()
             var view = (convertView ??
                        context.LayoutInflater.Inflate(
-                           Resource.Layout.post_item, 
+                           Resource.Layout.post_list_item, 
                            parent, 
                            false)) as LinearLayout;
 

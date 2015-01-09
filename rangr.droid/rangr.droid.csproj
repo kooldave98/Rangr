@@ -97,7 +97,6 @@
     <Compile Include="AppCode\Activities\MainActivity.cs" />
     <Compile Include="AppCode\Fragments\BaseFragment.cs" />
     <Compile Include="AppCode\Fragments\LoginFragment.cs" />
-    <Compile Include="AppCode\Fragments\PostsFragment.cs" />
     <Compile Include="AppCode\Views\AClickableSpan.cs" />
     <Compile Include="AppCode\Views\EndlessListView.cs" />
     <Compile Include="AppCode\Views\HyperTextView.cs" />
@@ -106,11 +105,12 @@
     <Compile Include="AppCode\Views\TextViewWriter.cs" />
     <Compile Include="AppCode\Fragments\SearchFragment.cs" />
     <Compile Include="AppCode\Fragments\PostDetailFragment.cs" />
-    <Compile Include="AppCode\Fragments\PostMapFragment.cs">
-      <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppCode\Activities\AboutAppActivity.cs" />
     <Compile Include="AppCode\Views\AppActionBarDrawerToggle.cs" />
+    <Compile Include="AppCode\Fragments\PostListFragment.cs" />
+    <Compile Include="AppCode\Fragments\PostDetailMapFragment.cs">
+      <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -156,8 +156,6 @@
     <AndroidResource Include="Resources\layout\login.axml" />
     <AndroidResource Include="Resources\layout\loading.axml" />
     <AndroidResource Include="Resources\layout\post_detail.axml" />
-    <AndroidResource Include="Resources\layout\posts.axml" />
-    <AndroidResource Include="Resources\layout\post_item.axml" />
     <AndroidResource Include="Resources\layout\empty.xml" />
     <AndroidResource Include="Resources\layout\main_with_drawer.axml" />
     <AndroidResource Include="Resources\layout\main_drawer_list_item.xml" />
@@ -185,6 +183,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_location_found.png" />
     <AndroidResource Include="Resources\menu\posts.xml" />
     <AndroidResource Include="Resources\menu\search.xml" />
+    <AndroidResource Include="Resources\layout\post_list.axml" />
+    <AndroidResource Include="Resources\layout\post_list_item.axml" />
+    <AndroidResource Include="Resources\layout\action_bar_spinner_item.xml" />
+    <AndroidResource Include="Resources\layout\action_bar_spinner.xml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -88,7 +88,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\layout\drawer_layout.xml" />
     <AndroidResource Include="Resources\layout\drawer_list_item.xml" />
-    <AndroidResource Include="Resources\layout\drop_down_item.xml" />
     <AndroidResource Include="Resources\layout\fragment_planet.xml" />
     <AndroidResource Include="Resources\layout\main_layout.axml" />
     <AndroidResource Include="Resources\layout\spinner_item.xml" />
@@ -96,6 +95,7 @@
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\values\string_arrays.xml" />
     <AndroidResource Include="Resources\xml\preferences_general.xml" />
+    <AndroidResource Include="Resources\layout\drop_down_item.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
 </Project>

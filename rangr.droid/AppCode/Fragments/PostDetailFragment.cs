@@ -38,7 +38,7 @@ namespace rangr.droid
         {
             var transaction = FragmentManager.BeginTransaction();
 
-            transaction.Replace(Resource.Id.fragmentContainer, new PostMapFragment(view_model.CurrentPost));
+            transaction.Replace(Resource.Id.fragmentContainer, new PostDetailMapFragment(view_model.CurrentPost));
 
             transaction.Commit();
         }

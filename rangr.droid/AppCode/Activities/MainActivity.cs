@@ -28,7 +28,7 @@ namespace rangr.droid
         MainLauncher = true, 
         Icon = "@drawable/icon", 
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : Activity, ListView.IOnItemClickListener
+    public class MainActivity : Activity, ListView.IOnItemClickListener, Android.App.ActionBar.IOnNavigationListener
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -144,19 +144,52 @@ namespace rangr.droid
             }
         }
 
-        private void show_feed()
+        private void show_feed(int selected_sub_item = 0)
         {
             if (current_drawer_item != 0)
             {
+                ActionBar.NavigationMode = ActionBarNavigationMode.List;
+                //ActionBar.Title = "";
+                var adapter = new ActionBarSpinnerAdapter(this, Resource.Layout.action_bar_spinner, feed_sub_items);
+
+                ActionBar.SetListNavigationCallbacks(adapter, this);
+
+
                 drawer_toggle.DrawerIndicatorEnabled = true;
                 ActionBar.SetDisplayHomeAsUpEnabled(true);
                 ActionBar.SetHomeButtonEnabled(true);
 
-                var fragment = new PostsFragment();
-                fragment.HashTagSelected += (ht) => show_search(ht);
-                fragment.PostItemSelected += (p) => show_detail(p);
-                SwitchScreens(fragment, true, true);
             }
+
+
+            if (current_feed_sub_item != selected_sub_item)
+            {
+                if (selected_sub_item == 0)
+                {
+                    var fragment = new PostListFragment();
+                    fragment.HashTagSelected += (ht) => show_search(ht);
+                    fragment.PostItemSelected += (p) => show_detail(p);
+                    SwitchScreens(fragment, true, true);
+                }
+                else
+                {
+                    var fragment = new PostDetailMapFragment(new Post()
+                        {
+                            ID = 111,
+                            post_id = 222,
+                            text = "fake post",
+                            user_display_name = "fake user",
+                            user_id = 444,
+                            date = DateTime.Now.Date,
+                            long_lat_acc_geo_string = "-2.2275587999999997,53.478498699999996,1",
+                        });
+
+                    SwitchScreens(fragment, true, true);
+                }
+            }
+
+
+            current_feed_sub_item = selected_sub_item;
         }
 
         private void show_search(string hash_tag)
@@ -274,6 +307,16 @@ namespace rangr.droid
             drawer_toggle.SyncState();
         }
 
+        public bool OnNavigationItemSelected(int position, long itemId)
+        {
+            show_feed(position);
+            return true;
+        }
+
+
+        private string[] feed_sub_items = new string[]{ "List", "Map" };
+        private int current_feed_sub_item = -1;
+
         private DrawerLayout drawer_layout;
         private ListView drawer_list;
         private MyActionBarDrawerToggle drawer_toggle;
@@ -282,4 +325,93 @@ namespace rangr.droid
         private int current_drawer_item = -1;
         private string[] navigation_items = new string[]{ "Feed", "People", "Profile", "Settings" };
     }
+
+    //See below url for styling the spinner properly
+    //http://stackoverflow.com/questions/17613912/styling-actionbar-spinner-navigation-to-look-like-its-title-and-subtitle#_=_
+    public class ActionBarSpinnerAdapter : ArrayAdapter<string>, ISpinnerAdapter
+    {
+        private Activity context;
+        //private int textViewResourceId;
+        private string[] items;
+
+        public ActionBarSpinnerAdapter(Activity context, int textViewResourceId, string[] items)
+            : base(context, textViewResourceId, items)
+        {
+            this.context = context; 
+            //this.textViewResourceId = textViewResourceId;
+            this.items = items; 
+        }
+
+        public string this [int position]
+        {
+            get { return items[position]; }
+        }
+
+        public override long GetItemId(int position)
+        {
+            return position;
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            // Get our object for position
+            var item = items[position];
+
+            //Try to reuse convertView if it's not  null, otherwise inflate it from our item layout
+            // gives us some performance gains by not always inflating a new view
+            // will sound familiar to MonoTouch developers with UITableViewCell.DequeueReusableCell()
+            var view = (convertView ??
+                       context.LayoutInflater.Inflate(
+                           Resource.Layout.action_bar_spinner,
+                           parent,
+                           false)) as LinearLayout;
+
+            // Find references to each subview in the list item's view
+            var txtName = view.FindViewById<TextView>(Resource.Id.action_bar_title);
+            var txtDescription = view.FindViewById<TextView>(Resource.Id.action_bar_subtitle);
+
+            //Assign item's values to the various subviews
+            txtName.SetText(context.Title, TextView.BufferType.Normal);
+            txtDescription.SetText(item, TextView.BufferType.Normal);
+
+            return view;
+        }
+
+
+        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            DropDownViewHolder holder = null;
+
+            if (convertView == null)
+            {
+                LayoutInflater inflater = (context).LayoutInflater;
+                convertView = inflater.Inflate(Resource.Layout.action_bar_spinner_item, parent, false);
+
+                holder = new DropDownViewHolder();
+                holder.mTitle = (TextView)convertView.FindViewById(Resource.Id.spinner_title);
+
+                convertView.Tag = (Java.Lang.Object)holder;
+            }
+            else
+            {
+                holder = (DropDownViewHolder)convertView.Tag;
+            }
+
+            holder.mTitle.SetText(items[position], TextView.BufferType.Normal);
+
+            return convertView;
+        }
+
+        public class DropDownViewHolder : Java.Lang.Object
+        {
+            public TextView mTitle { get; set; }
+        }
+
+        public override int Count
+        {
+            get { return items.Length; }
+        }
+
+    }
+
 }
