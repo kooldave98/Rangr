@@ -154,11 +154,9 @@ namespace rangr.droid
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
         }
 
-        public override void OnPrepareOptionsMenu(IMenu menu)
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
-            base.OnPrepareOptionsMenu(menu);
-
-            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
+            inflater.Inflate(Resource.Menu.search, menu);
         }
 
         public SearchFragment(string the_hash_tag)

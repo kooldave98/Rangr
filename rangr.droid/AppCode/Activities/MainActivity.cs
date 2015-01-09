@@ -56,6 +56,22 @@ namespace rangr.droid
             return base.OnCreateOptionsMenu(menu);
         }
 
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+
+            var drawerOpen = drawer_layout.IsDrawerOpen((int)GravityFlags.Left);
+            //when open don't show anything
+            var size = menu.Size();
+
+            for (int i = 0; i < size; i++)
+            {
+                var item = menu.GetItem(i);
+                item.SetVisible(!drawerOpen);
+            }
+
+            return base.OnPrepareOptionsMenu(menu);
+        }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             // The action bar home/up action should open or close the drawer.
@@ -106,6 +122,8 @@ namespace rangr.droid
             {
                 transaction.AddToBackStack(null);
             }
+
+            this.InvalidateOptionsMenu();
 
             return transaction.Commit();
         }
@@ -236,6 +254,21 @@ namespace rangr.droid
                 Resource.String.drawer_open,  /* "open drawer" description for accessibility */
                 Resource.String.drawer_close
             );
+
+            //Display the current fragments title and update the options menu
+            drawer_toggle.DrawerClosed += (o, args) =>
+            {
+                this.ActionBar.Title = action_bar_title;
+                this.InvalidateOptionsMenu();
+            };
+
+            //Display the drawer title and update the options menu
+            drawer_toggle.DrawerOpened += (o, args) =>
+            {
+                this.ActionBar.Title = action_bar_title;
+                this.InvalidateOptionsMenu();
+            };
+
             drawer_layout.SetDrawerListener(drawer_toggle);
 
             drawer_toggle.SyncState();
@@ -243,7 +276,7 @@ namespace rangr.droid
 
         private DrawerLayout drawer_layout;
         private ListView drawer_list;
-        private ActionBarDrawerToggle drawer_toggle;
+        private MyActionBarDrawerToggle drawer_toggle;
 
         private string action_bar_title;
         private int current_drawer_item = -1;

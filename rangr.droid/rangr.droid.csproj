@@ -183,6 +183,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_action_location_found.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_location_found.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_location_found.png" />
+    <AndroidResource Include="Resources\menu\posts.xml" />
+    <AndroidResource Include="Resources\menu\search.xml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

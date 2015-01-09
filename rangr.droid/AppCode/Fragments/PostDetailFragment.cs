@@ -34,13 +34,6 @@ namespace rangr.droid
             return view;
         }
 
-        public override void OnPrepareOptionsMenu(IMenu menu)
-        {
-            base.OnPrepareOptionsMenu(menu);
-
-            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
-        }
-
         private void set_map()
         {
             var transaction = FragmentManager.BeginTransaction();

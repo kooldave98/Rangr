@@ -156,13 +156,6 @@ namespace rangr.droid
             progressIndicator.Visibility = ViewStates.Visible;
         }
 
-        public override void OnPrepareOptionsMenu(IMenu menu)
-        {
-            base.OnPrepareOptionsMenu(menu);
-
-            menu.FindItem(Resource.Id.new_post_menu_item).SetVisible(false);
-        }
-
         public LoginFragment()
         {
             if (view_model == null)

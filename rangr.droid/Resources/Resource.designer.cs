@@ -520,6 +520,9 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0003
 			public const int satellite = 2131558403;
 			
+			// aapt resource value: 0x7f0d0021
+			public const int search_posts_menu_item = 2131558433;
+			
 			// aapt resource value: 0x7f0d0004
 			public const int terrain = 2131558404;
 			
@@ -604,6 +607,12 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0c0000
 			public const int main = 2131492864;
 			
+			// aapt resource value: 0x7f0c0001
+			public const int posts = 2131492865;
+			
+			// aapt resource value: 0x7f0c0002
+			public const int search = 2131492866;
+			
 			static Menu()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -629,14 +638,17 @@ namespace rangr.droid
 			// aapt resource value: 0x7f070022
 			public const int action_new_post = 2131165218;
 			
+			// aapt resource value: 0x7f070023
+			public const int action_search_posts = 2131165219;
+			
 			// aapt resource value: 0x7f070021
 			public const int action_settings = 2131165217;
 			
 			// aapt resource value: 0x7f07001d
 			public const int app_name = 2131165213;
 			
-			// aapt resource value: 0x7f070025
-			public const int app_not_available = 2131165221;
+			// aapt resource value: 0x7f070026
+			public const int app_not_available = 2131165222;
 			
 			// aapt resource value: 0x7f070015
 			public const int auth_client_needs_enabling_title = 2131165205;
@@ -716,11 +728,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f070013
 			public const int common_signin_button_text_long = 2131165203;
 			
-			// aapt resource value: 0x7f070024
-			public const int drawer_close = 2131165220;
+			// aapt resource value: 0x7f070025
+			public const int drawer_close = 2131165221;
 			
-			// aapt resource value: 0x7f070023
-			public const int drawer_open = 2131165219;
+			// aapt resource value: 0x7f070024
+			public const int drawer_open = 2131165220;
 			
 			// aapt resource value: 0x7f07001f
 			public const int hint_login_password = 2131165215;
@@ -731,11 +743,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f07001c
 			public const int library_name = 2131165212;
 			
-			// aapt resource value: 0x7f070026
-			public const int posts_title = 2131165222;
-			
 			// aapt resource value: 0x7f070027
-			public const int search_title = 2131165223;
+			public const int posts_title = 2131165223;
+			
+			// aapt resource value: 0x7f070028
+			public const int search_title = 2131165224;
 			
 			static String()
 			{
