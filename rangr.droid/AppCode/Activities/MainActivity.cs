@@ -35,8 +35,6 @@ namespace rangr.droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.main_with_drawer);
 
-            action_bar_title = Title;
-
             setup_navigation_drawer();
 
             if (!AppGlobal.Current.CurrentUserAndConnectionExists)
@@ -146,6 +144,8 @@ namespace rangr.droid
 
         private void show_feed(int selected_sub_item = 0)
         {
+            ActionBar.Title = "";
+
             if (current_drawer_item != 0)
             {
                 ActionBar.NavigationMode = ActionBarNavigationMode.List;
@@ -166,10 +166,7 @@ namespace rangr.droid
             {
                 if (selected_sub_item == 0)
                 {
-                    var fragment = new PostListFragment();
-                    fragment.HashTagSelected += (ht) => show_search(ht);
-                    fragment.PostItemSelected += (p) => show_detail(p);
-                    SwitchScreens(fragment, true, true);
+                    SwitchScreens(feed_fragment, true, true);
                 }
                 else
                 {
@@ -194,6 +191,8 @@ namespace rangr.droid
 
         private void show_search(string hash_tag)
         {
+            ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
+
             var fragment = new SearchFragment(hash_tag);
             fragment.HashTagSelected += (ht) => show_search(ht);
             SwitchScreens(fragment, true);
@@ -203,6 +202,8 @@ namespace rangr.droid
 
         private void show_detail(Post post)
         {
+            ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
+
             var fragment = new PostDetailFragment(post);
             SwitchScreens(fragment, true);
 
@@ -235,11 +236,13 @@ namespace rangr.droid
         public void SetTitle(string title)
         {
             action_bar_title = title;
-            ActionBar.Title = action_bar_title;
+            ActionBar.Title = Title = action_bar_title;
         }
 
         private void select_drawer_item(int position)
         {
+            SetTitle(navigation_items[position]);
+
             switch (position)
             {
                 case 0:
@@ -311,6 +314,24 @@ namespace rangr.droid
         {
             show_feed(position);
             return true;
+        }
+
+
+        private PostListFragment the_feed_fragment;
+
+        private PostListFragment feed_fragment
+        { 
+            get
+            { 
+                if (the_feed_fragment == null)
+                {
+                    the_feed_fragment = new PostListFragment();
+                    the_feed_fragment.HashTagSelected += (ht) => show_search(ht);
+                    the_feed_fragment.PostItemSelected += (p) => show_detail(p);
+                }
+
+                return the_feed_fragment;
+            }
         }
 
 
