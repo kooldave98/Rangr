@@ -111,6 +111,7 @@
     <Compile Include="AppCode\Fragments\PostDetailMapFragment.cs">
       <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\Fragments\NewPostFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -187,6 +188,12 @@
     <AndroidResource Include="Resources\layout\post_list_item.axml" />
     <AndroidResource Include="Resources\layout\action_bar_spinner_item.xml" />
     <AndroidResource Include="Resources\layout\action_bar_spinner.xml" />
+    <AndroidResource Include="Resources\layout\new_post.axml" />
+    <AndroidResource Include="Resources\menu\new_post.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_send_now.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_send_now.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_send_now.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_send_now.png" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

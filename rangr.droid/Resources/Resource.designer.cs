@@ -388,40 +388,43 @@ namespace rangr.droid
 			public const int ic_action_refresh = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int ic_drawer = 2130837536;
+			public const int ic_action_send_now = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int ic_launcher = 2130837537;
+			public const int ic_drawer = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int ic_plusone_medium_off_client = 2130837538;
+			public const int ic_launcher = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int ic_plusone_small_off_client = 2130837539;
+			public const int ic_plusone_medium_off_client = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int ic_plusone_standard_off_client = 2130837540;
+			public const int ic_plusone_small_off_client = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int ic_plusone_tall_off_client = 2130837541;
+			public const int ic_plusone_standard_off_client = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int Icon = 2130837542;
+			public const int ic_plusone_tall_off_client = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int Icon2x = 2130837543;
+			public const int Icon = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int Placeholder = 2130837544;
+			public const int Icon2x = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int questionmark = 2130837545;
+			public const int Placeholder = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int twitter = 2130837546;
+			public const int questionmark = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int user_default_avatar = 2130837547;
+			public const int twitter = 2130837547;
+			
+			// aapt resource value: 0x7f02002c
+			public const int user_default_avatar = 2130837548;
 			
 			static Drawable()
 			{
@@ -437,7 +440,10 @@ namespace rangr.droid
 		{
 			
 			// aapt resource value: 0x7f0d0019
-			public const int PostTextLabel = 2131558425;
+			public const int PostText = 2131558425;
+			
+			// aapt resource value: 0x7f0d001a
+			public const int PostTextLabel = 2131558426;
 			
 			// aapt resource value: 0x7f0d0018
 			public const int UserNameText = 2131558424;
@@ -463,11 +469,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0013
 			public const int drawer_layout = 2131558419;
 			
-			// aapt resource value: 0x7f0d0022
-			public const int feedImage1 = 2131558434;
+			// aapt resource value: 0x7f0d0023
+			public const int feedImage1 = 2131558435;
 			
-			// aapt resource value: 0x7f0d001a
-			public const int fragmentContainer = 2131558426;
+			// aapt resource value: 0x7f0d001b
+			public const int fragmentContainer = 2131558427;
 			
 			// aapt resource value: 0x7f0d0000
 			public const int hybrid = 2131558400;
@@ -484,8 +490,8 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0017
 			public const int linearLayout2 = 2131558423;
 			
-			// aapt resource value: 0x7f0d001c
-			public const int list = 2131558428;
+			// aapt resource value: 0x7f0d001d
+			public const int list = 2131558429;
 			
 			// aapt resource value: 0x7f0d0009
 			public const int loadMoreButton = 2131558409;
@@ -502,11 +508,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0012
 			public const int loginQuestion = 2131558418;
 			
-			// aapt resource value: 0x7f0d001e
-			public const int name = 2131558430;
+			// aapt resource value: 0x7f0d001f
+			public const int name = 2131558431;
 			
-			// aapt resource value: 0x7f0d0023
-			public const int new_post_menu_item = 2131558435;
+			// aapt resource value: 0x7f0d0025
+			public const int new_post_menu_item = 2131558437;
 			
 			// aapt resource value: 0x7f0d0001
 			public const int none = 2131558401;
@@ -517,17 +523,20 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d000f
 			public const int password = 2131558415;
 			
-			// aapt resource value: 0x7f0d001d
-			public const int profilePic = 2131558429;
+			// aapt resource value: 0x7f0d001e
+			public const int profilePic = 2131558430;
 			
-			// aapt resource value: 0x7f0d001b
-			public const int refresher = 2131558427;
+			// aapt resource value: 0x7f0d001c
+			public const int refresher = 2131558428;
 			
 			// aapt resource value: 0x7f0d0003
 			public const int satellite = 2131558403;
 			
+			// aapt resource value: 0x7f0d0026
+			public const int search_posts_menu_item = 2131558438;
+			
 			// aapt resource value: 0x7f0d0024
-			public const int search_posts_menu_item = 2131558436;
+			public const int send_post_menu_item = 2131558436;
 			
 			// aapt resource value: 0x7f0d0007
 			public const int spinner_title = 2131558407;
@@ -535,14 +544,14 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0004
 			public const int terrain = 2131558404;
 			
-			// aapt resource value: 0x7f0d001f
-			public const int timestamp = 2131558431;
-			
 			// aapt resource value: 0x7f0d0020
-			public const int txtStatusMsg = 2131558432;
+			public const int timestamp = 2131558432;
 			
 			// aapt resource value: 0x7f0d0021
-			public const int txtUrl = 2131558433;
+			public const int txtStatusMsg = 2131558433;
+			
+			// aapt resource value: 0x7f0d0022
+			public const int txtUrl = 2131558434;
 			
 			// aapt resource value: 0x7f0d000e
 			public const int userName = 2131558414;
@@ -598,13 +607,16 @@ namespace rangr.droid
 			public const int main_with_drawer = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int post_detail = 2130903047;
+			public const int new_post = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int post_list = 2130903048;
+			public const int post_detail = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int post_list_item = 2130903049;
+			public const int post_list = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int post_list_item = 2130903050;
 			
 			static Layout()
 			{
@@ -623,10 +635,13 @@ namespace rangr.droid
 			public const int main = 2131492864;
 			
 			// aapt resource value: 0x7f0c0001
-			public const int posts = 2131492865;
+			public const int new_post = 2131492865;
 			
 			// aapt resource value: 0x7f0c0002
-			public const int search = 2131492866;
+			public const int posts = 2131492866;
+			
+			// aapt resource value: 0x7f0c0003
+			public const int search = 2131492867;
 			
 			static Menu()
 			{
@@ -653,8 +668,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f070022
 			public const int action_new_post = 2131165218;
 			
+			// aapt resource value: 0x7f070024
+			public const int action_search_posts = 2131165220;
+			
 			// aapt resource value: 0x7f070023
-			public const int action_search_posts = 2131165219;
+			public const int action_send_post = 2131165219;
 			
 			// aapt resource value: 0x7f070021
 			public const int action_settings = 2131165217;
@@ -662,8 +680,8 @@ namespace rangr.droid
 			// aapt resource value: 0x7f07001d
 			public const int app_name = 2131165213;
 			
-			// aapt resource value: 0x7f070026
-			public const int app_not_available = 2131165222;
+			// aapt resource value: 0x7f070027
+			public const int app_not_available = 2131165223;
 			
 			// aapt resource value: 0x7f070015
 			public const int auth_client_needs_enabling_title = 2131165205;
@@ -743,11 +761,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f070013
 			public const int common_signin_button_text_long = 2131165203;
 			
-			// aapt resource value: 0x7f070025
-			public const int drawer_close = 2131165221;
+			// aapt resource value: 0x7f070026
+			public const int drawer_close = 2131165222;
 			
-			// aapt resource value: 0x7f070024
-			public const int drawer_open = 2131165220;
+			// aapt resource value: 0x7f070025
+			public const int drawer_open = 2131165221;
 			
 			// aapt resource value: 0x7f07001f
 			public const int hint_login_password = 2131165215;
@@ -758,11 +776,11 @@ namespace rangr.droid
 			// aapt resource value: 0x7f07001c
 			public const int library_name = 2131165212;
 			
-			// aapt resource value: 0x7f070027
-			public const int posts_title = 2131165223;
-			
 			// aapt resource value: 0x7f070028
-			public const int search_title = 2131165224;
+			public const int posts_title = 2131165224;
+			
+			// aapt resource value: 0x7f070029
+			public const int search_title = 2131165225;
 			
 			static String()
 			{

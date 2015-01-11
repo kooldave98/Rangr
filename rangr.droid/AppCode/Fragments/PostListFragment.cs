@@ -160,6 +160,18 @@ namespace rangr.droid
             inflater.Inflate(Resource.Menu.posts, menu);
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            { 
+                case Resource.Id.new_post_menu_item:
+                    NewPostSelected();
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
         public PostListFragment()
         {
             if (view_model == null)
@@ -173,6 +185,7 @@ namespace rangr.droid
         private SwipeRefreshLayout refresher;
 
         public event Action<Post> PostItemSelected = delegate {};
+        public event Action NewPostSelected = delegate {};
         public event Action<string> HashTagSelected = delegate {};
     }
 
@@ -274,6 +287,8 @@ namespace rangr.droid
             }
             return  spans;
         }
+
+
     }
 
 }
