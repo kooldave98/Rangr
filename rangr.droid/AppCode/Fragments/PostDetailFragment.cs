@@ -57,6 +57,11 @@ namespace rangr.droid
             view_model = new PostDetailsViewModel(post);
         }
 
+        public PostDetailFragment()
+        {
+
+        }
+
         private Post post;
     }
 }

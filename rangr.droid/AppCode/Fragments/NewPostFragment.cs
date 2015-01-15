@@ -31,12 +31,14 @@ namespace rangr.droid
 
             view.FindViewById<TextView>(Resource.Id.UserNameText).SetText(view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);
 
-            view.FindViewById<EditText>(Resource.Id.PostText).TextChanged += HandlePostTextChanged;
+            post_text_input = view.FindViewById<EditText>(Resource.Id.PostText);
+            post_text_input.TextChanged += HandlePostTextChanged;
 
 
             return view;
         }
 
+        private EditText post_text_input;
         private IMenuItem send_button;
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
@@ -69,7 +71,9 @@ namespace rangr.droid
 
                     if (successful)
                     {
+                        hide_keyboard_for(post_text_input);
                         NewPostCreated();
+                        return;
                     }
                 }
                 else

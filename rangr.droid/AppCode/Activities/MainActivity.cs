@@ -95,6 +95,10 @@ namespace rangr.droid
                     OnBackPressed();
 
                     return true;
+                case Resource.Id.new_post_menu_item:
+                    show_new_post();
+
+                    return true;
             }
 
             return base.OnOptionsItemSelected(item);
@@ -159,34 +163,46 @@ namespace rangr.droid
             switch_fragments(fragment, true, true);
         }
 
+        private void show_new_post()
+        {
+            new_post_fragment = new NewPostFragment();
+            new_post_fragment.SetupActionBarNavigation = () =>
+            {
+                drawer_toggle.DrawerIndicatorEnabled = false;
+                unset_spinner();
+                set_up_caret();
+            };
+            new_post_fragment.NewPostCreated += () =>
+            {
+                OnBackPressed();
+            };
+
+            switch_fragments(new_post_fragment, true);
+        }
+
         private void show_search(string hash_tag)
         {
-            if (search_fragment == null)
+            search_fragment = new SearchFragment(hash_tag);
+            search_fragment.HashTagSelected += (ht) => show_search(ht);
+            search_fragment.SetupActionBarNavigation = () =>
             {
-                search_fragment = new SearchFragment(hash_tag);
-                search_fragment.HashTagSelected += (ht) => show_search(ht);
-                search_fragment.SetupActionBarNavigation = () =>
-                {
-                    unset_spinner();
-                    set_up_caret();
-                };
-            }
+                unset_spinner();
+                set_up_caret();
+            };
+
             switch_fragments(search_fragment, true);
         }
 
         private void show_detail(Post post)
         {
-
-            if (post_detail_fragment == null)
+            post_detail_fragment = new PostDetailFragment(post);
+            post_detail_fragment.SetupActionBarNavigation = () =>
             {
-                post_detail_fragment = new PostDetailFragment(post);
-                post_detail_fragment.SetupActionBarNavigation = () =>
-                {
-                    drawer_toggle.DrawerIndicatorEnabled = false;
-                    unset_spinner();
-                    set_up_caret();
-                };
-            }
+                drawer_toggle.DrawerIndicatorEnabled = false;
+                unset_spinner();
+                set_up_caret();
+            };
+
             switch_fragments(post_detail_fragment, true);
         }
 

@@ -154,9 +154,7 @@ namespace rangr.droid
 
         private void hide_keyboard_and_show_progress()
         {
-            //this hides the keyboard
-            var imm = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
-            imm.HideSoftInputFromWindow(password.WindowToken, HideSoftInputFlags.NotAlways);
+            hide_keyboard_for(password);
             login.Visibility = ViewStates.Invisible;
             progressIndicator.Visibility = ViewStates.Visible;
         }

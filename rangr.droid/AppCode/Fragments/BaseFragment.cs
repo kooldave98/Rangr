@@ -12,12 +12,19 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using App.Common;
+using Android.Views.InputMethods;
 
 namespace rangr.droid
 {
     public abstract class BaseFragment : Fragment
     {
         public abstract string TitleLabel { get; }
+
+        protected void hide_keyboard_for(EditText edit_text)
+        {
+            var imm = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
+            imm.HideSoftInputFromWindow(edit_text.WindowToken, HideSoftInputFlags.NotAlways);
+        }
 
         protected void show_progress(string title = "Loading...", string message = "Busy")
         {

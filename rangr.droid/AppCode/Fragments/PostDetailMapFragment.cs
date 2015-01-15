@@ -100,6 +100,11 @@ namespace rangr.droid
             post = the_post;
         }
 
+        public PostDetailMapFragment()
+        {
+
+        }
+
         private Post post;
     }
 }

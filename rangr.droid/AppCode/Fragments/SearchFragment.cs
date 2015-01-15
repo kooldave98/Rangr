@@ -167,6 +167,10 @@ namespace rangr.droid
             view_model.hash_tag_search_keyword = the_hash_tag;
         }
 
+        public SearchFragment()
+        {
+        }
+
         private PostsAdapter postListAdapter;
         private EndlessListView postListView;
         private SwipeRefreshLayout refresher;
