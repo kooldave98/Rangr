@@ -17,10 +17,16 @@ namespace rangr.droid
 {
     public class NewPostFragment : VMFragment<NewPostViewModel>
     {
+        public override string TitleLabel
+        { 
+            get
+            {
+                return GetString(Resource.String.new_post_title);
+            } 
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Activity.ActionBar.SetTitle(Resource.String.app_name);
-
             var view = inflater.Inflate(Resource.Layout.new_post, null);
 
             view.FindViewById<TextView>(Resource.Id.UserNameText).SetText(view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);

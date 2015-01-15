@@ -22,10 +22,16 @@ namespace rangr.droid
 {
     public class PostListFragment : VMFragment<FeedViewModel>
     {
+        public override string TitleLabel
+        { 
+            get
+            {
+                return GetString(Resource.String.posts_title);
+            } 
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Activity.ActionBar.SetTitle(Resource.String.posts_title);
-
             var view = inflater.Inflate(Resource.Layout.post_list, null);
             return view;
         }

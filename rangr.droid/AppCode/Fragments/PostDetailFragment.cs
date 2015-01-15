@@ -17,10 +17,16 @@ namespace rangr.droid
 {
     public class PostDetailFragment : VMFragment<PostDetailsViewModel>
     {
+        public override string TitleLabel
+        { 
+            get
+            {
+                return string.Empty;
+            } 
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Activity.ActionBar.Title = string.Empty;
-
             var view = inflater.Inflate(Resource.Layout.post_detail, null);
 
             set_map();

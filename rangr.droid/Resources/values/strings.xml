@@ -18,6 +18,7 @@
 
     <string name="posts_title">Feed</string>
     <string name="search_title">Search</string>
+    <string name="new_post_title">New Post</string>
 
 
 </resources>

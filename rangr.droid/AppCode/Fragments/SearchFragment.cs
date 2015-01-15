@@ -21,12 +21,12 @@ namespace rangr.droid
     //and let there be a FeedFragment and a SearchFragment
     public class SearchFragment : VMFragment<SearchViewModel>
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            //Todo: Move hardcoded string to resource file
-            Activity.ActionBar.Title = string.Format("Search: #{0}", view_model.hash_tag_search_keyword);
-            //Activity.ActionBar.SetTitle(Resource.String.search_title);
+        public override string TitleLabel
+        { 
+            get
+            {
+                return string.Format("Search: #{0}", view_model.hash_tag_search_keyword);
+            } 
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

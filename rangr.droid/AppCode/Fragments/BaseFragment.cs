@@ -17,6 +17,8 @@ namespace rangr.droid
 {
     public abstract class BaseFragment : Fragment
     {
+        public abstract string TitleLabel { get; }
+
         protected void show_progress(string title = "Loading...", string message = "Busy")
         {
             this.
@@ -113,10 +115,18 @@ namespace rangr.droid
             SetHasOptionsMenu(true);
         }
 
+        public Action SetupActionBarNavigation = delegate
+        {
+        };
+
         public override void OnResume()
         {
             //notify ("OnResume");
             base.OnResume();
+
+            Activity.ActionBar.Title = TitleLabel;
+
+            SetupActionBarNavigation();
 
             isBusyChangedEventHandler = (sender, e) =>
             {

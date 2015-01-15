@@ -776,6 +776,9 @@ namespace rangr.droid
 			// aapt resource value: 0x7f07001c
 			public const int library_name = 2131165212;
 			
+			// aapt resource value: 0x7f07002a
+			public const int new_post_title = 2131165226;
+			
 			// aapt resource value: 0x7f070028
 			public const int posts_title = 2131165224;
 			

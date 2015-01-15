@@ -18,10 +18,16 @@ namespace rangr.droid
 {
     public class LoginFragment : VMFragment<LoginViewModel>, TextView.IOnEditorActionListener
     {
+        public override string TitleLabel
+        { 
+            get
+            {
+                return GetString(Resource.String.app_name);
+            } 
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Activity.ActionBar.SetTitle(Resource.String.app_name);
-
             var view = inflater.Inflate(Resource.Layout.login, null);
 
             login = view.FindViewById<Button>(Resource.Id.logIn);
@@ -29,7 +35,6 @@ namespace rangr.droid
             password = view.FindViewById<EditText>(Resource.Id.password);
             progressIndicator = view.FindViewById<ProgressBar>(Resource.Id.loginProgress);
             var loginHelp = view.FindViewById<ImageButton>(Resource.Id.loginQuestion);
-
 
 
             //Set edit action listener to allow the next & go buttons on the input keyboard to interact with login.

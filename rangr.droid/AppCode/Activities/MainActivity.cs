@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Android.App;
 using Android.Content;
@@ -21,6 +22,7 @@ using Android.Support.V4.View;
 /// 3. Sort out menus
 /// 4. Introduce action bar spinner on Posts Fragment
 /// </todo>
+
 
 namespace rangr.droid
 {
@@ -67,6 +69,9 @@ namespace rangr.droid
                 item.SetVisible(!drawerOpen);
             }
 
+            //The line below may not be very effective, as it would only hide those of the current fragment
+            //CurrentFragment.HideMenus();
+
             return base.OnPrepareOptionsMenu(menu);
         }
 
@@ -83,10 +88,8 @@ namespace rangr.droid
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    //either pop full backstack when going home.   
-
+                    //either pop full backstack when going home.
                     //FragmentManager.PopBackStack(baseFragment, PopBackStackFlags.Inclusive);
-                    //drawer_toggle.DrawerIndicatorEnabled = true;
 
                     //or go back to previous fragment
                     OnBackPressed();
@@ -97,21 +100,104 @@ namespace rangr.droid
             return base.OnOptionsItemSelected(item);
         }
 
-        public override void OnBackPressed()
+        private void show_login()
         {
-            base.OnBackPressed();
-
-            drawer_toggle.DrawerIndicatorEnabled = true;
+            var login_fragment = new LoginFragment();
+            login_fragment.LoginSucceeded += () => select_drawer_item(0);
+            login_fragment.SetupActionBarNavigation = () =>
+            {
+                unset_drawer();
+                unset_up_caret();
+            };
+            switch_fragments(login_fragment, true, true);
         }
 
-        public int SwitchScreens(Android.App.Fragment fragment, bool animated = true, bool isRoot = false)
+        private void show_feed(int selected_sub_item = 0)
+        {
+            if (selected_sub_item == 0)
+            {
+                show_feed_list();
+            }
+            else
+            {
+                show_feed_map();
+            }
+        }
+
+        private void show_feed_list()
+        {
+            if (feed_fragment == null)
+            {
+                feed_fragment = new PostListFragment();
+                feed_fragment.HashTagSelected += (ht) => show_search(ht);
+                feed_fragment.PostItemSelected += (p) => show_detail(p);
+                feed_fragment.SetupActionBarNavigation = () =>
+                {
+                    ActionBar.Title = "";
+                    set_feed_spinner();
+                    set_up_caret();
+                    set_drawer();
+                };
+            }
+
+            switch_fragments(feed_fragment, true, true);
+        }
+
+        private void show_feed_map()
+        {
+            var fragment = new PostDetailMapFragment(new Post()
+                {
+                    ID = 111,
+                    post_id = 222,
+                    text = "fake post",
+                    user_display_name = "fake user",
+                    user_id = 444,
+                    date = DateTime.Now.Date,
+                    long_lat_acc_geo_string = "-2.2275587999999997,53.478498699999996,1",
+                });
+
+            switch_fragments(fragment, true, true);
+        }
+
+        private void show_search(string hash_tag)
+        {
+            if (search_fragment == null)
+            {
+                search_fragment = new SearchFragment(hash_tag);
+                search_fragment.HashTagSelected += (ht) => show_search(ht);
+                search_fragment.SetupActionBarNavigation = () =>
+                {
+                    unset_spinner();
+                    set_up_caret();
+                };
+            }
+            switch_fragments(search_fragment, true);
+        }
+
+        private void show_detail(Post post)
+        {
+
+            if (post_detail_fragment == null)
+            {
+                post_detail_fragment = new PostDetailFragment(post);
+                post_detail_fragment.SetupActionBarNavigation = () =>
+                {
+                    drawer_toggle.DrawerIndicatorEnabled = false;
+                    unset_spinner();
+                    set_up_caret();
+                };
+            }
+            switch_fragments(post_detail_fragment, true);
+        }
+
+        private int switch_fragments(Android.App.Fragment fragment, bool animated = true, bool isRoot = false)
         {
             var transaction = FragmentManager.BeginTransaction();
 
             if (animated)
             {
                 int animIn, animOut;
-                GetAnimationsForFragment(fragment, out animIn, out animOut);
+                get_fragment_animations(fragment, out animIn, out animOut);
                 transaction.SetCustomAnimations(animIn, animOut);
             }
             transaction.Replace(Resource.Id.content_frame, fragment);
@@ -121,12 +207,10 @@ namespace rangr.droid
                 transaction.AddToBackStack(null);
             }
 
-            this.InvalidateOptionsMenu();
-
             return transaction.Commit();
         }
 
-        private void GetAnimationsForFragment(Android.App.Fragment fragment, out int animIn, out int animOut)
+        private void get_fragment_animations(Android.App.Fragment fragment, out int animIn, out int animOut)
         {
             //set default anims
             animIn = Resource.Animation.enter;
@@ -142,83 +226,44 @@ namespace rangr.droid
             }
         }
 
-        private void show_feed(int selected_sub_item = 0)
+        private void set_up_caret()
         {
-            ActionBar.Title = "";
-
-            if (current_drawer_item != 0)
-            {
-                ActionBar.NavigationMode = ActionBarNavigationMode.List;
-                //ActionBar.Title = "";
-                var adapter = new ActionBarSpinnerAdapter(this, Resource.Layout.action_bar_spinner, feed_sub_items);
-
-                ActionBar.SetListNavigationCallbacks(adapter, this);
-
-
-                drawer_toggle.DrawerIndicatorEnabled = true;
-                ActionBar.SetDisplayHomeAsUpEnabled(true);
-                ActionBar.SetHomeButtonEnabled(true);
-
-            }
-
-
-            if (current_feed_sub_item != selected_sub_item)
-            {
-                if (selected_sub_item == 0)
-                {
-                    SwitchScreens(feed_fragment, true, true);
-                }
-                else
-                {
-                    var fragment = new PostDetailMapFragment(new Post()
-                        {
-                            ID = 111,
-                            post_id = 222,
-                            text = "fake post",
-                            user_display_name = "fake user",
-                            user_id = 444,
-                            date = DateTime.Now.Date,
-                            long_lat_acc_geo_string = "-2.2275587999999997,53.478498699999996,1",
-                        });
-
-                    SwitchScreens(fragment, true, true);
-                }
-            }
-
-
-            current_feed_sub_item = selected_sub_item;
+            drawer_toggle.DrawerIndicatorEnabled = false;
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetHomeButtonEnabled(true);
         }
 
-        private void show_search(string hash_tag)
+        private void set_drawer()
+        {
+            drawer_toggle.DrawerIndicatorEnabled = true;
+            //ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetHomeButtonEnabled(true);
+        }
+
+        private void set_feed_spinner()
+        {
+            ActionBar.NavigationMode = ActionBarNavigationMode.List;
+
+            var adapter = new ActionBarSpinnerAdapter(this, Resource.Layout.action_bar_spinner, feed_sub_items);
+
+            ActionBar.SetListNavigationCallbacks(adapter, this);
+        }
+
+        private void unset_spinner()
         {
             ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
-
-            var fragment = new SearchFragment(hash_tag);
-            fragment.HashTagSelected += (ht) => show_search(ht);
-            SwitchScreens(fragment, true);
-
-            drawer_toggle.DrawerIndicatorEnabled = false;
         }
 
-        private void show_detail(Post post)
+        private void unset_drawer()
         {
-            ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
-
-            var fragment = new PostDetailFragment(post);
-            SwitchScreens(fragment, true);
-
             drawer_toggle.DrawerIndicatorEnabled = false;
+            ActionBar.SetHomeButtonEnabled(false);
         }
 
-        private void show_login()
+        private void unset_up_caret()
         {
-            drawer_toggle.DrawerIndicatorEnabled = false;
             ActionBar.SetDisplayHomeAsUpEnabled(false);
             ActionBar.SetHomeButtonEnabled(false);
-
-            var fragment = new LoginFragment();
-            fragment.LoginSucceeded += () => select_drawer_item(0);
-            SwitchScreens(fragment, true, true);
         }
 
         public void OnItemClick(AdapterView parent, View view, int position, long id)
@@ -226,6 +271,7 @@ namespace rangr.droid
             select_drawer_item(position);
         }
 
+        //IS THIS REALLY NEEDED ????
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
@@ -233,16 +279,8 @@ namespace rangr.droid
             drawer_toggle.OnConfigurationChanged(newConfig);
         }
 
-        public void SetTitle(string title)
-        {
-            action_bar_title = title;
-            ActionBar.Title = Title = action_bar_title;
-        }
-
         private void select_drawer_item(int position)
         {
-            SetTitle(navigation_items[position]);
-
             switch (position)
             {
                 case 0:
@@ -258,13 +296,11 @@ namespace rangr.droid
             current_drawer_item = position;
             drawer_list.SetItemChecked(position, true);
 
-            SetTitle(navigation_items[position]);
             drawer_layout.CloseDrawer(drawer_list);
         }
 
         private void setup_navigation_drawer()
         {
-            drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             drawer_layout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             drawer_list = FindViewById<ListView>(Resource.Id.left_drawer);
 
@@ -294,16 +330,30 @@ namespace rangr.droid
             //Display the current fragments title and update the options menu
             drawer_toggle.DrawerClosed += (o, args) =>
             {
-                this.ActionBar.Title = action_bar_title;
                 this.InvalidateOptionsMenu();
             };
 
             //Display the drawer title and update the options menu
             drawer_toggle.DrawerOpened += (o, args) =>
             {
-                this.ActionBar.Title = action_bar_title;
                 this.InvalidateOptionsMenu();
             };
+
+//            OpenCallback = () => {
+//                ActionBar.Title = Title;
+//                CurrentFragment.HasOptionsMenu = false;
+//                CurrentFragment.View.Enabled = false;
+//                InvalidateOptionsMenu ();
+//            },
+//            CloseCallback = () => {
+//                var currentFragment = CurrentFragment;
+//                if (currentFragment != null) {
+//                    ActionBar.Title = ((IMoyeuSection)currentFragment).Title;
+//                    currentFragment.HasOptionsMenu = true;
+//                    currentFragment.View.Enabled = true;
+//                }
+//                InvalidateOptionsMenu ();
+//            },
 
             drawer_layout.SetDrawerListener(drawer_toggle);
 
@@ -316,33 +366,36 @@ namespace rangr.droid
             return true;
         }
 
-
-        private PostListFragment the_feed_fragment;
-
-        private PostListFragment feed_fragment
-        { 
+        private Android.App.Fragment current_fragment
+        {
             get
-            { 
-                if (the_feed_fragment == null)
+            {
+                return new Android.App.Fragment[]
                 {
-                    the_feed_fragment = new PostListFragment();
-                    the_feed_fragment.HashTagSelected += (ht) => show_search(ht);
-                    the_feed_fragment.PostItemSelected += (p) => show_detail(p);
-                }
-
-                return the_feed_fragment;
+                    feed_fragment,
+                    post_detail_fragment,
+                    search_fragment,
+                    new_post_fragment
+                }.FirstOrDefault(f => f != null && f.IsAdded && f.IsVisible);
             }
         }
 
+        private PostListFragment feed_fragment { get; set; }
+
+        private PostDetailFragment post_detail_fragment { get; set; }
+
+        private SearchFragment search_fragment { get; set; }
+
+        private NewPostFragment new_post_fragment { get; set; }
+
+
 
         private string[] feed_sub_items = new string[]{ "List", "Map" };
-        private int current_feed_sub_item = -1;
 
         private DrawerLayout drawer_layout;
         private ListView drawer_list;
         private MyActionBarDrawerToggle drawer_toggle;
 
-        private string action_bar_title;
         private int current_drawer_item = -1;
         private string[] navigation_items = new string[]{ "Feed", "People", "Profile", "Settings" };
     }
