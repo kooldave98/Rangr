@@ -26,12 +26,12 @@ namespace rangr.droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
-			global::Xamarin.InsightsCore.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
-			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::SQLite.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
 			global::SQLite.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
+			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
+			global::Xamarin.InsightsCore.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
+			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation
@@ -656,11 +656,11 @@ namespace rangr.droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f07001b
-			public const int ApplicationName = 2131165211;
+			// aapt resource value: 0x7f07001c
+			public const int ApplicationName = 2131165212;
 			
-			// aapt resource value: 0x7f07001a
-			public const int Hello = 2131165210;
+			// aapt resource value: 0x7f07001b
+			public const int Hello = 2131165211;
 			
 			// aapt resource value: 0x7f070020
 			public const int action_login = 2131165216;
@@ -773,8 +773,8 @@ namespace rangr.droid
 			// aapt resource value: 0x7f07001e
 			public const int hint_login_username = 2131165214;
 			
-			// aapt resource value: 0x7f07001c
-			public const int library_name = 2131165212;
+			// aapt resource value: 0x7f07001a
+			public const int library_name = 2131165210;
 			
 			// aapt resource value: 0x7f07002a
 			public const int new_post_title = 2131165226;

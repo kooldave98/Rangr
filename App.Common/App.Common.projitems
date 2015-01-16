@@ -26,7 +26,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)CommonClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JavaScriptTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Connection.cs" />
@@ -49,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

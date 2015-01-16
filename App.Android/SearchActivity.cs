@@ -18,169 +18,186 @@ using Android.Support.V4.Widget;
 
 namespace App.Android
 {
-	[Activity (Label = "Search", 
-		ScreenOrientation = ScreenOrientation.Portrait)]			
-	public class SearchActivity : BaseActivity
-	{
-		private const string intent_name = "hashtag";
+    [Activity(Label = "Search", 
+        ScreenOrientation = ScreenOrientation.Portrait)]			
+    public class SearchActivity : BaseActivity
+    {
+        private const string intent_name = "hashtag";
 
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
 
-			SetContentView (Resource.Layout.PostList);
+            SetContentView(Resource.Layout.PostList);
 
-			Title = "Search";
+            Title = "Search";
 
-			if (Intent.HasExtra (intent_name)) {
-				var hash_tag_name = Intent.GetStringExtra (intent_name);
-				Title = hash_tag_name;
-				view_model.hash_tag_search_keyword = hash_tag_name;
-			} else {
-				Finish ();
-			}
+            if (Intent.HasExtra(intent_name))
+            {
+                var hash_tag_name = Intent.GetStringExtra(intent_name);
+                Title = hash_tag_name;
+                view_model.hash_tag_search_keyword = hash_tag_name;
+            }
+            else
+            {
+                Finish();
+            }
 
-			ActionBar.SetDisplayHomeAsUpEnabled (true);		
-
-
-
-			postListView = FindViewById<EndlessListView> (Resource.Id.list);
-
-			postListView.EmptyView = FindViewById<View> (AndroidResource.Id.Empty);
-			postListView.InitEndlessness (Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
-
-			postListView.OnLoadMoreTriggered += async (sender, e) => {
-				//await view_model.OlderPosts ();
-				JavaScriptTimer.SetTimeout (delegate {
-					RunOnUiThread (() => {
-						((EndlessListView)sender).SetEndlessListLoaderComplete ();
-					});
-				}, 1500);//1.5 secs
-			};
-
-			#region setup list adapter
-			postListAdapter = new PostFeedAdapter (this, view_model.Posts);
-			//----------
-			//Hook up our adapter to our ListView
-			//---------
-			postListView.Adapter = postListAdapter;
-			#endregion
+            ActionBar.SetDisplayHomeAsUpEnabled(true);		
 
 
-			#region Setup pull to refresh
 
-			refresher = FindViewById<SwipeRefreshLayout> (Resource.Id.refresher);
-			refresher.SetColorScheme (Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
-				Resource.Color.xam_gray, Resource.Color.xam_green);
+            postListView = FindViewById<EndlessListView>(Resource.Id.list);
 
-			refresher.Refresh += async (sender, e) => {
-				//await view_model.RefreshPosts ();
-				JavaScriptTimer.SetTimeout (delegate {
-					RunOnUiThread (() => {
-						refresher.Refreshing = false;
-					});
-				}, 1500);//1.5 secs
+            postListView.EmptyView = FindViewById<View>(AndroidResource.Id.Empty);
+            postListView.InitEndlessness(Resource.Layout.loading_layout, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
-			};
+            postListView.OnLoadMoreTriggered += async (sender, e) =>
+            {
+                //await view_model.OlderPosts ();
+                JSTimer.SetTimeout(delegate
+                    {
+                        RunOnUiThread(() =>
+                            {
+                                ((EndlessListView)sender).SetEndlessListLoaderComplete();
+                            });
+                    }, 1500);//1.5 secs
+            };
 
-			#endregion
+            #region setup list adapter
+            postListAdapter = new PostFeedAdapter(this, view_model.Posts);
+            //----------
+            //Hook up our adapter to our ListView
+            //---------
+            postListView.Adapter = postListAdapter;
+            #endregion
 
 
-			// wire up post click handler
-			postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-				var post = view_model.Posts [e.Position];
-				var postDetails = PostDetailsActivity.CreateIntent (this, post);
-				StartActivity (postDetails);
-			};
-		}
+            #region Setup pull to refresh
 
-		public override bool OnNavigateUp ()
-		{
-			base.OnNavigateUp ();
+            refresher = FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+            refresher.SetColorScheme(Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
+                Resource.Color.xam_gray, Resource.Color.xam_green);
 
-			Finish ();
+            refresher.Refresh += async (sender, e) =>
+            {
+                //await view_model.RefreshPosts ();
+                JSTimer.SetTimeout(delegate
+                    {
+                        RunOnUiThread(() =>
+                            {
+                                refresher.Refreshing = false;
+                            });
+                    }, 1500);//1.5 secs
 
-			return true;
-		}
+            };
 
-		public static Intent CreateIntent (Context context, string hash_tag)
-		{
-			return new Intent (context, typeof(SearchActivity)).PutExtra (intent_name, hash_tag);
-		}
+            #endregion
 
-		private EventHandler<EventArgs> NewPostsReceivedHandler;
 
-		private EventHandler<EventArgs> GeoLocatorRefreshedHandler;
+            // wire up post click handler
+            postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+            {
+                var post = view_model.Posts[e.Position];
+                var postDetails = PostDetailsActivity.CreateIntent(this, post);
+                StartActivity(postDetails);
+            };
+        }
 
-		private void show_refresher ()
-		{
-			refresher.Refreshing = true;
-		}
+        public override bool OnNavigateUp()
+        {
+            base.OnNavigateUp();
 
-		private void dismiss_refresher ()
-		{
-			refresher.Refreshing = false;
-		}
+            Finish();
 
-		protected override void OnResume ()
-		{
-			//Doing this before to prevent the blank screen
-			//cause the base can take a while
-			show_refresher ();
+            return true;
+        }
 
-			base.OnResume ();
+        public static Intent CreateIntent(Context context, string hash_tag)
+        {
+            return new Intent(context, typeof(SearchActivity)).PutExtra(intent_name, hash_tag);
+        }
 
-			if (AppGlobal.Current.CurrentUserAndConnectionExists) {
+        private EventHandler<EventArgs> NewPostsReceivedHandler;
 
-				NewPostsReceivedHandler = (object sender, EventArgs e) => {
-					//Refresh list view data
-					RunOnUiThread (() => {
-						postListAdapter.NotifyDataSetChanged ();
-					});
-				};
+        private EventHandler<EventArgs> GeoLocatorRefreshedHandler;
 
-				view_model.OnNewPostsReceived += NewPostsReceivedHandler;
+        private void show_refresher()
+        {
+            refresher.Refreshing = true;
+        }
 
-				GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
-					await view_model.RefreshPosts ();
+        private void dismiss_refresher()
+        {
+            refresher.Refreshing = false;
+        }
 
-					JavaScriptTimer.SetTimeout (delegate {
-						dismiss_refresher ();
-					}, 500);//1/2 a second
-				};
+        protected override void OnResume()
+        {
+            //Doing this before to prevent the blank screen
+            //cause the base can take a while
+            show_refresher();
 
-				AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
-			}
-			//Simulation
-			var persisted_simulation = PersistentStorage.Current.Load<string> ("simulation");
-			if (!string.IsNullOrWhiteSpace (persisted_simulation) && persisted_simulation != "L") {
-				ShowToast ("Simulated location" + persisted_simulation);
-			}
+            base.OnResume();
 
-		}
+            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
 
-		protected override void OnPause ()
-		{
-			base.OnPause ();
-			dismiss_refresher ();
-			view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
-			AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
-		}
+                NewPostsReceivedHandler = (object sender, EventArgs e) =>
+                {
+                    //Refresh list view data
+                    RunOnUiThread(() =>
+                        {
+                            postListAdapter.NotifyDataSetChanged();
+                        });
+                };
 
-		private SearchViewModel view_model;
+                view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-		protected override ViewModelBase init_view_model ()
-		{
-			if (view_model == null) {
-				view_model = new SearchViewModel ();
-			}
+                GeoLocatorRefreshedHandler = async (object sender, EventArgs e) =>
+                {
+                    await view_model.RefreshPosts();
 
-			return view_model;		
-		}
+                    JSTimer.SetTimeout(delegate
+                        {
+                            dismiss_refresher();
+                        }, 500);//1/2 a second
+                };
 
-		private PostFeedAdapter postListAdapter;
-		private EndlessListView postListView;
-		private SwipeRefreshLayout refresher;
-	}
+                AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
+            }
+            //Simulation
+            var persisted_simulation = PersistentStorage.Current.Load<string>("simulation");
+            if (!string.IsNullOrWhiteSpace(persisted_simulation) && persisted_simulation != "L")
+            {
+                ShowToast("Simulated location" + persisted_simulation);
+            }
+
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            dismiss_refresher();
+            view_model.OnNewPostsReceived -= NewPostsReceivedHandler;
+            AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
+        }
+
+        private SearchViewModel view_model;
+
+        protected override ViewModelBase init_view_model()
+        {
+            if (view_model == null)
+            {
+                view_model = new SearchViewModel();
+            }
+
+            return view_model;		
+        }
+
+        private PostFeedAdapter postListAdapter;
+        private EndlessListView postListView;
+        private SwipeRefreshLayout refresher;
+    }
 }
 

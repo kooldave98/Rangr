@@ -26,12 +26,12 @@ namespace App.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Splat.Resource.String.library_name = global::App.Android.Resource.String.library_name;
-			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
-			global::Xamarin.InsightsCore.Resource.String.Hello = global::App.Android.Resource.String.Hello;
 			global::ModernHttpClient.Resource.String.library_name = global::App.Android.Resource.String.library_name;
 			global::SQLite.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
 			global::SQLite.Resource.String.Hello = global::App.Android.Resource.String.Hello;
+			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::App.Android.Resource.String.ApplicationName;
+			global::Xamarin.InsightsCore.Resource.String.Hello = global::App.Android.Resource.String.Hello;
+			global::Splat.Resource.String.library_name = global::App.Android.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -654,11 +654,11 @@ namespace App.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f06001b
-			public const int ApplicationName = 2131099675;
+			// aapt resource value: 0x7f06001c
+			public const int ApplicationName = 2131099676;
 			
-			// aapt resource value: 0x7f06001a
-			public const int Hello = 2131099674;
+			// aapt resource value: 0x7f06001b
+			public const int Hello = 2131099675;
 			
 			// aapt resource value: 0x7f060021
 			public const int action_settings = 2131099681;
@@ -747,8 +747,8 @@ namespace App.Android
 			// aapt resource value: 0x7f06001e
 			public const int feed_menu_item = 2131099678;
 			
-			// aapt resource value: 0x7f06001c
-			public const int library_name = 2131099676;
+			// aapt resource value: 0x7f06001a
+			public const int library_name = 2131099674;
 			
 			// aapt resource value: 0x7f06001f
 			public const int people_menu_item = 2131099679;
