@@ -48,7 +48,7 @@ namespace rangr.droid
             postListView.OnLoadMoreTriggered += async (sender, e) =>
             {
                 await view_model.OlderPosts();
-                JavaScriptTimer.SetTimeout(delegate
+                JSTimer.SetTimeout(delegate
                     {
                         Activity.RunOnUiThread(() =>
                             {
@@ -75,7 +75,7 @@ namespace rangr.droid
             refresher.Refresh += async (sender, e) =>
             {
                 await view_model.RefreshPosts();
-                JavaScriptTimer.SetTimeout(delegate
+                JSTimer.SetTimeout(delegate
                     {
                         Activity.RunOnUiThread(() =>
                             {
@@ -136,7 +136,7 @@ namespace rangr.droid
                 {
                     await view_model.RefreshPosts();
 
-                    JavaScriptTimer.SetTimeout(delegate
+                    JSTimer.SetTimeout(delegate
                         {
                             dismiss_refresher();
                         }, 500);//1/2 a second
