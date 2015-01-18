@@ -1,66 +1,72 @@
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 using App.Common;
 
 namespace App.iOS
 {
-	public partial class LoginViewController : UIViewController
-	{
-		private LoginViewModel view_model;
+    public partial class LoginViewController : UIViewController
+    {
+        public event Action LoginSucceeded = delegate {};
 
-		public LoginViewController ()
-		{
-			view_model = new LoginViewModel ();
-		}
+        private LoginViewModel view_model;
 
-		public override void ViewWillAppear (bool animated)
-		{
-			base.ViewWillAppear (animated);			 
+        public LoginViewController()
+        {
+            view_model = new LoginViewModel();
+        }
 
-			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);			 
 
-			InitView ();		
+            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
 
-		}
+            InitView();		
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-		}
+        }
 
-		private async void Login ()
-		{
-			if (string.IsNullOrEmpty (username.Text)) {
-				var view = new UIAlertView ("Oops", "Please enter a username.", null, "Ok");
-				view.Dismissed += (sender, e) => username.BecomeFirstResponder ();
-				view.Show ();
-				return;
-			}
-			if (string.IsNullOrEmpty (password.Text)) {
-				var view = new UIAlertView ("Oops", "Please enter a password.", null, "Ok");
-				view.Dismissed += (sender, e) => password.BecomeFirstResponder ();
-				view.Show ();
-				return;
-			}
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            //del.NavigationController.SetNavigationBarHidden(true, false);
+        }
 
-			username.ResignFirstResponder ();
-			password.ResignFirstResponder ();
+        private async void Login()
+        {
+            if (string.IsNullOrEmpty(username.Text))
+            {
+                var view = new UIAlertView("Oops", "Please enter a username.", null, "Ok");
+                view.Dismissed += (sender, e) => username.BecomeFirstResponder();
+                view.Show();
+                return;
+            }
+            if (string.IsNullOrEmpty(password.Text))
+            {
+                var view = new UIAlertView("Oops", "Please enter a password.", null, "Ok");
+                view.Dismissed += (sender, e) => password.BecomeFirstResponder();
+                view.Show();
+                return;
+            }
 
-			indicator.StartAnimating ();
-			//indicator.StopAnimating ();
+            username.ResignFirstResponder();
+            password.ResignFirstResponder();
 
-			view_model.UserDisplayName = username.Text;
+            indicator.StartAnimating();
+            //indicator.StopAnimating ();
 
-			var create_user_successful = await view_model.CreateUser ();
+            view_model.UserDisplayName = username.Text;
 
-			if (create_user_successful) {
-				await AppGlobal.Current.CreateNewConnectionFromLogin ();
+            var create_user_successful = await view_model.CreateUser();
 
-				DismissViewController (true, null);
-			}
-		}
+            if (create_user_successful)
+            {
+                await AppGlobal.Current.CreateNewConnectionFromLogin();
 
-	}
+                LoginSucceeded();
+            }
+        }
+
+    }
 }

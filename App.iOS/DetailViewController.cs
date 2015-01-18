@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 using App.Common;
 using Google.Maps;
-using MonoTouch.CoreLocation;
+using CoreLocation;
 
 namespace App.iOS
 {
@@ -82,7 +82,7 @@ namespace App.iOS
         {
             var splits = view_model.CurrentPost.long_lat_acc_geo_string.Split(',');
             var camera = CameraPosition.FromCamera(latitude: double.Parse(splits[1]), longitude: double.Parse(splits[0]), zoom: 15);
-            mapView = MapView.FromCamera(new RectangleF(8, 200, 304, 348), camera);
+            mapView = MapView.FromCamera(new CGRect(8, 200, 304, 348), camera);
 
             mapView.MapType = MapViewType.Normal;
 

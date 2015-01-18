@@ -1,8 +1,8 @@
-﻿using System;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
-using System.Drawing;
+using System;
+using UIKit;
+using Foundation;
+using ObjCRuntime;
+using CoreGraphics;
 
 namespace App.iOS
 {
@@ -19,7 +19,7 @@ namespace App.iOS
 		{
 			var arr = NSBundle.MainBundle.LoadNib("ConsoleView", this, null);
 			var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
-			v.Frame = new RectangleF(0, 0, Frame.Width, Frame.Height);
+			v.Frame = new CGRect(0, 0, Frame.Width, Frame.Height);
 			AddSubview(v);
 
 			Console = ConsoleTextView;

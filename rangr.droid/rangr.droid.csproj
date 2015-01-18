@@ -75,9 +75,6 @@
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.1\lib\android\SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Mobile">
-      <HintPath>..\Components\xamarin.mobile-0.7.4\lib\android\Xamarin.Mobile.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
@@ -89,6 +86,9 @@
     </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.0\lib\monoandroid\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Mobile">
+      <HintPath>..\Components\xamarin.mobile-0.7.5\lib\android\Xamarin.Mobile.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -211,16 +211,12 @@
       <Version>1.0.8.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-    <XamarinComponentReference Include="xamarin.mobile">
-      <Version>0.7.4</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="json.net">
-      <Version>4.5.11.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="modernhttpclient">
       <Version>2.1.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamarin.mobile">
+      <Version>0.7.5</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

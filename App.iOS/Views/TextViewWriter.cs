@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Threading;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace App.iOS
 {

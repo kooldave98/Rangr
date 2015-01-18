@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace App.iOS
@@ -12,16 +12,16 @@ namespace App.iOS
 	partial class PostCellView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UILabel TimeAgoView { get; set; }
+		UIKit.UILabel TimeAgoView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIImageView UserImageView { get; set; }
+		UIKit.UIImageView UserImageView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel UserNameView { get; set; }
+		UIKit.UILabel UserNameView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel UserPostTextView { get; set; }
+		UIKit.UILabel UserPostTextView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

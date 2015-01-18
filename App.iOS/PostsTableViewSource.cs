@@ -1,10 +1,10 @@
-﻿using System;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using System;
+using UIKit;
+using Foundation;
 using System.Linq;
 using System.Collections.Generic;
 using App.Common;
-using MonoTouch.ObjCRuntime;
+using ObjCRuntime;
 
 namespace App.iOS
 {
@@ -20,12 +20,12 @@ namespace App.iOS
 		}
 
 		// Customize the number of sections in the table view.
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableview, int section)
+		public override nint RowsInSection (UITableView tableview, nint section)
 		{
 			return objects.Count;
 		}
@@ -59,7 +59,7 @@ namespace App.iOS
 			return cell;
 		}
 
-		public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+		public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
 		{
 			return 90;
 		}
