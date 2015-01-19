@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using App.Common;
+
 using Google.Maps;
 
 namespace rangr.ios
@@ -54,7 +55,12 @@ namespace rangr.ios
         public void show_login()
         {
             var login = new LoginViewController();
-            login.LoginSucceeded += show_feed;
+            login.LoginSucceeded += () =>
+            {
+                show_feed();
+            };
+
+
             navigation.PushViewController(login, true);
         }
 

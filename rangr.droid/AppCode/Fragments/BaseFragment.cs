@@ -16,6 +16,10 @@ using Android.Views.InputMethods;
 
 namespace rangr.droid
 {
+    /// <summary>
+    /// Investigate using custom notifications/toasts using the below library
+    /// https://github.com/Redth/AndHUD
+    /// </summary>
     public abstract class BaseFragment : Fragment
     {
         public abstract string TitleLabel { get; }

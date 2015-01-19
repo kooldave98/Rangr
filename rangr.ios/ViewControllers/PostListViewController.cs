@@ -44,6 +44,8 @@ namespace rangr.ios
             // Perform any additional setup after loading the view, typically from a nib.
             base.ViewDidLoad();
 
+            NavigationItem.HidesBackButton = true;
+
             TableView.Source = new PostsTableViewSource(this, view_model.Posts);
 
 

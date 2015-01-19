@@ -4,6 +4,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 using App.Common;
+
 using Google.Maps;
 using CoreLocation;
 
@@ -83,17 +84,17 @@ namespace rangr.ios
             var splits = view_model.CurrentPost.long_lat_acc_geo_string.Split(',');
             var camera = CameraPosition.FromCamera(latitude: double.Parse(splits[1]), longitude: double.Parse(splits[0]), zoom: 15);
             mapView = MapView.FromCamera(new CGRect(8, 200, 304, 348), camera);
-
+        
             mapView.MapType = MapViewType.Normal;
-
+        
             mapView.MyLocationEnabled = false;
-
+        
             mapView.Settings.SetAllGesturesEnabled(false);
-
+        
             AddMarker(view_model.CurrentPost, mapView);
-
+        
             AddCircle(view_model.CurrentPost, mapView);
-
+        
             mapView.Animate(GetPosition(view_model.CurrentPost.long_lat_acc_geo_string));
         }
 
@@ -103,7 +104,7 @@ namespace rangr.ios
             marker.Title = the_post.text;
             marker.Position = GetPosition(the_post.long_lat_acc_geo_string);
             marker.Map = the_map;
-
+        
             //.InvokeIcon(BitmapDescriptorFactory
             //.DefaultMarker(BitmapDescriptorFactory
             //.HueCyan)))
@@ -117,7 +118,7 @@ namespace rangr.ios
             circle.StrokeWidth = 1.0f;
             circle.StrokeColor = UIColor.LightTextColor;
             circle.FillColor = UIColor.LightTextColor;
-
+        
             circle.Map = the_map;
         }
 
