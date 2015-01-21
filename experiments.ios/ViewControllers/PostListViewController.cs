@@ -9,6 +9,10 @@ using System.Collections.Generic;
 
 namespace rangr.ios
 {
+    /// <summary>
+    ///see below for how to manually embed a refresh control
+    /// https://github.com/vandadnp/iOS-8-Swift-Programming-Cookbook/blob/master/chapter-tables/Displaying%20a%20Refresh%20Control%20for%20Table%20Views/Displaying%20a%20Refresh%20Control%20for%20Table%20Views/ViewController.swift
+    /// </summary>
     public partial class PostListViewController : BaseViewModelController<FeedViewModel>
     {
         public override string TitleLabel

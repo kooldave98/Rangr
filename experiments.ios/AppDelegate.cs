@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 using Foundation;
 using UIKit;
+using App.Common;
 
-namespace experiments.ios
+using Google.Maps;
+
+namespace rangr.ios
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to
@@ -13,35 +16,66 @@ namespace experiments.ios
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        // class-level declarations
-		
-        public override UIWindow Window
+        const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
+        public static AppDelegate Shared;
+
+        private UIWindow window;
+        private UINavigationController navigation = new UINavigationController();
+
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            get;
-            set;
+            Shared = this;
+            MapServices.ProvideAPIKey(MapsApiKey);
+
+            UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
+
+            window = new UIWindow(UIScreen.MainScreen.Bounds);
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
+                {
+                    TextColor = UIColor.White
+                });
+
+            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
+                show_feed();
+            }
+            else
+            {
+                show_login();
+            }
+
+            navigation.NavigationBar.TintColor = UIColor.White;
+            navigation.NavigationBar.BarTintColor = Color.Blue;
+
+            window.RootViewController = navigation;
+            window.MakeKeyAndVisible();
+            return true;
         }
-		
-        // This method is invoked when the application is about to move from active to inactive state.
-        // OpenGL applications should use this method to pause.
-        public override void OnResignActivation(UIApplication application)
+
+        public void show_login()
         {
+            var login = new LoginViewController();
+            login.LoginSucceeded += () =>
+            {
+                show_feed();
+            };
+
+
+            navigation.PushViewController(login, true);
         }
-		
-        // This method should be used to release shared resources and it should store the application state.
-        // If your application supports background exection this method is called instead of WillTerminate
-        // when the user quits.
-        public override void DidEnterBackground(UIApplication application)
+
+        public void show_feed()
         {
+            var vc = new PostListViewController();
+            vc.PostItemSelected += show_detail;
+            navigation.PushViewController(vc, true);
         }
-		
-        // This method is called as part of the transiton from background to active state.
-        public override void WillEnterForeground(UIApplication application)
+
+        public void show_detail(Post post_item)
         {
-        }
-		
-        // This method is called when the application is about to terminate. Save data, if needed.
-        public override void WillTerminate(UIApplication application)
-        {
+            var dc = new MapViewController();
+            //dc.SetDetailItem(post_item);
+            navigation.PushViewController(dc, true);
         }
     }
 }

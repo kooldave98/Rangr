@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
-using CoreGraphics;
-using Foundation;
 using UIKit;
+using CoreLocation;
+using CoreGraphics;
+using System.Collections.Generic;
+using Foundation;
 using App.Common;
 
 using Google.Maps;
-using CoreLocation;
 
 namespace rangr.ios
 {
@@ -34,12 +34,12 @@ namespace rangr.ios
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            mapView.StartRendering();
+            //mapView.StartRendering();
         }
 
         public override void ViewWillDisappear(bool animated)
         {   
-            mapView.StopRendering();
+            //mapView.StopRendering();
             base.ViewWillDisappear(animated);
         }
 
@@ -83,7 +83,14 @@ namespace rangr.ios
         {
             var splits = view_model.CurrentPost.long_lat_acc_geo_string.Split(',');
             var camera = CameraPosition.FromCamera(latitude: double.Parse(splits[1]), longitude: double.Parse(splits[0]), zoom: 15);
-            mapView = MapView.FromCamera(new CGRect(8, 200, 304, 348), camera);
+
+            var cgrect = new CGRect(8, 200, 304, 348);
+
+            //mapView = new MapView(cgrect);
+
+            //mapView.Camera = camera;
+
+            mapView = MapView.FromCamera(cgrect, camera);
         
             mapView.MapType = MapViewType.Normal;
         
