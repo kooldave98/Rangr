@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.iOS", "App.iOS\App.iOS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "experiments.ios", "experiments.ios\experiments.ios.csproj", "{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.ios", "rangr.ios\rangr.ios.csproj", "{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "App.Common", "App.Common\App.Common.shproj", "{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}"
 EndProject
 Global
@@ -30,6 +32,24 @@ Global
 		AppStore|iPhoneSimulator = AppStore|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhone.Build.0 = Debug|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|x86.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhone.ActiveCfg = Release|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhone.Build.0 = Release|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|x86.ActiveCfg = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|x86.Build.0 = Release|iPhoneSimulator
 		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
@@ -127,6 +147,7 @@ Global
 		{A19FB72C-0091-4D4D-8605-5D2C5DFDB0BF} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
 		{E64FD81B-35F7-483A-8EED-E726621BFDD4} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 		{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707} = {4283452C-295D-4F0B-B67B-203E2F86C793}
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
