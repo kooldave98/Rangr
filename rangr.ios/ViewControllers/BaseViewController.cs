@@ -2,6 +2,8 @@
 using UIKit;
 using App.Common;
 using BigTed;
+using Foundation;
+using CoreGraphics;
 
 namespace rangr.ios
 {
@@ -14,7 +16,15 @@ namespace rangr.ios
             base.LoadView();
             Guard.IsNotNull(view_model, "view_model");
 
-            Title = TitleLabel;
+            Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
+        }
+
+        protected void AddCentered(UIView view, float y, float width, float height)
+        {
+            var f = new CGRect((320 - width) / 2, y, width, height);
+            view.Frame = f;
+            view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
+            View.AddSubview(view);
         }
     }
 

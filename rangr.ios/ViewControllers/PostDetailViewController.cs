@@ -10,25 +10,34 @@ using Google.Maps;
 
 namespace rangr.ios
 {
-    public partial class DetailViewController : UIViewController
+    public class PostDetailViewController : BaseViewModelController<PostDetailsViewModel>
     {
-        MapView mapView;
-        PostDetailsViewModel view_model;
-
-        public DetailViewController()
-            : base("DetailViewController", null)
+        public override string TitleLabel
         {
-            Title = NSBundle.MainBundle.LocalizedString("Detail", "Detail");
+            get
+            {
+                return "Detail";
+            }
+        }
 
+        private MapView mapView;
+        private UILabel description;
+
+        public PostDetailViewController()
+        {
             view_model = new PostDetailsViewModel();
         }
 
         public override void LoadView()
         {
             base.LoadView();
+
+            View.BackgroundColor = UIColor.White;
+
+            View.Add(description = new UILabel(new CGRect(8, 8, 304, 348)));
             SetupMap();
             mapView.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
-            View.AddSubview(mapView);
+            View.Add(mapView);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -67,7 +76,7 @@ namespace rangr.ios
             // Update the user interface for the detail item
             if (IsViewLoaded && view_model.CurrentPost != null)
             {
-                detailDescriptionLabel.Text = view_model.CurrentPost.text;
+                description.Text = view_model.CurrentPost.text;
             }
         }
 
@@ -82,15 +91,10 @@ namespace rangr.ios
         private void SetupMap()
         {
             var splits = view_model.CurrentPost.long_lat_acc_geo_string.Split(',');
+
             var camera = CameraPosition.FromCamera(latitude: double.Parse(splits[1]), longitude: double.Parse(splits[0]), zoom: 15);
 
-            var cgrect = new CGRect(8, 200, 304, 348);
-
-            //mapView = new MapView(cgrect);
-
-            //mapView.Camera = camera;
-
-            mapView = MapView.FromCamera(cgrect, camera);
+            mapView = MapView.FromCamera(new CGRect(8, 200, 304, 348), camera);
         
             mapView.MapType = MapViewType.Normal;
         

@@ -19,8 +19,7 @@ namespace rangr.ios
         {
             get
             {
-                var title = NSBundle.MainBundle.LocalizedString("Feed", "Feed");
-                return title;
+                return "Feed";
             }
         }
 
@@ -50,6 +49,13 @@ namespace rangr.ios
 
             NavigationItem.HidesBackButton = true;
 
+            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
+            NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
+            {
+                NewPostSelected();
+
+            };
+
             TableView.Source = new PostsTableViewSource(this, view_model.Posts);
 
 
@@ -67,29 +73,6 @@ namespace rangr.ios
 
 
             TableView.AddSubview(RefreshControl);
-
-        }
-
-        public void Initialize()
-        {
-//            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
-//            NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
-//                {
-//                    //if (this.NewPostViewController == null)
-//                    this.CreatePostViewController = new CreatePostViewController();
-//                    //this.NewPostViewController.ModalInPopover = true;
-//
-//                    // Pass the selected object to the new view controller.
-//                    this.NavigationController.PushViewController(this.CreatePostViewController, true);
-//
-//                };
-//
-//
-//            NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Action), false);
-//            NavigationItem.LeftBarButtonItem.Clicked += (object sender, EventArgs e) =>
-//                {
-//                    //alert hey oh
-//                };
 
         }
 
@@ -119,7 +102,7 @@ namespace rangr.ios
 
 
         public event Action<Post> PostItemSelected = delegate {};
-        //        public event Action NewPostSelected = delegate {};
+        public event Action NewPostSelected = delegate {};
         //        public event Action<string> HashTagSelected = delegate {};
     }
 

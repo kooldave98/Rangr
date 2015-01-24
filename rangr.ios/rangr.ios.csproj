@@ -147,9 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="ViewControllers\DetailViewController.xib">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
-    </InterfaceDefinition>
     <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
@@ -160,21 +157,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Main.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="ViewControllers\BaseViewController.cs" />
-    <Compile Include="ViewControllers\DetailViewController.cs" />
-    <Compile Include="ViewControllers\DetailViewController.designer.cs">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewControllers\LoginViewController.cs" />
-    <Compile Include="ViewControllers\MapViewController.cs" />
     <Compile Include="ViewControllers\PostListViewController.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\PostCellView.cs" />
     <Compile Include="Views\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\PostDetailViewController.cs" />
+    <Compile Include="ViewControllers\NewPostViewController.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="SampleViewController.designer.cs">
+      <DependentUpon>SampleViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SampleViewController.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

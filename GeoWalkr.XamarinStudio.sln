@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "experiments.droid", "experi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{4283452C-295D-4F0B-B67B-203E2F86C793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.iOS", "App.iOS\App.iOS.csproj", "{E64FD81B-35F7-483A-8EED-E726621BFDD4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "experiments.ios", "experiments.ios\experiments.ios.csproj", "{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.ios", "rangr.ios\rangr.ios.csproj", "{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}"
@@ -122,30 +120,11 @@ Global
 		{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707}.Release|x86.ActiveCfg = Release|iPhoneSimulator
 		{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707}.Release|x86.Build.0 = Release|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.AppStore|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|iPhone.Build.0 = Debug|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Debug|x86.Build.0 = Debug|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|iPhone.ActiveCfg = Release|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|iPhone.Build.0 = Release|iPhone
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|x86.ActiveCfg = Release|iPhoneSimulator
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4}.Release|x86.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
 		{5AFA8462-CD90-42F2-BFA2-506D49BD1F20} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
 		{A19FB72C-0091-4D4D-8605-5D2C5DFDB0BF} = {DB98961A-6545-4AEB-8CCE-EE0B54B8572E}
-		{E64FD81B-35F7-483A-8EED-E726621BFDD4} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 		{D9AB03F1-AA59-4590-A91A-FCC3DE0D0707} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA} = {4283452C-295D-4F0B-B67B-203E2F86C793}
 	EndGlobalSection

@@ -60,7 +60,6 @@ namespace rangr.ios
                 show_feed();
             };
 
-
             navigation.PushViewController(login, true);
         }
 
@@ -68,12 +67,23 @@ namespace rangr.ios
         {
             var vc = new PostListViewController();
             vc.PostItemSelected += show_detail;
+            vc.NewPostSelected += show_new_post;
             navigation.PushViewController(vc, true);
+        }
+
+        public void show_new_post()
+        {
+            var dc = new NewPostViewController();
+            dc.CreatePostSucceeded += () =>
+            {
+                navigation.PopToRootViewController(true);
+            };
+            navigation.PushViewController(dc, true);
         }
 
         public void show_detail(Post post_item)
         {
-            var dc = new DetailViewController();
+            var dc = new PostDetailViewController();
             dc.SetDetailItem(post_item);
             navigation.PushViewController(dc, true);
         }
