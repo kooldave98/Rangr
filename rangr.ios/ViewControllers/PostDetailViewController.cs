@@ -34,10 +34,12 @@ namespace rangr.ios
 
             View.BackgroundColor = UIColor.White;
 
-            View.Add(description = new UILabel(new CGRect(8, 8, 304, 348)));
+            //View.Add(description = new UILabel(new CGRect(8, 8, 304, 348)));
+            AddCentered(description = new UILabel(new CGRect(8, 8, 304, 348)));
             SetupMap();
             mapView.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
-            View.Add(mapView);
+            //View.Add(mapView);
+            AddCentered(mapView);
         }
 
         public override void ViewWillAppear(bool animated)

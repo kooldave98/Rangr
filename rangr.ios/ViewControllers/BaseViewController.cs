@@ -19,6 +19,11 @@ namespace rangr.ios
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
         }
 
+        protected void AddCentered(UIView view)
+        {
+            AddCentered(view, (float)view.Frame.Y, (float)view.Frame.Width, (float)view.Frame.Height);
+        }
+
         protected void AddCentered(UIView view, float y, float width, float height)
         {
             var f = new CGRect((320 - width) / 2, y, width, height);
@@ -55,13 +60,14 @@ namespace rangr.ios
         protected void ShowAlert(string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
         {
             var alert = new UIAlertView(title, message, null, ok_button_text);                
-            alert.Show();
+
             alert.Clicked += delegate
             {
                 if (ok_button_action != null)
                 {
                     ok_button_action();
                 }
+                alert.Show();
                 
             };
         }

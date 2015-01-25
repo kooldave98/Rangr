@@ -32,6 +32,43 @@ namespace rangr.droid
 			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
 			global::Xamarin.InsightsCore.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
 			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Attribute.ahBarColor = global::rangr.droid.Resource.Attribute.ahBarColor;
+			global::AndroidHUD.Resource.Attribute.ahBarLength = global::rangr.droid.Resource.Attribute.ahBarLength;
+			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::rangr.droid.Resource.Attribute.ahBarWidth;
+			global::AndroidHUD.Resource.Attribute.ahCircleColor = global::rangr.droid.Resource.Attribute.ahCircleColor;
+			global::AndroidHUD.Resource.Attribute.ahDelayMillis = global::rangr.droid.Resource.Attribute.ahDelayMillis;
+			global::AndroidHUD.Resource.Attribute.ahRadius = global::rangr.droid.Resource.Attribute.ahRadius;
+			global::AndroidHUD.Resource.Attribute.ahRimColor = global::rangr.droid.Resource.Attribute.ahRimColor;
+			global::AndroidHUD.Resource.Attribute.ahRimWidth = global::rangr.droid.Resource.Attribute.ahRimWidth;
+			global::AndroidHUD.Resource.Attribute.ahSpinSpeed = global::rangr.droid.Resource.Attribute.ahSpinSpeed;
+			global::AndroidHUD.Resource.Attribute.ahText = global::rangr.droid.Resource.Attribute.ahText;
+			global::AndroidHUD.Resource.Attribute.ahTextColor = global::rangr.droid.Resource.Attribute.ahTextColor;
+			global::AndroidHUD.Resource.Attribute.ahTextSize = global::rangr.droid.Resource.Attribute.ahTextSize;
+			global::AndroidHUD.Resource.Drawable.ic_errorstatus = global::rangr.droid.Resource.Drawable.ic_errorstatus;
+			global::AndroidHUD.Resource.Drawable.ic_successstatus = global::rangr.droid.Resource.Drawable.ic_successstatus;
+			global::AndroidHUD.Resource.Drawable.roundedbg = global::rangr.droid.Resource.Drawable.roundedbg;
+			global::AndroidHUD.Resource.Drawable.roundedbgdark = global::rangr.droid.Resource.Drawable.roundedbgdark;
+			global::AndroidHUD.Resource.Id.loadingImage = global::rangr.droid.Resource.Id.loadingImage;
+			global::AndroidHUD.Resource.Id.loadingProgressBar = global::rangr.droid.Resource.Id.loadingProgressBar;
+			global::AndroidHUD.Resource.Id.loadingProgressWheel = global::rangr.droid.Resource.Id.loadingProgressWheel;
+			global::AndroidHUD.Resource.Id.textViewStatus = global::rangr.droid.Resource.Id.textViewStatus;
+			global::AndroidHUD.Resource.Layout.loading = global::rangr.droid.Resource.Layout.loading;
+			global::AndroidHUD.Resource.Layout.loadingimage = global::rangr.droid.Resource.Layout.loadingimage;
+			global::AndroidHUD.Resource.Layout.loadingprogress = global::rangr.droid.Resource.Layout.loadingprogress;
+			global::AndroidHUD.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel = global::rangr.droid.Resource.Styleable.ProgressWheel;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarLength = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarWidth = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahCircleColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahDelayMillis = global::rangr.droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRadius = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimWidth = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::rangr.droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::rangr.droid.Resource.Styleable.ProgressWheel_ahText;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextSize;
 		}
 		
 		public partial class Animation
@@ -83,6 +120,42 @@ namespace rangr.droid
 			
 			// aapt resource value: 0x7f010001
 			public const int adUnitId = 2130771969;
+			
+			// aapt resource value: 0x7f010013
+			public const int ahBarColor = 2130771987;
+			
+			// aapt resource value: 0x7f01001b
+			public const int ahBarLength = 2130771995;
+			
+			// aapt resource value: 0x7f01001a
+			public const int ahBarWidth = 2130771994;
+			
+			// aapt resource value: 0x7f010018
+			public const int ahCircleColor = 2130771992;
+			
+			// aapt resource value: 0x7f010017
+			public const int ahDelayMillis = 2130771991;
+			
+			// aapt resource value: 0x7f010019
+			public const int ahRadius = 2130771993;
+			
+			// aapt resource value: 0x7f010014
+			public const int ahRimColor = 2130771988;
+			
+			// aapt resource value: 0x7f010015
+			public const int ahRimWidth = 2130771989;
+			
+			// aapt resource value: 0x7f010016
+			public const int ahSpinSpeed = 2130771990;
+			
+			// aapt resource value: 0x7f010010
+			public const int ahText = 2130771984;
+			
+			// aapt resource value: 0x7f010011
+			public const int ahTextColor = 2130771985;
+			
+			// aapt resource value: 0x7f010012
+			public const int ahTextSize = 2130771986;
 			
 			// aapt resource value: 0x7f010003
 			public const int cameraBearing = 2130771971;
@@ -394,37 +467,49 @@ namespace rangr.droid
 			public const int ic_drawer = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int ic_launcher = 2130837538;
+			public const int ic_errorstatus = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int ic_plusone_medium_off_client = 2130837539;
+			public const int ic_launcher = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int ic_plusone_small_off_client = 2130837540;
+			public const int ic_plusone_medium_off_client = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int ic_plusone_standard_off_client = 2130837541;
+			public const int ic_plusone_small_off_client = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int ic_plusone_tall_off_client = 2130837542;
+			public const int ic_plusone_standard_off_client = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int Icon = 2130837543;
+			public const int ic_plusone_tall_off_client = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int Icon2x = 2130837544;
+			public const int ic_successstatus = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int Placeholder = 2130837545;
+			public const int Icon = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int questionmark = 2130837546;
+			public const int Icon2x = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int twitter = 2130837547;
+			public const int Placeholder = 2130837547;
 			
 			// aapt resource value: 0x7f02002c
-			public const int user_default_avatar = 2130837548;
+			public const int questionmark = 2130837548;
+			
+			// aapt resource value: 0x7f02002d
+			public const int roundedbg = 2130837549;
+			
+			// aapt resource value: 0x7f02002e
+			public const int roundedbgdark = 2130837550;
+			
+			// aapt resource value: 0x7f02002f
+			public const int twitter = 2130837551;
+			
+			// aapt resource value: 0x7f020030
+			public const int user_default_avatar = 2130837552;
 			
 			static Drawable()
 			{
@@ -439,14 +524,14 @@ namespace rangr.droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0d0019
-			public const int PostText = 2131558425;
+			// aapt resource value: 0x7f0d001d
+			public const int PostText = 2131558429;
 			
-			// aapt resource value: 0x7f0d001a
-			public const int PostTextLabel = 2131558426;
+			// aapt resource value: 0x7f0d001e
+			public const int PostTextLabel = 2131558430;
 			
-			// aapt resource value: 0x7f0d0018
-			public const int UserNameText = 2131558424;
+			// aapt resource value: 0x7f0d001c
+			public const int UserNameText = 2131558428;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int action_bar_subtitle = 2131558406;
@@ -454,26 +539,26 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0005
 			public const int action_bar_title = 2131558405;
 			
-			// aapt resource value: 0x7f0d0014
-			public const int content_frame = 2131558420;
+			// aapt resource value: 0x7f0d0018
+			public const int content_frame = 2131558424;
 			
-			// aapt resource value: 0x7f0d000c
-			public const int dialogImage = 2131558412;
+			// aapt resource value: 0x7f0d0010
+			public const int dialogImage = 2131558416;
 			
-			// aapt resource value: 0x7f0d000b
-			public const int dialogLayout = 2131558411;
+			// aapt resource value: 0x7f0d000f
+			public const int dialogLayout = 2131558415;
 			
-			// aapt resource value: 0x7f0d000d
-			public const int dialogTitle = 2131558413;
+			// aapt resource value: 0x7f0d0011
+			public const int dialogTitle = 2131558417;
 			
-			// aapt resource value: 0x7f0d0013
-			public const int drawer_layout = 2131558419;
+			// aapt resource value: 0x7f0d0017
+			public const int drawer_layout = 2131558423;
 			
-			// aapt resource value: 0x7f0d0023
-			public const int feedImage1 = 2131558435;
+			// aapt resource value: 0x7f0d0027
+			public const int feedImage1 = 2131558439;
 			
-			// aapt resource value: 0x7f0d001b
-			public const int fragmentContainer = 2131558427;
+			// aapt resource value: 0x7f0d001f
+			public const int fragmentContainer = 2131558431;
 			
 			// aapt resource value: 0x7f0d0000
 			public const int hybrid = 2131558400;
@@ -481,17 +566,17 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0008
 			public const int imageView1 = 2131558408;
 			
-			// aapt resource value: 0x7f0d0015
-			public const int left_drawer = 2131558421;
+			// aapt resource value: 0x7f0d0019
+			public const int left_drawer = 2131558425;
 			
-			// aapt resource value: 0x7f0d0016
-			public const int linearLayout1 = 2131558422;
+			// aapt resource value: 0x7f0d001a
+			public const int linearLayout1 = 2131558426;
 			
-			// aapt resource value: 0x7f0d0017
-			public const int linearLayout2 = 2131558423;
+			// aapt resource value: 0x7f0d001b
+			public const int linearLayout2 = 2131558427;
 			
-			// aapt resource value: 0x7f0d001d
-			public const int list = 2131558429;
+			// aapt resource value: 0x7f0d0021
+			public const int list = 2131558433;
 			
 			// aapt resource value: 0x7f0d0009
 			public const int loadMoreButton = 2131558409;
@@ -499,20 +584,29 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d000a
 			public const int loadMoreProgress = 2131558410;
 			
-			// aapt resource value: 0x7f0d0010
-			public const int logIn = 2131558416;
+			// aapt resource value: 0x7f0d000b
+			public const int loadingImage = 2131558411;
 			
-			// aapt resource value: 0x7f0d0011
-			public const int loginProgress = 2131558417;
+			// aapt resource value: 0x7f0d000e
+			public const int loadingProgressBar = 2131558414;
 			
-			// aapt resource value: 0x7f0d0012
-			public const int loginQuestion = 2131558418;
+			// aapt resource value: 0x7f0d000d
+			public const int loadingProgressWheel = 2131558413;
 			
-			// aapt resource value: 0x7f0d001f
-			public const int name = 2131558431;
+			// aapt resource value: 0x7f0d0014
+			public const int logIn = 2131558420;
 			
-			// aapt resource value: 0x7f0d0025
-			public const int new_post_menu_item = 2131558437;
+			// aapt resource value: 0x7f0d0015
+			public const int loginProgress = 2131558421;
+			
+			// aapt resource value: 0x7f0d0016
+			public const int loginQuestion = 2131558422;
+			
+			// aapt resource value: 0x7f0d0023
+			public const int name = 2131558435;
+			
+			// aapt resource value: 0x7f0d0029
+			public const int new_post_menu_item = 2131558441;
 			
 			// aapt resource value: 0x7f0d0001
 			public const int none = 2131558401;
@@ -520,23 +614,23 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0002
 			public const int normal = 2131558402;
 			
-			// aapt resource value: 0x7f0d000f
-			public const int password = 2131558415;
+			// aapt resource value: 0x7f0d0013
+			public const int password = 2131558419;
 			
-			// aapt resource value: 0x7f0d001e
-			public const int profilePic = 2131558430;
+			// aapt resource value: 0x7f0d0022
+			public const int profilePic = 2131558434;
 			
-			// aapt resource value: 0x7f0d001c
-			public const int refresher = 2131558428;
+			// aapt resource value: 0x7f0d0020
+			public const int refresher = 2131558432;
 			
 			// aapt resource value: 0x7f0d0003
 			public const int satellite = 2131558403;
 			
-			// aapt resource value: 0x7f0d0026
-			public const int search_posts_menu_item = 2131558438;
+			// aapt resource value: 0x7f0d002a
+			public const int search_posts_menu_item = 2131558442;
 			
-			// aapt resource value: 0x7f0d0024
-			public const int send_post_menu_item = 2131558436;
+			// aapt resource value: 0x7f0d0028
+			public const int send_post_menu_item = 2131558440;
 			
 			// aapt resource value: 0x7f0d0007
 			public const int spinner_title = 2131558407;
@@ -544,17 +638,20 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0004
 			public const int terrain = 2131558404;
 			
-			// aapt resource value: 0x7f0d0020
-			public const int timestamp = 2131558432;
+			// aapt resource value: 0x7f0d000c
+			public const int textViewStatus = 2131558412;
 			
-			// aapt resource value: 0x7f0d0021
-			public const int txtStatusMsg = 2131558433;
+			// aapt resource value: 0x7f0d0024
+			public const int timestamp = 2131558436;
 			
-			// aapt resource value: 0x7f0d0022
-			public const int txtUrl = 2131558434;
+			// aapt resource value: 0x7f0d0025
+			public const int txtStatusMsg = 2131558437;
 			
-			// aapt resource value: 0x7f0d000e
-			public const int userName = 2131558414;
+			// aapt resource value: 0x7f0d0026
+			public const int txtUrl = 2131558438;
+			
+			// aapt resource value: 0x7f0d0012
+			public const int userName = 2131558418;
 			
 			static Id()
 			{
@@ -598,25 +695,34 @@ namespace rangr.droid
 			public const int loading = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int login = 2130903044;
+			public const int loadingimage = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int main_drawer_list_item = 2130903045;
+			public const int loadingprogress = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int main_with_drawer = 2130903046;
+			public const int loadingProgressBar = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int new_post = 2130903047;
+			public const int login = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int post_detail = 2130903048;
+			public const int main_drawer_list_item = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int post_list = 2130903049;
+			public const int main_with_drawer = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int post_list_item = 2130903050;
+			public const int new_post = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int post_detail = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int post_list = 2130903052;
+			
+			// aapt resource value: 0x7f03000d
+			public const int post_list_item = 2130903053;
 			
 			static Layout()
 			{
@@ -905,6 +1011,57 @@ namespace rangr.droid
 			
 			// aapt resource value: 13
 			public const int MapAttrs_zOrderOnTop = 13;
+			
+			public static int[] ProgressWheel = new int[]
+			{
+					2130771984,
+					2130771985,
+					2130771986,
+					2130771987,
+					2130771988,
+					2130771989,
+					2130771990,
+					2130771991,
+					2130771992,
+					2130771993,
+					2130771994,
+					2130771995};
+			
+			// aapt resource value: 3
+			public const int ProgressWheel_ahBarColor = 3;
+			
+			// aapt resource value: 11
+			public const int ProgressWheel_ahBarLength = 11;
+			
+			// aapt resource value: 10
+			public const int ProgressWheel_ahBarWidth = 10;
+			
+			// aapt resource value: 8
+			public const int ProgressWheel_ahCircleColor = 8;
+			
+			// aapt resource value: 7
+			public const int ProgressWheel_ahDelayMillis = 7;
+			
+			// aapt resource value: 9
+			public const int ProgressWheel_ahRadius = 9;
+			
+			// aapt resource value: 4
+			public const int ProgressWheel_ahRimColor = 4;
+			
+			// aapt resource value: 5
+			public const int ProgressWheel_ahRimWidth = 5;
+			
+			// aapt resource value: 6
+			public const int ProgressWheel_ahSpinSpeed = 6;
+			
+			// aapt resource value: 0
+			public const int ProgressWheel_ahText = 0;
+			
+			// aapt resource value: 1
+			public const int ProgressWheel_ahTextColor = 1;
+			
+			// aapt resource value: 2
+			public const int ProgressWheel_ahTextSize = 2;
 			
 			static Styleable()
 			{

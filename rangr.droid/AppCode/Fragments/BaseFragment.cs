@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using App.Common;
 using Android.Views.InputMethods;
+using AndroidHUD;
 
 namespace rangr.droid
 {
@@ -56,12 +57,15 @@ namespace rangr.droid
 //            {
             this.Activity.RunOnUiThread(() =>
                 {
-                    if (true)
-                    {
-                        var t = Toast.MakeText(this.Activity, message, ToastLength.Long);
-                        t.SetGravity(GravityFlags.Center, 0, 0);
-                        t.Show();
-                    }
+//                    if (true)
+//                    {
+                    AndHUD.Shared.ShowToast(this.Activity, message, MaskType.Clear, TimeSpan.FromSeconds(5));
+
+
+//                        var t = Toast.MakeText(this.Activity, message, ToastLength.Long);
+//                        t.SetGravity(GravityFlags.Center, 0, 0);
+//                        t.Show();
+//                    }
                 });
             //}
 
