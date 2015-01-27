@@ -302,6 +302,14 @@ namespace rangr.droid
                 case 0:
                     show_feed();
                     break;
+                case 1:
+                    drawer_list.SetItemChecked(current_drawer_item, true);
+                    StartActivity(typeof(PeopleActivity));
+                    return;
+                case 2:
+                    drawer_list.SetItemChecked(current_drawer_item, true);
+                    StartActivity(typeof(ProfileActivity));
+                    return;
                 case 3:
                     drawer_list.SetItemChecked(current_drawer_item, true);
                     StartActivity(typeof(AboutAppActivity));

@@ -93,6 +93,7 @@
     <Reference Include="AndHUD">
       <HintPath>..\Components\AndHUD-1.3.1\lib\android\AndHUD.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Android.Export" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -115,6 +116,25 @@
       <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="AppCode\Fragments\NewPostFragment.cs" />
+    <Compile Include="AppCode\Activities\SimulationActivity.cs" />
+    <Compile Include="AppCode\Activities\ProfileActivity.cs" />
+    <Compile Include="AppCode\Activities\ProfileAdapter.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\Activities\EditProfileActivity.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\Activities\PeopleActivity.cs" />
+    <Compile Include="AppCode\Activities\PeopleMapFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\Activities\PeopleListFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\Activities\PeopleListAdapter.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\Activities\BaseActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -198,6 +218,36 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_send_now.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_send_now.png" />
     <AndroidResource Include="Resources\layout\loadingProgressBar.axml" />
+    <AndroidResource Include="Resources\layout\simulation.axml" />
+    <AndroidResource Include="Resources\layout\People.axml" />
+    <AndroidResource Include="Resources\layout\PeopleList.axml">
+      <DependentUpon>People.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PeopleListItem.axml">
+      <DependentUpon>People.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditProfile.axml" />
+    <AndroidResource Include="Resources\layout\Profile.axml" />
+    <AndroidResource Include="Resources\layout\EmailPropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GroupHeaderListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PhonePropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TwitterPropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UrlPropertyListItem.axml">
+      <DependentUpon>Profile.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GoogleMap.axml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

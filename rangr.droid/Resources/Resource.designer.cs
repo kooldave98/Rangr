@@ -524,14 +524,38 @@ namespace rangr.droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0d001d
-			public const int PostText = 2131558429;
+			// aapt resource value: 0x7f0d002c
+			public const int Divider = 2131558444;
 			
-			// aapt resource value: 0x7f0d001e
-			public const int PostTextLabel = 2131558430;
+			// aapt resource value: 0x7f0d000e
+			public const int EmailButton = 2131558414;
 			
-			// aapt resource value: 0x7f0d001c
-			public const int UserNameText = 2131558428;
+			// aapt resource value: 0x7f0d0011
+			public const int HeaderTextView = 2131558417;
+			
+			// aapt resource value: 0x7f0d000d
+			public const int NameTextView = 2131558413;
+			
+			// aapt resource value: 0x7f0d002d
+			public const int PhoneButton = 2131558445;
+			
+			// aapt resource value: 0x7f0d0025
+			public const int PostText = 2131558437;
+			
+			// aapt resource value: 0x7f0d002e
+			public const int PostTextLabel = 2131558446;
+			
+			// aapt resource value: 0x7f0d0037
+			public const int ProfileList = 2131558455;
+			
+			// aapt resource value: 0x7f0d0027
+			public const int SwipeContent = 2131558439;
+			
+			// aapt resource value: 0x7f0d0024
+			public const int UserNameText = 2131558436;
+			
+			// aapt resource value: 0x7f0d000c
+			public const int ValueTextView = 2131558412;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int action_bar_subtitle = 2131558406;
@@ -539,74 +563,86 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0005
 			public const int action_bar_title = 2131558405;
 			
-			// aapt resource value: 0x7f0d0018
-			public const int content_frame = 2131558424;
+			// aapt resource value: 0x7f0d0022
+			public const int content_frame = 2131558434;
 			
-			// aapt resource value: 0x7f0d0010
-			public const int dialogImage = 2131558416;
+			// aapt resource value: 0x7f0d001a
+			public const int dialogImage = 2131558426;
 			
-			// aapt resource value: 0x7f0d000f
-			public const int dialogLayout = 2131558415;
+			// aapt resource value: 0x7f0d0019
+			public const int dialogLayout = 2131558425;
 			
-			// aapt resource value: 0x7f0d0011
-			public const int dialogTitle = 2131558417;
+			// aapt resource value: 0x7f0d001b
+			public const int dialogTitle = 2131558427;
 			
-			// aapt resource value: 0x7f0d0017
-			public const int drawer_layout = 2131558423;
+			// aapt resource value: 0x7f0d0008
+			public const int displayName = 2131558408;
 			
-			// aapt resource value: 0x7f0d0027
-			public const int feedImage1 = 2131558439;
+			// aapt resource value: 0x7f0d002a
+			public const int distance = 2131558442;
 			
-			// aapt resource value: 0x7f0d001f
-			public const int fragmentContainer = 2131558431;
+			// aapt resource value: 0x7f0d0021
+			public const int drawer_layout = 2131558433;
+			
+			// aapt resource value: 0x7f0d0036
+			public const int feedImage1 = 2131558454;
+			
+			// aapt resource value: 0x7f0d0026
+			public const int fragmentContainer = 2131558438;
 			
 			// aapt resource value: 0x7f0d0000
 			public const int hybrid = 2131558400;
 			
-			// aapt resource value: 0x7f0d0008
-			public const int imageView1 = 2131558408;
-			
-			// aapt resource value: 0x7f0d0019
-			public const int left_drawer = 2131558425;
-			
-			// aapt resource value: 0x7f0d001a
-			public const int linearLayout1 = 2131558426;
-			
-			// aapt resource value: 0x7f0d001b
-			public const int linearLayout2 = 2131558427;
-			
-			// aapt resource value: 0x7f0d0021
-			public const int list = 2131558433;
-			
-			// aapt resource value: 0x7f0d0009
-			public const int loadMoreButton = 2131558409;
-			
-			// aapt resource value: 0x7f0d000a
-			public const int loadMoreProgress = 2131558410;
-			
-			// aapt resource value: 0x7f0d000b
-			public const int loadingImage = 2131558411;
-			
-			// aapt resource value: 0x7f0d000e
-			public const int loadingProgressBar = 2131558414;
-			
-			// aapt resource value: 0x7f0d000d
-			public const int loadingProgressWheel = 2131558413;
-			
-			// aapt resource value: 0x7f0d0014
-			public const int logIn = 2131558420;
-			
-			// aapt resource value: 0x7f0d0015
-			public const int loginProgress = 2131558421;
-			
-			// aapt resource value: 0x7f0d0016
-			public const int loginQuestion = 2131558422;
+			// aapt resource value: 0x7f0d000f
+			public const int imageView1 = 2131558415;
 			
 			// aapt resource value: 0x7f0d0023
-			public const int name = 2131558435;
+			public const int left_drawer = 2131558435;
 			
-			// aapt resource value: 0x7f0d0029
-			public const int new_post_menu_item = 2131558441;
+			// aapt resource value: 0x7f0d000a
+			public const int linearLayout1 = 2131558410;
+			
+			// aapt resource value: 0x7f0d000b
+			public const int linearLayout2 = 2131558411;
+			
+			// aapt resource value: 0x7f0d0028
+			public const int linearLayout3 = 2131558440;
+			
+			// aapt resource value: 0x7f0d0030
+			public const int list = 2131558448;
+			
+			// aapt resource value: 0x7f0d0013
+			public const int loadMoreButton = 2131558419;
+			
+			// aapt resource value: 0x7f0d0014
+			public const int loadMoreProgress = 2131558420;
+			
+			// aapt resource value: 0x7f0d0015
+			public const int loadingImage = 2131558421;
+			
+			// aapt resource value: 0x7f0d0018
+			public const int loadingProgressBar = 2131558424;
+			
+			// aapt resource value: 0x7f0d0017
+			public const int loadingProgressWheel = 2131558423;
+			
+			// aapt resource value: 0x7f0d001e
+			public const int logIn = 2131558430;
+			
+			// aapt resource value: 0x7f0d001f
+			public const int loginProgress = 2131558431;
+			
+			// aapt resource value: 0x7f0d0020
+			public const int loginQuestion = 2131558432;
+			
+			// aapt resource value: 0x7f0d0010
+			public const int map = 2131558416;
+			
+			// aapt resource value: 0x7f0d0032
+			public const int name = 2131558450;
+			
+			// aapt resource value: 0x7f0d003e
+			public const int new_post_menu_item = 2131558462;
 			
 			// aapt resource value: 0x7f0d0001
 			public const int none = 2131558401;
@@ -614,44 +650,71 @@ namespace rangr.droid
 			// aapt resource value: 0x7f0d0002
 			public const int normal = 2131558402;
 			
-			// aapt resource value: 0x7f0d0013
-			public const int password = 2131558419;
+			// aapt resource value: 0x7f0d001d
+			public const int password = 2131558429;
 			
-			// aapt resource value: 0x7f0d0022
-			public const int profilePic = 2131558434;
+			// aapt resource value: 0x7f0d0029
+			public const int personName = 2131558441;
 			
-			// aapt resource value: 0x7f0d0020
-			public const int refresher = 2131558432;
+			// aapt resource value: 0x7f0d0031
+			public const int profilePic = 2131558449;
+			
+			// aapt resource value: 0x7f0d0039
+			public const int radio_A = 2131558457;
+			
+			// aapt resource value: 0x7f0d003a
+			public const int radio_B = 2131558458;
+			
+			// aapt resource value: 0x7f0d003b
+			public const int radio_C = 2131558459;
+			
+			// aapt resource value: 0x7f0d003c
+			public const int radio_D = 2131558460;
+			
+			// aapt resource value: 0x7f0d0038
+			public const int radio_Live = 2131558456;
+			
+			// aapt resource value: 0x7f0d002f
+			public const int refresher = 2131558447;
 			
 			// aapt resource value: 0x7f0d0003
 			public const int satellite = 2131558403;
 			
-			// aapt resource value: 0x7f0d002a
-			public const int search_posts_menu_item = 2131558442;
+			// aapt resource value: 0x7f0d003f
+			public const int search_posts_menu_item = 2131558463;
 			
-			// aapt resource value: 0x7f0d0028
-			public const int send_post_menu_item = 2131558440;
+			// aapt resource value: 0x7f0d003d
+			public const int send_post_menu_item = 2131558461;
 			
 			// aapt resource value: 0x7f0d0007
 			public const int spinner_title = 2131558407;
 			
+			// aapt resource value: 0x7f0d002b
+			public const int status = 2131558443;
+			
+			// aapt resource value: 0x7f0d0009
+			public const int statusMessage = 2131558409;
+			
 			// aapt resource value: 0x7f0d0004
 			public const int terrain = 2131558404;
 			
-			// aapt resource value: 0x7f0d000c
-			public const int textViewStatus = 2131558412;
+			// aapt resource value: 0x7f0d0016
+			public const int textViewStatus = 2131558422;
 			
-			// aapt resource value: 0x7f0d0024
-			public const int timestamp = 2131558436;
+			// aapt resource value: 0x7f0d0033
+			public const int timestamp = 2131558451;
 			
-			// aapt resource value: 0x7f0d0025
-			public const int txtStatusMsg = 2131558437;
+			// aapt resource value: 0x7f0d0034
+			public const int txtStatusMsg = 2131558452;
 			
-			// aapt resource value: 0x7f0d0026
-			public const int txtUrl = 2131558438;
+			// aapt resource value: 0x7f0d0035
+			public const int txtUrl = 2131558453;
+			
+			// aapt resource value: 0x7f0d001c
+			public const int userName = 2131558428;
 			
 			// aapt resource value: 0x7f0d0012
-			public const int userName = 2131558418;
+			public const int view1 = 2131558418;
 			
 			static Id()
 			{
@@ -689,40 +752,79 @@ namespace rangr.droid
 			public const int action_bar_spinner_item = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int empty = 2130903042;
+			public const int EditProfile = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int loading = 2130903043;
+			public const int EmailPropertyListItem = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int loadingimage = 2130903044;
+			public const int empty = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int loadingprogress = 2130903045;
+			public const int GoogleMap = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int loadingProgressBar = 2130903046;
+			public const int GroupHeaderListItem = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int login = 2130903047;
+			public const int loading = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int main_drawer_list_item = 2130903048;
+			public const int loadingimage = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int main_with_drawer = 2130903049;
+			public const int loadingprogress = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int new_post = 2130903050;
+			public const int loadingProgressBar = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int post_detail = 2130903051;
+			public const int login = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int post_list = 2130903052;
+			public const int main_drawer_list_item = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int post_list_item = 2130903053;
+			public const int main_with_drawer = 2130903053;
+			
+			// aapt resource value: 0x7f03000e
+			public const int new_post = 2130903054;
+			
+			// aapt resource value: 0x7f03000f
+			public const int People = 2130903055;
+			
+			// aapt resource value: 0x7f030010
+			public const int PeopleList = 2130903056;
+			
+			// aapt resource value: 0x7f030011
+			public const int PeopleListItem = 2130903057;
+			
+			// aapt resource value: 0x7f030012
+			public const int PhonePropertyListItem = 2130903058;
+			
+			// aapt resource value: 0x7f030013
+			public const int post_detail = 2130903059;
+			
+			// aapt resource value: 0x7f030014
+			public const int post_list = 2130903060;
+			
+			// aapt resource value: 0x7f030015
+			public const int post_list_item = 2130903061;
+			
+			// aapt resource value: 0x7f030016
+			public const int Profile = 2130903062;
+			
+			// aapt resource value: 0x7f030017
+			public const int PropertyListItem = 2130903063;
+			
+			// aapt resource value: 0x7f030018
+			public const int simulation = 2130903064;
+			
+			// aapt resource value: 0x7f030019
+			public const int TwitterPropertyListItem = 2130903065;
+			
+			// aapt resource value: 0x7f03001a
+			public const int UrlPropertyListItem = 2130903066;
 			
 			static Layout()
 			{
