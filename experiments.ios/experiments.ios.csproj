@@ -104,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
+    <InterfaceDefinition Include="ConstraintsVC_iPhone.xib">
+      <DependentUpon>ConstraintsVC.cs</DependentUpon>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="ConstraintsVC_iPad.xib">
+      <DependentUpon>ConstraintsVC.cs</DependentUpon>
+    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -121,6 +127,10 @@
     <Compile Include="Main.cs" />
     <Compile Include="MapViewController.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ConstraintsVC.cs" />
+    <Compile Include="ConstraintsVC.designer.cs">
+      <DependentUpon>ConstraintsVC.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

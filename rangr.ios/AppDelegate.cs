@@ -35,32 +35,28 @@ namespace rangr.ios
                     TextColor = UIColor.White
                 });
 
-            if (AppGlobal.Current.CurrentUserAndConnectionExists)
-            {
-                show_feed();
-            }
-            else
-            {
-                show_login();
-            }
+
+            show_feed();
+
 
             navigation.NavigationBar.TintColor = UIColor.White;
             navigation.NavigationBar.BarTintColor = Color.Blue;
 
             window.RootViewController = navigation;
             window.MakeKeyAndVisible();
-            return true;
-        }
 
-        public void show_login()
-        {
-            var login = new LoginViewController();
-            login.LoginSucceeded += () =>
+            if (!AppGlobal.Current.CurrentUserAndConnectionExists)
             {
-                show_feed();
-            };
+                var login = new LoginViewController();
+                login.LoginSucceeded += () =>
+                {
+                    login.DismissViewController(true, null);
+                };
 
-            navigation.PushViewController(login, true);
+                navigation.PresentViewController(login, true, null);
+            }
+
+            return true;
         }
 
         public void show_feed()

@@ -47,7 +47,7 @@ namespace rangr.ios
             // Perform any additional setup after loading the view, typically from a nib.
             base.ViewDidLoad();
 
-            NavigationItem.HidesBackButton = true;
+            //NavigationItem.HidesBackButton = true;
 
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
             NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
@@ -80,11 +80,14 @@ namespace rangr.ios
         public override async void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-            UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
-            await view_model.RefreshPosts();
-            UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-
+                await view_model.RefreshPosts();
+            
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+            }
         }
 
         public override void DidReceiveMemoryWarning()
@@ -127,6 +130,13 @@ namespace rangr.ios
         {
             return objects.Count;
         }
+
+        //        public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+        //        {
+        //            //This should be interesting
+        //            //http://www.thinkandbuild.it/animating-uitableview-cells/
+        //        }
+
         // Customize the appearance of table view cells.
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {

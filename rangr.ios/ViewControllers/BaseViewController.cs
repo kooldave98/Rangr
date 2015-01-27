@@ -67,9 +67,9 @@ namespace rangr.ios
                 {
                     ok_button_action();
                 }
-                alert.Show();
-                
             };
+
+            alert.Show();
         }
 
         protected void notify(String methodName)
