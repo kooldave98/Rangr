@@ -3,7 +3,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 
-namespace App.iOS
+namespace experiments.ios
 {
     public partial class LoginViewController
     {
@@ -13,26 +13,22 @@ namespace App.iOS
         UIButton login;
         UIButton help;
 
-        static readonly UIImage TextFieldBackground = UIImage.FromBundle("login_textfield.png")
-																.CreateResizableImage(new UIEdgeInsets(8, 8, 8, 8));
-
-        public void InitView()
+        protected void InitView()
         {
-            View.BackgroundColor = UIColor.FromPatternImage(UIImage.FromBundle("login_box.png"));
+            View.BackgroundColor = UIColor.White;
 
+            var logo = new UIImageView(UIImage.FromBundle("user-default-avatar.png"));
 
-//			var logo = new UIImageView (UIImage.FromBundle ("logo.png"));
-//			AddCentered (logo, 33, logo.Image.Size.Width, logo.Image.Size.Height);
+            AddCentered(logo, 33, logo.Image.Size.Width, logo.Image.Size.Height);
 
             username = new UITextField
             {
                 Placeholder = "Username",
-                BorderStyle = UITextBorderStyle.None,
+                BorderStyle = UITextBorderStyle.RoundedRect,
                 VerticalAlignment = UIControlContentVerticalAlignment.Center,
                 AutocorrectionType = UITextAutocorrectionType.No,
                 AutocapitalizationType = UITextAutocapitalizationType.None,
                 ClearButtonMode = UITextFieldViewMode.WhileEditing,
-                Background = TextFieldBackground,
                 LeftView = new UIView(new CGRect(0, 0, 8, 8)),
                 LeftViewMode = UITextFieldViewMode.Always,
                 ReturnKeyType = UIReturnKeyType.Next,
@@ -48,12 +44,11 @@ namespace App.iOS
             {
                 Placeholder = "Password",
                 SecureTextEntry = true,
-                BorderStyle = UITextBorderStyle.None,
+                BorderStyle = UITextBorderStyle.RoundedRect,
                 VerticalAlignment = UIControlContentVerticalAlignment.Center,
                 AutocorrectionType = UITextAutocorrectionType.No,
                 AutocapitalizationType = UITextAutocapitalizationType.None,
                 ClearButtonMode = UITextFieldViewMode.WhileEditing,
-                Background = TextFieldBackground,
                 LeftView = new UIView(new CGRect(0, 0, 8, 8)),
                 LeftViewMode = UITextFieldViewMode.Always,
                 ReturnKeyType = UIReturnKeyType.Go,
@@ -65,17 +60,15 @@ namespace App.iOS
             };
             AddCentered(password, 132, 200, 44);
 
-            login = UIButton.FromType(UIButtonType.Custom);
+            login = UIButton.FromType(UIButtonType.RoundedRect);
             login.SetTitle("Login", UIControlState.Normal);
-            login.SetBackgroundImage(UIImage.FromBundle("login_btn.png").CreateResizableImage(new UIEdgeInsets(8, 8, 8, 8)), UIControlState.Normal);
             login.TouchUpInside += delegate
             {
                 Login();
             };
             AddCentered(login, 184, 100, 51);
 
-            help = UIButton.FromType(UIButtonType.Custom);
-            help.SetImage(UIImage.FromBundle("questionmark.png"), UIControlState.Normal);
+            help = UIButton.FromType(UIButtonType.InfoDark);
             help.TouchUpInside += (sender, e) =>
             {
                 new UIAlertView("Need Help?", "Enter any username or password to login.", null, "Ok").Show();
@@ -97,15 +90,6 @@ namespace App.iOS
             frame.Y = login.Frame.Y + 6;
             indicator.Frame = frame;
             View.AddSubview(indicator);
-        }
-
-
-        void AddCentered(UIView view, float y, float width, float height)
-        {
-            var f = new CGRect((320 - width) / 2, y, width, height);
-            view.Frame = f;
-            view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
-            View.AddSubview(view);
         }
     }
 }

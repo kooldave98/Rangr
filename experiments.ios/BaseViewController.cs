@@ -1,20 +1,18 @@
 ﻿using System;
 using UIKit;
-using App.Common;
 using BigTed;
 using Foundation;
 using CoreGraphics;
 
-namespace rangr.ios
+namespace experiments.ios
 {
-    public abstract class BaseViewModelController<VM> : BaseViewController where VM : ViewModelBase
+    public abstract class BaseViewController : UIViewController
     {
-        protected VM view_model;
+        public abstract string TitleLabel { get; }
 
         public override void LoadView()
         {
             base.LoadView();
-            Guard.IsNotNull(view_model, "view_model");
 
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
         }
@@ -31,11 +29,6 @@ namespace rangr.ios
             view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
             View.AddSubview(view);
         }
-    }
-
-    public abstract class BaseViewController : UIViewController
-    {
-        public abstract string TitleLabel { get; }
 
         protected void hide_keyboard_for()
         {

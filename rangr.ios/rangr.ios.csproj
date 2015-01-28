@@ -171,11 +171,6 @@
     </Compile>
     <Compile Include="ViewControllers\PostDetailViewController.cs" />
     <Compile Include="ViewControllers\NewPostViewController.cs" />
-    <Compile Include="Theme.cs" />
-    <Compile Include="SampleViewController.designer.cs">
-      <DependentUpon>SampleViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SampleViewController.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

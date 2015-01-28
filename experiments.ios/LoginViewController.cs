@@ -2,19 +2,23 @@ using System;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using App.Common;
 
-namespace App.iOS
+namespace experiments.ios
 {
-    public partial class LoginViewController : UIViewController
+    public partial class LoginViewController : BaseViewController
     {
-        public event Action LoginSucceeded = delegate {};
+        public override string TitleLabel
+        {
+            get
+            {
+                return "Login";
+            }
+        }
 
-        private LoginViewModel view_model;
+        public event Action LoginSucceeded = delegate {};
 
         public LoginViewController()
         {
-            view_model = new LoginViewModel();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -23,17 +27,15 @@ namespace App.iOS
 
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
 
-            InitView();		
-
+            InitView();
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            //del.NavigationController.SetNavigationBarHidden(true, false);
         }
 
-        private async void Login()
+        private void Login()
         {
             if (string.IsNullOrEmpty(username.Text))
             {
@@ -56,16 +58,8 @@ namespace App.iOS
             indicator.StartAnimating();
             //indicator.StopAnimating ();
 
-            view_model.UserDisplayName = username.Text;
-
-            var create_user_successful = await view_model.CreateUser();
-
-            if (create_user_successful)
-            {
-                await AppGlobal.Current.CreateNewConnectionFromLogin();
-
-                LoginSucceeded();
-            }
+            ShowToast("Hello");
+            LoginSucceeded();
         }
 
     }

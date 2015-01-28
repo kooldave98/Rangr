@@ -98,6 +98,9 @@
     <Reference Include="GoogleMaps">
       <HintPath>..\Components\googlemapsios-1.9.0.2\lib\ios-unified\GoogleMaps.dll</HintPath>
     </Reference>
+    <Reference Include="BTProgressHUD">
+      <HintPath>..\Components\btprogresshud-1.15\lib\ios-unified\BTProgressHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -131,11 +134,21 @@
     <Compile Include="ConstraintsVC.designer.cs">
       <DependentUpon>ConstraintsVC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Theme.cs" />
+    <Compile Include="BaseViewController.cs" />
+    <Compile Include="LoginViewController.cs" />
+    <Compile Include="LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <XamarinComponentReference Include="googlemapsios">
       <Version>1.9.0.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="btprogresshud">
+      <Version>1.15</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
