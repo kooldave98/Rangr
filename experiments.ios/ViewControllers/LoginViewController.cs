@@ -7,17 +7,10 @@ namespace experiments.ios
 {
     public partial class LoginViewController : BaseViewController
     {
-        public override string TitleLabel
-        {
-            get
-            {
-                return "Login";
-            }
-        }
-
         public event Action LoginSucceeded = delegate {};
 
         public LoginViewController()
+            : base("Login")
         {
         }
 

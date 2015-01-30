@@ -8,7 +8,12 @@ namespace experiments.ios
 {
     public abstract class BaseViewController : UIViewController
     {
-        public abstract string TitleLabel { get; }
+        public BaseViewController(string title)
+        {
+            TitleLabel = title;
+        }
+
+        public string TitleLabel { get; private set; }
 
         public override void LoadView()
         {

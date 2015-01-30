@@ -8,8 +8,14 @@ using Google.Maps;
 
 namespace experiments.ios
 {
-    public class MapViewController : UIViewController
+    public class MapViewController : BaseViewController
     {
+        public MapViewController()
+            : base("Map")
+        {
+           
+        }
+
         MapView mapView;
 
         public override void LoadView()

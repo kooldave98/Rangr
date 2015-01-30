@@ -107,12 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="ConstraintsVC_iPhone.xib">
-      <DependentUpon>ConstraintsVC.cs</DependentUpon>
-    </InterfaceDefinition>
-    <InterfaceDefinition Include="ConstraintsVC_iPad.xib">
-      <DependentUpon>ConstraintsVC.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -128,18 +122,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="MapViewController.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ConstraintsVC.cs" />
-    <Compile Include="ConstraintsVC.designer.cs">
-      <DependentUpon>ConstraintsVC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Theme.cs" />
-    <Compile Include="BaseViewController.cs" />
-    <Compile Include="LoginViewController.cs" />
-    <Compile Include="LoginViewController.designer.cs">
+    <Compile Include="ViewControllers\LoginViewController.cs" />
+    <Compile Include="ViewControllers\LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\BaseViewController.cs" />
+    <Compile Include="ViewControllers\MapViewController.cs" />
+    <Compile Include="ViewControllers\ConstraintsVC.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -151,5 +142,8 @@
       <Version>1.15</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewControllers\" />
   </ItemGroup>
 </Project>
