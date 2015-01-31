@@ -14,8 +14,10 @@ namespace experiments.ios
         {
         }
 
-        public override void LoadView()
+        public override void ViewDidLoad()
         {
+            base.ViewDidLoad();
+
             var content_view = new UIView();
             content_view.BackgroundColor = UIColor.Green;
             this.View = content_view;
@@ -66,11 +68,9 @@ namespace experiments.ios
                     1.0f,
                     0));
 
-        }
+        
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
+
 			
             // Perform any additional setup after loading the view, typically from a nib.
         }

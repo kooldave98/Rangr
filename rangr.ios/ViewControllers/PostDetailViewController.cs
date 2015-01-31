@@ -28,9 +28,9 @@ namespace rangr.ios
             view_model = new PostDetailsViewModel();
         }
 
-        public override void LoadView()
+        public override void ViewDidLoad()
         {
-            base.LoadView();
+            base.ViewDidLoad();
 
             View.BackgroundColor = UIColor.White;
 
@@ -40,6 +40,8 @@ namespace rangr.ios
             mapView.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
             //View.Add(mapView);
             AddCentered(mapView);
+
+            ConfigureView();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -52,14 +54,6 @@ namespace rangr.ios
         {   
             //mapView.StopRendering();
             base.ViewWillDisappear(animated);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // Perform any additional setup after loading the view, typically from a nib.
-            ConfigureView();
         }
 
         public void SetDetailItem(Post newDetailItem)

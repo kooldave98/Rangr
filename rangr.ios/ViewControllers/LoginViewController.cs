@@ -34,6 +34,18 @@ namespace rangr.ios
             AutomaticallyAdjustsScrollViewInsets = false;
         }
 
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            View.AddSubview(scrollView = new UIScrollView(View.Bounds));
+
+            LoginView = new LoginView();
+            LoginView.UserDidLogin += _ => Login(LoginView.EmailField.Text, LoginView.PasswordField.Text);
+            scrollView.Add(ContentView = LoginView);
+
+        }
+
         public override void ViewDidLayoutSubviews()
         {
             var bounds = View.Bounds;
@@ -42,17 +54,6 @@ namespace rangr.ios
             //Resize Scroller for keyboard;
             bounds.Height -= keyboardOffset;
             scrollView.Frame = bounds;
-        }
-
-        public override void LoadView()
-        {
-            base.LoadView();
-            View.AddSubview(scrollView = new UIScrollView(View.Bounds));
-
-            LoginView = new LoginView();
-            LoginView.UserDidLogin += _ => Login(LoginView.EmailField.Text, LoginView.PasswordField.Text);
-            scrollView.Add(ContentView = LoginView);
-
         }
 
         private void OnKeyboardNotification(NSNotification notification)

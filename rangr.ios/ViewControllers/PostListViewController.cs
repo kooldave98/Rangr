@@ -36,16 +36,12 @@ namespace rangr.ios
         private UIRefreshControl RefreshControl;
         public UITableView TableView;
 
-        public override void LoadView()
-        {
-            base.LoadView();
-            View.AddSubview(TableView = new UITableView(View.Bounds));
-        }
-
         public override void ViewDidLoad()
         {
             // Perform any additional setup after loading the view, typically from a nib.
             base.ViewDidLoad();
+
+            View.AddSubview(TableView = new UITableView(View.Bounds));
 
             //NavigationItem.HidesBackButton = true;
 

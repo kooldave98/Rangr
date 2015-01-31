@@ -26,9 +26,9 @@ namespace rangr.ios
             }
         }
 
-        public override void LoadView()
+        public override void ViewDidLoad()
         {
-            base.LoadView();
+            base.ViewDidLoad();
 
             View.BackgroundColor = UIColor.White;
 
@@ -39,11 +39,6 @@ namespace rangr.ios
             CreatePostBtn.TouchUpInside += Save;
             CreatePostBtn.Frame = new CGRect(8, 200, 304, 348);
             View.Add(CreatePostBtn);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
             //this.CreatePostBtn.TouchUpInside += Save;
