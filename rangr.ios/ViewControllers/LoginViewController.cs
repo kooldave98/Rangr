@@ -38,7 +38,7 @@ namespace rangr.ios
         {
             base.ViewDidLoad();
 
-            View.AddSubview(scrollView = new UIScrollView(View.Bounds));
+            View.AddSubview(scrollView = new UIScrollView());
 
             LoginView = new LoginView();
             LoginView.UserDidLogin += _ => Login(LoginView.EmailField.Text, LoginView.PasswordField.Text);

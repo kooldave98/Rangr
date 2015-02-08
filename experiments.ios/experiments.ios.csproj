@@ -131,6 +131,7 @@
     <Compile Include="ViewControllers\BaseViewController.cs" />
     <Compile Include="ViewControllers\MapViewController.cs" />
     <Compile Include="ViewControllers\ConstraintsVC.cs" />
+    <Compile Include="UIViewExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
