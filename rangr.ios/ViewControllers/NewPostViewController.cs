@@ -3,6 +3,7 @@ using CoreGraphics;
 using App.Common;
 using Foundation;
 using UIKit;
+using System.Drawing;
 
 namespace rangr.ios
 {
@@ -32,16 +33,23 @@ namespace rangr.ios
 
             View.BackgroundColor = UIColor.White;
 
-            View.Add(NewPostTbx = new UITextView(new CGRect(8, 8, 304, 348)));
+            View.Add(NewPostTbx = new UITextView());
 
             CreatePostBtn = UIButton.FromType(UIButtonType.RoundedRect);
             CreatePostBtn.SetTitle("Send", UIControlState.Normal);
             CreatePostBtn.TouchUpInside += Save;
-            CreatePostBtn.Frame = new CGRect(8, 200, 304, 348);
+
             View.Add(CreatePostBtn);
 
             // Perform any additional setup after loading the view, typically from a nib.
             //this.CreatePostBtn.TouchUpInside += Save;
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            NewPostTbx.Frame = new CGRect(8, 8, 304, 348);
+            //CreatePostBtn.CenterInParent();
+            CreatePostBtn.Frame = new CGRect(8, 200, 304, 348);
         }
 
         private async void Save(object sender, EventArgs e)

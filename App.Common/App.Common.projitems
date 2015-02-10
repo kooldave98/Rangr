@@ -51,7 +51,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Gravatar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\UIViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

@@ -18,19 +18,6 @@ namespace rangr.ios
 
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
         }
-
-        protected void AddCentered(UIView view)
-        {
-            AddCentered(view, view.Frame.Y, view.Frame.Width, view.Frame.Height);
-        }
-
-        protected void AddCentered(UIView view, nfloat y, nfloat width, nfloat height)
-        {
-            var f = new CGRect((View.Frame.Width - width) / 2, y, width, height);
-            view.Frame = f;
-            view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
-            View.AddSubview(view);
-        }
     }
 
     public abstract class BaseViewController : UIViewController

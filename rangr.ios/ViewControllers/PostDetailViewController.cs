@@ -20,7 +20,7 @@ namespace rangr.ios
             }
         }
 
-        private MapView mapView;
+        private MapView map_view;
         private UILabel description;
 
         public PostDetailViewController()
@@ -39,14 +39,21 @@ namespace rangr.ios
 
             View.BackgroundColor = UIColor.White;
 
-            //View.Add(description = new UILabel(new CGRect(8, 8, 304, 348)));
-            AddCentered(description = new UILabel(new CGRect(8, 8, 304, 348)));
-            SetupMap();
-            mapView.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
-            //View.Add(mapView);
-            AddCentered(mapView);
+            View.Add(description = new UILabel());
+
+            View.Add(map_view = LoadMap());
 
             ConfigureView();
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            description.Frame = new CGRect(8, 8, 304, 348);
+
+            map_view.Frame = new CGRect(8, 200, 304, 348);
+
+            map_view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
+
         }
 
         public override void ViewWillAppear(bool animated)
@@ -89,25 +96,27 @@ namespace rangr.ios
             // Release any cached data, images, etc that aren't in use.
         }
 
-        private void SetupMap()
+        private MapView LoadMap()
         {
             var splits = view_model.CurrentPost.long_lat_acc_geo_string.Split(',');
 
             var camera = CameraPosition.FromCamera(latitude: double.Parse(splits[1]), longitude: double.Parse(splits[0]), zoom: 15);
 
-            mapView = MapView.FromCamera(new CGRect(8, 200, 304, 348), camera);
+            var map_View = MapView.FromCamera(CGRect.Empty, camera);
         
-            mapView.MapType = MapViewType.Normal;
+            map_View.MapType = MapViewType.Normal;
         
-            mapView.MyLocationEnabled = false;
+            map_View.MyLocationEnabled = false;
         
-            mapView.Settings.SetAllGesturesEnabled(false);
+            map_View.Settings.SetAllGesturesEnabled(false);
         
-            AddMarker(view_model.CurrentPost, mapView);
+            AddMarker(view_model.CurrentPost, map_View);
         
-            AddCircle(view_model.CurrentPost, mapView);
+            AddCircle(view_model.CurrentPost, map_View);
         
-            mapView.Animate(GetPosition(view_model.CurrentPost.long_lat_acc_geo_string));
+            map_View.Animate(GetPosition(view_model.CurrentPost.long_lat_acc_geo_string));
+
+            return map_View;
         }
 
         private void AddMarker(Post the_post, MapView the_map)

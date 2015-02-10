@@ -15,12 +15,9 @@ namespace rangr.ios
     /// </summary>
     public partial class PostListViewController : BaseViewModelController<FeedViewModel>
     {
-        public override string TitleLabel
+        public override string TitleLabel 
         {
-            get
-            {
-                return "Feed";
-            }
+            get { return "Feed"; }
         }
 
         public PostListViewController()
@@ -43,17 +40,7 @@ namespace rangr.ios
 
             View.AddSubview(TableView = new UITableView(View.Bounds));
 
-            //NavigationItem.HidesBackButton = true;
-
-            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
-            NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
-            {
-                NewPostSelected();
-
-            };
-
             TableView.Source = new PostsTableViewSource(this, view_model.Posts);
-
 
             RefreshControl = new UIRefreshControl();
 
@@ -86,14 +73,6 @@ namespace rangr.ios
             }
         }
 
-        public override void DidReceiveMemoryWarning()
-        {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-			
-            // Release any cached data, images, etc that aren't in use.
-        }
-
         public void ItemSelected(Post selected_post)
         {
             PostItemSelected(selected_post);
@@ -101,7 +80,7 @@ namespace rangr.ios
 
 
         public event Action<Post> PostItemSelected = delegate {};
-        public event Action NewPostSelected = delegate {};
+        //public event Action NewPostSelected = delegate {};
         //        public event Action<string> HashTagSelected = delegate {};
     }
 

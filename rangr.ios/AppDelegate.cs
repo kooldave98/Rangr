@@ -63,8 +63,15 @@ namespace rangr.ios
         {
             var vc = new PostListViewController();
             vc.PostItemSelected += show_detail;
-            vc.NewPostSelected += show_new_post;
+
+            //vc.NewPostSelected += show_new_post;
             navigation.PushViewController(vc, true);
+            vc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
+            vc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
+            {
+                show_new_post();
+
+            };
         }
 
         public void show_new_post()

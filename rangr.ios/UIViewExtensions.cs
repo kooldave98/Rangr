@@ -12,13 +12,30 @@ namespace App.Common
     //http://blog.adamkemp.com/2014/12/ios-layout-gotchas-redux.html
     public static class UIViewExtensions
     {
+
+        public static void CenterXInParent(this UIView view)
+        {
+            var parent = view.Superview;
+            Guard.IsNotNull(parent, "parent");
+
+            var parentSize = parent.Bounds.Size;
+            var viewSize = view.Bounds.Size;
+
+            var f = new CGRect((parentSize.Width - viewSize.Width) / 2, 
+                                view.Frame.Y, 
+                                viewSize.Width, 
+                                viewSize.Height);
+            view.Frame = f;
+            view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
+            //parent.AddSubview(view);
+        }
+
         public static void CenterInParent(this UIView view)
         {
             var parent = view.Superview;
-            if (parent == null)
-            {
-                throw new InvalidOperationException("Cannot center a view in its parent unless it has a parent");
-            }
+
+            Guard.IsNotNull(parent, "Cannot center a view in its parent unless it has a parent");
+
             var parentSize = parent.Bounds.Size;
             view.SafeSetCenter(new CGPoint(parentSize.Width / 2, parentSize.Height / 2));
         }
