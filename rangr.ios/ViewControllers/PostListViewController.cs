@@ -65,9 +65,12 @@ namespace rangr.ios
             base.ViewWillAppear(animated);
             if (AppGlobal.Current.CurrentUserAndConnectionExists)
             {
+                ShowToast("Hello");
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
                 await view_model.RefreshPosts();
+
+                //dismiss_progress();
             
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
             }

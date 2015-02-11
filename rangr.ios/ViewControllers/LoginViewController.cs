@@ -114,8 +114,6 @@ namespace rangr.ios
                             {
                                 ShowToast("An error occurred.");
                             }
-
-                            dismiss_progress();
                         });
 
 
@@ -130,7 +128,6 @@ namespace rangr.ios
                 }
             }
 
-            dismiss_progress();
         }
     }
 }

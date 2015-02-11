@@ -41,7 +41,7 @@ namespace rangr.ios
 
         protected void ShowToast(string message)
         {
-            BTProgressHUD.ShowToast(message, false, 10000);
+            BTProgressHUD.ShowToast(message, false, 5000);
         }
 
         protected void ShowAlert(string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
