@@ -5,6 +5,7 @@
 //
 //namespace App.iOS
 //{
+//    //See James Montemagnos Post-It app for how he uses the appearance api for themeing.
 //    public class Theme
 //    {
 //        /// <summary>
