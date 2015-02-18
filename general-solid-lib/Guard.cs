@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Common
+namespace general_solid_lib
 {
     public static class Guard
     {

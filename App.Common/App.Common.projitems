@@ -47,7 +47,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Gravatar.cs" />

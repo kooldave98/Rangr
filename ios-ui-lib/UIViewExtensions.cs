@@ -6,8 +6,9 @@ using System.Drawing;
 using Foundation;
 using UIKit;
 using CoreGraphics;
+using general_solid_lib;
 
-namespace App.Common
+namespace ios_ui_lib
 {
     //http://blog.adamkemp.com/2014/12/ios-layout-gotchas-redux.html
     public static class UIViewExtensions

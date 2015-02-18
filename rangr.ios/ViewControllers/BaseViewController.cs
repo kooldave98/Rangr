@@ -4,6 +4,7 @@ using App.Common;
 using BigTed;
 using Foundation;
 using CoreGraphics;
+using general_solid_lib;
 
 namespace rangr.ios
 {

@@ -14,6 +14,7 @@ using Android.Widget;
 using App.Common;
 using Android.Views.InputMethods;
 using AndroidHUD;
+using general_solid_lib;
 
 namespace rangr.droid
 {
