@@ -8,7 +8,7 @@ namespace ios_ui_lib
         public static nfloat parent_child_margin = 20.0f;
         public static nfloat sibling_sibling_margin = 8.0f;
 
-        public static nfloat finger_tip_diameter = 44.0f;
+        public static nfloat finger_tip_diameter = 30.0f;
     }
 }
 

@@ -30,6 +30,9 @@ namespace rangr.ios
 
             Theme.Apply();
 
+            navigation.NavigationBar.Translucent = false;
+            tab_bar.TabBar.Translucent = false;
+
             show_feed();
 
             tab_bar.AddChildViewController(navigation);

@@ -4,6 +4,7 @@ using App.Common;
 using Foundation;
 using UIKit;
 using System.Drawing;
+using ios_ui_lib;
 
 namespace rangr.ios
 {
@@ -32,6 +33,7 @@ namespace rangr.ios
             base.ViewDidLoad();
 
             View.Add(NewPostTbx = new UITextView());
+            Theme.Primitive.Apply(NewPostTbx);
 
             CreatePostBtn = UIButton.FromType(UIButtonType.RoundedRect);
             CreatePostBtn.SetTitle("Send", UIControlState.Normal);
@@ -39,15 +41,24 @@ namespace rangr.ios
 
             View.Add(CreatePostBtn);
 
-            // Perform any additional setup after loading the view, typically from a nib.
-            //this.CreatePostBtn.TouchUpInside += Save;
         }
 
         public override void ViewDidLayoutSubviews()
         {
-            NewPostTbx.Frame = new CGRect(8, 8, 304, 348);
-            //CreatePostBtn.CenterInParent();
-            CreatePostBtn.Frame = new CGRect(8, 200, 304, 348);
+
+            View.ConstrainLayout(() => 
+                NewPostTbx.Frame.Top == View.Frame.Top + parent_child_margin &&
+                NewPostTbx.Frame.Left == View.Frame.Left + parent_child_margin &&
+                NewPostTbx.Frame.Right == View.Frame.Right - parent_child_margin &&
+                NewPostTbx.Frame.Height == View.Frame.Width * 0.5f &&
+
+
+                CreatePostBtn.Frame.Top == NewPostTbx.Frame.Bottom + parent_child_margin &&
+                CreatePostBtn.Frame.Height == finger_tip_diameter &&
+                CreatePostBtn.Frame.Width == CreatePostBtn.Frame.Height * 2.0f &&
+                CreatePostBtn.Frame.GetCenterX() == View.Frame.GetCenterX()
+            );
+        
         }
 
         private async void Save(object sender, EventArgs e)

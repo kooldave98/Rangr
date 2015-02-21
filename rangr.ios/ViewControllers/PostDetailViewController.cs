@@ -7,6 +7,7 @@ using Foundation;
 using App.Common;
 
 using Google.Maps;
+using ios_ui_lib;
 
 namespace rangr.ios
 {
@@ -46,24 +47,19 @@ namespace rangr.ios
 
         public override void ViewDidLayoutSubviews()
         {
-            description.Frame = new CGRect(8, 8, 304, 348);
 
-            map_view.Frame = new CGRect(8, 200, 304, 348);
+            View.ConstrainLayout(() => 
+                description.Frame.Top == View.Frame.Top + parent_child_margin &&
+                description.Frame.Left == View.Frame.Left + parent_child_margin &&
+                description.Frame.Right == View.Frame.Right - parent_child_margin &&
+                description.Frame.Height == finger_tip_diameter &&
 
-            map_view.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
 
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-            //mapView.StartRendering();
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {   
-            //mapView.StopRendering();
-            base.ViewWillDisappear(animated);
+                map_view.Frame.Top == description.Frame.Bottom + parent_child_margin &&
+                map_view.Frame.Left == View.Frame.Left + parent_child_margin &&
+                map_view.Frame.Right == View.Frame.Right - parent_child_margin &&
+                map_view.Frame.Bottom == View.Frame.Bottom - parent_child_margin
+            );
         }
 
         public void SetDetailItem(Post newDetailItem)

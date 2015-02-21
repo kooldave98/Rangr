@@ -5,6 +5,7 @@ using BigTed;
 using Foundation;
 using CoreGraphics;
 using general_solid_lib;
+using ios_ui_lib;
 
 namespace rangr.ios
 {
@@ -26,6 +27,20 @@ namespace rangr.ios
     public abstract class BaseViewController : UIViewController
     {
         public abstract string TitleLabel { get; }
+
+//        private static CGSize textSize = new NSString("The quick brown fox jumped over the lazy dog" +
+//                                        "The quick brown fox jumped over the lazy dog" +
+//                                        "The quick brown fox jumped over the lazy dog" +
+//                                        "The quick brown fox jumped over the lazy dog")
+//            .StringSize(UIFont.SystemFontOfSize(12f));
+//
+//        protected nfloat one_sixty_character_size = textSize.Height;
+
+        protected nfloat parent_child_margin = HumanInterface.parent_child_margin;
+
+        protected nfloat sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
+
+        protected nfloat finger_tip_diameter = HumanInterface.finger_tip_diameter;
 
         protected void hide_keyboard_for()
         {

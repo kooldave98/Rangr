@@ -39,6 +39,7 @@ namespace rangr.ios
             
         public static void Apply(UITabBar.UITabBarAppearance appearance, string options = null)
         {
+
         }
             
         public static void Apply(UIButton.UIButtonAppearance appearance, string options = null)
@@ -50,8 +51,9 @@ namespace rangr.ios
         {
         }
             
-        public static void Apply(UITextField.UITextFieldAppearance appearance, string options = null)
+        public static void Apply(UITextView.UITextViewAppearance appearance, string options = null)
         {
+
         }
 
         #region"Primitive API"
@@ -81,8 +83,11 @@ namespace rangr.ios
             {
             }
 
-            public static void Apply(UITextField view, string options = null)
+            public static void Apply(UITextView view, string options = null)
             {
+                view.Layer.BorderColor = UIColor.LightGray.CGColor;
+                view.Layer.BorderWidth = 1;
+                view.Layer.MasksToBounds = true;
             }
         }
         #endregion
