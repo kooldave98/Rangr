@@ -9,39 +9,41 @@ namespace experiments.ios
     {
         public event Action LoginSucceeded = delegate {};
 
-        public LoginViewController()
-            : base("Login")
-        {
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);			 
-
-            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
-
-            InitView();
+        public override string TitleLabel { 
+            get{ return "Login"; } 
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.Default;
+            View.BackgroundColor = UIColor.White;
+
+            populate_view();
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            layout_with_simple_contraints();
         }
 
         private void Login()
         {
             if (string.IsNullOrEmpty(username.Text))
             {
-                var view = new UIAlertView("Oops", "Please enter a username.", null, "Ok");
-                view.Dismissed += (sender, e) => username.BecomeFirstResponder();
-                view.Show();
+                show_alert("Oops", "Please enter a username.", "Ok", () => {
+                    username.BecomeFirstResponder();
+                });
+
                 return;
             }
             if (string.IsNullOrEmpty(password.Text))
             {
-                var view = new UIAlertView("Oops", "Please enter a password.", null, "Ok");
-                view.Dismissed += (sender, e) => password.BecomeFirstResponder();
-                view.Show();
+                show_alert("Oops", "Please enter a password.", "Ok", () => {
+                    password.BecomeFirstResponder();
+                });
+
                 return;
             }
 
@@ -51,7 +53,7 @@ namespace experiments.ios
             indicator.StartAnimating();
             //indicator.StopAnimating ();
 
-            ShowToast("Hello");
+            show_toast("Hello");
             LoginSucceeded();
         }
 

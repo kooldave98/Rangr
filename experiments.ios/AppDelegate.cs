@@ -33,17 +33,17 @@ namespace experiments.ios
 
 
 
-//            var login = new LoginViewController();
-//
-//            login.LoginSucceeded += () =>
-//            {
-//                navigation.DismissViewController(true, () =>
-//                    {
-//                        navigation.PushViewController(new MapViewController(), true);
-//                    });
-//            };
-//
-//            navigation.PresentViewController(login, true, null);
+            var login = new LoginViewController();
+
+            login.LoginSucceeded += () =>
+            {
+                navigation.DismissViewController(true, () =>
+                    {
+                        //navigation.PushViewController(new MapViewController(), true);
+                    });
+            };
+
+            navigation.PresentViewController(login, true, null);
             
             return true;
         }

@@ -10,10 +10,8 @@ namespace experiments.ios
 {
     public class MapViewController : BaseViewController
     {
-        public MapViewController()
-            : base("Map")
-        {
-           
+        public override string TitleLabel { 
+            get{ return "Map"; } 
         }
 
         MapView mapView;

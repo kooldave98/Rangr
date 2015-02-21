@@ -2,26 +2,68 @@ using System;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using ios_ui_lib;
 
 namespace experiments.ios
 {
     public partial class LoginViewController
     {
+
+        UIImageView logo;
         UITextField username;
         UITextField password;
-        UIActivityIndicatorView indicator;
         UIButton login;
         UIButton help;
+        UIActivityIndicatorView indicator;
 
-        protected void InitView()
+
+        private void layout_with_simple_contraints()
         {
-            View.BackgroundColor = UIColor.White;
 
-            var logo = new UIImageView(UIImage.FromBundle("user-default-avatar.png"));
+            var logo_image_width = logo.Image.Size.Width;
+            var logo_image_height = logo.Image.Size.Height;
+            var parent_child_margin = HumanInterface.parent_child_margin;
+            var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
+            var finger_tip_diameter = HumanInterface.finger_tip_diameter;
 
-            AddCentered(logo, 33, logo.Image.Size.Width, logo.Image.Size.Height);
+            View.ConstrainLayout(() => 
+                logo.Frame.Width == logo_image_width &&
+                logo.Frame.Height == logo_image_height &&
+                logo.Frame.Top == View.Frame.Top + parent_child_margin &&
+                logo.Frame.GetCenterX() == View.Frame.GetCenterX() &&
 
-            username = new UITextField
+                username.Frame.Left == View.Frame.Left + parent_child_margin &&
+                username.Frame.Right == View.Frame.Right - parent_child_margin &&         
+                username.Frame.Top == logo.Frame.Bottom + sibling_sibling_margin &&
+                username.Frame.Height == finger_tip_diameter &&
+
+                password.Frame.Left == View.Frame.Left + parent_child_margin &&
+                password.Frame.Right == View.Frame.Right - parent_child_margin &&         
+                password.Frame.Top == username.Frame.Bottom + sibling_sibling_margin &&
+                password.Frame.Height == finger_tip_diameter &&
+
+                login.Frame.Height == finger_tip_diameter &&
+                login.Frame.Width == login.Frame.Height * 2.0f &&
+                login.Frame.Top == password.Frame.Bottom + sibling_sibling_margin &&
+                login.Frame.GetCenterX() == View.Frame.GetCenterX() &&
+
+                help.Frame.Height == finger_tip_diameter &&
+                help.Frame.Width == help.Frame.Height * 2.0f &&
+                help.Frame.Top == login.Frame.Top &&
+                help.Frame.Left == login.Frame.Right + sibling_sibling_margin &&
+
+                indicator.Frame.Height == finger_tip_diameter &&
+                indicator.Frame.Width == indicator.Frame.Height * 2.0f &&
+                indicator.Frame.Top == login.Frame.Bottom + sibling_sibling_margin&&
+                indicator.Frame.Left == login.Frame.Left
+            );
+        }
+
+        protected void populate_view()
+        {
+            View.AddSubview( logo = new UIImageView(UIImage.FromBundle("user-default-avatar.png")));
+
+            View.AddSubview(username = new UITextField
             {
                 Placeholder = "Username",
                 BorderStyle = UITextBorderStyle.RoundedRect,
@@ -37,10 +79,10 @@ namespace experiments.ios
                     password.BecomeFirstResponder();
                     return true;
                 },
-            };
-            AddCentered(username, 80, 200, 44);
+            });
 
-            password = new UITextField
+
+            View.AddSubview(password = new UITextField
             {
                 Placeholder = "Password",
                 SecureTextEntry = true,
@@ -57,8 +99,8 @@ namespace experiments.ios
                     Login();
                     return true;
                 },
-            };
-            AddCentered(password, 132, 200, 44);
+            });
+
 
             login = UIButton.FromType(UIButtonType.RoundedRect);
             login.SetTitle("Login", UIControlState.Normal);
@@ -66,30 +108,22 @@ namespace experiments.ios
             {
                 Login();
             };
-            AddCentered(login, 184, 100, 51);
+            View.AddSubview(login);
+
 
             help = UIButton.FromType(UIButtonType.InfoDark);
             help.TouchUpInside += (sender, e) =>
             {
                 new UIAlertView("Need Help?", "Enter any username or password to login.", null, "Ok").Show();
             };
-            AddCentered(help, 194, 30, 31);
+            View.AddSubview(help);
 
-            //Adjust frame of help button
-            var frame = help.Frame;
-            frame.X = login.Frame.Right + 8;
-            help.Frame = frame;
 
-            indicator = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge)
+            View.AddSubview(indicator = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge)
             {
                 HidesWhenStopped = true,
                 Hidden = true,
-            };
-            frame = indicator.Frame;
-            frame.X = login.Frame.X - indicator.Frame.Width - 8;
-            frame.Y = login.Frame.Y + 6;
-            indicator.Frame = frame;
-            View.AddSubview(indicator);
+            });
         }
     }
 }

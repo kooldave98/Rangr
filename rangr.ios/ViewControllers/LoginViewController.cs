@@ -29,8 +29,9 @@ namespace rangr.ios
         {
             view_model = new LoginViewModel();
 
+            //N/B: This should not be done here. How do we know we are in a navigation controller ? ;)
             //This hides the back button text when you leave this View Controller
-            this.NavigationItem.BackBarButtonItem = new UIBarButtonItem("", UIBarButtonItemStyle.Plain, handler: null);
+            //this.NavigationItem.BackBarButtonItem = new UIBarButtonItem("", UIBarButtonItemStyle.Plain, handler: null);
             AutomaticallyAdjustsScrollViewInsets = false;
         }
 
