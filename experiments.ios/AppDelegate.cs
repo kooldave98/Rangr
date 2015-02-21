@@ -21,6 +21,8 @@ namespace experiments.ios
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
+            Theme.Apply();
+
 //            tab_bar.AddChildViewController(new ConstraintsVC());
 //            tab_bar.AddChildViewController(new LoginViewController());
 //            tab_bar.AddChildViewController(new MapViewController());

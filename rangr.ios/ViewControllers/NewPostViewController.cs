@@ -31,8 +31,6 @@ namespace rangr.ios
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.White;
-
             View.Add(NewPostTbx = new UITextView());
 
             CreatePostBtn = UIButton.FromType(UIButtonType.RoundedRect);

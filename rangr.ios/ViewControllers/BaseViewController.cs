@@ -17,6 +17,8 @@ namespace rangr.ios
             base.LoadView();
             Guard.IsNotNull(view_model, "view_model");
 
+            Theme.Primitive.Apply(View);
+
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
         }
     }

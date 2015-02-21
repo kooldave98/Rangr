@@ -37,8 +37,6 @@ namespace rangr.ios
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.White;
-
             View.Add(description = new UILabel());
 
             View.Add(map_view = LoadMap());
