@@ -13,12 +13,8 @@ namespace rangr.ios
 {
     public class PostDetailViewController : BaseViewModelController<PostDetailsViewModel>
     {
-        public override string TitleLabel
-        {
-            get
-            {
-                return "Detail";
-            }
+        public override string TitleLabel {
+            get { return "Detail"; }
         }
 
         private MapView map_view;
@@ -80,14 +76,6 @@ namespace rangr.ios
             {
                 description.Text = view_model.CurrentPost.text;
             }
-        }
-
-        public override void DidReceiveMemoryWarning()
-        {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-			
-            // Release any cached data, images, etc that aren't in use.
         }
 
         private MapView LoadMap()

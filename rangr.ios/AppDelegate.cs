@@ -33,9 +33,9 @@ namespace rangr.ios
             navigation.NavigationBar.Translucent = false;
             tab_bar.TabBar.Translucent = false;
 
-            show_feed();
-
             tab_bar.AddChildViewController(navigation);
+
+            show_feed();
 
             window.RootViewController = tab_bar;
             window.MakeKeyAndVisible();
@@ -43,8 +43,7 @@ namespace rangr.ios
             if (!AppGlobal.Current.CurrentUserAndConnectionExists)
             {
                 var login = new LoginViewController();
-                login.LoginSucceeded += () =>
-                {
+                login.LoginSucceeded += () => {
                     login.DismissViewController(true, null);
                 };
 
@@ -62,20 +61,23 @@ namespace rangr.ios
             //vc.NewPostSelected += show_new_post;
             navigation.PushViewController(vc, true);
             vc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
-            vc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) =>
-            {
+            vc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
                 show_new_post();
-
             };
         }
 
         public void show_new_post()
         {
             var dc = new NewPostViewController();
-            dc.CreatePostSucceeded += () =>
-            {
+            dc.CreatePostSucceeded += () => {
                 navigation.PopToRootViewController(true);
             };
+
+            dc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done), false);
+            dc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
+                dc.Save(sender, e);
+            };
+
             navigation.PushViewController(dc, true);
         }
 

@@ -16,6 +16,7 @@ namespace rangr.ios
         public override void LoadView()
         {
             base.LoadView();
+
             Guard.IsNotNull(view_model, "view_model");
 
             Theme.Primitive.Apply(View);
@@ -49,20 +50,22 @@ namespace rangr.ios
 
         protected void show_progress(string title = "Loading...", string message = "Busy")
         {                
+            UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
             BTProgressHUD.Show(title);
         }
 
         protected void dismiss_progress()
         {
+            UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
             BTProgressHUD.Dismiss();
         }
 
-        protected void ShowToast(string message)
+        protected void show_toast(string message)
         {
             BTProgressHUD.ShowToast(message, false, 5000);
         }
 
-        protected void ShowAlert(string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
+        protected void show_alert(string title, string message, string ok_button_text = "Ok", Action ok_button_action = null)
         {
             var alert = new UIAlertView(title, message, null, ok_button_text);                
 

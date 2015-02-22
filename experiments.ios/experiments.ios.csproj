@@ -107,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
+    <InterfaceDefinition Include="Views\PostCellView.xib">
+      <DependentUpon>PostCellView.cs</DependentUpon>
+    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -131,6 +134,10 @@
     <Compile Include="ViewControllers\BaseViewController.cs" />
     <Compile Include="ViewControllers\MapViewController.cs" />
     <Compile Include="ViewControllers\ConstraintsVC.cs" />
+    <Compile Include="Views\PostCellView.cs" />
+    <Compile Include="Views\PostCellView.designer.cs">
+      <DependentUpon>PostCellView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -145,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewControllers\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\general-solid-lib\general-solid-lib.csproj">

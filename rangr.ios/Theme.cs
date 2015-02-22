@@ -85,9 +85,7 @@ namespace rangr.ios
 
             public static void Apply(UITextView view, string options = null)
             {
-                view.Layer.BorderColor = UIColor.LightGray.CGColor;
-                view.Layer.BorderWidth = 1;
-                view.Layer.MasksToBounds = true;
+
             }
         }
         #endregion

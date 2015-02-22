@@ -16,7 +16,7 @@ namespace rangr.ios
 
         public event Action<LoginView> UserDidLogin = delegate{};
 
-        public LoginView(string xamarinAccountEmail = "david.olubajo@outlook.com")
+        public LoginView()
         {
             BackgroundColor = UIColor.White;
 
@@ -29,7 +29,7 @@ namespace rangr.ios
             GravatarView.Layer.CornerRadius = GravatarSize.Width / 2;
             GravatarView.Layer.MasksToBounds = true;
 
-            DisplayGravatar(xamarinAccountEmail);
+            DisplayGravatar("david.olubajo@outlook.com");
 
             AddConstraint(NSLayoutConstraint.Create(
                     GravatarView,
@@ -54,7 +54,7 @@ namespace rangr.ios
             Add(EmailField = new UITextField(new RectangleF(10, 10, 300, 30))
                 {
                     BorderStyle = UITextBorderStyle.RoundedRect,
-                    Placeholder = xamarinAccountEmail,
+                    Placeholder = "display name",
                     TranslatesAutoresizingMaskIntoConstraints = false,
                     Delegate = new EmailFieldDelegate()
                 });
@@ -87,7 +87,7 @@ namespace rangr.ios
                     SecureTextEntry = true,
                     TranslatesAutoresizingMaskIntoConstraints = false,
                     ReturnKeyType = UIReturnKeyType.Go,
-                    Placeholder = "Password"
+                    Placeholder = "password"
                 });
 
             AddConstraint(NSLayoutConstraint.Create(
@@ -117,7 +117,7 @@ namespace rangr.ios
                 return true;
             };
 
-            PasswordField.BecomeFirstResponder();
+            EmailField.BecomeFirstResponder();
         }
 
         async void DisplayGravatar(string email)

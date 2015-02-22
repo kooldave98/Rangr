@@ -99,33 +99,35 @@ namespace rangr.ios
                 if (!string.IsNullOrEmpty(password) && password == "wertyc")
                 {
 
-                    show_progress("Logging in...");
 
-                    ShowAlert("Disclaimer", "This app is in beta, it may be subject to changes, loss of data and unavailability.", "Ok", async delegate
+
+                    show_alert("Disclaimer", "This app is in beta, it may be subject to changes, loss of data and unavailability.", "Ok", async delegate
+                    {
+                        show_progress("creating user...");
+                        var create_user_successful = await view_model.CreateUser();
+                        dismiss_progress();
+                        if (create_user_successful)
                         {
-                            var create_user_successful = await view_model.CreateUser();
-
-                            if (create_user_successful)
-                            {
-                                await AppGlobal.Current.CreateNewConnectionFromLogin();
-
-                                LoginSucceeded();
-                            }
-                            else
-                            {
-                                ShowToast("An error occurred.");
-                            }
-                        });
+                            show_progress("logging in...");
+                            await AppGlobal.Current.CreateNewConnectionFromLogin();
+                            dismiss_progress();
+                            LoginSucceeded();
+                        }
+                        else
+                        {
+                            show_toast("An error occurred.");
+                        }
+                    });
 
 
                 }
                 else
                 {
-                    ShowAlert("Error", "Invalid code entered. Please request a test code by emailing walkr@davidolubajo.com. Thanks", "Ok", delegate
-                        {
-                            LoginView.PasswordField.SelectAll(this);
-                            LoginView.PasswordField.BecomeFirstResponder();
-                        });
+                    show_alert("Error", "Invalid code entered. Please request a test code by emailing walkr@davidolubajo.com. Thanks", "Ok", delegate
+                    {
+                        LoginView.PasswordField.SelectAll(this);
+                        LoginView.PasswordField.BecomeFirstResponder();
+                    });
                 }
             }
 
