@@ -52,7 +52,7 @@ namespace rangr.ios
                 RefreshControl.EndRefreshing();
             };
 
-
+            TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             TableView.AddSubview(RefreshControl);
 
         }
@@ -127,7 +127,13 @@ namespace rangr.ios
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            return 150;
+            //http://stackoverflow.com/questions/19597988/monotouch-calculate-uilabel-height
+            //http://forums.xamarin.com/discussion/22686/dynamically-set-row-height-according-to-content
+//            var cell = GetCell(tableView, indexPath);
+//            cell.LayoutIfNeeded();
+//            return cell.Frame.Height;
+            return 120;
+        
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
