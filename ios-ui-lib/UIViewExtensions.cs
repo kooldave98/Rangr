@@ -13,6 +13,16 @@ namespace ios_ui_lib
     //http://blog.adamkemp.com/2014/12/ios-layout-gotchas-redux.html
     public static class UIViewExtensions
     {
+        public static CGSize get_text_size_with_font(this string text, UIFont font) 
+        {
+            return new NSString(text).StringSize(UIFont.SystemFontOfSize(font.PointSize));
+        }
+
+        public static void apply_simple_border(this UIView view, CGColor color = null)
+        {
+            view.Layer.BorderWidth = 1;
+            view.Layer.BorderColor = color ?? UIColor.Black.CGColor;
+        }
 
         public static void CenterXInParent(this UIView view)
         {

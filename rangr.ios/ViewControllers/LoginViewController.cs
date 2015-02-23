@@ -10,12 +10,8 @@ namespace rangr.ios
 {
     public class LoginViewController : BaseViewModelController<LoginViewModel>
     {
-        public override string TitleLabel
-        {
-            get
-            {
-                return "Login";
-            }
+        public override string TitleLabel {
+            get { return "Login"; }
         }
 
         private UIView ContentView;

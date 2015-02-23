@@ -151,9 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="Views\PostCellView.xib">
-      <DependentUpon>PostCellView.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -170,9 +167,6 @@
     <Compile Include="ViewControllers\PostListViewController.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\PostCellView.cs" />
-    <Compile Include="Views\PostCellView.designer.cs">
-      <DependentUpon>PostCellView.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewControllers\PostDetailViewController.cs" />
     <Compile Include="ViewControllers\NewPostViewController.cs" />
     <Compile Include="Theme.cs" />

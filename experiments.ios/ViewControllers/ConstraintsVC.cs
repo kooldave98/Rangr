@@ -29,8 +29,8 @@ namespace experiments.ios
             };
 
             centerView.Layer.CornerRadius = 10;
-            centerView.Layer.BorderWidth = 1;
-            centerView.Layer.BorderColor = UIColor.White.CGColor;
+            centerView.Layer.MasksToBounds = true;
+            centerView.apply_simple_border(UIColor.White.CGColor);
 
             View.AddSubview(centerView);
         }

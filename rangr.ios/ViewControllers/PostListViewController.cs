@@ -116,8 +116,8 @@ namespace rangr.ios
 
             if (cell == null)
             {
-                cell = PostCellView.Create();
-                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+                cell = new PostCellView();
+                //cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
             }
 
             cell.BindDataToCell(post);
@@ -127,7 +127,7 @@ namespace rangr.ios
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            return 90;
+            return 150;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
