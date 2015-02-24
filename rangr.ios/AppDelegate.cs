@@ -19,7 +19,7 @@ namespace rangr.ios
         private UIWindow window;
         private UITabBarController tab_bar = new UITabBarController();
         private UINavigationController navigation = new UINavigationController();
-
+        private MapViewController map_view = new MapViewController();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -33,7 +33,11 @@ namespace rangr.ios
             navigation.NavigationBar.Translucent = false;
             tab_bar.TabBar.Translucent = false;
 
+            navigation.TabBarItem = new UITabBarItem("Feed", UIImage.FromBundle("running.png"),1);
+            map_view.TabBarItem = new UITabBarItem("Map", UIImage.FromBundle("world_times.png"),2);
+
             tab_bar.AddChildViewController(navigation);
+            tab_bar.AddChildViewController(map_view);
 
             show_feed();
 

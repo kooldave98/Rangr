@@ -15,7 +15,7 @@ namespace rangr.ios
         public UILabel time_ago;
         public UIImageView user_image;
         public UILabel user_name;
-        public HLabel post_text;
+        public UILabel post_text;
 
         public UIView content_view;
 
@@ -47,25 +47,26 @@ namespace rangr.ios
                 Lines = 1                
             });
 
-            content_view.AddSubview(post_text = new HLabel(){
+            content_view.AddSubview(post_text = new UILabel(){
                 TextColor = UIColor.Black,
                 Font = UIFont.PreferredSubheadline,
                 TextAlignment = UITextAlignment.Left,
                 Lines = 0,
                 LineBreakMode = UILineBreakMode.WordWrap,
-                VerticalAlignment = HLabel.VerticalAlignments.Top
+                //VerticalAlignment = UITextVerticalAlignment.Top
             });
 
-//            user_name.apply_simple_border();
-//            time_ago.apply_simple_border();
-//            user_image.apply_simple_border();
-//            post_text.apply_simple_border();
-//            content_view.apply_simple_border();
+            user_name.apply_simple_border();
+            time_ago.apply_simple_border();
+            user_image.apply_simple_border();
+            post_text.apply_simple_border();
+            content_view.apply_simple_border();
 
         }
 
         public override void LayoutSubviews()
         {
+            post_text.Text += "\n";
             post_text.SizeToFit();
 
             var user_name_height = user_name.Text.get_text_size_with_font(user_name.Font).Height;

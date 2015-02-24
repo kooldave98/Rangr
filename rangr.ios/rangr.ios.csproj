@@ -170,6 +170,7 @@
     <Compile Include="ViewControllers\PostDetailViewController.cs" />
     <Compile Include="ViewControllers\NewPostViewController.cs" />
     <Compile Include="Theme.cs" />
+    <Compile Include="ViewControllers\MapViewController.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -194,6 +195,11 @@
   <ItemGroup>
     <BundleResource Include="Resources\user-default-avatar.png" />
     <BundleResource Include="Resources\user-default-avatar%402x.png" />
+    <BundleResource Include="Resources\world_times.png" />
+    <BundleResource Include="Resources\contacts.png" />
+    <BundleResource Include="Resources\running.png" />
+    <BundleResource Include="Resources\users_three_2.png" />
+    <BundleResource Include="Resources\top_charts.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\general-solid-lib\general-solid-lib.csproj">

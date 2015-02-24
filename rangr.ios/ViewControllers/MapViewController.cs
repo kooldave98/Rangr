@@ -6,7 +6,7 @@ using CoreGraphics;
 
 using Google.Maps;
 
-namespace experiments.ios
+namespace rangr.ios
 {
     public class MapViewController : BaseViewController
     {

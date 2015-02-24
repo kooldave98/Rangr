@@ -20,13 +20,17 @@ namespace rangr.ios
             Guard.IsNotNull(view_model, "view_model");
 
             Theme.Primitive.Apply(View);
-
-            Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
         }
     }
 
     public abstract class BaseViewController : UIViewController
     {
+        public override void LoadView()
+        {
+            base.LoadView();
+            Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
+        }
+
         public abstract string TitleLabel { get; }
 
 //        private static CGSize textSize = new NSString("The quick brown fox jumped over the lazy dog" +

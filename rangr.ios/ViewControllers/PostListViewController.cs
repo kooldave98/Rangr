@@ -54,7 +54,7 @@ namespace rangr.ios
 
             TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             TableView.AddSubview(RefreshControl);
-
+            TableView.BackgroundColor = UIColor.LightGray;
         }
 
         public override void ViewDidLayoutSubviews()
@@ -155,6 +155,7 @@ namespace rangr.ios
 
 //        public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
 //        {
+//
 //            //Nice, uncomment this method and see some magical effects.
 //            //Learn more about transforms from here
 //            //http://www.thinkandbuild.it/introduction-to-3d-drawing-in-core-animation-part-1/
