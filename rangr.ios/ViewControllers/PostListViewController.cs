@@ -12,10 +12,6 @@ using ios_ui_lib;
 
 namespace rangr.ios
 {
-    /// <summary>
-    ///see below for how to manually embed a refresh control
-    /// https://github.com/vandadnp/iOS-8-Swift-Programming-Cookbook/blob/master/chapter-tables/Displaying%20a%20Refresh%20Control%20for%20Table%20Views/Displaying%20a%20Refresh%20Control%20for%20Table%20Views/ViewController.swift
-    /// </summary>
     public class PostListViewController : BaseViewModelController<FeedViewModel>
     {
         public override string TitleLabel 
@@ -55,6 +51,8 @@ namespace rangr.ios
             TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             TableView.AddSubview(RefreshControl);
             TableView.BackgroundColor = UIColor.LightGray;
+
+            TableView.RegisterClassForCellReuse(typeof(UITableViewCell), PostCellView.Key);
         }
 
         public override void ViewDidLayoutSubviews()
@@ -117,23 +115,47 @@ namespace rangr.ios
             if (cell == null)
             {
                 cell = new PostCellView();
-                //cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
             }
 
             cell.BindDataToCell(post);
+
+            cell.SetNeedsUpdateConstraints();
+            cell.UpdateConstraintsIfNeeded();
 
             return cell;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            //http://stackoverflow.com/questions/19597988/monotouch-calculate-uilabel-height
-            //http://forums.xamarin.com/discussion/22686/dynamically-set-row-height-according-to-content
-//            var cell = GetCell(tableView, indexPath);
-//            cell.LayoutIfNeeded();
-//            return cell.Frame.Height;
-            return 120;
-        
+
+            var prototype = GetCell(tableView, indexPath);
+            prototype.SetNeedsUpdateConstraints();
+            prototype.UpdateConstraintsIfNeeded();
+
+            prototype.Bounds = new CGRect(0, 0, controller.TableView.Bounds.Width, controller.TableView.Bounds.Height);
+
+            prototype.SetNeedsLayout();
+            prototype.LayoutIfNeeded();
+
+            var height = prototype.ContentView.SystemLayoutSizeFittingSize(UIView.UILayoutFittingCompressedSize).Height;
+            height += 1;
+
+            return height;
+        }
+
+        public override nfloat EstimatedHeight(UITableView tableView, NSIndexPath indexPath)
+        {
+            // NOTE for iOS 7.0.x ONLY, this bug has been fixed by Apple as of iOS 7.1:
+            // A constraint exception will be thrown if the estimated row height for an inserted row is greater
+            // than the actual height for that row. In order to work around this, we need to return the actual
+            // height for the the row when inserting into the table view - uncomment the below 3 lines of code.
+            // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
+            //            if (this.isInsertingRow)
+            //            {
+            //                return this.GetHeightForRow(tableView, indexPath);
+            //            }
+
+            return 130.0f;//UITableView.AutomaticDimension;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)

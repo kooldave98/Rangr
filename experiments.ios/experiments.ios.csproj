@@ -138,6 +138,13 @@
     <Compile Include="Views\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\ItemsViewController.cs" />
+    <Compile Include="ViewControllers\ItemCell.cs">
+      <DependentUpon>ItemsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Model.cs">
+      <DependentUpon>ItemsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

@@ -32,6 +32,13 @@ namespace ios_ui_lib
 {
     public static class Layout
     {
+        //<See>https://github.com/kentcb/TableViewCellWithAutoLayout_dotNET/blob/master/VariableHeightTableCells/Layout.cs
+        public static readonly float RequiredPriority = 1000;
+
+        public static readonly float HighPriority = 750;
+
+        public static readonly float LowPriority = 250;
+        //</See>
         /// <summary>
         /// <para>Constrains the layout of subviews according to equations and
         /// inequalities specified in <paramref name="constraints"/>.  Issue
