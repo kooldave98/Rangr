@@ -130,12 +130,6 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-//            user_name.apply_simple_border();
-//            time_ago.apply_simple_border();
-//            user_image.apply_simple_border();
-//            post_text.apply_simple_border();
-//            ContentView.apply_simple_border();
-
         }
     }
 }
