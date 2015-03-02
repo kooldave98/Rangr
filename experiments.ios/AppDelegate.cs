@@ -39,21 +39,23 @@ namespace experiments.ios
 
             window.RootViewController = tab_bar;
             window.MakeKeyAndVisible();
+
+            show_login(tab_bar);
             
             return true;
         }
 
-        private void show_login()
+        private void show_login(UIViewController root)
         {
-//            var login = new LoginViewController();
-//
-//            login.LoginSucceeded += () => {
-//                navigation.DismissViewController(true, () => {
-//                        //navigation.PushViewController(new MapViewController(), true);
-//                    });
-//            };
-//
-//            navigation.PresentViewController(login, true, null);
+            var login = new LoginViewController();
+
+            login.LoginSucceeded += () => {
+                root.DismissViewController(true, () => {
+                        //navigation.PushViewController(new MapViewController(), true);
+                    });
+            };
+
+            root.PresentViewController(login, true, null);
         }
     }
 }

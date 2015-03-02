@@ -53,7 +53,6 @@ namespace experiments.ios
             indicator.StartAnimating();
             //indicator.StopAnimating ();
 
-            show_toast("Hello");
             LoginSucceeded();
         }
 
