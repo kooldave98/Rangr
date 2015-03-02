@@ -45,6 +45,7 @@
     <Compile Include="EasyLayout.cs" />
     <Compile Include="UIViewExtensions.cs" />
     <Compile Include="HumanInterface.cs" />
+    <Compile Include="Views\UIMultiLineLabelCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

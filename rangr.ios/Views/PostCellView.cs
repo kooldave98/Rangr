@@ -60,7 +60,7 @@ namespace rangr.ios
 
                 post_text.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
                 post_text.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
-                post_text.Frame.Top >= user_image.Frame.Bottom + sibling_sibling_margin &&
+                post_text.Frame.Top >= time_ago.Frame.Bottom + sibling_sibling_margin &&
                 post_text.Frame.Bottom == ContentView.Frame.Bottom - sibling_sibling_margin
 
             );
@@ -94,8 +94,8 @@ namespace rangr.ios
 
 
             ContentView.BackgroundColor = UIColor.White;
-            ContentView.Layer.CornerRadius = 10;
-            ContentView.Layer.MasksToBounds = true;
+            //ContentView.Layer.CornerRadius = 10;
+            //ContentView.Layer.MasksToBounds = true;
             ContentView.TranslatesAutoresizingMaskIntoConstraints = false;
 
 
