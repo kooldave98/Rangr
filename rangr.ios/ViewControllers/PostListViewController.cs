@@ -52,7 +52,10 @@ namespace rangr.ios
             TableView.AddSubview(RefreshControl);
             TableView.BackgroundColor = UIColor.LightGray;
 
-            TableView.RegisterClassForCellReuse(typeof(UITableViewCell), PostCellView.Key);
+            TableView.RowHeight = UITableView.AutomaticDimension;
+            TableView.EstimatedRowHeight = 160.0f;
+
+            TableView.RegisterClassForCellReuse(typeof(PostCellView), PostCellView.Key);
         }
 
         public override void ViewDidLayoutSubviews()
@@ -85,8 +88,7 @@ namespace rangr.ios
 
 
         public event Action<Post> PostItemSelected = delegate {};
-        //public event Action NewPostSelected = delegate {};
-        //        public event Action<string> HashTagSelected = delegate {};
+        //public event Action<string> HashTagSelected = delegate {};
     }
 
     public class PostsTableViewSource : UITableViewSource
@@ -105,12 +107,11 @@ namespace rangr.ios
             return objects.Count;
         }
 
-        // Customize the appearance of table view cells.
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var post = objects[indexPath.Row];
+            var cell = (PostCellView)tableView.DequeueReusableCell(PostCellView.Key);
 
-            var cell = tableView.DequeueReusableCell(PostCellView.Key) as PostCellView;
+            var post = objects[indexPath.Row];
 
             if (cell == null)
             {
@@ -123,39 +124,6 @@ namespace rangr.ios
             cell.UpdateConstraintsIfNeeded();
 
             return cell;
-        }
-
-        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-        {
-
-            var prototype = GetCell(tableView, indexPath);
-            prototype.SetNeedsUpdateConstraints();
-            prototype.UpdateConstraintsIfNeeded();
-
-            prototype.Bounds = new CGRect(0, 0, controller.TableView.Bounds.Width, controller.TableView.Bounds.Height);
-
-            prototype.SetNeedsLayout();
-            prototype.LayoutIfNeeded();
-
-            var height = prototype.ContentView.SystemLayoutSizeFittingSize(UIView.UILayoutFittingCompressedSize).Height;
-            height += 1;
-
-            return height;
-        }
-
-        public override nfloat EstimatedHeight(UITableView tableView, NSIndexPath indexPath)
-        {
-            // NOTE for iOS 7.0.x ONLY, this bug has been fixed by Apple as of iOS 7.1:
-            // A constraint exception will be thrown if the estimated row height for an inserted row is greater
-            // than the actual height for that row. In order to work around this, we need to return the actual
-            // height for the the row when inserting into the table view - uncomment the below 3 lines of code.
-            // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
-            //            if (this.isInsertingRow)
-            //            {
-            //                return this.GetHeightForRow(tableView, indexPath);
-            //            }
-
-            return 130.0f;//UITableView.AutomaticDimension;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)

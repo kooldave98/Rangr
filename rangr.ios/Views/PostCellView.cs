@@ -18,19 +18,6 @@ namespace rangr.ios
         public UILabel user_name;
         public UILabel post_text;
 
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-
-            this.ContentView.SetNeedsLayout();
-            this.ContentView.LayoutIfNeeded();
-
-            this.post_text.PreferredMaxLayoutWidth = this.post_text.Frame.Width;
-
-
-        }
-
         public override void UpdateConstraints()
         {
             base.UpdateConstraints();
