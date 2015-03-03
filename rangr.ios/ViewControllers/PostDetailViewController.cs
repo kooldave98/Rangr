@@ -19,12 +19,12 @@ namespace rangr.ios
 
         private const string PlaceholderImagePath = "user-default-avatar.png";
 
-        private UIView ContentView;
+        private UIView card_view;
         private MapView map_view;
-        public UILabel time_ago;
-        public UIImageView user_image;
-        public UILabel user_name;
-        public UILabel post_text;
+        private UILabel time_ago;
+        private UIImageView user_image;
+        private UILabel user_name;
+        private UILabel post_text;
 
         private Post item;
 
@@ -52,16 +52,19 @@ namespace rangr.ios
         {
             View.BackgroundColor = UIColor.LightGray;
 
-            View.AddSubview(ContentView = new UIView(){
+            View.AddSubview(card_view = new UIView(){
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 BackgroundColor = UIColor.White
             });
 
-            ContentView.AddSubview(user_image = new UIImageView(){
+            card_view.Layer.CornerRadius = 5;
+            card_view.Layer.MasksToBounds = true;
+
+            card_view.AddSubview(user_image = new UIImageView(){
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            ContentView.AddSubview(user_name = new UILabel(){
+            card_view.AddSubview(user_name = new UILabel(){
                 TextColor = UIColor.Black,
                 Font = UIFont.BoldSystemFontOfSize(17.0f),
                 TextAlignment = UITextAlignment.Left,
@@ -70,7 +73,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            ContentView.AddSubview(time_ago = new UILabel(){
+            card_view.AddSubview(time_ago = new UILabel(){
                 TextColor = UIColor.Black,
                 Font = UIFont.SystemFontOfSize(10.0f),
                 TextAlignment = UITextAlignment.Left,
@@ -79,7 +82,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            ContentView.AddSubview(post_text = new UILabel(){
+            card_view.AddSubview(post_text = new UILabel(){
                 TextColor = UIColor.Black,
                 Font = UIFont.PreferredSubheadline,
                 TextAlignment = UITextAlignment.Left,
@@ -88,7 +91,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            ContentView.AddSubview(map_view = LoadMap());
+            card_view.AddSubview(map_view = LoadMap());
             map_view.TranslatesAutoresizingMaskIntoConstraints = false;
 
         }
@@ -105,35 +108,35 @@ namespace rangr.ios
             var user_image_height = HumanInterface.medium_square_image_length;
 
             View.ConstrainLayout(() => 
-                ContentView.Frame.Top == View.Bounds.Top + sibling_sibling_margin &&
-                ContentView.Frame.Left == View.Bounds.Left + sibling_sibling_margin &&
-                ContentView.Frame.Right == View.Bounds.Right - sibling_sibling_margin &&
-                ContentView.Frame.Bottom == View.Bounds.Bottom - sibling_sibling_margin
+                card_view.Frame.Top == View.Bounds.Top + sibling_sibling_margin &&
+                card_view.Frame.Left == View.Bounds.Left + sibling_sibling_margin &&
+                card_view.Frame.Right == View.Bounds.Right - sibling_sibling_margin &&
+                card_view.Frame.Bottom == View.Bounds.Bottom - sibling_sibling_margin
             );
 
-            ContentView.ConstrainLayout(() => 
+            card_view.ConstrainLayout(() => 
                 user_image.Frame.Width == user_image_width &&
                 user_image.Frame.Height == user_image_height &&
-                user_image.Frame.Top == ContentView.Frame.Top + sibling_sibling_margin &&
-                user_image.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
+                user_image.Frame.Top == card_view.Frame.Top + sibling_sibling_margin &&
+                user_image.Frame.Left == card_view.Frame.Left + sibling_sibling_margin &&
 
                 user_name.Frame.Left == user_image.Frame.Right + sibling_sibling_margin &&
-                user_name.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
-                user_name.Frame.Top == ContentView.Frame.Top + sibling_sibling_margin &&
+                user_name.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
+                user_name.Frame.Top == card_view.Frame.Top + sibling_sibling_margin &&
 
                 time_ago.Frame.Left == user_image.Frame.Right + sibling_sibling_margin &&
-                time_ago.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
+                time_ago.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
                 time_ago.Frame.Top == user_name.Frame.Bottom + sibling_sibling_margin &&
                 time_ago.Frame.Bottom <= user_image.Frame.Bottom &&
 
-                post_text.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
-                post_text.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
+                post_text.Frame.Left == card_view.Frame.Left + sibling_sibling_margin &&
+                post_text.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
                 post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
 
                 map_view.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
-                map_view.Frame.Left == ContentView.Frame.Left &&
-                map_view.Frame.Right == ContentView.Frame.Right &&
-                map_view.Frame.Bottom == ContentView.Frame.Bottom
+                map_view.Frame.Left == card_view.Frame.Left &&
+                map_view.Frame.Right == card_view.Frame.Right &&
+                map_view.Frame.Bottom == card_view.Frame.Bottom
 
             );
                 
