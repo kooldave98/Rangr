@@ -87,8 +87,7 @@ namespace rangr.ios
 
         public void show_detail(Post post_item)
         {
-            var dc = new PostDetailViewController();
-            dc.SetDetailItem(post_item);
+            var dc = new PostDetailViewController(post_item);
             navigation.PushViewController(dc, true);
         }
     }

@@ -139,53 +139,8 @@ namespace rangr.ios
 
         public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
         {
-            // Return false if you do not want the specified item to be editable.
             return false;
         }
-
-//        public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
-//        {
-//
-//            //Nice, uncomment this method and see some magical effects.
-//            //Learn more about transforms from here
-//            //http://www.thinkandbuild.it/introduction-to-3d-drawing-in-core-animation-part-1/
-//            //http://www.thinkandbuild.it/interactive-transitions/
-//
-//            //1. Setup the CATransform3D structure
-//            CATransform3D rotation;
-//            rotation = CATransform3D.MakeRotation( (90.0f*3.142f)/180.0f, 0.0f, 0.7f, 0.4f);
-//            rotation.m34 = 1.0f/ -600.0f;
-//
-//            //2. Define the initial state (Before the animation)
-//            cell.Layer.ShadowColor = UIColor.Black.CGColor;
-//            cell.Layer.ShadowOffset = new CGSize(10, 10);
-//            cell.Alpha = 0;
-//
-//            cell.Layer.Transform = rotation;
-//            cell.Layer.AnchorPoint = new CGPoint(0.0f, 0.5f);
-//
-//            //3. Define the final state (After the animation) and commit the animation
-//            UIView.BeginAnimations(@"rotation", (IntPtr)null);
-//            UIView.SetAnimationDuration(0.8f);
-//            cell.Layer.Transform = CATransform3D.Identity;
-//            cell.Alpha = 1;
-//            cell.Layer.ShadowOffset = new CGSize(0, 0);
-//            UIView.CommitAnimations();
-//        }
-
-//        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
-//        {
-//            //ToInvestigate: I think i'm inserting into the table wrongly.
-//            //I add to the underlying collection then tell the table to reload.
-//            //Performance wise, i'm not sure it is a great idea.
-//            //Mabe using this method will be better off.
-//
-//            if (editingStyle == UITableViewCellEditingStyle.Insert)
-//            {
-//                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//            }
-//        }
-
     }
 }
 

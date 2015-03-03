@@ -17,12 +17,21 @@ namespace rangr.ios
             get { return "Detail"; }
         }
 
-        private MapView map_view;
-        private UILabel description;
+        private const string PlaceholderImagePath = "user-default-avatar.png";
 
-        public PostDetailViewController()
+        private UIView ContentView;
+        private MapView map_view;
+        public UILabel time_ago;
+        public UIImageView user_image;
+        public UILabel user_name;
+        public UILabel post_text;
+
+        private Post item;
+
+        public PostDetailViewController(Post the_item)
         {
             view_model = new PostDetailsViewModel();
+            view_model.CurrentPost = item = the_item;
         }
 
         //According to http://blog.adamkemp.com/2014/11/ios-layout-gotchas-and-view-controller.html
@@ -34,48 +43,108 @@ namespace rangr.ios
         {
             base.ViewDidLoad();
 
-            View.Add(description = new UILabel());
+            create_view();
 
-            View.Add(map_view = LoadMap());
+            BindDataToCell(item);
+        }
 
-            ConfigureView();
+        private void create_view()
+        {
+            View.BackgroundColor = UIColor.LightGray;
+
+            View.AddSubview(ContentView = new UIView(){
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                BackgroundColor = UIColor.White
+            });
+
+            ContentView.AddSubview(user_image = new UIImageView(){
+                TranslatesAutoresizingMaskIntoConstraints = false
+            });
+
+            ContentView.AddSubview(user_name = new UILabel(){
+                TextColor = UIColor.Black,
+                Font = UIFont.BoldSystemFontOfSize(17.0f),
+                TextAlignment = UITextAlignment.Left,
+                Lines = 1,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            });
+
+            ContentView.AddSubview(time_ago = new UILabel(){
+                TextColor = UIColor.Black,
+                Font = UIFont.SystemFontOfSize(10.0f),
+                TextAlignment = UITextAlignment.Left,
+                Lines = 1,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            });
+
+            ContentView.AddSubview(post_text = new UILabel(){
+                TextColor = UIColor.Black,
+                Font = UIFont.PreferredSubheadline,
+                TextAlignment = UITextAlignment.Left,
+                Lines = 0,
+                LineBreakMode = UILineBreakMode.WordWrap,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            });
+
+            ContentView.AddSubview(map_view = LoadMap());
+            map_view.TranslatesAutoresizingMaskIntoConstraints = false;
+
         }
 
         public override void ViewDidLayoutSubviews()
         {
+            this.user_name.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.time_ago.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.post_text.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+
+
+
+            var user_image_width = HumanInterface.medium_square_image_length;
+            var user_image_height = HumanInterface.medium_square_image_length;
 
             View.ConstrainLayout(() => 
-                description.Frame.Top == View.Frame.Top + parent_child_margin &&
-                description.Frame.Left == View.Frame.Left + parent_child_margin &&
-                description.Frame.Right == View.Frame.Right - parent_child_margin &&
-                description.Frame.Height == finger_tip_diameter &&
-
-
-                map_view.Frame.Top == description.Frame.Bottom + parent_child_margin &&
-                map_view.Frame.Left == View.Frame.Left + parent_child_margin &&
-                map_view.Frame.Right == View.Frame.Right - parent_child_margin &&
-                map_view.Frame.Bottom == View.Frame.Bottom - parent_child_margin
+                ContentView.Frame.Top == View.Bounds.Top + sibling_sibling_margin &&
+                ContentView.Frame.Left == View.Bounds.Left + sibling_sibling_margin &&
+                ContentView.Frame.Right == View.Bounds.Right - sibling_sibling_margin &&
+                ContentView.Frame.Bottom == View.Bounds.Bottom - sibling_sibling_margin
             );
+
+            ContentView.ConstrainLayout(() => 
+                user_image.Frame.Width == user_image_width &&
+                user_image.Frame.Height == user_image_height &&
+                user_image.Frame.Top == ContentView.Frame.Top + sibling_sibling_margin &&
+                user_image.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
+
+                user_name.Frame.Left == user_image.Frame.Right + sibling_sibling_margin &&
+                user_name.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
+                user_name.Frame.Top == ContentView.Frame.Top + sibling_sibling_margin &&
+
+                time_ago.Frame.Left == user_image.Frame.Right + sibling_sibling_margin &&
+                time_ago.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
+                time_ago.Frame.Top == user_name.Frame.Bottom + sibling_sibling_margin &&
+                time_ago.Frame.Bottom <= user_image.Frame.Bottom &&
+
+                post_text.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
+                post_text.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
+                post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
+
+                map_view.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
+                map_view.Frame.Left == ContentView.Frame.Left &&
+                map_view.Frame.Right == ContentView.Frame.Right &&
+                map_view.Frame.Bottom == ContentView.Frame.Bottom
+
+            );
+                
         }
 
-        public void SetDetailItem(Post newDetailItem)
+        private void BindDataToCell(Post post)
         {
-            if (view_model.CurrentPost != newDetailItem)
-            {
-                view_model.CurrentPost = newDetailItem;
-				
-                // Update the view
-                ConfigureView();
-            }
-        }
-
-        private void ConfigureView()
-        {
-            // Update the user interface for the detail item
-            if (IsViewLoaded && view_model.CurrentPost != null)
-            {
-                description.Text = view_model.CurrentPost.text;
-            }
+            user_name.Text = post.user_display_name;
+            post_text.Text = post.text;
+            user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
+            time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
         }
 
         private MapView LoadMap()

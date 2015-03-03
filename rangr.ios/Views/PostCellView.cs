@@ -35,6 +35,7 @@ namespace rangr.ios
             var user_image_width = HumanInterface.medium_square_image_length;
             var user_image_height = HumanInterface.medium_square_image_length;
             var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
+            var parent_child_margin = HumanInterface.parent_child_margin;
 
             this.ConstrainLayout(() => 
                 ContentView.Frame.Top == this.Bounds.Top + sibling_sibling_margin &&
@@ -60,7 +61,7 @@ namespace rangr.ios
 
                 post_text.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
                 post_text.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
-                post_text.Frame.Top >= time_ago.Frame.Bottom + sibling_sibling_margin &&
+                post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
                 post_text.Frame.Bottom == ContentView.Frame.Bottom - sibling_sibling_margin
 
             );
