@@ -7,6 +7,7 @@ using UIKit;
 using App.Common;
 
 using Google.Maps;
+using CoreFoundation;
 
 namespace rangr.ios
 {
@@ -48,11 +49,13 @@ namespace rangr.ios
             {
                 var login = new LoginViewController();
                 login.LoginSucceeded += () => {
+
                     login.DismissViewController(true, null);
                 };
 
-                tab_bar.PresentViewController(login, true, null);
+                window.RootViewController.PresentViewController(login, true, null);
             }
+
 
             return true;
         }
