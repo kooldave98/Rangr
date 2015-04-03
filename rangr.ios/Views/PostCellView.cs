@@ -16,6 +16,7 @@ namespace rangr.ios
         private UILabel time_ago;
         private UIImageView user_image;
         private UILabel user_name;
+        private TopAlignedImageView post_image;
         private UILabel post_text;
         private UIView card_view;
 
@@ -60,9 +61,14 @@ namespace rangr.ios
                 time_ago.Frame.Top == user_name.Frame.Bottom + sibling_sibling_margin &&
                 time_ago.Frame.Bottom <= user_image.Frame.Bottom &&
 
+                post_image.Frame.Left == card_view.Frame.Left &&
+                post_image.Frame.Right == card_view.Frame.Right &&
+                post_image.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
+                post_image.Frame.Height == post_image.Frame.Width &&
+
                 post_text.Frame.Left == card_view.Frame.Left + sibling_sibling_margin &&
                 post_text.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
-                post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
+                post_text.Frame.Top == post_image.Frame.Bottom + parent_child_margin &&
                 post_text.Frame.Bottom == card_view.Frame.Bottom - sibling_sibling_margin
 
             );
@@ -76,6 +82,8 @@ namespace rangr.ios
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
             time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
+            post_image.LoadUrl(post.image_url);
+            //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
         }
 
         public PostCellView()
@@ -127,6 +135,10 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
+            card_view.AddSubview(post_image = new TopAlignedImageView {
+                ClipsToBounds = true,
+            });
+
             card_view.AddSubview(post_text = new UILabel(){
                 TextColor = UIColor.Black,
                 Font = UIFont.PreferredSubheadline,
@@ -135,6 +147,9 @@ namespace rangr.ios
                 LineBreakMode = UILineBreakMode.WordWrap,
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
+
+
+            //post_image.apply_simple_border();
 
         }
     }

@@ -8,6 +8,7 @@ using App.Common;
 
 using Google.Maps;
 using CoreFoundation;
+using System.Runtime.InteropServices;
 
 namespace rangr.ios
 {
@@ -86,6 +87,8 @@ namespace rangr.ios
             };
 
             navigation.PushViewController(dc, true);
+
+            select_picture(dc);
         }
 
         public void show_detail(Post post_item)
@@ -93,6 +96,20 @@ namespace rangr.ios
             var dc = new PostDetailViewController(post_item);
             navigation.PushViewController(dc, true);
         }
+
+        private void select_picture(NewPostViewController controller)
+        {
+            var picker = new UIImagePickerController();
+            picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            picker.Canceled += delegate { picker.DismissViewController(true, null); };
+            picker.FinishedPickingMedia += (s, e) => {
+                picker.DismissViewController(true, null);
+                var image = (UIImage)e.Info.ObjectForKey(new NSString("UIImagePickerControllerOriginalImage"));
+
+                controller.BindDataToView(image);
+            };
+
+            controller.PresentViewController(picker, true, null);
+        }
     }
 }
-

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using general_solid_lib;
 
 namespace App.Common
 {
@@ -9,13 +10,18 @@ namespace App.Common
 
 		public string PostText { get; set; }
 
+        public HttpFile PostImage { get; set; }
+
 		public async Task<bool> CreatePost ()
 		{
 			if (string.IsNullOrWhiteSpace (PostText)) {
 				throw new InvalidOperationException ("Cannot create an empty post");
-			}				
+			}
 
-			var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id.ToString ());
+            Guard.IsNotNull(PostImage, "PostImage");
+
+
+            var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id.ToString (), PostImage);
 
 			if (result != null) {
 				return true;

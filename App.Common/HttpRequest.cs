@@ -6,6 +6,7 @@ using System.Linq;
 using ModernHttpClient;
 using System.Net.Http;
 using Fusillade;
+using System.Net.Http.Headers;
 
 namespace App.Common
 {
@@ -72,6 +73,67 @@ namespace App.Common
             }
 
             return responseString;
+        }
+
+        public async Task<string> Post(string baseUrl, 
+                                        List<KeyValuePair<string, string>> data, 
+                                        List<KeyValuePair<string, HttpFile>> binary_data)
+        {
+            //Multipart setup
+            var httpContent = new MultipartFormDataContent("testnewboundary");
+            foreach (var item in data)
+            {
+                httpContent.Add(new StringContent(item.Value), item.Key);
+            }
+            add_to_multipart_form_data_content(httpContent, binary_data);
+            //end of multipart setup
+
+
+            var request_string = "POST: " + baseUrl;
+
+            Insights.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
+
+            string responseString = null;
+
+            try
+            {
+                using (var handle = Insights.TrackTime(request_string))
+                {   
+                    var response = await httpClient.PostAsync(baseUrl, httpContent);
+                    responseString = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+            catch (Exception e)
+            { 
+                Insights.Report(e, new Dictionary<string, string>()
+                    {
+                        { "Request", request_string },
+                        { "Response", responseString }
+                    });
+
+                throw;
+            }
+
+            return responseString;
+
+        }
+
+        private void add_to_multipart_form_data_content(MultipartFormDataContent content, 
+                                                        List<KeyValuePair<string, HttpFile>> data)
+        {
+            foreach (var item in data)
+            {
+                var fileContent = new ByteArrayContent(item.Value.Buffer);
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(item.Value.MediaType);
+
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = item.Value.FileName,
+                    Name = item.Key
+                };
+                content.Add(fileContent,item.Key);
+            }
         }
 
         public async Task<string> Get(string baseUrl)

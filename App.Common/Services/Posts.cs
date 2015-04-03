@@ -81,7 +81,7 @@ namespace App.Common
             return posts;
         }
 
-        public async Task<PostIdentity> Create(string text, string connection_id)
+        public async Task<PostIdentity> Create(string text, string connection_id, HttpFile raw_image)
         {
             PostIdentity post_id = null;
 
@@ -91,12 +91,17 @@ namespace App.Common
                 new KeyValuePair<string, string>("text", text)
             };
 
-            var url = String.Format("{0}/", base_rest_url);
+            var binary_request_body = new List<KeyValuePair<string, HttpFile>>()
+            {
+                new KeyValuePair<string, HttpFile>("image_data", raw_image)
+            }; 
+
+            var url = String.Format("{0}/create", base_rest_url);
 
             try
             {
 
-                var data = await _httpRequest.Post(url, requestBody);
+                var data = await _httpRequest.Post(url, requestBody, binary_request_body);
                 post_id = JsonConvert.DeserializeObject<PostIdentity>(data);
 
             }

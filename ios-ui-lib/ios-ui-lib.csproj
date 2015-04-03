@@ -46,7 +46,9 @@
     <Compile Include="UIViewExtensions.cs" />
     <Compile Include="HumanInterface.cs" />
     <Compile Include="Views\UIMultiLineLabelCell.cs" />
+    <Compile Include="Views\TopAlignedImageView.cs" />
   </ItemGroup>
+  <Import Project="..\general-shared-lib\general-shared-lib.projitems" Label="Shared" Condition="Exists('..\general-shared-lib\general-shared-lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\general-solid-lib\general-solid-lib.csproj">

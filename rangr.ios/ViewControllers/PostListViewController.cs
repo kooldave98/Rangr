@@ -53,7 +53,7 @@ namespace rangr.ios
             TableView.BackgroundColor = UIColor.LightGray;
 
             TableView.RowHeight = UITableView.AutomaticDimension;
-            TableView.EstimatedRowHeight = 160.0f;
+            TableView.EstimatedRowHeight = 200.0f;
 
             TableView.RegisterClassForCellReuse(typeof(PostCellView), PostCellView.Key);
         }

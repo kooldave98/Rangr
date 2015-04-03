@@ -34,11 +34,6 @@ namespace rangr.ios
             view_model.CurrentPost = item = the_item;
         }
 
-        //According to http://blog.adamkemp.com/2014/11/ios-layout-gotchas-and-view-controller.html
-        //Need to moveout layout code from here and move to the ViewDidLayoutSubviews
-        //Never set your own Frame in a UIView or your own View.Frame in a UIViewController.
-        //Do layout in LayoutSubviews in a UIView and in ViewDidLayoutSubviews in a UIViewController.
-        //Don't use the screen's size for layout. Instead use Bounds in a UIView and View.Bounds in a UIViewController.
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
