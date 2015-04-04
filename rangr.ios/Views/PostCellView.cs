@@ -82,7 +82,7 @@ namespace rangr.ios
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
             time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
-            post_image.LoadUrl(post.image_url);
+            post_image.LoadUrl(string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id));
             //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
         }
 

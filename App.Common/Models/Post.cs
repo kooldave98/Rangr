@@ -14,7 +14,7 @@ namespace App.Common
 
 		public string long_lat_acc_geo_string { get; set; }
 
-        public string image_url { get; set; }
+        public string image_id { get; set; }
 	}
 }
 

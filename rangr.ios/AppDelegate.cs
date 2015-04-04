@@ -100,11 +100,26 @@ namespace rangr.ios
         private void select_picture(NewPostViewController controller)
         {
             var picker = new UIImagePickerController();
+
+            picker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
+
             picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-            picker.Canceled += delegate { picker.DismissViewController(true, null); };
+
+            picker.Canceled += (sender, evt) => { picker.DismissViewController(true, null); };
+
             picker.FinishedPickingMedia += (s, e) => {
+
+
                 picker.DismissViewController(true, null);
-                var image = (UIImage)e.Info.ObjectForKey(new NSString("UIImagePickerControllerOriginalImage"));
+
+                //image = [info valueForKey:UIImagePickerControllerOriginalImage];
+                //[imagepickerview setImage:image];
+
+                var rum = e.Info[UIImagePickerController.OriginalImage];//.ObjectForKey(new NSString("UIImagePickerController.OriginalImage"));
+
+                var image = (UIImage)rum;
+
+
 
                 controller.BindDataToView(image);
             };
