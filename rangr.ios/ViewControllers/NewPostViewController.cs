@@ -13,10 +13,13 @@ namespace rangr.ios
     {
         private const string PlaceholderImagePath = "user-default-avatar.png";
 
+
+        public UIImage selected_image { get; set;}
+
         private UIView card_view;
         private UIImageView user_image;
         private UITextView post_text;
-        private TopAlignedImageView selected_image;
+        private TopAlignedImageView post_image;//uiimageview.ContentMode = UIViewContentMode.ScaleAspectFit;
 
 
         public event Action CreatePostSucceeded = delegate {};
@@ -35,6 +38,8 @@ namespace rangr.ios
             base.ViewDidLoad();
 
             create_view();
+
+            BindDataToView();
         }
 
         private void create_view()
@@ -60,7 +65,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(selected_image = new TopAlignedImageView {
+            card_view.AddSubview(post_image = new TopAlignedImageView {
                 ClipsToBounds = true,
             });
 
@@ -89,10 +94,10 @@ namespace rangr.ios
                 post_text.Frame.Top == card_view.Frame.Top + sibling_sibling_margin &&
                 post_text.Frame.Bottom == user_image.Frame.Bottom &&
 
-                selected_image.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
-                selected_image.Frame.Left == card_view.Frame.Left &&
-                selected_image.Frame.Right == card_view.Frame.Right &&
-                selected_image.Frame.Bottom == card_view.Frame.Bottom
+                post_image.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
+                post_image.Frame.Left == card_view.Frame.Left &&
+                post_image.Frame.Right == card_view.Frame.Right &&
+                post_image.Frame.Bottom == card_view.Frame.Bottom
 
             );
         }
@@ -103,10 +108,10 @@ namespace rangr.ios
             post_text.BecomeFirstResponder();
         }
 
-        public void BindDataToView(UIImage image)
+        private void BindDataToView()
         {
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            selected_image.Image = image;
+            post_image.Image = selected_image;
         }
 
         public async void Save(object sender, EventArgs e)
@@ -121,7 +126,7 @@ namespace rangr.ios
                 return;
             }
 
-            view_model.PostImage = prepare_image(selected_image.Image);
+            view_model.PostImage = prepare_image(post_image.Image);
 
             view_model.PostText = post_text.Text;
 

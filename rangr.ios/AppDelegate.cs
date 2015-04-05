@@ -10,6 +10,9 @@ using Google.Maps;
 using CoreFoundation;
 using System.Runtime.InteropServices;
 
+using Xamarin.Media;
+using System.Threading.Tasks;
+
 namespace rangr.ios
 {
     [Register("AppDelegate")]
@@ -74,7 +77,18 @@ namespace rangr.ios
             };
         }
 
+        public void show_detail(Post post_item)
+        {
+            var dc = new PostDetailViewController(post_item);
+            navigation.PushViewController(dc, true);
+        }
+
         public void show_new_post()
+        {
+            select_picture();
+        }
+
+        private void set_caption(UIImage image)
         {
             var dc = new NewPostViewController();
             dc.CreatePostSucceeded += () => {
@@ -86,18 +100,38 @@ namespace rangr.ios
                 dc.Save(sender, e);
             };
 
-            navigation.PushViewController(dc, true);
+            dc.selected_image = image;
 
-            select_picture(dc);
+            navigation.PushViewController(dc, true);
         }
 
-        public void show_detail(Post post_item)
+        private void select_picture()
         {
-            var dc = new PostDetailViewController(post_item);
-            navigation.PushViewController(dc, true);
+            var picker = new MediaPicker();
+            picker.PickPhotoAsync().ContinueWith(t => {
+                
+                MediaFile media_file = t.Result;
+
+                var image = UIImage.FromFile(media_file.Path);
+
+                //dispose_media_file(media_file);
+                 
+                InvokeOnMainThread ( () => {
+                    set_caption(image);
+                });
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+
         }
 
-        private void select_picture(NewPostViewController controller)
+        private void dispose_media_file(MediaFile Media)
+        {
+            if (Media != null) {
+                Media.Dispose();
+                Media = null;
+            }
+        }
+
+        private void select_picture_natively()
         {
             var picker = new UIImagePickerController();
 
@@ -109,22 +143,14 @@ namespace rangr.ios
 
             picker.FinishedPickingMedia += (s, e) => {
 
-
                 picker.DismissViewController(true, null);
 
-                //image = [info valueForKey:UIImagePickerControllerOriginalImage];
-                //[imagepickerview setImage:image];
+                var image = (UIImage)e.Info[UIImagePickerController.OriginalImage];
 
-                var rum = e.Info[UIImagePickerController.OriginalImage];//.ObjectForKey(new NSString("UIImagePickerController.OriginalImage"));
-
-                var image = (UIImage)rum;
-
-
-
-                controller.BindDataToView(image);
+                set_caption(image);
             };
 
-            controller.PresentViewController(picker, true, null);
+            navigation.PresentViewController(picker, true, null);
         }
     }
 }
