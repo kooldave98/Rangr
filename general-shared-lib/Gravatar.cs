@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using Foundation;
 #endif
 
-namespace App.Common
+namespace general_shared_lib
 {
     class Gravatar
     {

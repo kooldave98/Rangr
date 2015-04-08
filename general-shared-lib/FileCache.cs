@@ -6,6 +6,10 @@ using System.IO;
 using System.Net;
 using System.Collections.Generic;
 
+#if __ANDROID__
+using Android.App;
+#endif
+
 namespace general_shared_lib
 {
     public class FileCache
@@ -13,7 +17,7 @@ namespace general_shared_lib
 
         public static string SaveLocation = 
             #if __ANDROID__
-            CacheDir.AbsolutePath;
+            Application.Context.CacheDir.AbsolutePath;
             #else
             System.IO.Directory.GetParent (Environment.GetFolderPath (Environment.SpecialFolder.Personal)).ToString () + "/tmp";
             #endif

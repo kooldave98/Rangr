@@ -9,6 +9,13 @@
     <Import_RootNamespace>general_shared_lib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SingletonBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Gravatar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)korede_readme.txt" />
   </ItemGroup>
 </Project>

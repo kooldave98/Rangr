@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PostDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProfileViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Connections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Posts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Users.cs" />
@@ -45,16 +44,14 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Gravatar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\HttpFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
-    <Folder Include="$(MSBuildThisFileDirectory)UI\" />
   </ItemGroup>
 </Project>

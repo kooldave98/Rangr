@@ -7,10 +7,11 @@ using ModernHttpClient;
 using System.Net.Http;
 using Fusillade;
 using System.Net.Http.Headers;
+using general_shared_lib;
 
 namespace App.Common
 {
-    public class HttpRequest
+    public class HttpRequest : SingletonBase<HttpRequest>
     {
         public async Task<string> Put(string baseUrl, List<KeyValuePair<string, string>> data)
         {
@@ -167,18 +168,6 @@ namespace App.Common
             return responseString;
         }
 
-
-        private static HttpRequest _instance;
-
-        public static HttpRequest Current
-        {
-            get
-            {
-                return _instance ?? (_instance = new HttpRequest());
-                //return (_instance = new HttpRequest ());
-            }
-        }
-
         private static HttpClient httpClient;
 
         private HttpRequest()
@@ -186,6 +175,17 @@ namespace App.Common
             httpClient = new HttpClient(NetCache.UserInitiated);
             httpClient.Timeout = TimeSpan.FromSeconds(10);
         }
+
+//        private static HttpRequest _instance;
+//
+//        public static HttpRequest Current
+//        {
+//            get
+//            {
+//                return _instance ?? (_instance = new HttpRequest());
+//                //return (_instance = new HttpRequest ());
+//            }
+//        }
 
     }
 }

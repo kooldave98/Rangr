@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using general_shared_lib;
 
 #if __ANDROID__
 using Android.App;
@@ -16,23 +17,9 @@ using Foundation;
 namespace App.Common
 {
     //TODO: Commonise this with the ios one, they are too similar to be duplicated
-    public class PersistentStorage
+    public class PersistentStorage : SingletonBase<PersistentStorage>
     {
-
-        private static PersistentStorage _instance = null;
-
-        public static PersistentStorage Current
-        {
-            get
-            {
-                return _instance ?? (_instance = new PersistentStorage());
-            }
-        }
-
-        private PersistentStorage()
-        {
-
-        }
+        private PersistentStorage() {  }
 
         public bool Clear(string key)
         {

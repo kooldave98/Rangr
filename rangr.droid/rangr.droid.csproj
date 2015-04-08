@@ -250,6 +250,7 @@
     <AndroidResource Include="Resources\layout\GoogleMap.axml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
+  <Import Project="..\general-shared-lib\general-shared-lib.projitems" Label="Shared" Condition="Exists('..\general-shared-lib\general-shared-lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\anim\" />
@@ -277,11 +278,5 @@
       <Version>1.3.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\general-solid-lib\general-solid-lib.csproj">
-      <Project>{1902DAE8-DFE5-4018-A7C4-BCE0D35330D3}</Project>
-      <Name>general-solid-lib</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

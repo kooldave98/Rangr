@@ -162,10 +162,6 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\general-solid-lib\general-solid-lib.csproj">
-      <Project>{1902DAE8-DFE5-4018-A7C4-BCE0D35330D3}</Project>
-      <Name>general-solid-lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ios-ui-lib\ios-ui-lib.csproj">
       <Project>{12B7BEB1-E98B-4E98-B935-60B684AD0AB1}</Project>
       <Name>ios-ui-lib</Name>

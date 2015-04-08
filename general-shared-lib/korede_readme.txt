@@ -1,4 +1,4 @@
-﻿//This project is only for re-useable SOLID code that is very generic and not related to Rangr.
+﻿//This project is only for re-useable cross-application(non-rangr-specific), cross-platform code.
 //So things like Time-Ago or GeoCoordinates shouldn't really be in here.
 
 //Rather, what should really happen is to understand their underlying purpose/responsibility...

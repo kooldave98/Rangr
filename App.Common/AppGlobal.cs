@@ -8,6 +8,7 @@ using Xamarin;
 using Splat;
 using ModernHttpClient;
 using System.Net.Http;
+using general_shared_lib;
 
 #if __ANDROID__
 using AndroidApp = Android.App;

@@ -1,6 +1,6 @@
 using System;
 
-namespace general_solid_lib
+namespace general_shared_lib
 {
     public static class Guard
     {

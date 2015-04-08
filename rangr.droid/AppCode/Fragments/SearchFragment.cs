@@ -14,6 +14,7 @@ using Android.Widget;
 using CustomViews;
 using App.Common;
 using Android.Support.V4.Widget;
+using general_shared_lib;
 
 namespace rangr.droid
 {

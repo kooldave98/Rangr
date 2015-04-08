@@ -1,8 +1,9 @@
 using System;
+using general_shared_lib;
 
 namespace App.Common
 {
-	public class AppEvents
+    public class AppEvents : SingletonBase<AppEvents>
 	{
 		#region "GeolocatorFailed"
 
@@ -45,14 +46,6 @@ namespace App.Common
 
 
 		#region"Instance plumbing"
-
-		public static AppEvents Current {
-			get {
-				return current ?? (current = new AppEvents ());
-			}
-		}
-
-		private static AppEvents current;
 
 		protected AppEvents ()
 		{

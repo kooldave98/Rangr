@@ -2,7 +2,7 @@ using System;
 
 //using System.Threading;
 
-namespace App.Common
+namespace general_shared_lib
 {
     public static class JSTimer
     {

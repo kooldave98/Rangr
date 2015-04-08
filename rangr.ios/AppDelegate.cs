@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 
 using Xamarin.Media;
 using System.Threading.Tasks;
+using ios_ui_lib;
 
 namespace rangr.ios
 {
@@ -72,8 +73,8 @@ namespace rangr.ios
             //vc.NewPostSelected += show_new_post;
             navigation.PushViewController(vc, true);
             vc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
-            vc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
-                show_new_post();
+            vc.NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
+                await show_new_post();
             };
         }
 
@@ -83,9 +84,9 @@ namespace rangr.ios
             navigation.PushViewController(dc, true);
         }
 
-        public void show_new_post()
+        public async Task show_new_post()
         {
-            select_picture();
+            await select_picture();
         }
 
         private void set_caption(UIImage image)
@@ -102,25 +103,37 @@ namespace rangr.ios
 
             dc.selected_image = image;
 
-            navigation.PushViewController(dc, true);
+            navigation.PresentViewController(dc, true, null);
         }
 
-        private void select_picture()
+        private void crop_photo(string image_path)
+        {
+            var dc = new CropperViewController(image_path);
+//            dc.Cropped += () => {
+//                navigation.PopToRootViewController(true);
+//            };
+
+//            dc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done), false);
+//            dc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
+//                dc.Save(sender, e);
+//            };
+
+            //dc.selected_image = image;
+
+            navigation.PresentViewController(dc, true, null);
+        }
+
+        private async Task select_picture()
         {
             var picker = new MediaPicker();
-            picker.PickPhotoAsync().ContinueWith(t => {
-                
-                MediaFile media_file = t.Result;
 
-                var image = UIImage.FromFile(media_file.Path);
+            var media_file = await picker.PickPhotoAsync();
 
-                //dispose_media_file(media_file);
-                 
-                InvokeOnMainThread ( () => {
-                    set_caption(image);
-                });
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            //var image = UIImage.FromFile(media_file.Path);
 
+            //dispose_media_file(media_file);
+
+            crop_photo(media_file.Path);
         }
 
         private void dispose_media_file(MediaFile Media)
@@ -131,26 +144,26 @@ namespace rangr.ios
             }
         }
 
-        private void select_picture_natively()
-        {
-            var picker = new UIImagePickerController();
-
-            picker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
-
-            picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-
-            picker.Canceled += (sender, evt) => { picker.DismissViewController(true, null); };
-
-            picker.FinishedPickingMedia += (s, e) => {
-
-                picker.DismissViewController(true, null);
-
-                var image = (UIImage)e.Info[UIImagePickerController.OriginalImage];
-
-                set_caption(image);
-            };
-
-            navigation.PresentViewController(picker, true, null);
-        }
+//        private void select_picture_natively()
+//        {
+//            var picker = new UIImagePickerController();
+//
+//            picker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
+//
+//            picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+//
+//            picker.Canceled += (sender, evt) => { picker.DismissViewController(true, null); };
+//
+//            picker.FinishedPickingMedia += (s, e) => {
+//
+//                picker.DismissViewController(true, null);
+//
+//                var image = (UIImage)e.Info[UIImagePickerController.OriginalImage];
+//
+//                crop_photo(image);
+//            };
+//
+//            navigation.PresentViewController(picker, true, null);
+//        }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using general_solid_lib;
+using general_shared_lib;
 
 namespace App.Common
 {
