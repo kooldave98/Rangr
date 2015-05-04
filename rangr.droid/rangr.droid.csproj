@@ -69,9 +69,6 @@
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.1\lib\android\SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -85,56 +82,65 @@
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.9.1.107\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.3.0\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
-    </Reference>
-    <Reference Include="OkHttp">
-      <HintPath>..\packages\modernhttpclient.2.3.0\lib\MonoAndroid\OkHttp.dll</HintPath>
-    </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\monoandroid\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Media.Plugin">
+      <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\MonoAndroid10\Media.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Media.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\MonoAndroid10\Media.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.0\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="OkHttp">
+      <HintPath>..\packages\modernhttpclient.2.4.0\lib\MonoAndroid\OkHttp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AppCode\Activities\MainActivity.cs" />
-    <Compile Include="AppCode\Fragments\BaseFragment.cs" />
-    <Compile Include="AppCode\Fragments\LoginFragment.cs" />
-    <Compile Include="AppCode\Views\AClickableSpan.cs" />
-    <Compile Include="AppCode\Views\EndlessListView.cs" />
-    <Compile Include="AppCode\Views\HyperTextView.cs" />
-    <Compile Include="AppCode\Views\PeopleGroupsListView.cs" />
-    <Compile Include="AppCode\Views\TextViewHyperlinkOnTouchListener.cs" />
-    <Compile Include="AppCode\Views\TextViewWriter.cs" />
-    <Compile Include="AppCode\Fragments\SearchFragment.cs" />
-    <Compile Include="AppCode\Fragments\PostDetailFragment.cs" />
-    <Compile Include="AppCode\Activities\AboutAppActivity.cs" />
-    <Compile Include="AppCode\Views\AppActionBarDrawerToggle.cs" />
-    <Compile Include="AppCode\Fragments\PostListFragment.cs" />
-    <Compile Include="AppCode\Fragments\PostDetailMapFragment.cs">
-      <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
+    <Compile Include="Activities\AboutAppActivity.cs" />
+    <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Activities\EditProfileActivity.cs">
+      <DependentUpon>..\AppCode\Activities\ProfileActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Fragments\NewPostFragment.cs" />
-    <Compile Include="AppCode\Activities\SimulationActivity.cs" />
-    <Compile Include="AppCode\Activities\ProfileActivity.cs" />
-    <Compile Include="AppCode\Activities\ProfileAdapter.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\PeopleActivity.cs" />
+    <Compile Include="Activities\PeopleListAdapter.cs">
+      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Activities\EditProfileActivity.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    <Compile Include="Activities\PeopleListFragment.cs">
+      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Activities\PeopleActivity.cs" />
-    <Compile Include="AppCode\Activities\PeopleMapFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    <Compile Include="Activities\PeopleMapFragment.cs">
+      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Activities\PeopleListFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    <Compile Include="Activities\ProfileActivity.cs" />
+    <Compile Include="Activities\ProfileAdapter.cs">
+      <DependentUpon>..\AppCode\Activities\ProfileActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Activities\PeopleListAdapter.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    <Compile Include="Activities\SimulationActivity.cs" />
+    <Compile Include="Fragments\BaseFragment.cs" />
+    <Compile Include="Fragments\LoginFragment.cs" />
+    <Compile Include="Fragments\NewPostFragment.cs" />
+    <Compile Include="Fragments\PostDetailFragment.cs" />
+    <Compile Include="Fragments\PostDetailMapFragment.cs">
+      <DependentUpon>..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Activities\BaseActivity.cs" />
+    <Compile Include="Fragments\PostListFragment.cs" />
+    <Compile Include="Fragments\SearchFragment.cs" />
+    <Compile Include="Views\AClickableSpan.cs" />
+    <Compile Include="Views\AppActionBarDrawerToggle.cs" />
+    <Compile Include="Views\EndlessListView.cs" />
+    <Compile Include="Views\HyperTextView.cs" />
+    <Compile Include="Views\PeopleGroupsListView.cs" />
+    <Compile Include="Views\TextViewHyperlinkOnTouchListener.cs" />
+    <Compile Include="Views\TextViewWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -178,7 +184,6 @@
     <AndroidResource Include="Resources\values-v14\styles.xml" />
     <AndroidResource Include="Resources\xml\preferences_general.xml" />
     <AndroidResource Include="Resources\layout\login.axml" />
-    <AndroidResource Include="Resources\layout\loading.axml" />
     <AndroidResource Include="Resources\layout\post_detail.axml" />
     <AndroidResource Include="Resources\layout\empty.xml" />
     <AndroidResource Include="Resources\layout\main_with_drawer.axml" />
@@ -248,14 +253,13 @@
       <DependentUpon>Profile.axml</DependentUpon>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\GoogleMap.axml" />
+    <AndroidResource Include="Resources\layout\loadMore.axml" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
-  <Import Project="..\general-shared-lib\general-shared-lib.projitems" Label="Shared" Condition="Exists('..\general-shared-lib\general-shared-lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\anim\" />
     <Folder Include="Resources\menu\" />
-    <Folder Include="AppCode\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleplayservices">
@@ -266,10 +270,6 @@
       <Version>1.0.8.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-    <XamarinComponentReference Include="modernhttpclient">
-      <Version>2.1.2</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="xamarin.mobile">
       <Version>0.7.5</Version>
       <Visible>False</Visible>
@@ -278,5 +278,15 @@
       <Version>1.3.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\droid_ui_lib\droid_ui_lib.csproj">
+      <Project>{56C520E3-BB89-439D-8C42-33EADC0AF5E6}</Project>
+      <Name>droid_ui_lib</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

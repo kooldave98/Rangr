@@ -31,7 +31,7 @@ namespace App.Common
 
 		public EditProfileViewModel ()
 		{
-			SessionInstance = Session.GetInstance ();
+			SessionInstance = Session.Current;
 			user_services = new Users ();
 
 			CurrentUserToBeEdited = SessionInstance.GetCurrentUser ();

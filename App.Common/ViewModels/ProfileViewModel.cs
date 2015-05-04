@@ -10,7 +10,7 @@ namespace App.Common
 	{
 		public ProfileViewModel ()
 		{
-			var person = Session.GetInstance ().GetCurrentUser ();
+			var person = Session.Current.GetCurrentUser ();
 
 			if (person == null) {
 				throw new ArgumentNullException ("person");

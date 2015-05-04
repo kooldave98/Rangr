@@ -127,8 +127,8 @@ namespace XamarinStore
 		public partial class Dimension
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int btn_corner_radius = 2131165184;
+			// aapt resource value: 0x7f080000
+			public const int btn_corner_radius = 2131230720;
 			
 			static Dimension()
 			{
@@ -198,22 +198,25 @@ namespace XamarinStore
 			public const int monkey = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int processing = 2130837522;
+			public const int monoandroidsplash = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int ProductImage = 2130837523;
+			public const int processing = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int purple_shirt = 2130837524;
+			public const int ProductImage = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int shirt_image = 2130837525;
+			public const int purple_shirt = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int user_default_avatar = 2130837526;
+			public const int shirt_image = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int wrench = 2130837527;
+			public const int user_default_avatar = 2130837527;
+			
+			// aapt resource value: 0x7f020018
+			public const int wrench = 2130837528;
 			
 			static Drawable()
 			{
@@ -451,23 +454,26 @@ namespace XamarinStore
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f080001
-			public const int XamActionBarStyle = 2131230721;
+			// aapt resource value: 0x7f070000
+			public const int Mono_Android_Theme_Splash = 2131165184;
 			
-			// aapt resource value: 0x7f080000
-			public const int XamActionBarTheme = 2131230720;
+			// aapt resource value: 0x7f070002
+			public const int XamActionBarStyle = 2131165186;
 			
-			// aapt resource value: 0x7f080002
-			public const int XamActionBarTitleStyle = 2131230722;
+			// aapt resource value: 0x7f070001
+			public const int XamActionBarTheme = 2131165185;
 			
-			// aapt resource value: 0x7f080005
-			public const int XamButton = 2131230725;
+			// aapt resource value: 0x7f070003
+			public const int XamActionBarTitleStyle = 2131165187;
 			
-			// aapt resource value: 0x7f080004
-			public const int XamSubtitleText = 2131230724;
+			// aapt resource value: 0x7f070006
+			public const int XamButton = 2131165190;
 			
-			// aapt resource value: 0x7f080003
-			public const int XamTitleText = 2131230723;
+			// aapt resource value: 0x7f070005
+			public const int XamSubtitleText = 2131165189;
+			
+			// aapt resource value: 0x7f070004
+			public const int XamTitleText = 2131165188;
 			
 			static Style()
 			{

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using general_shared_lib;
+using solid_lib;
 
 namespace App.Common
 {
@@ -32,7 +32,7 @@ namespace App.Common
 
 		public NewPostViewModel ()
 		{
-			SessionInstance = Session.GetInstance ();
+			SessionInstance = Session.Current;
 			post_services = new Posts ();
 
 			CurrentUser = SessionInstance.GetCurrentUser ();

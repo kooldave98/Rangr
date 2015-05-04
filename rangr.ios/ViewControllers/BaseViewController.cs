@@ -4,7 +4,7 @@ using App.Common;
 using BigTed;
 using Foundation;
 using CoreGraphics;
-using general_shared_lib;
+using solid_lib;
 using ios_ui_lib;
 
 namespace rangr.ios

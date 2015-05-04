@@ -2,7 +2,7 @@ using System;
 
 namespace App.Common
 {
-	public class Session
+    public class Session : SingletonBase<Session>
 	{
 
 		public void PersistCurrentConnection (ConnectionIdentity connection_id)
@@ -37,18 +37,11 @@ namespace App.Common
 			persistentStorage.Save (CurrentUserKey, user);
 		}
 
-		public static Session GetInstance ()
-		{
-			return _instance ?? (_instance = new Session ());
-		}
-
 		private PersistentStorage persistentStorage;
 
 		private const string CurrentUserKey = "current_user";
 
 		private const string CurrentConnectionKey = "current_connection";
-
-		private static Session _instance = null;
 
 		private Session ()
 		{

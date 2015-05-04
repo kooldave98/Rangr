@@ -162,9 +162,13 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ios-ui-lib\ios-ui-lib.csproj">
-      <Project>{12B7BEB1-E98B-4E98-B935-60B684AD0AB1}</Project>
-      <Name>ios-ui-lib</Name>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ios_ui_lib\ios_ui_lib.csproj">
+      <Project>{8D459AA9-125E-4108-8E7D-24C6E47E9B6A}</Project>
+      <Name>ios_ui_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

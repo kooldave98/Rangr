@@ -26,6 +26,7 @@ namespace experiments.droid
 		
 		public static void UpdateIdValues()
 		{
+			global::droid_ui_lib.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
 		}
 		
 		public partial class Array
@@ -119,16 +120,19 @@ namespace experiments.droid
 			public const int mercury = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int neptune = 2130837513;
+			public const int monoandroidsplash = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int saturn = 2130837514;
+			public const int neptune = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int uranus = 2130837515;
+			public const int saturn = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int venus = 2130837516;
+			public const int uranus = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int venus = 2130837517;
 			
 			static Drawable()
 			{
@@ -143,35 +147,35 @@ namespace experiments.droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090008
-			public const int action_bar_subtitle = 2131296264;
+			// aapt resource value: 0x7f0a0008
+			public const int action_bar_subtitle = 2131361800;
 			
-			// aapt resource value: 0x7f090007
-			public const int action_bar_title = 2131296263;
+			// aapt resource value: 0x7f0a0007
+			public const int action_bar_title = 2131361799;
 			
-			// aapt resource value: 0x7f090009
-			public const int action_websearch = 2131296265;
+			// aapt resource value: 0x7f0a0009
+			public const int action_websearch = 2131361801;
 			
-			// aapt resource value: 0x7f090001
-			public const int content_frame = 2131296257;
+			// aapt resource value: 0x7f0a0001
+			public const int content_frame = 2131361793;
 			
-			// aapt resource value: 0x7f090000
-			public const int drawer_layout = 2131296256;
+			// aapt resource value: 0x7f0a0000
+			public const int drawer_layout = 2131361792;
 			
-			// aapt resource value: 0x7f090006
-			public const int fragmentContainer = 2131296262;
+			// aapt resource value: 0x7f0a0006
+			public const int fragmentContainer = 2131361798;
 			
-			// aapt resource value: 0x7f090004
-			public const int image = 2131296260;
+			// aapt resource value: 0x7f0a0004
+			public const int image = 2131361796;
 			
-			// aapt resource value: 0x7f090002
-			public const int left_drawer = 2131296258;
+			// aapt resource value: 0x7f0a0002
+			public const int left_drawer = 2131361794;
 			
-			// aapt resource value: 0x7f090005
-			public const int myButton = 2131296261;
+			// aapt resource value: 0x7f0a0005
+			public const int myButton = 2131361797;
 			
-			// aapt resource value: 0x7f090003
-			public const int spinner_title = 2131296259;
+			// aapt resource value: 0x7f0a0003
+			public const int spinner_title = 2131361795;
 			
 			static Id()
 			{
@@ -220,8 +224,8 @@ namespace experiments.droid
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f080000
-			public const int main = 2131230720;
+			// aapt resource value: 0x7f090000
+			public const int main = 2131296256;
 			
 			static Menu()
 			{
@@ -254,12 +258,31 @@ namespace experiments.droid
 			// aapt resource value: 0x7f070000
 			public const int hello = 2131165184;
 			
+			// aapt resource value: 0x7f070006
+			public const int library_name = 2131165190;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int Mono_Android_Theme_Splash = 2131230720;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}

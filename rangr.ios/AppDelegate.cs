@@ -9,10 +9,11 @@ using App.Common;
 using Google.Maps;
 using CoreFoundation;
 using System.Runtime.InteropServices;
-
-using Xamarin.Media;
+using Media.Plugin.Abstractions;
 using System.Threading.Tasks;
 using ios_ui_lib;
+using CoreGraphics;
+using Media.Plugin;
 
 namespace rangr.ios
 {
@@ -36,6 +37,7 @@ namespace rangr.ios
 
             Theme.Apply();
 
+            //setting these to translucent makes the content to be pushed and not overlaid
             navigation.NavigationBar.Translucent = false;
             tab_bar.TabBar.Translucent = false;
 
@@ -70,7 +72,6 @@ namespace rangr.ios
             var vc = new PostListViewController();
             vc.PostItemSelected += show_detail;
 
-            //vc.NewPostSelected += show_new_post;
             navigation.PushViewController(vc, true);
             vc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
             vc.NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
@@ -89,51 +90,44 @@ namespace rangr.ios
             await select_picture();
         }
 
-        private void set_caption(UIImage image)
-        {
-            var dc = new NewPostViewController();
-            dc.CreatePostSucceeded += () => {
-                navigation.PopToRootViewController(true);
-            };
-
-            dc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done), false);
-            dc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
-                dc.Save(sender, e);
-            };
-
-            dc.selected_image = image;
-
-            navigation.PresentViewController(dc, true, null);
-        }
-
-        private void crop_photo(string image_path)
-        {
-            var dc = new CropperViewController(image_path);
-//            dc.Cropped += () => {
-//                navigation.PopToRootViewController(true);
-//            };
-
-//            dc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done), false);
-//            dc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
-//                dc.Save(sender, e);
-//            };
-
-            //dc.selected_image = image;
-
-            navigation.PresentViewController(dc, true, null);
-        }
-
         private async Task select_picture()
         {
-            var picker = new MediaPicker();
+            var media_file = await CrossMedia.Current.PickPhotoAsync();
 
-            var media_file = await picker.PickPhotoAsync();
+            set_caption(media_file);
+        }
 
-            //var image = UIImage.FromFile(media_file.Path);
+        private void set_caption(MediaFile media_file)
+        {
+            if (media_file != null)
+            {
+                var dc = new NewPostViewController();
+                var dc_wrapped = with_navigation_bar(dc);
 
-            //dispose_media_file(media_file);
+                dc.CreatePostSucceeded += () => {
+                    dc_wrapped.DismissViewController(true, null);
+                };
+                dc.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Cancel), false);
+                dc.NavigationItem.LeftBarButtonItem.Clicked += (sender, e) => {
+                    dc_wrapped.DismissViewController(true, null);
+                };
+                dc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Done), false);
+                dc.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
+                    dc.Save(sender, e);
+                };
 
-            crop_photo(media_file.Path);
+                dc.selected_image = CropCenterSquare(UIImage.FromFile(media_file.Path));
+
+                navigation.PresentViewController(dc_wrapped, true, null);
+            }
+        }
+
+        private UIViewController with_navigation_bar(UIViewController controller)
+        {
+            var navigation_controller = new UINavigationController(controller);
+            navigation_controller.NavigationBar.Translucent = false;
+
+            return navigation_controller;
         }
 
         private void dispose_media_file(MediaFile Media)
@@ -144,26 +138,57 @@ namespace rangr.ios
             }
         }
 
-//        private void select_picture_natively()
-//        {
-//            var picker = new UIImagePickerController();
-//
-//            picker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
-//
-//            picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-//
-//            picker.Canceled += (sender, evt) => { picker.DismissViewController(true, null); };
-//
-//            picker.FinishedPickingMedia += (s, e) => {
-//
-//                picker.DismissViewController(true, null);
-//
-//                var image = (UIImage)e.Info[UIImagePickerController.OriginalImage];
-//
-//                crop_photo(image);
-//            };
-//
-//            navigation.PresentViewController(picker, true, null);
-//        }
+        // crop a square from the center of the image, without resizing
+        //Adapted from here: 
+        //http://forums.xamarin.com/discussion/4170/resize-images-and-save-thumbnails
+        private UIImage CropCenterSquare(UIImage sourceImage)
+        {
+            nfloat shortest_length;
+
+            nfloat crop_x; nfloat crop_y; 
+
+            if (sourceImage.Size.Height == sourceImage.Size.Width)
+            {
+                shortest_length = sourceImage.Size.Height;//Any(Width or Height)
+
+                crop_y = 0;
+                crop_x = 0;
+            }
+
+
+            if (sourceImage.Size.Height < sourceImage.Size.Width)
+            {
+                shortest_length = sourceImage.Size.Height;
+
+                crop_y = 0;
+                crop_x = (sourceImage.Size.Width - shortest_length) / 2;
+            }
+
+            if(sourceImage.Size.Width < sourceImage.Size.Height)
+            {
+                shortest_length = sourceImage.Size.Width;
+
+                crop_y = (sourceImage.Size.Height - shortest_length) / 2;
+                crop_x = 0;
+            }
+
+
+
+            nfloat width = shortest_length;
+            nfloat height = shortest_length;
+
+
+
+            var imgSize = sourceImage.Size;
+            UIGraphics.BeginImageContext(new CGSize(width, height));
+            var context = UIGraphics.GetCurrentContext();
+            var clippedRect = new CGRect(0, 0, width, height);
+            context.ClipToRect(clippedRect);
+            var drawRect = new CGRect(-crop_x, -crop_y, imgSize.Width, imgSize.Height);
+            sourceImage.Draw(drawRect);
+            var modifiedImage = UIGraphics.GetImageFromCurrentImageContext();
+            UIGraphics.EndImageContext();
+            return modifiedImage;
+        }
     }
 }

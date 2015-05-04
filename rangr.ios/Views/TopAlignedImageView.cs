@@ -6,9 +6,9 @@ using System.Text;
 using UIKit;
 using Foundation;
 using CoreGraphics;
-using general_shared_lib;
+using App.Common;
 
-namespace ios_ui_lib
+namespace rangr.ios
 {
     public class TopAlignedImageView : UIView
     {

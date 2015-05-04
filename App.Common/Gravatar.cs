@@ -9,9 +9,13 @@ using System.Security.Cryptography;
 using Foundation;
 #endif
 
-namespace general_shared_lib
+namespace App.Common
 {
-    class Gravatar
+    //TO-REFACTOR
+    //This class violates SOLID in so many ways.
+    //Most importantly it is not re-useable in other apps due 
+    //to its high coupling with with external dependencises
+    public class Gravatar
     {
         public enum Rating
         {

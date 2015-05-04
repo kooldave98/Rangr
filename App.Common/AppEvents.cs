@@ -1,5 +1,4 @@
 using System;
-using general_shared_lib;
 
 namespace App.Common
 {

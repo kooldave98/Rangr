@@ -8,7 +8,7 @@ using Xamarin;
 using Splat;
 using ModernHttpClient;
 using System.Net.Http;
-using general_shared_lib;
+using solid_lib;
 
 #if __ANDROID__
 using AndroidApp = Android.App;
@@ -199,7 +199,7 @@ namespace App.Common
 
             _geoLocationInstance = GeoLocation.GetInstance();
             ConnectionServices = new Connections();
-            sessionInstance = Session.GetInstance();
+            sessionInstance = Session.Current;
 
             // any work here is likely to be blocking (static constructors run on whatever thread that first 
             // access its instance members, which in our case is an activity doing an initialization check),

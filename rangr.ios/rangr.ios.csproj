@@ -139,11 +139,17 @@
     <Reference Include="PLCrashReporterUnifiedBinding">
       <HintPath>..\packages\Xamarin.Insights.1.9.1.107\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
     </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.3.0\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
-    </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Media.Plugin">
+      <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\Xamarin.iOS10\Media.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Media.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\Xamarin.iOS10\Media.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.0\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +177,9 @@
     <Compile Include="ViewControllers\NewPostViewController.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="ViewControllers\MapViewController.cs" />
+    <Compile Include="Views\TopAlignedImageView.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
-  <Import Project="..\general-shared-lib\general-shared-lib.projitems" Label="Shared" Condition="Exists('..\general-shared-lib\general-shared-lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <XamarinComponentReference Include="googlemapsios">
@@ -203,9 +209,13 @@
     <BundleResource Include="Resources\top_charts.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ios-ui-lib\ios-ui-lib.csproj">
-      <Project>{12B7BEB1-E98B-4E98-B935-60B684AD0AB1}</Project>
-      <Name>ios-ui-lib</Name>
+    <ProjectReference Include="..\ios_ui_lib\ios_ui_lib.csproj">
+      <Project>{8D459AA9-125E-4108-8E7D-24C6E47E9B6A}</Project>
+      <Name>ios_ui_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

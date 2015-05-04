@@ -6,11 +6,11 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{12B7BEB1-E98B-4E98-B935-60B684AD0AB1}</ProjectGuid>
+    <ProjectGuid>{8D459AA9-125E-4108-8E7D-24C6E47E9B6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>ios_ui_lib</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>ios-ui-lib</AssemblyName>
+    <AssemblyName>ios_ui_lib</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,19 +38,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\" />
-    <Folder Include="ViewControllers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EasyLayout.cs" />
-    <Compile Include="UIViewExtensions.cs" />
-    <Compile Include="HumanInterface.cs" />
-    <Compile Include="Views\UIMultiLineLabelCell.cs" />
-    <Compile Include="Views\TopAlignedImageView.cs" />
     <Compile Include="ViewControllers\CropperViewController.cs" />
     <Compile Include="Views\CropperView.cs" />
+    <Compile Include="Views\UIMultiLineLabelCell.cs" />
+    <Compile Include="EasyLayout.cs" />
+    <Compile Include="HumanInterface.cs" />
+    <Compile Include="UIViewExtensions.cs" />
   </ItemGroup>
-  <Import Project="..\general-shared-lib\general-shared-lib.projitems" Label="Shared" Condition="Exists('..\general-shared-lib\general-shared-lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

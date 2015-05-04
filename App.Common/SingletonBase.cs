@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace general_shared_lib
+namespace App.Common
 {
     /// <summary>
     /// A base class for the singleton design pattern.

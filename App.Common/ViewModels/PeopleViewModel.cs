@@ -28,7 +28,7 @@ namespace App.Common
 		public PeopleViewModel ()
 		{
 			ConnectedUsers = new List<Connection> ();
-			_sessionInstance = Session.GetInstance ();
+			_sessionInstance = Session.Current;
 			_geoLocationInstance = GeoLocation.GetInstance ();
 
 			ConnectionServices = new Connections ();

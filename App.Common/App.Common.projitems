@@ -49,6 +49,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Gravatar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SingletonBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

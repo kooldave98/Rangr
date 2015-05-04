@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 using System.Drawing;
-using general_shared_lib;
+using solid_lib;
 using CoreGraphics;
 
 namespace ios_ui_lib
@@ -25,15 +25,52 @@ namespace ios_ui_lib
         {
             base.ViewDidLoad ();
 
+            create_view();
+
+            bind_cropper_gestures();
+               
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            //aspect ratio stuff
+            var divisor = imageView.Image.Size.Width / View.Bounds.Width;
+            var image_height = imageView.Image.Size.Height / divisor;
+
+
+
+            View.ConstrainLayout(() => 
+
+                imageView.Frame.Width == View.Frame.Width &&
+                imageView.Frame.Height == image_height &&
+                imageView.Frame.Top == View.Frame.Top &&
+                imageView.Frame.Left == View.Frame.Left &&
+
+                cropperView.Frame.Left == View.Frame.Left &&
+                cropperView.Frame.Right == View.Frame.Right &&
+                cropperView.Frame.Top == View.Frame.Top &&
+                cropperView.Frame.Bottom == View.Frame.Bottom
+            );
+        }
+
+        private void create_view()
+        {
             using (var image = UIImage.FromFile (selected_image_path)) 
             {
-                imageView = new UIImageView (new CGRect (0, 0, image.Size.Width, image.Size.Height));
-                imageView.Image = image;
+                View.AddSubview(imageView = new UIImageView(){
+                    Image = image,
+                    TranslatesAutoresizingMaskIntoConstraints = false
+                });
             }
 
-            cropperView = new CropperView { Frame = View.Frame };
-            View.AddSubviews (imageView, cropperView);
+            View.AddSubview(cropperView = new CropperView { 
+                //Frame = View.Bounds, 
+                TranslatesAutoresizingMaskIntoConstraints = false 
+            });
+        }
 
+        private void bind_cropper_gestures()
+        {
             nfloat dx = 0;
             nfloat dy = 0;
 
@@ -88,12 +125,15 @@ namespace ios_ui_lib
 
             cropperView.AddGestureRecognizer (pan);
             cropperView.AddGestureRecognizer (pinch);
-            cropperView.AddGestureRecognizer (doubleTap);   
+            cropperView.AddGestureRecognizer (doubleTap);
         }
+
 
         private void Crop()
         {
-            var inputCGImage = UIImage.FromFile (selected_image_path).CGImage;
+            var img = UIImage.FromFile(selected_image_path);
+
+            var inputCGImage = img.CGImage;
 
             var image = inputCGImage.WithImageInRect (cropperView.CropRect);
             using (var croppedImage = UIImage.FromImage (image)) {

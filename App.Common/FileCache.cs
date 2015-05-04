@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Android.App;
 #endif
 
-namespace general_shared_lib
+namespace App.Common
 {
     public class FileCache
     {

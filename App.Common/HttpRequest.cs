@@ -7,10 +7,13 @@ using ModernHttpClient;
 using System.Net.Http;
 using Fusillade;
 using System.Net.Http.Headers;
-using general_shared_lib;
 
 namespace App.Common
 {
+    //TO-REFACTOR
+    //This class violates SOLID in so many ways.
+    //Most importantly it is not re-useable in other apps due 
+    //to its high coupling with with external dependencises
     public class HttpRequest : SingletonBase<HttpRequest>
     {
         public async Task<string> Put(string baseUrl, List<KeyValuePair<string, string>> data)
@@ -173,19 +176,8 @@ namespace App.Common
         private HttpRequest()
         {
             httpClient = new HttpClient(NetCache.UserInitiated);
-            httpClient.Timeout = TimeSpan.FromSeconds(10);
+            //httpClient.Timeout = TimeSpan.FromSeconds(100);
         }
-
-//        private static HttpRequest _instance;
-//
-//        public static HttpRequest Current
-//        {
-//            get
-//            {
-//                return _instance ?? (_instance = new HttpRequest());
-//                //return (_instance = new HttpRequest ());
-//            }
-//        }
 
     }
 }

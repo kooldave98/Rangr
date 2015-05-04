@@ -34,7 +34,7 @@ namespace App.Common
 
 		public LoginViewModel ()
 		{
-			sessionInstance = Session.GetInstance ();
+			sessionInstance = Session.Current;
 
 			UserServices = new Users ();
 		}

@@ -86,7 +86,7 @@ namespace App.Common
 		{
 			Posts = new List<Post> ();
 
-			_sessionInstance = Session.GetInstance ();
+			_sessionInstance = Session.Current;
 
 			PostServices = new Posts ();
 		}

@@ -107,7 +107,7 @@ namespace App.Common
 			//end workaround
 
 
-			_sessionInstance = Session.GetInstance ();
+			_sessionInstance = Session.Current;
 
 			PostServices = new Posts ();
 		}

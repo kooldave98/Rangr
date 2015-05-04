@@ -69,6 +69,12 @@ namespace rangr.ios
                 ClipsToBounds = true,
             });
 
+            View.AddGestureRecognizer(new UITapGestureRecognizer ((gesture) => { View.EndEditing(true); }) 
+            { 
+                NumberOfTapsRequired = 1, 
+                NumberOfTouchesRequired = 1 
+            });
+
         }
 
         public override void ViewDidLayoutSubviews()
