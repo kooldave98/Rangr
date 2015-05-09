@@ -118,7 +118,7 @@ namespace rangr.ios
 
                 dc.selected_image = CropCenterSquare(UIImage.FromFile(media_file.Path));
 
-                navigation.PresentViewController(dc_wrapped, true, null);
+                navigation.PresentViewController(dc_wrapped, true, ()=>{ dispose_media_file(media_file); });
             }
         }
 

@@ -3,7 +3,6 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Xamarin;
 
 using Splat;
 using ModernHttpClient;
@@ -56,7 +55,7 @@ namespace App.Common
 
             if (location != null)
             {
-                var connection_id = await ConnectionServices.Create(user.user_id.ToString(), location.ToLongLatAccString());
+                var connection_id = await ConnectionServices.Create(user.user_id, location.ToLongLatAccString());
 
                 if (connection_id != null)
                 {
@@ -91,7 +90,7 @@ namespace App.Common
 
         private async Task update_connection(GeoCoordinate position)
         { 
-            await ConnectionServices.Update(sessionInstance.GetCurrentConnection().connection_id.ToString(), 
+            await ConnectionServices.Update(sessionInstance.GetCurrentConnection().connection_id, 
                 position.ToLongLatAccString());
         }
 
@@ -190,13 +189,6 @@ namespace App.Common
 
         protected AppGlobal()
         {
-            #if __ANDROID__
-            Insights.Initialize("5f5d7dc30fc0c3f61718fa1ffacecf065b9deb26", AndroidApp.Application.Context);
-            #else
-
-            #endif
-
-
             _geoLocationInstance = GeoLocation.GetInstance();
             ConnectionServices = new Connections();
             sessionInstance = Session.Current;

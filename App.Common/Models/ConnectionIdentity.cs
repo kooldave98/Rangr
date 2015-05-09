@@ -5,7 +5,7 @@ namespace App.Common
 {
     public class ConnectionIdentity : BaseEntity
     {
-        public int connection_id { get; set; }
+        public string connection_id { get; set; }
     }
 
     public class ConnectionComparer : IEqualityComparer<Connection>

@@ -8,7 +8,7 @@ namespace App.Common
 
 		public DateTime date { get; set; }
 
-		public int user_id { get; set; }
+		public string user_id { get; set; }
 
 		public string user_display_name{ get; set; }
 

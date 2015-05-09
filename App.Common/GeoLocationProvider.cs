@@ -4,7 +4,6 @@ using System.Linq;
 using Xamarin.Geolocation;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin;
 
 #if __ANDROID__
 using Android.App;
@@ -162,7 +161,7 @@ namespace App.Common
 		{
 			GeoCoordinate geo_value = null;
 
-			using (var handle = Insights.TrackTime ("TimeToGetCurrentPosition")) {
+            using (var handle = Analytics.Current.TrackTime ("TimeToGetCurrentPosition")) {
 
 				if (!this.geolocator.IsGeolocationAvailable || !this.geolocator.IsGeolocationEnabled) {
 					NotifyStatusChanged (Status.ERROR, "Location services are unavailable");
@@ -182,7 +181,7 @@ namespace App.Common
 					try {
 						geoPosition = await geolocator.GetPositionAsync (20000);
 					} catch (Exception e) {
-						Insights.Report (e);
+                        Analytics.Current.Report (e);
 						NotifyStatusChanged (Status.ERROR, "Could not determine location");
 						return geo_value;
 					}

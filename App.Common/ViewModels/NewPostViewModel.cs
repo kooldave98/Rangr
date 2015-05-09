@@ -21,7 +21,7 @@ namespace App.Common
             Guard.IsNotNull(PostImage, "PostImage");
 
 
-            var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id.ToString (), PostImage);
+            var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id, PostImage);
 
 			if (result != null) {
 				return true;

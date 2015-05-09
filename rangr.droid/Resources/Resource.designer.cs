@@ -65,8 +65,6 @@ namespace rangr.droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::rangr.droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextSize;
-			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
-			global::Xamarin.InsightsCore.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
 			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::droid_ui_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;

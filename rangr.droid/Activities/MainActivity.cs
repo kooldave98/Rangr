@@ -35,6 +35,9 @@ namespace rangr.droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            Analytics.Current.Initialize(ApplicationContext);
+
             SetContentView(Resource.Layout.main_with_drawer);
 
             setup_navigation_drawer();
@@ -155,7 +158,7 @@ namespace rangr.droid
                     post_id = 222,
                     text = "fake post",
                     user_display_name = "fake user",
-                    user_id = 444,
+                    user_id = "444",
                     date = DateTime.Now.Date,
                     long_lat_acc_geo_string = "-2.2275587999999997,53.478498699999996,1",
                 });

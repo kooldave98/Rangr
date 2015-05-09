@@ -4,7 +4,7 @@ namespace App.Common
 {
 	public class Connection : ConnectionIdentity, IUser
 	{
-		public int user_id { get; set; }
+		public string user_id { get; set; }
 
 		public string user_display_name { get; set; }
 

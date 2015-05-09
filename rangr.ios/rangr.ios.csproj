@@ -133,12 +133,6 @@
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.3\lib\ios-unified\SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.9.1.107\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="PLCrashReporterUnifiedBinding">
-      <HintPath>..\packages\Xamarin.Insights.1.9.1.107\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
-    </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
@@ -148,8 +142,14 @@
     <Reference Include="Media.Plugin.Abstractions">
       <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\Xamarin.iOS10\Media.Plugin.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.10.0.108\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\packages\Xamarin.Insights.1.10.0.108\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
     <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.0\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+      <HintPath>..\packages\modernhttpclient.2.4.1\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

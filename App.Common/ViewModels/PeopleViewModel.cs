@@ -14,7 +14,7 @@ namespace App.Common
 
 		public async Task RefreshConnectedUsers ()
 		{
-			var result = await ConnectionServices.Get (_sessionInstance.GetCurrentConnection ().connection_id.ToString ());
+			var result = await ConnectionServices.Get (_sessionInstance.GetCurrentConnection ().connection_id);
 
 			ConnectedUsers = result;
 

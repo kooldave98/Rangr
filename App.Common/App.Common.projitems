@@ -53,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Gravatar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SingletonBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Analytics.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

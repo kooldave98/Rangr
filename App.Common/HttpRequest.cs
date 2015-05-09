@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using Xamarin;
 using System.Linq;
 using ModernHttpClient;
 using System.Net.Http;
@@ -20,13 +19,13 @@ namespace App.Common
         {
             var request_string = "PUT: " + baseUrl;
 
-            Insights.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
+            Analytics.Current.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
 
             string responseString = null;
 
             try
             {
-                using (var handle = Insights.TrackTime(request_string))
+                using (var handle = Analytics.Current.TrackTime(request_string))
                 {	
                     var response = await httpClient.PutAsync(baseUrl, new FormUrlEncodedContent(data));
                     responseString = await response.Content.ReadAsStringAsync();
@@ -35,7 +34,7 @@ namespace App.Common
             }
             catch (Exception e)
             { 
-                Insights.Report(e, new Dictionary<string, string>()
+                Analytics.Current.Report(e, new Dictionary<string, string>()
                     {
                         { "Request", request_string },
                         { "Response", responseString }
@@ -52,13 +51,13 @@ namespace App.Common
         {
             var request_string = "POST: " + baseUrl;
 
-            Insights.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
+            Analytics.Current.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
 
             string responseString = null;
 
             try
             {
-                using (var handle = Insights.TrackTime(request_string))
+                using (var handle = Analytics.Current.TrackTime(request_string))
                 {	
                     var response = await httpClient.PostAsync(baseUrl, new FormUrlEncodedContent(data));
                     responseString = await response.Content.ReadAsStringAsync();
@@ -67,7 +66,7 @@ namespace App.Common
             }
             catch (Exception e)
             { 
-                Insights.Report(e, new Dictionary<string, string>()
+                Analytics.Current.Report(e, new Dictionary<string, string>()
                     {
                         { "Request", request_string },
                         { "Response", responseString }
@@ -95,22 +94,22 @@ namespace App.Common
 
             var request_string = "POST: " + baseUrl;
 
-            Insights.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
+            Analytics.Current.Track(request_string, data.ToDictionary(i => i.Key, i => i.Value));
 
             string responseString = null;
 
             try
             {
-                using (var handle = Insights.TrackTime(request_string))
-                {   
+                //using (var handle = Analytics.Current.TrackTime(request_string))
+                //{   
                     var response = await httpClient.PostAsync(baseUrl, httpContent);
                     responseString = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
-                }
+                //}
             }
             catch (Exception e)
             { 
-                Insights.Report(e, new Dictionary<string, string>()
+                Analytics.Current.Report(e, new Dictionary<string, string>()
                     {
                         { "Request", request_string },
                         { "Response", responseString }
@@ -144,13 +143,13 @@ namespace App.Common
         {
             var request_string = "GET: " + baseUrl;
 
-            Insights.Track(request_string);
+            Analytics.Current.Track(request_string);
 
             string responseString = null;
 
             try
             {
-                using (var handle = Insights.TrackTime(request_string))
+                using (var handle = Analytics.Current.TrackTime(request_string))
                 {				
                     var response = await httpClient.GetAsync(baseUrl);
                     responseString = await response.Content.ReadAsStringAsync();
@@ -159,7 +158,7 @@ namespace App.Common
             }
             catch (Exception e)
             { 
-                Insights.Report(e, new Dictionary<string, string>()
+                Analytics.Current.Report(e, new Dictionary<string, string>()
                     {
                         { "Request", request_string },
                         { "Response", responseString }

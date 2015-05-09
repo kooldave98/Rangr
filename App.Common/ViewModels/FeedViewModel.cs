@@ -77,7 +77,7 @@ namespace App.Common
 		}
 
 		private string connection_id {
-			get{ return _sessionInstance.GetCurrentConnection ().connection_id.ToString (); }
+			get{ return _sessionInstance.GetCurrentConnection ().connection_id; }
 		}
 
 		public event EventHandler<EventArgs> OnNewPostsReceived;
