@@ -15,6 +15,37 @@ namespace App.Common
     //to its high coupling with with external dependencises
     public class HttpRequest : SingletonBase<HttpRequest>
     {
+        public async Task<string> Get(string baseUrl)
+        {
+            var request_string = "GET: " + baseUrl;
+
+            Analytics.Current.Track(request_string);
+
+            string responseString = null;
+
+            try
+            {
+                using (var handle = Analytics.Current.TrackTime(request_string))
+                {               
+                    var response = await httpClient.GetAsync(baseUrl);
+                    responseString = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+            catch (Exception e)
+            { 
+                Analytics.Current.Report(e, new Dictionary<string, string>()
+                    {
+                        { "Request", request_string },
+                        { "Response", responseString }
+                    });
+
+                throw;
+            }
+
+            return responseString;
+        }
+
         public async Task<string> Put(string baseUrl, List<KeyValuePair<string, string>> data)
         {
             var request_string = "PUT: " + baseUrl;
@@ -45,8 +76,7 @@ namespace App.Common
 
             return responseString;
         }
-
-
+            
         public async Task<string> Post(string baseUrl, List<KeyValuePair<string, string>> data)
         {
             var request_string = "POST: " + baseUrl;
@@ -100,58 +130,9 @@ namespace App.Common
 
             try
             {
-                //using (var handle = Analytics.Current.TrackTime(request_string))
-                //{   
-                    var response = await httpClient.PostAsync(baseUrl, httpContent);
-                    responseString = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-                //}
-            }
-            catch (Exception e)
-            { 
-                Analytics.Current.Report(e, new Dictionary<string, string>()
-                    {
-                        { "Request", request_string },
-                        { "Response", responseString }
-                    });
-
-                throw;
-            }
-
-            return responseString;
-
-        }
-
-        private void add_to_multipart_form_data_content(MultipartFormDataContent content, 
-                                                        List<KeyValuePair<string, HttpFile>> data)
-        {
-            foreach (var item in data)
-            {
-                var fileContent = new ByteArrayContent(item.Value.Buffer);
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue(item.Value.MediaType);
-
-                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = item.Value.FileName,
-                    Name = item.Key
-                };
-                content.Add(fileContent,item.Key);
-            }
-        }
-
-        public async Task<string> Get(string baseUrl)
-        {
-            var request_string = "GET: " + baseUrl;
-
-            Analytics.Current.Track(request_string);
-
-            string responseString = null;
-
-            try
-            {
                 using (var handle = Analytics.Current.TrackTime(request_string))
-                {				
-                    var response = await httpClient.GetAsync(baseUrl);
+                {   
+                    var response = await httpClient.PostAsync(baseUrl, httpContent);
                     responseString = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                 }
@@ -168,6 +149,7 @@ namespace App.Common
             }
 
             return responseString;
+
         }
 
         private static HttpClient httpClient;
@@ -178,5 +160,21 @@ namespace App.Common
             //httpClient.Timeout = TimeSpan.FromSeconds(100);
         }
 
+        private void add_to_multipart_form_data_content(MultipartFormDataContent content, 
+                                                            List<KeyValuePair<string, HttpFile>> data)
+        {
+            foreach (var item in data)
+            {
+                var fileContent = new ByteArrayContent(item.Value.Buffer);
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(item.Value.MediaType);
+
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                    {
+                        FileName = item.Value.FileName,
+                        Name = item.Key
+                    };
+                content.Add(fileContent,item.Key);
+            }
+        }
     }
 }

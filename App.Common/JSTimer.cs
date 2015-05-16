@@ -1,7 +1,5 @@
 using System;
 
-//using System.Threading;
-
 namespace App.Common
 {
     public static class JSTimer
@@ -30,7 +28,6 @@ namespace App.Common
         }
 
 
-        //D.O: Modified this method to be self disposable
         public static void SetTimeout(Action method, int delayInMilliseconds)
         {
             System.Timers.Timer timer = new System.Timers.Timer(delayInMilliseconds);
@@ -47,9 +44,9 @@ namespace App.Common
             timer.Enabled = true;
             timer.Start();
 
-            // Returns a stop handle which can be used for stopping
-            // the timer, if required
-            //return timer as IDisposable;
+            //D.O: Modified this method to be self disposable
+
+            //return timer as IDisposable;// returns a stop handle which can be used for stopping the timer, if required
         }
     }
 }
