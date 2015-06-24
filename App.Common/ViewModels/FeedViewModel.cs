@@ -22,10 +22,12 @@ namespace App.Common
 			if (!first_load) {
 				//Todo: Need to guard Get Current Connection
 				var newer_posts =
-					await PostServices
-							.Get (connection_id, 
-						forward_start_index.ToString (), 
-						first_load: first_load);
+                    await get_posts.Get (
+                        new GetPostsByMutualRequest(){
+                        user_id = user_id, 
+                        start_index = forward_start_index, 
+						first_load = first_load
+                    });
 
 				foreach (var post in newer_posts) {
 					first_load = false;
@@ -47,11 +49,15 @@ namespace App.Common
 
 			if (first_load || backward_start_index > 0) {
 				var older_posts = 
-					await PostServices
-							.Get (connection_id, 
-						backward_start_index.ToString (), 
-						first_load: first_load, 
-						traversal: CollectionTraversal.Older);
+                    await get_posts
+							.Get (
+                            new GetPostsByMutualRequest(){
+                            user_id = user_id, 
+                            start_index = backward_start_index, 
+						    first_load = first_load, 
+                            collection_traversal = CollectionTraversal.Older
+                        }
+                        );
 
 				foreach (var post in older_posts) {
 					first_load = false;
@@ -68,16 +74,16 @@ namespace App.Common
 			return older_posts_remaining;
 		}
 
-		private int forward_start_index {
-			get{ return Posts.FirstOrDefault () != null ? Posts.First ().post_id + 1 : 0; }
+		private long forward_start_index {
+            get{ return Posts.FirstOrDefault () != null ? Posts.First ().epoch_id + 1 : 0; }
 		}
 
-		private int backward_start_index {
-			get{ return Posts.LastOrDefault () != null ? Posts.Last ().post_id - 1 : 0; }
+		private long backward_start_index {
+            get{ return Posts.LastOrDefault () != null ? Posts.Last ().epoch_id - 1 : 0; }
 		}
 
-		private string connection_id {
-			get{ return _sessionInstance.GetCurrentConnection ().connection_id; }
+		private long user_id {
+            get{ return _sessionInstance.GetCurrentUser ().user_id; }
 		}
 
 		public event EventHandler<EventArgs> OnNewPostsReceived;
@@ -88,11 +94,11 @@ namespace App.Common
 
 			_sessionInstance = Session.Current;
 
-			PostServices = new Posts ();
+            get_posts = new GetPosts ();
 		}
 
 		Session _sessionInstance;
-		Posts PostServices;
+		GetPosts get_posts;
 	}
 }
 

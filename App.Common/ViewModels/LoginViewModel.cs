@@ -3,44 +3,57 @@ using System.Threading.Tasks;
 
 namespace App.Common
 {
-	public class LoginViewModel : ViewModelBase
-	{
-		public string UserDisplayName { get; set; }
+    public class LoginViewModel : ViewModelBase
+    {
+        public string user_mobile_number { get; set; }
 
-		public async Task<bool> CreateUser ()
-		{
-			if (string.IsNullOrWhiteSpace (UserDisplayName)) {
-				throw new InvalidOperationException ("You must enter a Display Name to create a new user");
-			}
+        public async Task<bool> CreateUser()
+        {
+            long val = 0;
+            if (!long.TryParse(user_mobile_number, out val))
+            {
+                throw new InvalidOperationException("You must enter a valid mobile number to create a new user");
+            }
 
-			var userID = await UserServices.Create (UserDisplayName);
+            var userID = await create_user_service.Create(new CreateUserRequest()
+                { 
+                    mobile_number = val
+                });
 
-			if (userID == null) {
-				return false;
-			}
+            if (userID == null)
+            {
+                return false;
+            }
+
+            var user = new User()
+            { 
+                user_id = userID.user_id
+            };
+
+            //var user = await get_user_by_id.Get (new UserIdentity(){user_id = userID.user_id});
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            sessionInstance.PersistCurrentUser(user);
 
 
-			var user = await UserServices.Get (userID.user_id.ToString ());
+            return true;
+        }
 
-			if (user == null) {
-				return false;
-			}
+        public LoginViewModel()
+        {
+            sessionInstance = Session.Current;
 
-			sessionInstance.PersistCurrentUser (user);
+            create_user_service = new CreateUser();
+            get_user_by_id = new GetUserById();
+        }
 
-
-			return true;
-		}
-
-		public LoginViewModel ()
-		{
-			sessionInstance = Session.Current;
-
-			UserServices = new Users ();
-		}
-
-		private Users UserServices;
-		private Session sessionInstance;
-	}
+        private CreateUser create_user_service;
+        private GetUserById get_user_by_id;
+        private Session sessionInstance;
+    }
 }
 

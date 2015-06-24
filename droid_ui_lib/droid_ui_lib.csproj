@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Views\AClickableSpan.cs" />
+    <Compile Include="Activities\FragmentBase.cs" />
+    <Compile Include="Activities\FragmentActivityBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -56,6 +58,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="Activities\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\solid_lib\solid_lib.csproj">

@@ -4,23 +4,6 @@ namespace App.Common
 {
     public class Session : SingletonBase<Session>
 	{
-
-		public void PersistCurrentConnection (ConnectionIdentity connection_id)
-		{
-			persistentStorage.Save (CurrentConnectionKey, connection_id);
-		}
-
-		public ConnectionIdentity GetCurrentConnection (bool allowDefault = false)
-		{
-			var connection = persistentStorage.Load<ConnectionIdentity> (CurrentConnectionKey);
-
-			if (!allowDefault && connection == null) {
-				throw new InvalidOperationException ("Connection ID does not exist");
-			}
-
-			return connection;
-		}
-
 		public User GetCurrentUser (bool allowDefault = false)
 		{
 			var user = persistentStorage.Load<User> (CurrentUserKey);
@@ -40,8 +23,6 @@ namespace App.Common
 		private PersistentStorage persistentStorage;
 
 		private const string CurrentUserKey = "current_user";
-
-		private const string CurrentConnectionKey = "current_connection";
 
 		private Session ()
 		{

@@ -139,7 +139,7 @@ namespace rangr.ios
 
         private void BindDataToCell(Post post)
         {
-            user_name.Text = post.user_display_name;
+            user_name.Text = post.user_id.ToString();
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
             time_ago.Text = TimeAgoConverter.Current.Convert(post.date);

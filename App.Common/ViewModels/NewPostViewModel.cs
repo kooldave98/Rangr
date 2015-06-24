@@ -20,8 +20,16 @@ namespace App.Common
 
             Guard.IsNotNull(PostImage, "PostImage");
 
+            var location = await GeoLocation.GetInstance().GetCurrentPosition();
 
-            var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id, PostImage);
+            var request = new CreatePostRequest(){ 
+                user_id = SessionInstance.GetCurrentUser().user_id,
+                text = PostText,
+                long_lat_acc_geo_string = location.ToLongLatAccString(),
+                image_data = PostImage
+            };
+
+            var result = await create_post.execute (request);
 
 			if (result != null) {
 				return true;
@@ -33,13 +41,13 @@ namespace App.Common
 		public NewPostViewModel ()
 		{
 			SessionInstance = Session.Current;
-			post_services = new Posts ();
+            create_post = new CreatePost ();
 
 			CurrentUser = SessionInstance.GetCurrentUser ();
 		}
 
 		private Session SessionInstance;
-		private Posts post_services;
+		private CreatePost create_post;
 	}
 }
 

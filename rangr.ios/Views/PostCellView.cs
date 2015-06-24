@@ -4,6 +4,7 @@ using Foundation;
 using UIKit;
 using App.Common;
 using ios_ui_lib;
+using System.Threading.Tasks;
 
 namespace rangr.ios
 {
@@ -76,12 +77,12 @@ namespace rangr.ios
             this.didSetupConstraints = true;
         }
 
-        public void BindDataToCell(Post post)
+        public async Task BindDataToCell(Post post)
         {
-            user_name.Text = post.user_display_name;
+            user_name.Text = await post.get_name_for_number();
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
+            time_ago.Text = post.get_time_ago();
             post_image.LoadUrl(string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id));
             //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
         }

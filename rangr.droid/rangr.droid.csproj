@@ -14,7 +14,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidApplication>True</AndroidApplication>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AssemblyName>rangr.droid</AssemblyName>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
@@ -69,9 +69,6 @@
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.1\lib\android\SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Mobile">
       <HintPath>..\Components\xamarin.mobile-0.7.5\lib\android\Xamarin.Mobile.dll</HintPath>
     </Reference>
@@ -88,59 +85,42 @@
     <Reference Include="Media.Plugin.Abstractions">
       <HintPath>..\packages\Xam.Plugin.Media.1.0.0\lib\MonoAndroid10\Media.Plugin.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.1\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
     </Reference>
     <Reference Include="OkHttp">
-      <HintPath>..\packages\modernhttpclient.2.4.1\lib\MonoAndroid\OkHttp.dll</HintPath>
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.10.1.109\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Insights.1.10.4.112\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Activities\AboutAppActivity.cs" />
-    <Compile Include="Activities\BaseActivity.cs" />
-    <Compile Include="Activities\EditProfileActivity.cs">
-      <DependentUpon>..\AppCode\Activities\ProfileActivity.cs</DependentUpon>
+    <Compile Include="App\Activities\AboutAppActivity.cs" />
+    <Compile Include="App\Activities\BaseActivity.cs" />
+    <Compile Include="App\Activities\MainActivity.cs" />
+    <Compile Include="App\Fragments\BaseFragment.cs" />
+    <Compile Include="App\Fragments\LoginFragment.cs" />
+    <Compile Include="App\Fragments\NewPostFragment.cs" />
+    <Compile Include="App\Fragments\PostDetailFragment.cs" />
+    <Compile Include="App\Fragments\PostDetailMapFragment.cs">
+      <DependentUpon>..\..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Activities\PeopleActivity.cs" />
-    <Compile Include="Activities\PeopleListAdapter.cs">
-      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Activities\PeopleListFragment.cs">
-      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Activities\PeopleMapFragment.cs">
-      <DependentUpon>..\AppCode\Activities\PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Activities\ProfileActivity.cs" />
-    <Compile Include="Activities\ProfileAdapter.cs">
-      <DependentUpon>..\AppCode\Activities\ProfileActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Activities\SimulationActivity.cs" />
-    <Compile Include="Fragments\BaseFragment.cs" />
-    <Compile Include="Fragments\LoginFragment.cs" />
-    <Compile Include="Fragments\NewPostFragment.cs" />
-    <Compile Include="Fragments\PostDetailFragment.cs" />
-    <Compile Include="Fragments\PostDetailMapFragment.cs">
-      <DependentUpon>..\..\App.Android\PostDetailsActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fragments\PostListFragment.cs" />
-    <Compile Include="Fragments\SearchFragment.cs" />
-    <Compile Include="Views\AClickableSpan.cs" />
-    <Compile Include="Views\AppActionBarDrawerToggle.cs" />
-    <Compile Include="Views\EndlessListView.cs" />
-    <Compile Include="Views\HyperTextView.cs" />
-    <Compile Include="Views\PeopleGroupsListView.cs" />
-    <Compile Include="Views\TextViewHyperlinkOnTouchListener.cs" />
-    <Compile Include="Views\TextViewWriter.cs" />
+    <Compile Include="App\Fragments\PostListFragment.cs" />
+    <Compile Include="App\Views\AClickableSpan.cs" />
+    <Compile Include="App\Views\AppActionBarDrawerToggle.cs" />
+    <Compile Include="App\Views\EndlessListView.cs" />
+    <Compile Include="App\Views\HyperTextView.cs" />
+    <Compile Include="App\Views\TextViewHyperlinkOnTouchListener.cs" />
+    <Compile Include="App\Views\TextViewWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -260,6 +240,7 @@
   <ItemGroup>
     <Folder Include="Resources\anim\" />
     <Folder Include="Resources\menu\" />
+    <Folder Include="App\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleplayservices">

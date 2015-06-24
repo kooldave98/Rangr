@@ -28,8 +28,6 @@ namespace App.Common
 		//private SynchronizationContext _context;
 		private static bool positionReliable = false;
 		private static Position geoPosition;
-		private static Position simulated_geoPosition;
-		private static bool is_simulation = false;
 
 		#if __ANDROID__
 		public static GeoLocation GetInstance ()
@@ -83,56 +81,11 @@ namespace App.Common
 				if (PositionIsInvalid) {
 					NotifyInaccurate ();
 				} else {
-					if (!is_simulation) {
 						pre_notify_position_changed ();
-					}
+					
 				}
 			};
-
-
-
-			AppEvents.Current.LocationSimulated += (sender, args) => {
-
-				if (args.Message == "L") {
-
-					is_simulation = false;
-				
-				} else {
-
-					simulate_position (args.Message);
-
-				}
-
-				pre_notify_position_changed ();
-			};
-
-			var persisted_sim = PersistentStorage.Current.Load<string> ("simulation");
-			persisted_sim = string.IsNullOrWhiteSpace (persisted_sim) ? "L" : persisted_sim;
-			if (persisted_sim != "L") {
-				simulate_position (persisted_sim);
-			}
 		
-		}
-
-		private void simulate_position (string key)
-		{
-			var locations = new Dictionary<string, string> () {
-				{ "A","-2.229798, 53.477738" },
-				{ "B","-2.229396, 53.479345" },
-				{ "C","-2.227427, 53.480470" },
-				{ "D","-2.224769, 53.480107" },
-			};
-
-			is_simulation = true;
-			var lat_lng = GetLatLng (locations [key]);
-
-			var pos = new Position ();
-
-			pos.Latitude = lat_lng.Item1;
-			pos.Longitude = lat_lng.Item2;
-			pos.Accuracy = 1;
-
-			simulated_geoPosition = pos;
 		}
 
 		private Tuple<double, double> GetLatLng (string geo_string)
@@ -145,10 +98,6 @@ namespace App.Common
 		{
 			var geolocationValue = new GeoCoordinate (geoPosition.Latitude, geoPosition.Longitude);
 			//geolocationValue = sample_geoposition;//TO BE REMOVED
-
-			if (is_simulation) {
-				geolocationValue = new GeoCoordinate (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
-			}
 
 			NotifyAccurate ();
 
@@ -203,10 +152,6 @@ namespace App.Common
 
 				geo_value = new GeoCoordinate (geoPosition.Latitude, geoPosition.Longitude);
 
-				if (is_simulation) {
-					geo_value = new GeoCoordinate (simulated_geoPosition.Latitude, simulated_geoPosition.Longitude);
-				}
-
 				//geolocationValue = sample_geoposition;
 				geo_value.Accuracy = Convert.ToInt32 (geoPosition.Accuracy);
 			}
@@ -215,9 +160,9 @@ namespace App.Common
 
 		private bool PositionIsInvalid {
 			get {
-				//var timespan = DateTime.UtcNow - geoPosition.Timestamp;
-				//return geoPosition.Accuracy > 100 || timespan.Minutes > 1;
-				return false;
+				var timespan = DateTime.UtcNow - geoPosition.Timestamp;
+				return geoPosition.Accuracy > 100000 || timespan.Minutes > 180;		//<<<------accurracy ?	
+                //greater than 3 hours and 100,000 metres
 			}
 		}
 

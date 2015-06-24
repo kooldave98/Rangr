@@ -85,11 +85,11 @@ namespace rangr.ios
             NSNotificationCenter.DefaultCenter.RemoveObservers(new []{ UIKeyboard.WillHideNotification, UIKeyboard.WillShowNotification });
         }
 
-        private void Login(string username, string password)
+        private void Login(string mobile_number, string password)
         {
-            view_model.UserDisplayName = username;
+            view_model.user_mobile_number = mobile_number;
 
-            if (!string.IsNullOrEmpty(username))
+            if (!string.IsNullOrEmpty(mobile_number))
             {
 
                 if (!string.IsNullOrEmpty(password) && password == "wertyc")
@@ -104,8 +104,6 @@ namespace rangr.ios
                         dismiss_progress();
                         if (create_user_successful)
                         {
-                            show_progress("logging in...");
-                            await AppGlobal.Current.CreateNewConnectionFromLogin();
                             dismiss_progress();
                             LoginSucceeded();
                         }

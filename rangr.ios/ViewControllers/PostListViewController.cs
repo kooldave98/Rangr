@@ -73,7 +73,7 @@ namespace rangr.ios
         {
             base.ViewWillAppear(animated);
 
-            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            if (AppGlobal.Current.CurrentUserExists)
             {
                 show_progress();
                 await view_model.RefreshPosts();

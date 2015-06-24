@@ -52,7 +52,7 @@ namespace rangr.ios
             window.RootViewController = tab_bar;
             window.MakeKeyAndVisible();
 
-            if (!AppGlobal.Current.CurrentUserAndConnectionExists)
+            if (!AppGlobal.Current.CurrentUserExists)
             {
                 var login = new LoginViewController();
                 login.LoginSucceeded += () => {
