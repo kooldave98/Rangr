@@ -102,7 +102,7 @@ namespace rangr.ios
             if (media_file != null)
             {
                 var dc = new NewPostViewController();
-                var dc_wrapped = with_navigation_bar(dc);
+                var dc_wrapped = dc.ToNavigationController();
 
                 dc.CreatePostSucceeded += () => {
                     dc_wrapped.DismissViewController(true, null);
@@ -122,13 +122,7 @@ namespace rangr.ios
             }
         }
 
-        private UIViewController with_navigation_bar(UIViewController controller)
-        {
-            var navigation_controller = new UINavigationController(controller);
-            navigation_controller.NavigationBar.Translucent = false;
 
-            return navigation_controller;
-        }
 
         private void dispose_media_file(MediaFile Media)
         {

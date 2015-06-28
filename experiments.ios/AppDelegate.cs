@@ -3,6 +3,7 @@
 using Foundation;
 using UIKit;
 using Google.Maps;
+using ios_ui_lib;
 
 namespace experiments.ios
 {
@@ -13,6 +14,37 @@ namespace experiments.ios
         UITabBarController tab_bar = new UITabBarController();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var mobile_entry = new MobileEntryViewController();
+
+            var mobile_wrapped = mobile_entry.ToNavigationController();
+
+            var country_chooser = new CountryCodesViewController();
+
+            mobile_entry.last_chosen_country = 0;
+
+            country_chooser.OnCountrySelected += (i) => {
+                mobile_entry.last_chosen_country = i;
+                mobile_entry.RefreshView();
+                mobile_wrapped.PopViewController(true);
+            };
+
+            mobile_entry.OnCountryChooserSelected += (i) => {
+                country_chooser.LastSelectedCountry = i;
+                mobile_wrapped.PushViewController(country_chooser, true);
+                country_chooser.Refresh();
+            };
+
+            window.RootViewController = mobile_wrapped;
+            window.MakeKeyAndVisible();
+
+            return true;
+        }
+
+
+        public /*override*/ bool REMOVED_FinishedLaunching(UIApplication app, NSDictionary options)
         {
             MapServices.ProvideAPIKey("AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o");
 

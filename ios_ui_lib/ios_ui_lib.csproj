@@ -47,6 +47,9 @@
     <Compile Include="EasyLayout.cs" />
     <Compile Include="HumanInterface.cs" />
     <Compile Include="UIViewExtensions.cs" />
+    <Compile Include="ViewControllers\CountryCodesViewController.cs" />
+    <Compile Include="ViewControllers\MobileEntryViewController.cs" />
+    <Compile Include="UIViewControllerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

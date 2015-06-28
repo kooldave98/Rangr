@@ -29,10 +29,10 @@ namespace App.Common
                 return mobile_number.ToString();
             }
 
-//            if (mobile_number == user_id)
-//            {
-//                return "Me";
-//            }
+            if (mobile_number == user_id)
+            {
+                return "Me";
+            }
 
             foreach (var contact in address_book) 
             {
