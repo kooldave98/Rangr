@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="MobileEntrySequence\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -47,9 +48,10 @@
     <Compile Include="EasyLayout.cs" />
     <Compile Include="HumanInterface.cs" />
     <Compile Include="UIViewExtensions.cs" />
-    <Compile Include="ViewControllers\CountryCodesViewController.cs" />
-    <Compile Include="ViewControllers\MobileEntryViewController.cs" />
     <Compile Include="UIViewControllerExtensions.cs" />
+    <Compile Include="MobileEntrySequence\MobileEntrySequence.cs" />
+    <Compile Include="MobileEntrySequence\CountryCodesViewController.cs" />
+    <Compile Include="MobileEntrySequence\MobileEntryViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

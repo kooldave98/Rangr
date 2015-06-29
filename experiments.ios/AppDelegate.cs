@@ -4,6 +4,7 @@ using Foundation;
 using UIKit;
 using Google.Maps;
 using ios_ui_lib;
+using System.Threading.Tasks;
 
 namespace experiments.ios
 {
@@ -17,28 +18,21 @@ namespace experiments.ios
         {
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var mobile_entry = new MobileEntryViewController();
+            var root = new TextDisplayViewController();
 
-            var mobile_wrapped = mobile_entry.ToNavigationController();
+            root.BeginPressed += async () => {
+                var results = await MobileEntrySequence.ShowAsync(root);
 
-            var country_chooser = new CountryCodesViewController();
-
-            mobile_entry.last_chosen_country = 0;
-
-            country_chooser.OnCountrySelected += (i) => {
-                mobile_entry.last_chosen_country = i;
-                mobile_entry.RefreshView();
-                mobile_wrapped.PopViewController(true);
+                if (results.Canceled) {
+                    root.set_label_text("YOU CANCELED THE OPERATION");
+                } else {
+                    root.set_label_text(results.EnteredMobileNumber);
+                }
             };
 
-            mobile_entry.OnCountryChooserSelected += (i) => {
-                country_chooser.LastSelectedCountry = i;
-                mobile_wrapped.PushViewController(country_chooser, true);
-                country_chooser.Refresh();
-            };
-
-            window.RootViewController = mobile_wrapped;
+            window.RootViewController = root;
             window.MakeKeyAndVisible();
+
 
             return true;
         }

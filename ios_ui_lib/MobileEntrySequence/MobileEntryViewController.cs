@@ -7,7 +7,7 @@ using solid_lib;
 
 namespace ios_ui_lib
 {
-    public class MobileEntryViewController : UITableViewController, ICountryChooser
+    public class MobileEntryViewController : UITableViewController
     {
         public MobileEntryViewController()
             : base(UITableViewStyle.Grouped)
@@ -62,26 +62,24 @@ namespace ios_ui_lib
             OnCountryChooserSelected(current_index);
         }
 
+        public void NumberEntered(string number)
+        {
+            OnNumberEntered(number);
+        }
+
         public event Action<int> OnCountryChooserSelected = delegate {};
+        public event Action<string> OnNumberEntered = delegate {};
     }
-
-    public interface ICountryChooser
-    {
-        int last_chosen_country { get; set;}
-
-        void CountryChooserSelected(int current_index);
-    }
-
 
     public class MobileEntryViewSource : UITableViewSource
     {
-        private ICountryChooser chooser;
+        private MobileEntryViewController chooser;
 
         private MobileEntryCellType[] cells;
 
-        public MobileEntryViewSource(ICountryChooser the_chooser)
+        public MobileEntryViewSource(MobileEntryViewController the_controller)
         {
-            chooser = Guard.IsNotNull(the_chooser, "the_chooser");
+            chooser = Guard.IsNotNull(the_controller, "the_controller");
 
             cells = new MobileEntryCellType[]{
                 MobileEntryCellType.Description,
@@ -186,20 +184,11 @@ namespace ios_ui_lib
 
             number_cell = cell;
 
+            number_cell.OnNumberChanged += (num) => {
+                chooser.NumberEntered(num);
+            };
             return cell;
         }
-
-//        public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
-//        {
-//            switch (cells[indexPath.Row])
-//            {
-//                case MobileEntryCellType.Description:
-//                    return 20.5f;
-//                default:
-//                    break;
-//            }
-//
-//        }
     }
 
     public class TextDisplayCell : UITableViewCell
@@ -309,7 +298,13 @@ namespace ios_ui_lib
                 KeyboardType = UIKeyboardType.NumberPad,
                 Placeholder = "your number here"
             });
+
+            number_field.EditingChanged += (sender, e) => {
+                OnNumberChanged(code_field.Text + number_field.Text);
+            };
         }
+
+        public event Action<string> OnNumberChanged = delegate{};
 
         public void BindDataToCell(string country_code)
         {

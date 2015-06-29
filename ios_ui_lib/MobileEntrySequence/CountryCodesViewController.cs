@@ -6,7 +6,7 @@ using solid_lib;
 
 namespace ios_ui_lib
 {
-    public class CountryCodesViewController : UITableViewController, ICountrySelector
+    public class CountryCodesViewController : UITableViewController
     {
         public CountryCodesViewController()
             : base(UITableViewStyle.Grouped)
@@ -55,19 +55,14 @@ namespace ios_ui_lib
         };
     }
 
-    public interface ICountrySelector
-    {
-        int LastSelectedCountry { get; set; }
-        void CountrySelected(int selected_index);
-    }
-
     public class CountryCodesViewSource : UITableViewSource
     {
-        private ICountrySelector country_selector;
+        private CountryCodesViewController country_selector;
 
         private KeyValuePair<string, string>[] codes;
         
-        public CountryCodesViewSource(KeyValuePair<string, string>[]  the_codes, ICountrySelector the_country_selector)
+        public CountryCodesViewSource(KeyValuePair<string, string>[]  the_codes
+                                        , CountryCodesViewController the_country_selector)
         {
             codes = Guard.IsNotNull(the_codes, "the_codes");
             country_selector = Guard.IsNotNull(the_country_selector, "the_country_selector");

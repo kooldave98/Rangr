@@ -110,6 +110,9 @@
     <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
+    <InterfaceDefinition Include="ViewControllers\TextDisplayViewController.xib">
+      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
+    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -138,12 +141,16 @@
     <Compile Include="Views\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\ItemsViewController.cs" />
-    <Compile Include="ViewControllers\ItemCell.cs">
+    <Compile Include="VariableHeightCells\ItemsViewController.cs" />
+    <Compile Include="VariableHeightCells\ItemCell.cs">
       <DependentUpon>ItemsViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\Model.cs">
+    <Compile Include="VariableHeightCells\Model.cs">
       <DependentUpon>ItemsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\TextDisplayViewController.cs" />
+    <Compile Include="ViewControllers\TextDisplayViewController.designer.cs">
+      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -160,6 +167,7 @@
   <ItemGroup>
     <Folder Include="ViewControllers\" />
     <Folder Include="Views\" />
+    <Folder Include="VariableHeightCells\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\solid_lib\solid_lib.csproj">
