@@ -10,40 +10,46 @@ namespace ios_ui_lib
             new TaskCompletionSource<MobileEntrySequenceResults>();
 
         private UINavigationController navigation;
-        private UIBarButtonItem cancelButton;
 
         private MobileEntryViewController mobile_entry;
         private CountryCodesViewController country_chooser;
 
         private string entered_mobile = "";
 
-//        dc.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Cancel), false);
-//        
-
         private MobileEntrySequence()
         {
-            cancelButton = new UIBarButtonItem(UIBarButtonSystemItem.Cancel);
             navigation = new UINavigationController();
         }
 
-        private void AddCancelButton(UIViewController page)
+        private void set_cancel_button(bool shown)
         {
-            //page.ToolbarItems.Add(_cancelButton);
+            var cancelButton = new UIBarButtonItem(UIBarButtonSystemItem.Cancel);
+            cancelButton.Clicked += (sender, e) => {
+                HandleCancel();
+            };
+
+            mobile_entry.NavigationItem.SetLeftBarButtonItem(cancelButton, false);
         }
 
-        private UIBarButtonItem Done()
+        private void set_done_button()
         {
-            return new UIBarButtonItem(UIBarButtonSystemItem.Done);
-        }
-
-        private async Task show_mobile_entry_page(UIViewController mother)
-        {
-            mobile_entry = new MobileEntryViewController();
-            mobile_entry.NavigationItem.SetRightBarButtonItem(Done(), false);
-            mobile_entry.NavigationItem.RightBarButtonItem.Enabled = false;
-            mobile_entry.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
+            var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
+            doneButton.Clicked += (sender, e) => {
                 HandleNumberEntered(entered_mobile);
             };
+            doneButton.Enabled = false;
+
+            mobile_entry.NavigationItem.SetRightBarButtonItem(doneButton, false);
+        }
+
+        private async Task show_mobile_entry_page(UIViewController mother, bool is_cancelable)
+        {
+            mobile_entry = new MobileEntryViewController();
+
+            set_done_button();
+
+            set_cancel_button(is_cancelable);
+
             mobile_entry.last_chosen_country = 0;
 
             mobile_entry.OnCountryChooserSelected += (i) => {
@@ -53,8 +59,6 @@ namespace ios_ui_lib
             mobile_entry.OnNumberEntered += (num) => {
                 entered_mobile = validate_number(num);
             };
-
-            AddCancelButton(mobile_entry);
 
             navigation = mobile_entry.ToNavigationController();
 
@@ -104,7 +108,7 @@ namespace ios_ui_lib
         {
             var sequence = new MobileEntrySequence();
 
-            await sequence.show_mobile_entry_page(mother);
+            await sequence.show_mobile_entry_page(mother, true);
 
             var results = await sequence.task_completion_source.Task;
 

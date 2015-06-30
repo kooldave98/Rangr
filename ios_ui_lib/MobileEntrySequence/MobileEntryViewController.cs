@@ -53,6 +53,7 @@ namespace ios_ui_lib
         public void RefreshView()
         {
             TableView.ReloadData();
+            table_source.clear_number_field();
         }
 
         public int last_chosen_country { get; set;}
@@ -113,6 +114,11 @@ namespace ios_ui_lib
         public void focus_number_text_field()
         {
             number_cell.focus_number_field();
+        }
+
+        public void clear_number_field()
+        {
+            number_cell.clear_number_field();
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -348,6 +354,12 @@ namespace ios_ui_lib
         public void focus_number_field()
         {
             number_field.BecomeFirstResponder();
+        }
+
+        public void clear_number_field()
+        {
+            number_field.Text = "";
+            number_field.SendActionForControlEvents(UIControlEvent.EditingChanged);
         }
 
         private UITextField number_field;
