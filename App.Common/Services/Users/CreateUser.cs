@@ -35,6 +35,6 @@ namespace App.Common
 
     public class CreateUserRequest
     {
-        public long mobile_number { get; set; }
+        public string mobile_number { get; set; }
     }
 }

@@ -52,6 +52,8 @@
     <Compile Include="MobileEntrySequence\MobileEntrySequence.cs" />
     <Compile Include="MobileEntrySequence\CountryCodesViewController.cs" />
     <Compile Include="MobileEntrySequence\MobileEntryViewController.cs" />
+    <Compile Include="MobileEntrySequence\ISOCountry.cs" />
+    <Compile Include="MobileEntrySequence\MobileEntrySequenceViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

@@ -11,12 +11,12 @@ namespace App.Common
 
     public class CreateContactsRequest : UserIdentity
     {
-        public long[] mobile_numbers { get; set; }
+        public string[] mobile_numbers { get; set; }
     }
 
     public class RemoveContactsRequest : UserIdentity
     {
-        public long[] mobile_numbers { get; set; }
+        public string[] mobile_numbers { get; set; }
     }
 }
 

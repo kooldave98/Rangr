@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 
 using Foundation;
 using UIKit;
@@ -9,12 +10,16 @@ namespace ios_ui_lib
 {
     public class MobileEntryViewController : UITableViewController
     {
-        public MobileEntryViewController()
+        private MobileEntrySequenceViewModel view_model;
+
+        public MobileEntryViewController(MobileEntrySequenceViewModel the_view_model)
             : base(UITableViewStyle.Grouped)
         {
+            view_model = Guard.IsNotNull(the_view_model, "the_view_model");
         }
 
-        MobileEntryViewSource table_source;
+
+        private MobileEntryViewSource table_source;
 
         public override void DidReceiveMemoryWarning()
         {
@@ -31,7 +36,7 @@ namespace ios_ui_lib
             Title = "Your Number";
 			
             // Register the TableView's data source
-            TableView.Source = table_source = new MobileEntryViewSource(this);
+            TableView.Source = setup_and_return_view_source();
             TableView.RowHeight = UITableView.AutomaticDimension;
             TableView.EstimatedRowHeight = 100.0f;
 
@@ -56,31 +61,40 @@ namespace ios_ui_lib
             table_source.clear_number_field();
         }
 
-        public int last_chosen_country { get; set;}
-
-        public void CountryChooserSelected(int current_index)
+        private MobileEntryViewSource setup_and_return_view_source()
         {
-            OnCountryChooserSelected(current_index);
+            table_source = new MobileEntryViewSource(view_model, view_model);
+
+            table_source.OnCountryChooserSelected += () => {
+                OnCountryChooserSelected();
+            };
+
+            table_source.OnNumberEntered += (number) => {
+                view_model.mobile_number = number;
+                OnNumberEntered(number);
+                OnNumberIsValid(view_model.is_valid_international_number(number));
+            };
+
+            return table_source;
         }
 
-        public void NumberEntered(string number)
-        {
-            OnNumberEntered(number);
-        }
-
-        public event Action<int> OnCountryChooserSelected = delegate {};
+        public event Action OnCountryChooserSelected = delegate {};
         public event Action<string> OnNumberEntered = delegate {};
+        public event Action<bool> OnNumberIsValid = delegate{};
     }
 
     public class MobileEntryViewSource : UITableViewSource
     {
-        private MobileEntryViewController chooser;
+        private ISelectedCountry view_model;
+        private NumberEntryCell.IPhoneNumberFormatter formatter;
 
         private MobileEntryCellType[] cells;
 
-        public MobileEntryViewSource(MobileEntryViewController the_controller)
+        public MobileEntryViewSource(ISelectedCountry the_view_model
+                                    , NumberEntryCell.IPhoneNumberFormatter the_formatter)
         {
-            chooser = Guard.IsNotNull(the_controller, "the_controller");
+            view_model = Guard.IsNotNull(the_view_model, "the_view_model");
+            formatter = Guard.IsNotNull(the_formatter, "the_formatter");
 
             cells = new MobileEntryCellType[]{
                 MobileEntryCellType.Description,
@@ -100,12 +114,14 @@ namespace ios_ui_lib
             // TODO: return the actual number of items in the section
             return cells.Length;
         }
+        public event Action<string> OnNumberEntered = delegate{};
+        public event Action OnCountryChooserSelected = delegate{};
 
         public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
         {
             if (cells[indexPath.Row] == MobileEntryCellType.CountrySelection)
             {
-                chooser.CountryChooserSelected(chooser.last_chosen_country);
+                OnCountryChooserSelected();
             }
 
             tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
@@ -163,9 +179,9 @@ namespace ios_ui_lib
                 cell = new UITableViewCell(UITableViewCellStyle.Value1, CountryCellKey);
 
 
-            var data = CountryCodesViewController.codes.ToArray()[chooser.last_chosen_country];
+            var data = view_model.selected_country;
 
-            cell.TextLabel.Text = data.Key;
+            cell.TextLabel.Text = data.ISOName;
 
             cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
@@ -176,22 +192,23 @@ namespace ios_ui_lib
 
         public UITableViewCell GetNumberEntryCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(NumberEntryCell.Key) as NumberEntryCell;
-            if (cell == null)
-                cell = new NumberEntryCell();
+//            var cell = tableView.DequeueReusableCell(NumberEntryCell.Key) as NumberEntryCell;
+//            if (cell == null)
+            var cell = new NumberEntryCell(formatter);
 
 
-            var data = CountryCodesViewController.codes.ToArray()[chooser.last_chosen_country];
+            var data = view_model.selected_country;
 
-            ((NumberEntryCell)cell).BindDataToCell(data.Value);
+            ((NumberEntryCell)cell).BindDataToCell(data.ISODialCode);
 
             cell.SetNeedsUpdateConstraints();
             cell.UpdateConstraintsIfNeeded();
 
             number_cell = cell;
 
-            number_cell.OnNumberChanged += (num) => {
-                chooser.NumberEntered(num);
+            number_cell.OnNumberEntered += (num) =>
+            {
+                OnNumberEntered(num);
             };
             return cell;
         }
@@ -272,14 +289,9 @@ namespace ios_ui_lib
 
         private bool didSetupConstraints;
 
-        public NumberEntryCell()
+        public NumberEntryCell(IPhoneNumberFormatter the_formatter)
         {
-            this.create_view();
-        }
-
-        public NumberEntryCell(IntPtr handle)
-            : base(handle)
-        {
+            formatter = Guard.IsNotNull(the_formatter, "the_formatter");
             this.create_view();
         }
 
@@ -306,11 +318,27 @@ namespace ios_ui_lib
             });
 
             number_field.EditingChanged += (sender, e) => {
-                OnNumberChanged(code_field.Text + number_field.Text);
+
+                var condensed = code_field.Text + WHITE_SPACE + number_field.Text;
+
+                var formatted = formatter.format_input(condensed);
+
+                number_field.Text = remove_dial_code(formatted);
+
+                OnNumberEntered(condensed);
             };
         }
 
-        public event Action<string> OnNumberChanged = delegate{};
+        const string WHITE_SPACE = " ";
+
+        private string remove_dial_code(string formatted_number)
+        {            
+            return formatted_number.Split(null).Skip(1).Aggregate((i, j) => i + WHITE_SPACE + j);
+        }
+
+        private IPhoneNumberFormatter formatter;// { get; private set;}
+
+        public event Action<string> OnNumberEntered = delegate{};
 
         public void BindDataToCell(string country_code)
         {
@@ -364,6 +392,12 @@ namespace ios_ui_lib
 
         private UITextField number_field;
         private UITextField code_field;
+
+        public interface IPhoneNumberFormatter
+        {
+            string format_input(string input);
+        }
+
     }
 
     public enum MobileEntryCellType

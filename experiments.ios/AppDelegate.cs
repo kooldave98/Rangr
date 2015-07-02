@@ -21,10 +21,10 @@ namespace experiments.ios
             var root = new TextDisplayViewController();
 
             root.BeginPressed += async () => {
-                var results = await MobileEntrySequence.ShowAsync(root);
+                var results = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(root);
 
                 if (results.Canceled) {
-                    root.set_label_text("YOU CANCELED THE OPERATION");
+                    root.set_label_text("YOU CANCELED !");
                 } else {
                     root.set_label_text(results.EnteredMobileNumber);
                 }

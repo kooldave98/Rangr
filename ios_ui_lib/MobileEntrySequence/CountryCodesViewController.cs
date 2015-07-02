@@ -8,10 +8,13 @@ namespace ios_ui_lib
 {
     public class CountryCodesViewController : UITableViewController
     {
-        public CountryCodesViewController()
+        public CountryCodesViewController(MobileEntrySequenceViewModel the_view_model)
             : base(UITableViewStyle.Grouped)
         {
+            view_model = Guard.IsNotNull(the_view_model, "the_view_model");
         }
+
+        private MobileEntrySequenceViewModel view_model;
 
         public override void DidReceiveMemoryWarning()
         {
@@ -29,14 +32,19 @@ namespace ios_ui_lib
 
             // Register the TableView's data source
 
-            TableView.Source = new CountryCodesViewSource(codes.ToArray(), this);
+            TableView.Source = setup_and_return_view_source();
         }
 
-        public int LastSelectedCountry { get; set; }
-
-        public void CountrySelected(int selected_index)
+        private CountryCodesViewSource setup_and_return_view_source()
         {
-            OnCountrySelected(selected_index);
+            table_source = new CountryCodesViewSource(view_model);
+
+            table_source.OnCountryIndexSelected += (index) => {
+                view_model.select_country_index(index);
+                OnCountrySelected(view_model.selected_country);
+            };
+
+            return table_source;
         }
 
         public void Refresh()
@@ -44,28 +52,21 @@ namespace ios_ui_lib
             TableView.ReloadData();
         }
 
-        public event Action<int> OnCountrySelected = delegate {};
+        public event Action<ISOCountry> OnCountrySelected = delegate {};
 
 
-        public static List<KeyValuePair<string, string>> codes = new List<KeyValuePair<string, string>>()
-        {
-            new KeyValuePair<string, string>("Nigeria", "+234"),
-            new KeyValuePair<string, string>("United Kingdom", "+44"),
-            new KeyValuePair<string, string>("United States", "+1")
-        };
+        private CountryCodesViewSource table_source;
     }
 
     public class CountryCodesViewSource : UITableViewSource
     {
-        private CountryCodesViewController country_selector;
+        private ISelectableCountries view_model;
 
-        private KeyValuePair<string, string>[] codes;
-        
-        public CountryCodesViewSource(KeyValuePair<string, string>[]  the_codes
-                                        , CountryCodesViewController the_country_selector)
+        public event Action<int> OnCountryIndexSelected = delegate {};
+
+        public CountryCodesViewSource(ISelectableCountries the_view_model)
         {
-            codes = Guard.IsNotNull(the_codes, "the_codes");
-            country_selector = Guard.IsNotNull(the_country_selector, "the_country_selector");
+            view_model = Guard.IsNotNull(the_view_model, "the_view_model");
         }
 
         public override nint NumberOfSections(UITableView tableView)
@@ -76,13 +77,13 @@ namespace ios_ui_lib
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return (nint)codes.Length;
+            return (nint)view_model.iso_countries.Length;
         }
 
         public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
         {
             tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
-            country_selector.CountrySelected(indexPath.Row);
+            OnCountryIndexSelected(indexPath.Row);
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -92,12 +93,12 @@ namespace ios_ui_lib
                 cell = new UITableViewCell(UITableViewCellStyle.Value1, Key);
 
 
-            var data = codes[indexPath.Row];
+            var data = view_model.iso_countries[indexPath.Row];
 
-            cell.TextLabel.Text = data.Key;
+            cell.TextLabel.Text = data.ISOName;
 
-            cell.DetailTextLabel.Text = data.Value;
-            if (indexPath.Row == country_selector.LastSelectedCountry)
+            cell.DetailTextLabel.Text = data.ISODialCode;
+            if (indexPath.Row == view_model.selected_country_index)
             {
                 cell.Accessory = UITableViewCellAccessory.Checkmark;
             }

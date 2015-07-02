@@ -52,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Posts\Resources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContactsProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GetCountryCodes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
@@ -59,5 +60,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Services\Users\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Contacts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Posts\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Validators\" />
   </ItemGroup>
 </Project>

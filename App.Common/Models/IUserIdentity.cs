@@ -4,13 +4,13 @@ namespace App.Common
 {
     public class UserIdentity : BaseEntity, IUserIdentity
     {
-        public long user_id { get; set; }
+        public string user_id { get; set; }
     }
 
 
     public interface IUserIdentity
     {
-        long user_id { get; set; }
+        string user_id { get; set; }
     }
 }
 
