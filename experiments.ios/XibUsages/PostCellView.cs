@@ -5,6 +5,10 @@ using UIKit;
 
 //using MonoTouch.ObjCRuntime;
 
+/// <summary>
+/// See below for a more robust framework for doing this.
+/// http://www.alexyork.net/blog/2011/07/18/creating-custom-uitableviewcells-with-monotouch-the-correct-way/
+/// </summary>
 namespace experiments.ios
 {
     [Register("PostCellView")] 

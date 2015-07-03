@@ -144,10 +144,10 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="Views\PostCellView.xib">
+    <InterfaceDefinition Include="XibUsages\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="ViewControllers\TextDisplayViewController.xib">
+    <InterfaceDefinition Include="XibUsages\TextDisplayViewController.xib">
       <DependentUpon>TextDisplayViewController.cs</DependentUpon>
     </InterfaceDefinition>
   </ItemGroup>
@@ -165,20 +165,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Main.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Theme.cs" />
-    <Compile Include="ViewControllers\LoginViewController.cs" />
-    <Compile Include="ViewControllers\LoginViewController.designer.cs">
-      <DependentUpon>LoginViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\BaseViewController.cs" />
-    <Compile Include="ViewControllers\MapViewController.cs" />
-    <Compile Include="ViewControllers\ConstraintsVC.cs" />
-    <Compile Include="Views\PostCellView.cs" />
-    <Compile Include="Views\PostCellView.designer.cs">
-      <DependentUpon>PostCellView.cs</DependentUpon>
-    </Compile>
     <Compile Include="VariableHeightCells\ItemsViewController.cs" />
     <Compile Include="VariableHeightCells\ItemCell.cs">
       <DependentUpon>ItemsViewController.cs</DependentUpon>
@@ -186,11 +177,22 @@
     <Compile Include="VariableHeightCells\Model.cs">
       <DependentUpon>ItemsViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\TextDisplayViewController.cs" />
-    <Compile Include="ViewControllers\TextDisplayViewController.designer.cs">
+    <Compile Include="MobileEntrySequence\SequenceViewModel.cs" />
+    <Compile Include="GoogleMaps\MapViewController.cs" />
+    <Compile Include="XibUsages\PostCellView.cs" />
+    <Compile Include="XibUsages\PostCellView.designer.cs">
+      <DependentUpon>PostCellView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XibUsages\TextDisplayViewController.cs" />
+    <Compile Include="XibUsages\TextDisplayViewController.designer.cs">
       <DependentUpon>TextDisplayViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="SequenceViewModel.cs" />
+    <Compile Include="Constraints\LoginViewController.cs" />
+    <Compile Include="Constraints\LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Constraints\ConstraintsVC.cs" />
+    <Compile Include="BaseViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -204,9 +206,11 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewControllers\" />
-    <Folder Include="Views\" />
     <Folder Include="VariableHeightCells\" />
+    <Folder Include="MobileEntrySequence\" />
+    <Folder Include="GoogleMaps\" />
+    <Folder Include="XibUsages\" />
+    <Folder Include="Constraints\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ios_ui_lib\ios_ui_lib.csproj">
