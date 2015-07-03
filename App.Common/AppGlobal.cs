@@ -7,7 +7,7 @@ using System.Diagnostics;
 using Splat;
 using ModernHttpClient;
 using System.Net.Http;
-using solid_lib;
+using common_lib;
 
 #if __ANDROID__
 using AndroidApp = Android.App;

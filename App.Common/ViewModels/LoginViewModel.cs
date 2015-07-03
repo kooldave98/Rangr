@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using common_lib;
 
 namespace App.Common
 {
@@ -9,15 +10,11 @@ namespace App.Common
 
         public async Task<bool> CreateUser()
         {
-            long val = 0;
-            if (!long.TryParse(user_mobile_number, out val))
-            {
-                throw new InvalidOperationException("You must enter a valid mobile number to create a new user");
-            }
+            //TODO: Validate mobile number
 
             var userID = await create_user_service.Create(new CreateUserRequest()
                 { 
-                    mobile_number = val
+                    mobile_number = user_mobile_number
                 });
 
             if (userID == null)

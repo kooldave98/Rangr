@@ -23,6 +23,8 @@ using Android.Support.V4.View;
 /// 4. Introduce action bar spinner on Posts Fragment
 /// </todo>
 using droid_ui_lib;
+using common_lib;
+using AppResources = App.Common.Resources;
 
 
 namespace rangr.droid
@@ -37,7 +39,7 @@ namespace rangr.droid
         {
             base.OnCreate(bundle);
 
-            Analytics.Current.Initialize(ApplicationContext);
+            Analytics.Current.Initialize(ApplicationContext, AppResources.AnalyticsApiKey);
 
             SetContentView(Resource.Layout.main_with_drawer);
 
@@ -158,7 +160,7 @@ namespace rangr.droid
                     ID = 111,
                     epoch_id = 222,
                     text = "fake post",
-                    user_id = 09876547676767,
+                    user_id = "+447711072437",
                     date = DateTime.Now.Date,
                     long_lat_acc_geo_string = "-2.2275587999999997,53.478498699999996,1",
                 });

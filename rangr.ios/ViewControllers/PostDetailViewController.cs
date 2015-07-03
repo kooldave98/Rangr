@@ -8,6 +8,7 @@ using App.Common;
 
 using Google.Maps;
 using ios_ui_lib;
+using common_lib;
 
 namespace rangr.ios
 {

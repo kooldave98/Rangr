@@ -174,13 +174,11 @@
     <Compile Include="ViewControllers\BaseViewController.cs" />
     <Compile Include="ViewControllers\LoginViewController.cs" />
     <Compile Include="ViewControllers\PostListViewController.cs" />
-    <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\PostCellView.cs" />
     <Compile Include="ViewControllers\PostDetailViewController.cs" />
     <Compile Include="ViewControllers\NewPostViewController.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="ViewControllers\MapViewController.cs" />
-    <Compile Include="Views\TopAlignedImageView.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -216,9 +214,9 @@
       <Project>{8D459AA9-125E-4108-8E7D-24C6E47E9B6A}</Project>
       <Name>ios_ui_lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
-      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
-      <Name>solid_lib</Name>
+    <ProjectReference Include="..\ios_common_lib\ios_common_lib.csproj">
+      <Project>{AE879C71-58B2-424A-897C-19913B22D032}</Project>
+      <Name>ios_common_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

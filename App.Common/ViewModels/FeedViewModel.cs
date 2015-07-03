@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using common_lib;
 
 namespace App.Common
 {
@@ -82,7 +83,7 @@ namespace App.Common
             get{ return Posts.LastOrDefault () != null ? Posts.Last ().epoch_id - 1 : 0; }
 		}
 
-		private long user_id {
+		private string user_id {
             get{ return _sessionInstance.GetCurrentUser ().user_id; }
 		}
 

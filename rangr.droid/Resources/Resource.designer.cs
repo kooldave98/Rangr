@@ -68,6 +68,7 @@ namespace rangr.droid
 			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::droid_ui_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation

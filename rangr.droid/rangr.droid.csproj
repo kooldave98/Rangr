@@ -264,13 +264,13 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
-      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
-      <Name>solid_lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\droid_ui_lib\droid_ui_lib.csproj">
       <Project>{56C520E3-BB89-439D-8C42-33EADC0AF5E6}</Project>
       <Name>droid_ui_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\droid_common_lib\droid_common_lib.csproj">
+      <Project>{35255BD3-7E03-4B61-AECB-953D98695DEB}</Project>
+      <Name>droid_common_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

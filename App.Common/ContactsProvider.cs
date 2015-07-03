@@ -3,6 +3,7 @@
 using XamAddressBook = Xamarin.Contacts.AddressBook;
 using XamContact = Xamarin.Contacts.Contact;
 using System.Threading.Tasks;
+using common_lib;
 
 #if __ANDROID__
 using Android.App;
@@ -22,7 +23,7 @@ namespace App.Common
             }
         }
 
-        public async Task<string> get_name_for_number(long mobile_number)
+        public async Task<string> get_name_for_number(string mobile_number)
         {
             if (! await request_permission())
             {
@@ -67,7 +68,7 @@ namespace App.Common
         }
 
         private XamAddressBook address_book;
-        private long user_id;
+        private string user_id;
         private bool permission_granted = false;
     }
 }

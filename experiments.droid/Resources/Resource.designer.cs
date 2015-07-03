@@ -26,7 +26,10 @@ namespace experiments.droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Splat.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::ModernHttpClient.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
 			global::droid_ui_lib.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
 		}
 		
 		public partial class Array

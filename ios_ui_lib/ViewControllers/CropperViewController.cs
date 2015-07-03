@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 using System.Drawing;
-using solid_lib;
+using common_lib;
 using CoreGraphics;
 
 namespace ios_ui_lib

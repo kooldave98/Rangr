@@ -4,6 +4,7 @@ using System.Linq;
 using Xamarin.Geolocation;
 using System.Threading;
 using System.Threading.Tasks;
+using common_lib;
 
 #if __ANDROID__
 using Android.App;

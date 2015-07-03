@@ -6,6 +6,7 @@ using UIKit;
 using System.Drawing;
 using ios_ui_lib;
 using System.Runtime.InteropServices;
+using common_lib;
 
 namespace rangr.ios
 {

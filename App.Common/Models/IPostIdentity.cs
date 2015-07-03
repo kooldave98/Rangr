@@ -1,4 +1,5 @@
 using System;
+using common_lib;
 
 namespace App.Common
 {
@@ -6,14 +7,14 @@ namespace App.Common
     {
         public long epoch_id { get; set; }
 
-        public long user_id { get; set; }
+        public string user_id { get; set; }
     }
 
 	public interface IPostIdentity
 	{
         long epoch_id { get; set; }
 
-        long user_id { get; set; }
+        string user_id { get; set; }
 	}
 }
 

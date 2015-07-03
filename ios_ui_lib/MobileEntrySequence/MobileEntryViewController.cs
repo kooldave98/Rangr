@@ -4,7 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using solid_lib;
+using common_lib;
 
 namespace ios_ui_lib
 {
@@ -319,6 +319,7 @@ namespace ios_ui_lib
 
             number_field.EditingChanged += (sender, e) => {
 
+                //For now, there needs to be a white-space in-between for things to work.
                 var condensed = code_field.Text + WHITE_SPACE + number_field.Text;
 
                 var formatted = formatter.format_input(condensed);
@@ -336,7 +337,7 @@ namespace ios_ui_lib
             return formatted_number.Split(null).Skip(1).Aggregate((i, j) => i + WHITE_SPACE + j);
         }
 
-        private IPhoneNumberFormatter formatter;// { get; private set;}
+        private IPhoneNumberFormatter formatter;
 
         public event Action<string> OnNumberEntered = delegate{};
 

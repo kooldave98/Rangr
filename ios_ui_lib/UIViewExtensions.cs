@@ -6,7 +6,7 @@ using System.Drawing;
 using Foundation;
 using UIKit;
 using CoreGraphics;
-using solid_lib;
+using common_lib;
 
 namespace ios_ui_lib
 {

@@ -17,7 +17,8 @@ using App.Common;
 using Android.Support.V4.Widget;
 using Android.Text;
 using System.Text.RegularExpressions;
-using solid_lib;
+using common_lib;
+
 
 namespace rangr.droid
 {

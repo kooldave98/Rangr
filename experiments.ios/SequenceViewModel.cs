@@ -1,6 +1,6 @@
 ﻿using System;
 using ios_ui_lib;
-using PhoneNumbers;
+using common_lib;
 
 namespace experiments.ios
 {
@@ -8,34 +8,12 @@ namespace experiments.ios
     {
         public override string format_input(string input)
         {            
-            try
-            {
-                var number_proto = phoneUtil.Parse(input, string.Empty);            
-
-                return phoneUtil.Format(number_proto, PhoneNumberFormat.INTERNATIONAL);
-
-            }
-            catch (NumberParseException e)
-            {
-                //Log exception somehow
-                return input;
-            }
+            return formatter.format_number(input);
         }
 
         public override bool is_valid_international_number(string input)
         {
-            try
-            {
-                var number_proto = phoneUtil.Parse(input, string.Empty);
-
-                return phoneUtil.IsValidNumber(number_proto);
-            }
-            catch (NumberParseException e)
-            {
-                //Log exception somehow
-                return false;
-            }
-
+            return validator.is_valid_number(input);
         }
 
         public override ISOCountry[] iso_countries { get; protected set;}
@@ -43,18 +21,13 @@ namespace experiments.ios
 
         public SequenceViewModel()
         {
-            phoneUtil = PhoneNumberUtil.GetInstance();
-
-            iso_countries = new ISOCountry[]
-            {
-                new ISOCountry("Nigeria", "+234", "NG"),
-                new ISOCountry("United Kingdom", "+44", "GB"),
-                new ISOCountry("United States", "+1", "US")
-            };
+            iso_countries = new GetCountryCodes().execute().ToArray();
+            validator = new PhoneNumberValidator();
+            formatter = new PhoneNumberFormatter();
         }
 
-        private readonly PhoneNumberUtil phoneUtil;
-        
+        private PhoneNumberValidator validator;
+        private PhoneNumberFormatter formatter;
     }
 }
 

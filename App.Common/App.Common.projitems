@@ -16,23 +16,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Post.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\HttpFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FileCache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Gravatar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SingletonBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Analytics.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\IPostIdentity.cs">
       <DependentUpon>..\..\App.Core.Portable\Models\Post.cs</DependentUpon>
     </Compile>
@@ -51,8 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Users\GetUserById.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Posts\Resources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContactsProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\GetCountryCodes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
@@ -60,6 +45,5 @@
     <Folder Include="$(MSBuildThisFileDirectory)Services\Users\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Contacts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Posts\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Validators\" />
   </ItemGroup>
 </Project>
