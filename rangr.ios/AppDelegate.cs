@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using ios_ui_lib;
 using CoreGraphics;
 using Media.Plugin;
+using common_lib;
 
 namespace rangr.ios
 {
@@ -35,7 +36,7 @@ namespace rangr.ios
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Theme.Apply();
+            RangrTheme.Apply();
 
             //setting these to translucent makes the content to be pushed and not overlaid
             navigation.NavigationBar.Translucent = false;
@@ -54,6 +55,17 @@ namespace rangr.ios
 
             if (!AppGlobal.Current.CurrentUserExists)
             {
+//                root.BeginPressed += async () => {
+//                    var results = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(root);
+//
+//                    if (results.Canceled) {
+//                        root.set_label_text("YOU CANCELED !");
+//                    } else {
+//                        root.set_label_text(results.EnteredMobileNumber);
+//                    }
+//                };
+
+
                 var login = new LoginViewController();
                 login.LoginSucceeded += () => {
 

@@ -1,7 +1,8 @@
-﻿using System;
+﻿#if __IOS__
+using System;
 using UIKit;
 
-namespace ios_ui_lib
+namespace common_lib
 {
     public static class UIViewControllerExtensions
     {
@@ -14,4 +15,5 @@ namespace ios_ui_lib
         }
     }
 }
+#endif
 

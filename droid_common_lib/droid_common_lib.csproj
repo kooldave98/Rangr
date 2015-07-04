@@ -79,6 +79,9 @@
       <HintPath>..\packages\libphonenumber-csharp.7.0.5.5\lib\PhoneNumbers.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="AndHUD">
+      <HintPath>..\packages\AndHUD.1.2.0\lib\MonoAndroid\AndHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />

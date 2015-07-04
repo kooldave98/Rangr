@@ -2,10 +2,11 @@ using System;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using common_lib;
 
 namespace experiments.ios
 {
-    public partial class LoginViewController : BaseViewController
+    public partial class LoginViewController : SimpleViewController
     {
         public event Action LoginSucceeded = delegate {};
 

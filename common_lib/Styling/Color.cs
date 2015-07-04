@@ -9,7 +9,7 @@ using UIKit;
 using CoreGraphics;
 #endif
 
-namespace App.Common
+namespace common_lib
 {
     public struct Color
     {

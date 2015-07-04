@@ -5,10 +5,11 @@ using CoreLocation;
 using CoreGraphics;
 
 using Google.Maps;
+using common_lib;
 
 namespace rangr.ios
 {
-    public class MapViewController : BaseViewController
+    public class MapViewController : SimpleViewController
     {
         public override string TitleLabel { 
             get{ return "Map"; } 

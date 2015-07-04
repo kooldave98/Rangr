@@ -68,7 +68,43 @@ namespace rangr.droid
 			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::droid_ui_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.Attribute.ahBarColor = global::rangr.droid.Resource.Attribute.ahBarColor;
+			global::droid_common_lib.Resource.Attribute.ahBarLength = global::rangr.droid.Resource.Attribute.ahBarLength;
+			global::droid_common_lib.Resource.Attribute.ahBarWidth = global::rangr.droid.Resource.Attribute.ahBarWidth;
+			global::droid_common_lib.Resource.Attribute.ahCircleColor = global::rangr.droid.Resource.Attribute.ahCircleColor;
+			global::droid_common_lib.Resource.Attribute.ahDelayMillis = global::rangr.droid.Resource.Attribute.ahDelayMillis;
+			global::droid_common_lib.Resource.Attribute.ahRadius = global::rangr.droid.Resource.Attribute.ahRadius;
+			global::droid_common_lib.Resource.Attribute.ahRimColor = global::rangr.droid.Resource.Attribute.ahRimColor;
+			global::droid_common_lib.Resource.Attribute.ahRimWidth = global::rangr.droid.Resource.Attribute.ahRimWidth;
+			global::droid_common_lib.Resource.Attribute.ahSpinSpeed = global::rangr.droid.Resource.Attribute.ahSpinSpeed;
+			global::droid_common_lib.Resource.Attribute.ahText = global::rangr.droid.Resource.Attribute.ahText;
+			global::droid_common_lib.Resource.Attribute.ahTextColor = global::rangr.droid.Resource.Attribute.ahTextColor;
+			global::droid_common_lib.Resource.Attribute.ahTextSize = global::rangr.droid.Resource.Attribute.ahTextSize;
+			global::droid_common_lib.Resource.Drawable.ic_errorstatus = global::rangr.droid.Resource.Drawable.ic_errorstatus;
+			global::droid_common_lib.Resource.Drawable.ic_successstatus = global::rangr.droid.Resource.Drawable.ic_successstatus;
+			global::droid_common_lib.Resource.Drawable.roundedbg = global::rangr.droid.Resource.Drawable.roundedbg;
+			global::droid_common_lib.Resource.Drawable.roundedbgdark = global::rangr.droid.Resource.Drawable.roundedbgdark;
+			global::droid_common_lib.Resource.Id.loadingImage = global::rangr.droid.Resource.Id.loadingImage;
+			global::droid_common_lib.Resource.Id.loadingProgressBar = global::rangr.droid.Resource.Id.loadingProgressBar;
+			global::droid_common_lib.Resource.Id.loadingProgressWheel = global::rangr.droid.Resource.Id.loadingProgressWheel;
+			global::droid_common_lib.Resource.Id.textViewStatus = global::rangr.droid.Resource.Id.textViewStatus;
+			global::droid_common_lib.Resource.Layout.loading = global::rangr.droid.Resource.Layout.loading;
+			global::droid_common_lib.Resource.Layout.loadingimage = global::rangr.droid.Resource.Layout.loadingimage;
+			global::droid_common_lib.Resource.Layout.loadingprogress = global::rangr.droid.Resource.Layout.loadingprogress;
 			global::droid_common_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel = global::rangr.droid.Resource.Styleable.ProgressWheel;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarLength = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarWidth = global::rangr.droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahCircleColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahDelayMillis = global::rangr.droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRadius = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRimColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRimWidth = global::rangr.droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::rangr.droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahText = global::rangr.droid.Resource.Styleable.ProgressWheel_ahText;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahTextColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahTextSize = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextSize;
 		}
 		
 		public partial class Animation

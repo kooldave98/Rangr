@@ -1,4 +1,5 @@
-﻿//
+﻿#if __IOS__
+//
 // Copyright (c) 2013-2015 Frank A. Krueger
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +29,7 @@ using System.Reflection;
 
 using UIKit;
 
-namespace ios_ui_lib
+namespace common_lib
 {
     public static class Layout
     {
@@ -340,3 +341,4 @@ namespace ios_ui_lib
         }
     }
 }
+#endif

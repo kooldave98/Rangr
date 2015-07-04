@@ -7,10 +7,11 @@ using UIKit;
 using System.Collections.Generic;
 using ios_ui_lib;
 using CoreGraphics;
+using common_lib;
 
 namespace experiments.ios
 {
-    public class ConstraintsVC : BaseViewController
+    public class ConstraintsVC : SimpleViewController
     {
         public override string TitleLabel { 
             get{ return "Constraints"; } 

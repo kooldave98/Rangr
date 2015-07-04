@@ -177,7 +177,6 @@
     <Compile Include="Views\PostCellView.cs" />
     <Compile Include="ViewControllers\PostDetailViewController.cs" />
     <Compile Include="ViewControllers\NewPostViewController.cs" />
-    <Compile Include="Theme.cs" />
     <Compile Include="ViewControllers\MapViewController.cs" />
   </ItemGroup>
   <Import Project="..\App.Common\App.Common.projitems" Label="Shared" Condition="Exists('..\App.Common\App.Common.projitems')" />

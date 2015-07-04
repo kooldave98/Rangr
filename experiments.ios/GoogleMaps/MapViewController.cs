@@ -3,12 +3,14 @@ using System;
 using UIKit;
 using CoreLocation;
 using CoreGraphics;
+using common_lib;
 
 using Google.Maps;
 
+
 namespace experiments.ios
 {
-    public class MapViewController : BaseViewController
+    public class MapViewController : SimpleViewController
     {
         public override string TitleLabel { 
             get{ return "Map"; } 

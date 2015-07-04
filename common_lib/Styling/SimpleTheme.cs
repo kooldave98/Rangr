@@ -1,11 +1,12 @@
+#if __IOS__
 using System;
 using UIKit;
 using CoreGraphics;
 using System.Collections.Generic;
 
-namespace experiments.ios
+namespace common_lib
 {
-    public class Theme
+    public class SimpleTheme
     {
         //See James Montemagnos Post-It app for how he uses the appearance api for themeing.
         public static void Apply(string options = null)
@@ -469,3 +470,4 @@ namespace experiments.ios
 
     #endregion
 }
+#endif

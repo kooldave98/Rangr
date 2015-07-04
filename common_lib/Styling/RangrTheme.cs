@@ -1,12 +1,12 @@
+﻿#if __IOS__
 using System;
 using UIKit;
 using CoreGraphics;
 using System.Collections.Generic;
-using App.Common;
 
-namespace rangr.ios
+namespace common_lib
 {
-    public class Theme
+    public class RangrTheme
     {
         //See James Montemagnos Post-It app for how he uses the appearance api for themeing.
         public static void Apply(string options = null)
@@ -25,32 +25,32 @@ namespace rangr.ios
             //            Apply(UISwitch.Appearance, options);
             //            Apply(UIRefreshControl.Appearance, options);
         }
-            
+
         public static void Apply(UINavigationBar.UINavigationBarAppearance appearance, string options = null)
         {
 
             appearance.TintColor = UIColor.White;
             appearance.BarTintColor = Color.Blue;
             appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                TextColor = UIColor.White
-            });
+                {
+                    TextColor = UIColor.White
+                });
         }
-            
+
         public static void Apply(UITabBar.UITabBarAppearance appearance, string options = null)
         {
 
         }
-            
+
         public static void Apply(UIButton.UIButtonAppearance appearance, string options = null)
         {
 
         }
-            
+
         public static void Apply(UILabel.UILabelAppearance appearance, string options = null)
         {
         }
-            
+
         public static void Apply(UITextView.UITextViewAppearance appearance, string options = null)
         {
 
@@ -91,3 +91,4 @@ namespace rangr.ios
         #endregion
     }
 }
+#endif

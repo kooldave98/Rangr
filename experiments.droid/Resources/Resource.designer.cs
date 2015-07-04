@@ -28,8 +28,81 @@ namespace experiments.droid
 		{
 			global::Splat.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Attribute.ahBarColor = global::experiments.droid.Resource.Attribute.ahBarColor;
+			global::AndroidHUD.Resource.Attribute.ahBarLength = global::experiments.droid.Resource.Attribute.ahBarLength;
+			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::experiments.droid.Resource.Attribute.ahBarWidth;
+			global::AndroidHUD.Resource.Attribute.ahCircleColor = global::experiments.droid.Resource.Attribute.ahCircleColor;
+			global::AndroidHUD.Resource.Attribute.ahDelayMillis = global::experiments.droid.Resource.Attribute.ahDelayMillis;
+			global::AndroidHUD.Resource.Attribute.ahRadius = global::experiments.droid.Resource.Attribute.ahRadius;
+			global::AndroidHUD.Resource.Attribute.ahRimColor = global::experiments.droid.Resource.Attribute.ahRimColor;
+			global::AndroidHUD.Resource.Attribute.ahRimWidth = global::experiments.droid.Resource.Attribute.ahRimWidth;
+			global::AndroidHUD.Resource.Attribute.ahSpinSpeed = global::experiments.droid.Resource.Attribute.ahSpinSpeed;
+			global::AndroidHUD.Resource.Attribute.ahText = global::experiments.droid.Resource.Attribute.ahText;
+			global::AndroidHUD.Resource.Attribute.ahTextColor = global::experiments.droid.Resource.Attribute.ahTextColor;
+			global::AndroidHUD.Resource.Attribute.ahTextSize = global::experiments.droid.Resource.Attribute.ahTextSize;
+			global::AndroidHUD.Resource.Drawable.ic_errorstatus = global::experiments.droid.Resource.Drawable.ic_errorstatus;
+			global::AndroidHUD.Resource.Drawable.ic_successstatus = global::experiments.droid.Resource.Drawable.ic_successstatus;
+			global::AndroidHUD.Resource.Drawable.roundedbg = global::experiments.droid.Resource.Drawable.roundedbg;
+			global::AndroidHUD.Resource.Drawable.roundedbgdark = global::experiments.droid.Resource.Drawable.roundedbgdark;
+			global::AndroidHUD.Resource.Id.loadingImage = global::experiments.droid.Resource.Id.loadingImage;
+			global::AndroidHUD.Resource.Id.loadingProgressBar = global::experiments.droid.Resource.Id.loadingProgressBar;
+			global::AndroidHUD.Resource.Id.loadingProgressWheel = global::experiments.droid.Resource.Id.loadingProgressWheel;
+			global::AndroidHUD.Resource.Id.textViewStatus = global::experiments.droid.Resource.Id.textViewStatus;
+			global::AndroidHUD.Resource.Layout.loading = global::experiments.droid.Resource.Layout.loading;
+			global::AndroidHUD.Resource.Layout.loadingimage = global::experiments.droid.Resource.Layout.loadingimage;
+			global::AndroidHUD.Resource.Layout.loadingprogress = global::experiments.droid.Resource.Layout.loadingprogress;
+			global::AndroidHUD.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel = global::experiments.droid.Resource.Styleable.ProgressWheel;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarLength = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarWidth = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahCircleColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahDelayMillis = global::experiments.droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRadius = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimWidth = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::experiments.droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::experiments.droid.Resource.Styleable.ProgressWheel_ahText;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::experiments.droid.Resource.Styleable.ProgressWheel_ahTextSize;
 			global::droid_ui_lib.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.Attribute.ahBarColor = global::experiments.droid.Resource.Attribute.ahBarColor;
+			global::droid_common_lib.Resource.Attribute.ahBarLength = global::experiments.droid.Resource.Attribute.ahBarLength;
+			global::droid_common_lib.Resource.Attribute.ahBarWidth = global::experiments.droid.Resource.Attribute.ahBarWidth;
+			global::droid_common_lib.Resource.Attribute.ahCircleColor = global::experiments.droid.Resource.Attribute.ahCircleColor;
+			global::droid_common_lib.Resource.Attribute.ahDelayMillis = global::experiments.droid.Resource.Attribute.ahDelayMillis;
+			global::droid_common_lib.Resource.Attribute.ahRadius = global::experiments.droid.Resource.Attribute.ahRadius;
+			global::droid_common_lib.Resource.Attribute.ahRimColor = global::experiments.droid.Resource.Attribute.ahRimColor;
+			global::droid_common_lib.Resource.Attribute.ahRimWidth = global::experiments.droid.Resource.Attribute.ahRimWidth;
+			global::droid_common_lib.Resource.Attribute.ahSpinSpeed = global::experiments.droid.Resource.Attribute.ahSpinSpeed;
+			global::droid_common_lib.Resource.Attribute.ahText = global::experiments.droid.Resource.Attribute.ahText;
+			global::droid_common_lib.Resource.Attribute.ahTextColor = global::experiments.droid.Resource.Attribute.ahTextColor;
+			global::droid_common_lib.Resource.Attribute.ahTextSize = global::experiments.droid.Resource.Attribute.ahTextSize;
+			global::droid_common_lib.Resource.Drawable.ic_errorstatus = global::experiments.droid.Resource.Drawable.ic_errorstatus;
+			global::droid_common_lib.Resource.Drawable.ic_successstatus = global::experiments.droid.Resource.Drawable.ic_successstatus;
+			global::droid_common_lib.Resource.Drawable.roundedbg = global::experiments.droid.Resource.Drawable.roundedbg;
+			global::droid_common_lib.Resource.Drawable.roundedbgdark = global::experiments.droid.Resource.Drawable.roundedbgdark;
+			global::droid_common_lib.Resource.Id.loadingImage = global::experiments.droid.Resource.Id.loadingImage;
+			global::droid_common_lib.Resource.Id.loadingProgressBar = global::experiments.droid.Resource.Id.loadingProgressBar;
+			global::droid_common_lib.Resource.Id.loadingProgressWheel = global::experiments.droid.Resource.Id.loadingProgressWheel;
+			global::droid_common_lib.Resource.Id.textViewStatus = global::experiments.droid.Resource.Id.textViewStatus;
+			global::droid_common_lib.Resource.Layout.loading = global::experiments.droid.Resource.Layout.loading;
+			global::droid_common_lib.Resource.Layout.loadingimage = global::experiments.droid.Resource.Layout.loadingimage;
+			global::droid_common_lib.Resource.Layout.loadingprogress = global::experiments.droid.Resource.Layout.loadingprogress;
 			global::droid_common_lib.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel = global::experiments.droid.Resource.Styleable.ProgressWheel;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarLength = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahBarWidth = global::experiments.droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahCircleColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahDelayMillis = global::experiments.droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRadius = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRimColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahRimWidth = global::experiments.droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::experiments.droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahText = global::experiments.droid.Resource.Styleable.ProgressWheel_ahText;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahTextColor = global::experiments.droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::droid_common_lib.Resource.Styleable.ProgressWheel_ahTextSize = global::experiments.droid.Resource.Styleable.ProgressWheel_ahTextSize;
 		}
 		
 		public partial class Array
@@ -53,6 +126,42 @@ namespace experiments.droid
 		
 		public partial class Attribute
 		{
+			
+			// aapt resource value: 0x7f010003
+			public const int ahBarColor = 2130771971;
+			
+			// aapt resource value: 0x7f01000b
+			public const int ahBarLength = 2130771979;
+			
+			// aapt resource value: 0x7f01000a
+			public const int ahBarWidth = 2130771978;
+			
+			// aapt resource value: 0x7f010008
+			public const int ahCircleColor = 2130771976;
+			
+			// aapt resource value: 0x7f010007
+			public const int ahDelayMillis = 2130771975;
+			
+			// aapt resource value: 0x7f010009
+			public const int ahRadius = 2130771977;
+			
+			// aapt resource value: 0x7f010004
+			public const int ahRimColor = 2130771972;
+			
+			// aapt resource value: 0x7f010005
+			public const int ahRimWidth = 2130771973;
+			
+			// aapt resource value: 0x7f010006
+			public const int ahSpinSpeed = 2130771974;
+			
+			// aapt resource value: 0x7f010000
+			public const int ahText = 2130771968;
+			
+			// aapt resource value: 0x7f010001
+			public const int ahTextColor = 2130771969;
+			
+			// aapt resource value: 0x7f010002
+			public const int ahTextSize = 2130771970;
 			
 			static Attribute()
 			{
@@ -108,31 +217,43 @@ namespace experiments.droid
 			public const int ic_drawer = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int ic_launcher = 2130837508;
+			public const int ic_errorstatus = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int Icon = 2130837509;
+			public const int ic_launcher = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int jupiter = 2130837510;
+			public const int ic_successstatus = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int mars = 2130837511;
+			public const int Icon = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int mercury = 2130837512;
+			public const int jupiter = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int neptune = 2130837513;
+			public const int mars = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int saturn = 2130837514;
+			public const int mercury = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int uranus = 2130837515;
+			public const int neptune = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int venus = 2130837516;
+			public const int roundedbg = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int roundedbgdark = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int saturn = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int uranus = 2130837519;
+			
+			// aapt resource value: 0x7f020010
+			public const int venus = 2130837520;
 			
 			static Drawable()
 			{
@@ -153,17 +274,17 @@ namespace experiments.droid
 			// aapt resource value: 0x7f090000
 			public const int EditText = 2131296256;
 			
-			// aapt resource value: 0x7f09000b
-			public const int TextView = 2131296267;
+			// aapt resource value: 0x7f09000f
+			public const int TextView = 2131296271;
 			
-			// aapt resource value: 0x7f09000a
-			public const int action_bar_subtitle = 2131296266;
+			// aapt resource value: 0x7f09000e
+			public const int action_bar_subtitle = 2131296270;
 			
-			// aapt resource value: 0x7f090009
-			public const int action_bar_title = 2131296265;
+			// aapt resource value: 0x7f09000d
+			public const int action_bar_title = 2131296269;
 			
-			// aapt resource value: 0x7f09000c
-			public const int action_websearch = 2131296268;
+			// aapt resource value: 0x7f090010
+			public const int action_websearch = 2131296272;
 			
 			// aapt resource value: 0x7f090003
 			public const int content_frame = 2131296259;
@@ -171,8 +292,8 @@ namespace experiments.droid
 			// aapt resource value: 0x7f090002
 			public const int drawer_layout = 2131296258;
 			
-			// aapt resource value: 0x7f090008
-			public const int fragmentContainer = 2131296264;
+			// aapt resource value: 0x7f09000c
+			public const int fragmentContainer = 2131296268;
 			
 			// aapt resource value: 0x7f090006
 			public const int image = 2131296262;
@@ -180,11 +301,23 @@ namespace experiments.droid
 			// aapt resource value: 0x7f090004
 			public const int left_drawer = 2131296260;
 			
+			// aapt resource value: 0x7f090009
+			public const int loadingImage = 2131296265;
+			
 			// aapt resource value: 0x7f090007
-			public const int myButton = 2131296263;
+			public const int loadingProgressBar = 2131296263;
+			
+			// aapt resource value: 0x7f09000a
+			public const int loadingProgressWheel = 2131296266;
+			
+			// aapt resource value: 0x7f09000b
+			public const int myButton = 2131296267;
 			
 			// aapt resource value: 0x7f090005
 			public const int spinner_title = 2131296261;
+			
+			// aapt resource value: 0x7f090008
+			public const int textViewStatus = 2131296264;
 			
 			static Id()
 			{
@@ -215,16 +348,25 @@ namespace experiments.droid
 			public const int fragment_planet = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Main = 2130903045;
+			public const int loading = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int main_layout = 2130903046;
+			public const int loadingimage = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int spinner_item = 2130903047;
+			public const int loadingprogress = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int start = 2130903048;
+			public const int Main = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int main_layout = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int spinner_item = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int start = 2130903051;
 			
 			static Layout()
 			{
@@ -298,6 +440,70 @@ namespace experiments.droid
 			}
 			
 			private Xml()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] ProgressWheel = new int[]
+			{
+					2130771968,
+					2130771969,
+					2130771970,
+					2130771971,
+					2130771972,
+					2130771973,
+					2130771974,
+					2130771975,
+					2130771976,
+					2130771977,
+					2130771978,
+					2130771979};
+			
+			// aapt resource value: 3
+			public const int ProgressWheel_ahBarColor = 3;
+			
+			// aapt resource value: 11
+			public const int ProgressWheel_ahBarLength = 11;
+			
+			// aapt resource value: 10
+			public const int ProgressWheel_ahBarWidth = 10;
+			
+			// aapt resource value: 8
+			public const int ProgressWheel_ahCircleColor = 8;
+			
+			// aapt resource value: 7
+			public const int ProgressWheel_ahDelayMillis = 7;
+			
+			// aapt resource value: 9
+			public const int ProgressWheel_ahRadius = 9;
+			
+			// aapt resource value: 4
+			public const int ProgressWheel_ahRimColor = 4;
+			
+			// aapt resource value: 5
+			public const int ProgressWheel_ahRimWidth = 5;
+			
+			// aapt resource value: 6
+			public const int ProgressWheel_ahSpinSpeed = 6;
+			
+			// aapt resource value: 0
+			public const int ProgressWheel_ahText = 0;
+			
+			// aapt resource value: 1
+			public const int ProgressWheel_ahTextColor = 1;
+			
+			// aapt resource value: 2
+			public const int ProgressWheel_ahTextSize = 2;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}

@@ -85,8 +85,6 @@
     <Compile Include="Views\AClickableSpan.cs" />
     <Compile Include="Activities\FragmentBase.cs" />
     <Compile Include="Activities\FragmentActivityBase.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

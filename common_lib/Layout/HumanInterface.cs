@@ -1,6 +1,7 @@
-﻿using System;
+﻿#if __IOS__
+using System;
 
-namespace ios_ui_lib
+namespace common_lib
 {
     public class HumanInterface
     {
@@ -14,3 +15,4 @@ namespace ios_ui_lib
     }
 }
 
+#endif
