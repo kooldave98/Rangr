@@ -153,9 +153,6 @@
     <InterfaceDefinition Include="XibUsages\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="XibUsages\TextDisplayViewController.xib">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -187,10 +184,6 @@
     <Compile Include="XibUsages\PostCellView.cs" />
     <Compile Include="XibUsages\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="XibUsages\TextDisplayViewController.cs" />
-    <Compile Include="XibUsages\TextDisplayViewController.designer.cs">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Constraints\LoginViewController.cs" />
     <Compile Include="Constraints\LoginViewController.designer.cs">

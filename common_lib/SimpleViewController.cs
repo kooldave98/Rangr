@@ -13,6 +13,8 @@ namespace common_lib
         {
             base.LoadView();
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
+
+            View.BackgroundColor = UIColor.White;
         }
 
         public abstract string TitleLabel { get; }

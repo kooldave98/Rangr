@@ -44,7 +44,7 @@ namespace ios_ui_lib
             mobile_entry.NavigationItem.SetRightBarButtonItem(doneButton, false);
         }
 
-        private async Task show_mobile_entry_page(UIViewController mother, bool is_cancelable)
+        private async Task show_mobile_entry_page(UIWindow window, bool is_cancelable)
         {
             mobile_entry = new MobileEntryViewController(view_model);
 
@@ -52,11 +52,13 @@ namespace ios_ui_lib
 
             set_cancel_button(is_cancelable);
 
-            mobile_entry.OnCountryChooserSelected += () => {
+            mobile_entry.OnCountryChooserSelected += () =>
+            {
                 show_country_chooser_page();
             };
 
-            mobile_entry.OnNumberIsValid += (is_valid) => {
+            mobile_entry.OnNumberIsValid += (is_valid) =>
+            {
                 if (is_valid)
                 {
                     mobile_entry.NavigationItem.RightBarButtonItem.Enabled = true;
@@ -69,7 +71,9 @@ namespace ios_ui_lib
 
             navigation = mobile_entry.ToNavigationController();
 
-            await mother.PresentViewControllerAsync(navigation, true);
+
+            await window.PresentViewController(navigation, true);
+
         }
 
         private void show_country_chooser_page()
@@ -97,12 +101,12 @@ namespace ios_ui_lib
         private MobileEntrySequenceViewModel view_model;
 
 
-        public async Task<MobileEntrySequenceResults> StartAsync(UIViewController root)                                                                
+        public async Task<MobileEntrySequenceResults> StartAsync(UIWindow window)
         {
-            await this.show_mobile_entry_page(root, true);
+            await this.show_mobile_entry_page(window, true);
 
             var results = await this.task_completion_source.Task;
-
+               
             await this.navigation.DismissViewControllerAsync(true);
 
             return results;

@@ -54,7 +54,7 @@ namespace experiments.ios
 
                 indicator.Frame.Height == finger_tip_diameter &&
                 indicator.Frame.Width == indicator.Frame.Height * 2.0f &&
-                indicator.Frame.Top == login.Frame.Bottom + sibling_sibling_margin&&
+                indicator.Frame.Top == login.Frame.Bottom + sibling_sibling_margin &&
                 indicator.Frame.Left == login.Frame.Left
             );
         }

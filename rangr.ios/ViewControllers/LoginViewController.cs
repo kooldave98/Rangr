@@ -8,6 +8,10 @@ using ios_ui_lib;
 
 namespace rangr.ios
 {
+    /// <summary>
+    /// TODO: Consolidate this LoginViewController with the Login View
+    /// Decide on a re-useable pattern to go forward with.
+    /// </summary>
     public class LoginViewController : BaseViewModelController<LoginViewModel>
     {
         public override string TitleLabel {

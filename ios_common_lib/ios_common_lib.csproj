@@ -83,10 +83,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="TextDisplayViewController.cs" />
+    <Compile Include="TextDisplayViewController.designer.cs">
+      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\common_lib\common_lib.projitems" Label="Shared" Condition="Exists('..\common_lib\common_lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="TextDisplayViewController.xib">
+      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
+    </InterfaceDefinition>
   </ItemGroup>
 </Project>

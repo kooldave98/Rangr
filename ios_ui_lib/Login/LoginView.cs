@@ -6,6 +6,10 @@ using common_lib;
 
 namespace ios_ui_lib
 {
+    /// <summary>
+    /// TODO: Consolidate this LoginView with the LoginViewController
+    /// Decide on a re-useable pattern to go forward with.
+    /// </summary>
     public class LoginView : UIView
     {
         public readonly UIImageView GravatarView;

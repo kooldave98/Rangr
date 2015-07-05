@@ -57,5 +57,10 @@ namespace experiments.ios
             LoginSucceeded();
         }
 
+        public void set_user_name(string value)
+        {
+            username.Text = value;
+        }
+
     }
 }

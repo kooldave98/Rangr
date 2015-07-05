@@ -62,7 +62,7 @@ namespace common_lib
         {
             public static void Apply(UIView view, string options = null)
             {
-                view.BackgroundColor = UIColor.White;
+                view.BackgroundColor = UIColor.LightGray;
             }
 
             public static void Apply(UINavigationBar view, string options = null)

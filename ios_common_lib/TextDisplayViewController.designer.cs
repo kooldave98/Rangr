@@ -7,14 +7,11 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace experiments.ios
+namespace common_lib
 {
 	[Register ("TextDisplayViewController")]
 	partial class TextDisplayViewController
 	{
-		[Outlet]
-		UIKit.UIButton BeginButton { get; set; }
-
 		[Outlet]
 		UIKit.UILabel DisplayLabel { get; set; }
 		
@@ -23,11 +20,6 @@ namespace experiments.ios
 			if (DisplayLabel != null) {
 				DisplayLabel.Dispose ();
 				DisplayLabel = null;
-			}
-
-			if (BeginButton != null) {
-				BeginButton.Dispose ();
-				BeginButton = null;
 			}
 		}
 	}
