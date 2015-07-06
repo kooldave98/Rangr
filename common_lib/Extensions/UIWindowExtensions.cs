@@ -23,7 +23,7 @@ namespace common_lib
             // Return if it's already the root controller
             if (window.RootViewController == controller)
                 return;
-
+            
             // Set the root controller
             window.RootViewController = controller;
 
@@ -33,6 +33,7 @@ namespace common_lib
                     window, 
                     .3, 
                     UIViewAnimationOptions.TransitionCrossDissolve, delegate { }, delegate { });
+            
         }
 
         public async static Task PresentViewController(this UIWindow window, UIViewController controller, bool animated = true)

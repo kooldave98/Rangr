@@ -186,9 +186,6 @@
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
     <Compile Include="Constraints\LoginViewController.cs" />
-    <Compile Include="Constraints\LoginViewController.designer.cs">
-      <DependentUpon>LoginViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Constraints\ConstraintsVC.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

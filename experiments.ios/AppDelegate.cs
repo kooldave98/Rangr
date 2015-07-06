@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Foundation;
 using UIKit;
 using Google.Maps;
@@ -27,20 +26,15 @@ namespace experiments.ios
 
             start_screen.OnStartApp += async () =>
             {
+                    
                 var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(window);
 
                 if (!result.Canceled)
                 {   
-                        var login = 
-                            new LoginViewController()
-                                //.Init(c => c.set_user_name(result.EnteredMobileNumber))
-                                .Init(c=> c.LoginSucceeded += () => window.SwitchRootViewController(new_tab_bar(), true));
-                            
-                        
-                    window.SwitchRootViewController(login, true);
-
-                    login.set_user_name(result.EnteredMobileNumber);
-                    
+                    new LoginViewController()
+                        .Init(c => window.SwitchRootViewController(c, true))
+                        .Init(c => c.set_user_name(result.EnteredMobileNumber))
+                        .Init(c=> c.LoginSucceeded += () => window.SwitchRootViewController(new_tab_bar(), true));
                 }
             };
 
