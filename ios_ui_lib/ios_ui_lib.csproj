@@ -89,6 +89,7 @@
     <Compile Include="ImageCropping\CropperView.cs" />
     <Compile Include="CustomViews\UIMultiLineLabelCell.cs" />
     <Compile Include="CustomViews\TopAlignedImageView.cs" />
+    <Compile Include="Login\SignInViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

@@ -7,12 +7,17 @@ using common_lib;
 namespace ios_ui_lib
 {
     /// <summary>
-    /// TODO: Consolidate this LoginView with the LoginViewController
+    /// TODO: Consider consolidating this LoginView with the LoginViewController
     /// Decide on a re-useable pattern to go forward with.
+    /// ----------------------------------------------------------->>>>>>>>>>>>>>>>>>>>
+    /// UPDATE: I'm thinking I may as well leave this in here as an example of how to create UIViews ??
+    /// The LoginViewController can just embbed this viewlike any other view and handle the area where it asks for a username and password.
     /// </summary>
     public class LoginView : UIView
     {
         public readonly UIImageView GravatarView;
+
+        //TODO: Add this to the Layout standard sizes as Standard
         static readonly SizeF GravatarSize = new SizeF(85f, 85f);
 
         public readonly UITextField EmailField;
@@ -27,13 +32,13 @@ namespace ios_ui_lib
             Add(GravatarView = new UIImageView(new RectangleF(PointF.Empty, GravatarSize))
                 {
                     TranslatesAutoresizingMaskIntoConstraints = false,
+                    //TODO: Put resources that will be local to the library csproj
                     Image = UIImage.FromBundle("user-default-avatar"),
                 });
 
             GravatarView.Layer.CornerRadius = GravatarSize.Width / 2;
             GravatarView.Layer.MasksToBounds = true;
 
-            DisplayGravatar("david.olubajo@outlook.com");
 
             AddConstraint(NSLayoutConstraint.Create(
                     GravatarView,
@@ -80,6 +85,10 @@ namespace ios_ui_lib
                     NSLayoutAttribute.CenterX,
                     1f, 0
                 ));
+
+            EmailField.EditingChanged += (sender, e) => {
+                DisplayGravatar(EmailField.Text);
+            };
 
             var textSize = new NSString("hello").StringSize(UIFont.SystemFontOfSize(12f));
 

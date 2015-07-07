@@ -29,7 +29,7 @@ namespace experiments.ios
             layout_with_simple_contraints();
         }
 
-        UIImageView logo;
+        UIImageView user_image;
         UITextField username;
         UITextField password;
         UIButton login;
@@ -40,21 +40,21 @@ namespace experiments.ios
         private void layout_with_simple_contraints()
         {
 
-            var logo_image_width = logo.Image.Size.Width;
-            var logo_image_height = logo.Image.Size.Height;
+            var logo_image_width = user_image.Image.Size.Width;
+            var logo_image_height = user_image.Image.Size.Height;
             var parent_child_margin = HumanInterface.parent_child_margin;
             var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
             var finger_tip_diameter = HumanInterface.finger_tip_diameter;
 
             View.ConstrainLayout(() => 
-                logo.Frame.Width == logo_image_width &&
-                logo.Frame.Height == logo_image_height &&
-                logo.Frame.Top == View.Frame.Top + parent_child_margin &&
-                logo.Frame.GetCenterX() == View.Frame.GetCenterX() &&
+                user_image.Frame.Width == logo_image_width &&
+                user_image.Frame.Height == logo_image_height &&
+                user_image.Frame.Top == View.Frame.Top + parent_child_margin &&
+                user_image.Frame.GetCenterX() == View.Frame.GetCenterX() &&
 
                 username.Frame.Left == View.Frame.Left + parent_child_margin &&
                 username.Frame.Right == View.Frame.Right - parent_child_margin &&
-                username.Frame.Top == logo.Frame.Bottom + sibling_sibling_margin &&
+                username.Frame.Top == user_image.Frame.Bottom + sibling_sibling_margin &&
                 username.Frame.Height == finger_tip_diameter &&
 
                 password.Frame.Left == View.Frame.Left + parent_child_margin &&
@@ -81,7 +81,7 @@ namespace experiments.ios
 
         protected void populate_view()
         {
-            View.AddSubview(logo = new UIImageView(UIImage.FromBundle("user-default-avatar.png")));
+            View.AddSubview(user_image = new UIImageView(UIImage.FromBundle("user-default-avatar.png")));
 
             View.AddSubview(username = new UITextField
                 {
