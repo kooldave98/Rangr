@@ -22,16 +22,16 @@ namespace experiments.ios
                 
                 new SimpleStartScreenController()
                     .Init(sc =>sc.OnStartApp += async () => {
-                    
-                        var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
-
-                        if (!result.Canceled)
-                        {   
-                            new LoginViewController()
-                                .Init(c => Window.SwitchRootViewController(c, true))
-                                .Init(c => c.set_user_name(result.EnteredMobileNumber))
-                                .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(new_tab_bar(), true));
-                        }
+                        Window.SwitchRootViewController(new ExtendableLoginViewController(), true);
+//                        var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
+//
+//                        if (!result.Canceled)
+//                        {   
+//                            new LoginViewController()
+//                                .Init(c => Window.SwitchRootViewController(c, true))
+//                                .Init(c => c.set_user_name(result.EnteredMobileNumber))
+//                                .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(new_tab_bar(), true));
+//                        }
                     });
 
             Window.MakeKeyAndVisible();

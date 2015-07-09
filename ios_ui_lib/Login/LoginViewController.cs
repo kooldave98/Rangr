@@ -4,9 +4,9 @@ using Foundation;
 using UIKit;
 using common_lib;
 
-namespace experiments.ios
+namespace ios_ui_lib
 {
-    public class LoginViewController : SimpleViewController
+    public sealed class LoginViewController : SimpleViewController
     {
         public event Action LoginSucceeded = delegate {};
 
@@ -26,20 +26,6 @@ namespace experiments.ios
 
         public override void ViewDidLayoutSubviews()
         {
-            layout_with_simple_contraints();
-        }
-
-        UIImageView user_image;
-        UITextField username;
-        UITextField password;
-        UIButton login;
-        UIButton help;
-        UIActivityIndicatorView indicator;
-
-
-        private void layout_with_simple_contraints()
-        {
-
             var logo_image_width = user_image.Image.Size.Width;
             var logo_image_height = user_image.Image.Size.Height;
             var parent_child_margin = HumanInterface.parent_child_margin;
@@ -78,6 +64,13 @@ namespace experiments.ios
                 indicator.Frame.Left == login.Frame.Left
             );
         }
+
+        UIImageView user_image;
+        UITextField username;
+        UITextField password;
+        UIButton login;
+        UIButton help;
+        UIActivityIndicatorView indicator;
 
         protected void populate_view()
         {

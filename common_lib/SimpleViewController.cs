@@ -29,9 +29,15 @@ namespace common_lib
 
         protected nfloat parent_child_margin = HumanInterface.parent_child_margin;
 
+        protected nfloat double_parent_child_margin = HumanInterface.parent_child_margin * 2;
+
         protected nfloat sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
 
+        protected nfloat double_sibling_sibling_margin = HumanInterface.sibling_sibling_margin * 2;
+
         protected nfloat finger_tip_diameter = HumanInterface.finger_tip_diameter;
+
+        protected nfloat double_finger_tip_diameter = HumanInterface.finger_tip_diameter * 2;
 
         protected void hide_keyboard_for()
         {
