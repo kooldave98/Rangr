@@ -9,10 +9,17 @@ namespace common_lib
 {
     public abstract class SimpleViewController : UIViewController
     {
+        protected bool have_constraints_been_added { get; set;}
+
         public override void LoadView()
         {
             base.LoadView();
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
+
+            View.TranslatesAutoresizingMaskIntoConstraints = false;
+            have_constraints_been_added = false;
+            View.SetNeedsUpdateConstraints();
+
 
             View.BackgroundColor = UIColor.White;
         }

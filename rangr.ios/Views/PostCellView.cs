@@ -23,6 +23,7 @@ namespace rangr.ios
 
         public override void UpdateConstraints()
         {
+            //I really think the super.updateconstraints should be done at the boottom, see SmileyBorgs code
             base.UpdateConstraints();
 
             if (this.didSetupConstraints)
