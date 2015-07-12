@@ -34,7 +34,8 @@ namespace experiments.ios
         }
 
         public override void UpdateConstraints()
-        {           
+        {     
+            base.UpdateConstraints();//for some reason, moving this line to the bottom as suggested by @smileyborg doesn't work.
 
             if (this.didSetupConstraints)
             {
@@ -58,7 +59,7 @@ namespace experiments.ios
 
             didSetupConstraints = true;
 
-            base.UpdateConstraints();
+
         }
 
         public void UpdateFonts()

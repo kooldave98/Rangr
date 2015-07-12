@@ -102,13 +102,20 @@ namespace ios_ui_lib
                     });
             }
 
-            //see https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
-            //for how to scroll rect to visible
-            //ideally the below code should be called in the Keyboard.DidShowNotification
-            if (!View.Frame.Contains(login_view.EmailField.Frame.Location))
-            {
-                scroll_view.ScrollRectToVisible(login_view.EmailField.Frame, true);
-            }
+            //However: I think the scrolling is done automatically for you, see:
+            //http://stackoverflow.com/a/2703756/502130
+
+            //if not.... then see below
+
+//            //see https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
+//            //for how to scroll rect to visible
+//            //ideally the below code should be called in the Keyboard.DidShowNotification
+//            if (!View.Frame.Contains(login_view.EmailField.Frame.Location))
+//            {
+//                scroll_view.ScrollRectToVisible(login_view.EmailField.Frame, true);
+//            }
+
+
         }
 
         public void set_user_name(string username)
