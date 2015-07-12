@@ -72,7 +72,7 @@ namespace ios_ui_lib
         UIButton help;
         UIActivityIndicatorView indicator;
 
-        protected void populate_view()
+        private void populate_view()
         {
             View.AddSubview(user_image = new UIImageView(UIImage.FromBundle("user-default-avatar.png")));
 

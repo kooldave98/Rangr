@@ -16,13 +16,45 @@ namespace common_lib
             base.LoadView();
             Title = NSBundle.MainBundle.LocalizedString(TitleLabel, TitleLabel);
 
-            View.TranslatesAutoresizingMaskIntoConstraints = false;
             have_constraints_been_added = false;
-            View.SetNeedsUpdateConstraints();
+            ApplyConstraints();
 
 
             View.BackgroundColor = UIColor.White;
+
+            WillPopulateView();
         }
+
+        public override void UpdateViewConstraints()
+        {
+            if (!have_constraints_been_added)
+            {
+                WillAddConstraints();
+
+                have_constraints_been_added = true;
+            }
+            else
+            {
+                WillUpdateConstraints();
+            }
+
+            base.UpdateViewConstraints();
+        }
+
+        public void ApplyConstraints(bool right_now = false)
+        {
+            View.SetNeedsUpdateConstraints();
+            if (right_now)
+            {
+                View.UpdateConstraintsIfNeeded();
+            }
+        }
+
+        public virtual void WillPopulateView() {  }
+
+        public virtual void WillAddConstraints() {  }
+
+        public virtual void WillUpdateConstraints() {  }
 
         public abstract string TitleLabel { get; }
 
@@ -85,7 +117,7 @@ namespace common_lib
 
         protected void notify(String methodName)
         {
-//lock screen notifications
+            //lock screen notifications
         }
 
         private static bool UserInterfaceIdiomIsPhone

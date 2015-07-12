@@ -90,7 +90,7 @@
     <Compile Include="CustomViews\UIMultiLineLabelCell.cs" />
     <Compile Include="CustomViews\TopAlignedImageView.cs" />
     <Compile Include="Login\LoginViewController.cs" />
-    <Compile Include="Login\ExtendableLogInViewController.cs" />
+    <Compile Include="Login\AdvancedLogInViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

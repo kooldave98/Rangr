@@ -19,30 +19,27 @@ namespace experiments.ios
 
         private UIView centerView;
 
-        public override void ViewDidLoad()
+        public override void WillPopulateView()
         {
-            base.ViewDidLoad();
-
             this.View.BackgroundColor = UIColor.Green;
 
-            centerView = new UIView(){
+            View.AddSubview(centerView = new UIView() {
                 BackgroundColor = UIColor.Red
-            };
+            });
 
             centerView.Layer.CornerRadius = 10;
             centerView.Layer.MasksToBounds = true;
             centerView.apply_simple_border(UIColor.White.CGColor);
 
-            View.AddSubview(centerView);
         }
 
-        public override void ViewDidLayoutSubviews()
+        public override void WillAddConstraints()
         {
+            //layout_with_complex_contraints();
             layout_with_simple_contraints();
         }
 
-        NSLayoutConstraint[] potrait_constraints = new NSLayoutConstraint[0];
-        NSLayoutConstraint[] landscape_constraints = new NSLayoutConstraint[0];
+
 
         //http://praeclarum.org/post/45690317491/easy-layout-a-dsl-for-nslayoutconstraint
         //https://gist.github.com/praeclarum/6225853
@@ -51,9 +48,19 @@ namespace experiments.ios
         {
             View.ConstrainLayout(() => 
                 centerView.Frame.GetCenterX() == View.Frame.GetCenterX() &&
-                centerView.Frame.GetCenterY() == View.Frame.GetCenterY()
+                centerView.Frame.GetCenterY() == View.Frame.GetCenterY() &&
+                centerView.Frame.Width == View.Frame.Width * 0.5f &&
+                centerView.Frame.Height == View.Frame.Height * 0.5f
             );
 
+        }
+
+
+        NSLayoutConstraint[] potrait_constraints = new NSLayoutConstraint[0];
+        NSLayoutConstraint[] landscape_constraints = new NSLayoutConstraint[0];
+
+        private void bad_way_to_do_constraints()
+        {
             if(InterfaceOrientation == UIInterfaceOrientation.Portrait ||
                 InterfaceOrientation == UIInterfaceOrientation.PortraitUpsideDown)
             {
@@ -61,7 +68,7 @@ namespace experiments.ios
 
                 potrait_constraints = View.ConstrainLayout(() => 
                     centerView.Frame.Width == View.Frame.Width * 0.5f &&
-                    centerView.Frame.Height == centerView.Frame.Width
+                    centerView.Frame.Height == View.Frame.Height * 0.5f
                 );
             }
 
@@ -75,6 +82,7 @@ namespace experiments.ios
                     centerView.Frame.Width == centerView.Frame.Height
                 );
             }
+
         }
 
         private void layout_with_complex_contraints()

@@ -34,8 +34,7 @@ namespace experiments.ios
         }
 
         public override void UpdateConstraints()
-        {
-            base.UpdateConstraints();
+        {           
 
             if (this.didSetupConstraints)
             {
@@ -58,6 +57,8 @@ namespace experiments.ios
             );
 
             didSetupConstraints = true;
+
+            base.UpdateConstraints();
         }
 
         public void UpdateFonts()

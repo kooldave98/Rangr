@@ -15,14 +15,7 @@ namespace common_lib
         private UIView card_view;
         private UIButton start_button;
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            create_view();
-        }
-
-        protected virtual void create_view()
+        public override void WillPopulateView()
         {
 
             View.AddSubview(card_view = new UIView(){
@@ -42,7 +35,7 @@ namespace common_lib
             View.AddSubview(start_button);
         }
 
-        public override void ViewDidLayoutSubviews()
+        public override void WillAddConstraints()
         {
             var double_parent_margin = parent_child_margin * 2;
 
