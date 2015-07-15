@@ -28,6 +28,8 @@ namespace ios_ui_lib
 
         protected nfloat double_finger_tip_diameter = HumanInterface.finger_tip_diameter * 2;
 
+        protected nfloat combined_parent_and_sibling_margin = HumanInterface.sibling_sibling_margin + HumanInterface.parent_child_margin;
+
         public abstract void WillPopulateView();
 
         public abstract void WillAddConstraints();

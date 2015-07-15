@@ -24,8 +24,13 @@ namespace ios_ui_lib
                 new UIView(){ BackgroundColor = UIColor.Yellow, TranslatesAutoresizingMaskIntoConstraints = false },
                 new UIView(){ BackgroundColor = UIColor.Orange, TranslatesAutoresizingMaskIntoConstraints = false },
                 new UIView(){ BackgroundColor = UIColor.Purple, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.DarkGray, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Magenta, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Black, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.LightGray, TranslatesAutoresizingMaskIntoConstraints = false },
                 new UIView(){ BackgroundColor = UIColor.Brown, TranslatesAutoresizingMaskIntoConstraints = false }
             };
+
 
             View.Add(
                 scroll_view = new UIScrollView() {
@@ -50,7 +55,7 @@ namespace ios_ui_lib
 
             start_button = UIButton.FromType(UIButtonType.RoundedRect);
             //see this for arrow beside button :http://stackoverflow.com/a/20821178/502130
-            start_button.SetTitle("Start Keeping App >", UIControlState.Normal);
+            start_button.SetTitle("Start Keeping App", UIControlState.Normal);
             start_button.TranslatesAutoresizingMaskIntoConstraints = false;
             start_button.TouchUpInside += delegate {
                 OnStartApp();
@@ -83,50 +88,42 @@ namespace ios_ui_lib
 
             for (int i = 0; i < items.Length; i++)
             {
-                var item = items[i];
 
                 View.ConstrainLayout(() => 
-                    item.Frame.Top == View.Bounds.Top + parent_child_margin &&
-                    item.Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
-                    item.Frame.Width == View.Bounds.Width - double_parent_child_margin
+                    items[i].Frame.Top == View.Bounds.Top + parent_child_margin &&
+                    items[i].Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
+                    items[i].Frame.Width == View.Bounds.Width - double_parent_child_margin
 
                 );
 
                 if (i == 0)
                 {
                     scroll_view.ConstrainLayout(() => 
-                        item.Frame.Left >= scroll_view.Frame.Left + parent_child_margin
+                        items[i].Frame.Left >= scroll_view.Frame.Left + parent_child_margin
                     );
                 }
 
                 if (i > 0)
                 {
-                    var previous_item = items[i-1];
                     scroll_view.ConstrainLayout(() => 
-                        item.Frame.Left >= previous_item.Frame.Right + double_parent_child_margin
+                        items[i].Frame.Left >= items[i-1].Frame.Right + double_parent_child_margin
                     );
                 }
 
                 if (i == items.Length-1)
                 {
                     scroll_view.ConstrainLayout(() => 
-                        item.Frame.Right <= scroll_view.Frame.Right - parent_child_margin
+                        items[i].Frame.Right <= scroll_view.Frame.Right - parent_child_margin
                     );
                 }
 
             }
-
-
         }
-
 
         private UIView[] items;
 
-
         private UIScrollView scroll_view;
         private UIPageControl page_control;
-
-
     }
 }
 #endif
