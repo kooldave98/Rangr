@@ -20,7 +20,7 @@ namespace ios_ui_lib
         //TODO: Add this to the Layout standard sizes as Standard
         static readonly SizeF GravatarSize = new SizeF(85f, 85f);
 
-        public readonly UITextField EmailField;
+        public readonly UITextField UserIDField;
         public readonly UITextField PasswordField;
 
         public event Action<LoginView> UserDidLogin = delegate{};
@@ -60,16 +60,16 @@ namespace ios_ui_lib
 
             AddConstantSizeConstraints(GravatarView, GravatarSize);
 
-            Add(EmailField = new UITextField(new RectangleF(10, 10, 300, 30))
+            Add(UserIDField = new UITextField(new RectangleF(10, 10, 300, 30))
                 {
                     BorderStyle = UITextBorderStyle.RoundedRect,
-                    Placeholder = "display name",
+                    Placeholder = "user id",
                     TranslatesAutoresizingMaskIntoConstraints = false,
-                    Delegate = new EmailFieldDelegate()
+                    Delegate = new IDFieldDelegate()
                 });
 
             AddConstraint(NSLayoutConstraint.Create(
-                    EmailField,
+                    UserIDField,
                     NSLayoutAttribute.Top,
                     NSLayoutRelation.Equal,
                     GravatarView,
@@ -78,7 +78,7 @@ namespace ios_ui_lib
                 ));
 
             AddConstraint(NSLayoutConstraint.Create(
-                    EmailField,
+                    UserIDField,
                     NSLayoutAttribute.CenterX,
                     NSLayoutRelation.Equal,
                     GravatarView,
@@ -86,13 +86,13 @@ namespace ios_ui_lib
                     1f, 0
                 ));
 
-            EmailField.EditingChanged += (sender, e) => {
-                DisplayGravatar(EmailField.Text);
+            UserIDField.EditingChanged += (sender, e) => {
+                DisplayGravatar(UserIDField.Text);
             };
 
             var textSize = new NSString("hello").StringSize(UIFont.SystemFontOfSize(12f));
 
-            AddConstantSizeConstraints(EmailField, new SizeF(260, (float)textSize.Height + 16));
+            AddConstantSizeConstraints(UserIDField, new SizeF(260, (float)textSize.Height + 16));
 
             Add(PasswordField = new UITextField(new RectangleF(10, 10, 300, 30))
                 {
@@ -107,7 +107,7 @@ namespace ios_ui_lib
                     PasswordField,
                     NSLayoutAttribute.Top,
                     NSLayoutRelation.Equal,
-                    EmailField,
+                    UserIDField,
                     NSLayoutAttribute.Bottom,
                     1f, 10f
                 ));
@@ -116,7 +116,7 @@ namespace ios_ui_lib
                     PasswordField,
                     NSLayoutAttribute.CenterX,
                     NSLayoutRelation.Equal,
-                    EmailField,
+                    UserIDField,
                     NSLayoutAttribute.CenterX,
                     1f, 0
                 ));
@@ -130,7 +130,7 @@ namespace ios_ui_lib
                 return true;
             };
 
-            EmailField.BecomeFirstResponder();
+            UserIDField.BecomeFirstResponder();
         }
 
         async void DisplayGravatar(string email)
@@ -170,7 +170,7 @@ namespace ios_ui_lib
                 ));
         }
 
-        class EmailFieldDelegate : UITextFieldDelegate
+        class IDFieldDelegate : UITextFieldDelegate
         {
             public override bool ShouldBeginEditing(UITextField textField)
             {

@@ -38,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Users\GetUserById.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Posts\Resources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContactsProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Users\VerifyUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

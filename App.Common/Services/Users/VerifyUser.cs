@@ -6,17 +6,18 @@ using System.Diagnostics;
 
 namespace App.Common
 {
-	public class CreateUser
+	public class VerifyUser
 	{
-        public async Task<UserIdentity> Create (CreateUserRequest request)
+        public async Task<UserIdentity> execute (VerifyUserRequest request)
 		{
 			UserIdentity user_identity = null;
 
 			var requestBody = new List<KeyValuePair<string, string>> () {
-                new KeyValuePair<string, string> ("mobile_number", request.mobile_number)
+                new KeyValuePair<string, string> ("user_id", request.user_id),
+                new KeyValuePair<string, string> ("secret_code", request.user_id)
 			};
 
-            var url = string.Format ("{0}/create", UserResources.base_rest_url);
+            var url = string.Format ("{0}/verify", UserResources.base_rest_url);
 
 			try {
 
@@ -33,8 +34,10 @@ namespace App.Common
 		}		
 	}
 
-    public class CreateUserRequest
+    public class VerifyUserRequest
     {
-        public string mobile_number { get; set; }
+        public string user_id { get; set; }
+
+        public string secret_code { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using common_lib;
 
 namespace ios_ui_lib
 {
-    public sealed class LoginViewController : SimpleViewController
+    public sealed class SimpleLoginViewController : SimpleViewController
     {
         public event Action LoginSucceeded = delegate {};
 

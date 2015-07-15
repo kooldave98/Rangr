@@ -41,6 +41,12 @@ namespace common_lib
             base.UpdateViewConstraints();
         }
 
+        /// <summary>
+        /// Sounds like a bad name for this method,
+        /// dont like that it sounds right with a bool passed in,
+        /// but off mark without the bool
+        /// </summary>
+        /// <param name="right_now">If set to <c>true</c> right now.</param>
         public void ApplyConstraints(bool right_now = false)
         {
             View.SetNeedsUpdateConstraints();
@@ -71,6 +77,8 @@ namespace common_lib
         protected nfloat double_parent_child_margin = HumanInterface.parent_child_margin * 2;
 
         protected nfloat sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
+
+        protected nfloat combined_parent_and_sibling_margin = HumanInterface.sibling_sibling_margin + HumanInterface.parent_child_margin;
 
         protected nfloat double_sibling_sibling_margin = HumanInterface.sibling_sibling_margin * 2;
 

@@ -38,29 +38,24 @@ namespace experiments.ios
             return true;
         }
 
+        public UITabBarController new_tab_bar()
+        {
+            return
+                new UIViewController[] {
+
+                    new ConstraintsVC().Init(c=>c.TabBarItem = new UITabBarItem("First", UIImage.FromBundle("first.png"), 1)),
+
+                    new ItemsViewController().ToNavigationController().Init(c=>c.TabBarItem = new UITabBarItem("Second", UIImage.FromBundle("second.png"), 2)),
+
+                    new_map_view_controller().Init(c=>c.TabBarItem = new UITabBarItem("Third", UIImage.FromBundle("first.png"), 3))
+
+                }.ToTabBarController();
+        }
 
         public MapViewController new_map_view_controller()
         {
             MapServices.ProvideAPIKey("AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o");
             return new MapViewController();
-        }
-
-        public UITabBarController new_tab_bar()
-        {
-            var red_square = new ConstraintsVC();
-            var lorem_table = new ItemsViewController().ToNavigationController();
-            var map = new_map_view_controller();
-
-            red_square.TabBarItem = new UITabBarItem("First", UIImage.FromBundle("first.png"), 1);
-            lorem_table.TabBarItem = new UITabBarItem("Second", UIImage.FromBundle("second.png"), 2);
-            map.TabBarItem = new UITabBarItem("Third", UIImage.FromBundle("first.png"), 3);
-
-            var controllers = new UIViewController[]
-            { 
-                red_square, lorem_table, map
-            };
-
-            return controllers.ToTabBarController();
         }
 
         public override void OnResignActivation(UIApplication application)

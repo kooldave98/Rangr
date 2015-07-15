@@ -179,13 +179,13 @@
     <Compile Include="VariableHeightCells\Model.cs">
       <DependentUpon>ItemsViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="MobileEntrySequence\SequenceViewModel.cs" />
     <Compile Include="GoogleMaps\MapViewController.cs" />
     <Compile Include="XibUsages\PostCellView.cs" />
     <Compile Include="XibUsages\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
     <Compile Include="Constraints\ConstraintsVC.cs" />
+    <Compile Include="MobileEntrySequence\SequenceViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -200,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VariableHeightCells\" />
-    <Folder Include="MobileEntrySequence\" />
     <Folder Include="GoogleMaps\" />
     <Folder Include="XibUsages\" />
     <Folder Include="Constraints\" />

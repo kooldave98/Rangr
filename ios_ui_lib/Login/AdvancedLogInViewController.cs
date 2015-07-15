@@ -120,18 +120,18 @@ namespace ios_ui_lib
 
         public void set_user_name(string username)
         {
-            login_view.EmailField.Text = username;
+            login_view.UserIDField.Text = username;
         }
 
 
 
-        private void Login()
+        protected virtual void Login()
         {
-            if (string.IsNullOrEmpty(login_view.EmailField.Text))
+            if (string.IsNullOrEmpty(login_view.UserIDField.Text))
             {
                 show_alert("Oops", "Please enter a valid email.", "Ok", () =>
                     {
-                        login_view.EmailField.BecomeFirstResponder();
+                        login_view.UserIDField.BecomeFirstResponder();
                     });
 
                 return;
@@ -146,15 +146,15 @@ namespace ios_ui_lib
                 return;
             }
 
-            login_view.EmailField.ResignFirstResponder();
+            login_view.UserIDField.ResignFirstResponder();
             login_view.PasswordField.ResignFirstResponder();
 
             LoginSucceeded();
         }
 
-        private LoginView login_view;
+        protected LoginView login_view;
 
-        private UIScrollView scroll_view;
+        protected UIScrollView scroll_view;
 
     }
 }
