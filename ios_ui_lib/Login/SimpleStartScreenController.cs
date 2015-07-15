@@ -13,11 +13,9 @@ namespace ios_ui_lib
 
         public event Action OnStartApp = delegate {};
 
-        private UIButton start_button;
-
         public override void WillPopulateView()
         {
-            items = new UIView[] {
+            var items = new UIView[] {
                 new UIView(){ BackgroundColor = UIColor.Blue, TranslatesAutoresizingMaskIntoConstraints = false },
                 new UIView(){ BackgroundColor = UIColor.Red, TranslatesAutoresizingMaskIntoConstraints = false },
                 new UIView(){ BackgroundColor = UIColor.Green, TranslatesAutoresizingMaskIntoConstraints = false },
@@ -33,22 +31,8 @@ namespace ios_ui_lib
 
 
             View.Add(
-                scroll_view = new UIScrollView() {
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                PagingEnabled = true,
-                ScrollEnabled = true,
-                ShowsHorizontalScrollIndicator = false,
-                ShowsVerticalScrollIndicator = false
-            }
-                .Init(sv => sv.Scrolled += (s, e) => page_control.CurrentPage = (int)System.Math.Floor(sv.ContentOffset.X / sv.Frame.Size.Width))
-                .Init(sv=>sv.AddSubviews(items))
-            );
-
-            View.Add(page_control = new UIPageControl(){
-                Pages = items.Length,
-                CurrentPage = 0,
-                CurrentPageIndicatorTintColor = UIColor.DarkGray,
-                PageIndicatorTintColor = UIColor.LightGray
+                swipe_view = new SwipePagerView(items) {
+                TranslatesAutoresizingMaskIntoConstraints = false
             });
 
 
@@ -68,15 +52,10 @@ namespace ios_ui_lib
             var double_parent_margin = parent_child_margin * 2;
 
             View.ConstrainLayout(() => 
-                scroll_view.Frame.Top == View.Bounds.Top &&
-                scroll_view.Frame.Left == View.Bounds.Left &&
-                scroll_view.Frame.Right == View.Bounds.Right &&
-                scroll_view.Frame.Bottom == page_control.Frame.Top - sibling_sibling_margin &&
-
-                page_control.Frame.Bottom == start_button.Frame.Top - double_parent_margin &&
-                page_control.Frame.Left == View.Bounds.Left && 
-                page_control.Frame.Right == View.Bounds.Right &&
-                page_control.Frame.Height == double_finger_tip_diameter &&
+                swipe_view.Frame.Top == View.Bounds.Top &&
+                swipe_view.Frame.Left == View.Bounds.Left &&
+                swipe_view.Frame.Right == View.Bounds.Right &&
+                swipe_view.Frame.Bottom == start_button.Frame.Top - double_parent_margin &&
 
 
                 start_button.Frame.Height == finger_tip_diameter &&
@@ -86,44 +65,12 @@ namespace ios_ui_lib
 
             );
 
-            for (int i = 0; i < items.Length; i++)
-            {
 
-                View.ConstrainLayout(() => 
-                    items[i].Frame.Top == View.Bounds.Top + parent_child_margin &&
-                    items[i].Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
-                    items[i].Frame.Width == View.Bounds.Width - double_parent_child_margin
-
-                );
-
-                if (i == 0)
-                {
-                    scroll_view.ConstrainLayout(() => 
-                        items[i].Frame.Left >= scroll_view.Frame.Left + parent_child_margin
-                    );
-                }
-
-                if (i > 0)
-                {
-                    scroll_view.ConstrainLayout(() => 
-                        items[i].Frame.Left >= items[i-1].Frame.Right + double_parent_child_margin
-                    );
-                }
-
-                if (i == items.Length-1)
-                {
-                    scroll_view.ConstrainLayout(() => 
-                        items[i].Frame.Right <= scroll_view.Frame.Right - parent_child_margin
-                    );
-                }
-
-            }
         }
 
-        private UIView[] items;
+        private SwipePagerView swipe_view;
 
-        private UIScrollView scroll_view;
-        private UIPageControl page_control;
+        private UIButton start_button;
     }
 }
 #endif

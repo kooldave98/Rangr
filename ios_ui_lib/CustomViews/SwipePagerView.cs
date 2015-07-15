@@ -9,7 +9,6 @@ namespace ios_ui_lib
     /// Swipe pager view.
     /// see: http://www.gooorack.com/2013/07/31/xamarin-uipagecontrol-and-uiscrollview-for-ios-homescreen-look/?subscribe=success#blog_subscription-2
     /// </summary>
-    //[Register("SwipePagerView")]
     public class SwipePagerView : SimpleUIView
     {
         public void WillPopulateView()
@@ -18,7 +17,10 @@ namespace ios_ui_lib
                     scroll_view = new UIScrollView() {
                         TranslatesAutoresizingMaskIntoConstraints = false,
                         PagingEnabled = true,
-                        ScrollEnabled = true
+                        ScrollEnabled = true,
+                        ShowsHorizontalScrollIndicator = false,
+                        ShowsVerticalScrollIndicator = false,
+                        AlwaysBounceHorizontal = true
                     }
                     .Init(sv => sv.Scrolled += (s, e) => page_control.CurrentPage = (int)System.Math.Floor(sv.ContentOffset.X / sv.Frame.Size.Width))
                     .Init(sv=>sv.AddSubviews(items))                    
@@ -26,7 +28,9 @@ namespace ios_ui_lib
 
             Add(page_control = new UIPageControl(){
                 Pages = items.Length,
-                CurrentPage = 0
+                CurrentPage = 0,
+                CurrentPageIndicatorTintColor = UIColor.DarkGray,
+                PageIndicatorTintColor = UIColor.LightGray
             });
 
         }
