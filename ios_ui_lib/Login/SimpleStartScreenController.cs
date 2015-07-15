@@ -13,13 +13,19 @@ namespace ios_ui_lib
 
         public event Action OnStartApp = delegate {};
 
-        private SwipePagerView swipe_pager;
         private UIButton start_button;
 
         public override void WillPopulateView()
         {
-            first = new UIView(){ BackgroundColor = UIColor.Blue, TranslatesAutoresizingMaskIntoConstraints = false };
-            second = new UIView(){ BackgroundColor = UIColor.Brown, TranslatesAutoresizingMaskIntoConstraints = false };
+            items = new UIView[] {
+                new UIView(){ BackgroundColor = UIColor.Blue, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Red, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Green, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Yellow, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Orange, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Purple, TranslatesAutoresizingMaskIntoConstraints = false },
+                new UIView(){ BackgroundColor = UIColor.Brown, TranslatesAutoresizingMaskIntoConstraints = false }
+            };
 
             View.Add(
                 scroll_view = new UIScrollView() {
@@ -30,25 +36,16 @@ namespace ios_ui_lib
                 ShowsVerticalScrollIndicator = false
             }
                 .Init(sv => sv.Scrolled += (s, e) => page_control.CurrentPage = (int)System.Math.Floor(sv.ContentOffset.X / sv.Frame.Size.Width))
-                .Init(sv=>sv.AddSubview(first))
-                .Init(sv=>sv.AddSubview(second))
+                .Init(sv=>sv.AddSubviews(items))
             );
 
             View.Add(page_control = new UIPageControl(){
-                Pages = 2,
+                Pages = items.Length,
                 CurrentPage = 0,
                 CurrentPageIndicatorTintColor = UIColor.DarkGray,
                 PageIndicatorTintColor = UIColor.LightGray
             });
 
-
-
-
-
-
-//            View.AddSubview(swipe_pager = new SwipePagerView(){
-//                TranslatesAutoresizingMaskIntoConstraints = false
-//            });
 
 
             start_button = UIButton.FromType(UIButtonType.RoundedRect);
@@ -74,23 +71,8 @@ namespace ios_ui_lib
                 page_control.Frame.Bottom == start_button.Frame.Top - double_parent_margin &&
                 page_control.Frame.Left == View.Bounds.Left && 
                 page_control.Frame.Right == View.Bounds.Right &&
-                page_control.Frame.Height == double_finger_tip_diameter
-                && 
-                first.Frame.Top == View.Bounds.Top + parent_child_margin &&
-                first.Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
-                first.Frame.Width == View.Bounds.Width - double_parent_child_margin
+                page_control.Frame.Height == double_finger_tip_diameter &&
 
-                &&
-
-                second.Frame.Top == View.Bounds.Top + parent_child_margin &&
-                second.Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
-                second.Frame.Width == View.Bounds.Width - double_parent_child_margin
-
-                &&
-//                swipe_pager.Frame.Top == View.Bounds.Top + double_parent_margin &&
-//                swipe_pager.Frame.Left == View.Bounds.Left + sibling_sibling_margin &&
-//                swipe_pager.Frame.Right == View.Bounds.Right - sibling_sibling_margin &&
-//                swipe_pager.Frame.Bottom == start_button.Frame.Top - double_parent_margin &&
 
                 start_button.Frame.Height == finger_tip_diameter &&
                 start_button.Frame.Width == start_button.Frame.Height * 8.0f && //Really should investigate using COntent hugging
@@ -99,30 +81,46 @@ namespace ios_ui_lib
 
             );
 
+            for (int i = 0; i < items.Length; i++)
+            {
+                var item = items[i];
 
+                View.ConstrainLayout(() => 
+                    item.Frame.Top == View.Bounds.Top + parent_child_margin &&
+                    item.Frame.Bottom == View.Frame.Bottom - combined_parent_and_sibling_margin &&
+                    item.Frame.Width == View.Bounds.Width - double_parent_child_margin
 
+                );
 
-            scroll_view.ConstrainLayout(() => 
-                first.Frame.Left >= scroll_view.Frame.Left + parent_child_margin
+                if (i == 0)
+                {
+                    scroll_view.ConstrainLayout(() => 
+                        item.Frame.Left >= scroll_view.Frame.Left + parent_child_margin
+                    );
+                }
 
-                &&
-                second.Frame.Left >= first.Frame.Right + double_parent_child_margin
-                &&
+                if (i > 0)
+                {
+                    var previous_item = items[i-1];
+                    scroll_view.ConstrainLayout(() => 
+                        item.Frame.Left >= previous_item.Frame.Right + double_parent_child_margin
+                    );
+                }
 
-                second.Frame.Right <= scroll_view.Frame.Right - parent_child_margin
-            );
+                if (i == items.Length-1)
+                {
+                    scroll_view.ConstrainLayout(() => 
+                        item.Frame.Right <= scroll_view.Frame.Right - parent_child_margin
+                    );
+                }
+
+            }
+
 
         }
 
 
-
-
-
-
-
-        private UIView first;
-
-        private UIView second;
+        private UIView[] items;
 
 
         private UIScrollView scroll_view;

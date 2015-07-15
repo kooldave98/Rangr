@@ -35,22 +35,22 @@ namespace rangr.ios
 
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-//            if (AppGlobal.Current.CurrentUserExists)
-//                Window.RootViewController = get_main_tab_bar();
-//            else
+            if (AppGlobal.Current.CurrentUserExists)
+                Window.RootViewController = get_main_tab_bar();
+            else
             Window.RootViewController =
-                new SimpleStartScreenController();
-//                        .Init(sc =>sc.OnStartApp += async () => {
-//                            var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
-//
-//                            if (!result.Canceled)
-//                            {   
-//                                new AdvancedLoginViewController()
-//                                    .Init(c => Window.SwitchRootViewController(c, true))
-//                                    .Init(c => c.set_user_name(result.EnteredMobileNumber))
-//                                    .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true));
-//                            }
-//                    });
+                new SimpleStartScreenController()
+                        .Init(sc =>sc.OnStartApp += async () => {
+                            var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
+
+                            if (!result.Canceled)
+                            {   
+                                new AdvancedLoginViewController()
+                                    .Init(c => Window.SwitchRootViewController(c, true))
+                                    .Init(c => c.set_user_name(result.EnteredMobileNumber))
+                                    .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true));
+                            }
+                    });
 
 
 
