@@ -5,9 +5,14 @@ using Foundation;
 
 namespace ios_ui_lib
 {
+    /// <summary>
+    /// Swipe pager view.
+    /// see: http://www.gooorack.com/2013/07/31/xamarin-uipagecontrol-and-uiscrollview-for-ios-homescreen-look/?subscribe=success#blog_subscription-2
+    /// </summary>
+    //[Register("SwipePagerView")]
     public class SwipePagerView : SimpleUIView
     {
-        public override void WillPopulateView()
+        public void WillPopulateView()
         {
             Add(
                     scroll_view = new UIScrollView() {
@@ -86,7 +91,7 @@ namespace ios_ui_lib
         {
             items = Guard.IsNotNull(the_items, "the_items");
 
-            base.InitSimpleUIView();
+            WillPopulateView();
         }
 
         private UIView[] items;

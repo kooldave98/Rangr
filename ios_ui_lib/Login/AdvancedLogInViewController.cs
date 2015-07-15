@@ -21,7 +21,7 @@ namespace ios_ui_lib
         //so we won't have to derive from LoadView just to populate the view;
         public override void WillPopulateView()
         {
-            View.AddSubview(scroll_view = new UIScrollView());
+            View.AddSubview(scroll_view = new UIScrollView(){ AlwaysBounceVertical = true });
 
             scroll_view.AddSubview(login_view = new LoginView()
                                         .Init(l => l.UserDidLogin += o => Login())
