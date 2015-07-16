@@ -5,36 +5,42 @@ using common_lib;
 
 namespace rangr.ios
 {
-    public class VerifyNumberViewController : AdvancedLoginViewController
+    public class VerifyNumberViewController : UILoginViewController
     {
         private LoginViewModel view_model ;
 
-        public VerifyNumberViewController(LoginViewModel the_view_model)
+        public event Action VerificationSucceeded = delegate {};
+        public event Action VerificationFailed = delegate {};
+
+        public VerifyNumberViewController(string mobile_number)
         {
-            view_model = Guard.IsNotNull(the_view_model, "the_view_model");
+            view_model = new LoginViewModel(){
+                user_mobile_number = mobile_number
+            };
         }
 
-        protected override async void Login()
+        public async override void ViewDidLoad()
         {
-            if (string.IsNullOrEmpty(login_view.UserIDField.Text))
-            {
-                show_alert("Oops", "Please enter a valid number.", "Ok", () => {
-                    login_view.UserIDField.BecomeFirstResponder();
-                });
+            base.ViewDidLoad();
 
-                return;
-            }
-            if (string.IsNullOrEmpty(login_view.PasswordField.Text))
-            {
-                show_alert("Oops", "Please enter a password.", "Ok", () => {
-                    login_view.PasswordField.BecomeFirstResponder();
-                });
+            //view_model.user_mobile_number = login_view.UserIDField.Text;
 
-                return;
-            }
+            login_view.PasswordField.BecomeFirstResponder();
 
-            view_model.user_mobile_number = login_view.UserIDField.Text;
-            view_model.user_mobile_number = login_view.PasswordField.Text;
+            login_view.UserIDField.BorderStyle = UIKit.UITextBorderStyle.None;
+            login_view.PasswordField.BorderStyle = UIKit.UITextBorderStyle.None;
+
+            login_view.UserIDField.ShouldBeginEditing += (t)=> false;
+
+            await view_model.CreateUser();
+        }
+
+        protected override async void OnRequestLogin(string id, string password)
+        {
+            base.OnRequestLogin(id, password);
+
+            view_model.user_mobile_number = id;
+            view_model.user_secret_code = password;
 
             show_progress("verifying number...");
 
@@ -44,7 +50,7 @@ namespace rangr.ios
             {
                 login_view.PasswordField.ResignFirstResponder();
 
-                //LoginSucceeded();
+                VerificationSucceeded();
             }
             else
             {
@@ -53,6 +59,8 @@ namespace rangr.ios
 
                 login_view.PasswordField.SelectAll(this);
                 login_view.PasswordField.BecomeFirstResponder();
+
+                VerificationFailed();
             }
 
             dismiss_progress();

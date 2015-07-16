@@ -6,25 +6,23 @@ using common_lib;
 
 namespace ios_ui_lib
 {
-    public class AdvancedLoginViewController : SimpleViewController
+    public class UILoginViewController : SimpleViewController
     {
         nfloat keyboardOffset = 0;
 
-        public event Action LoginSucceeded = delegate {};
+        public event EventHandler<LoginView.OnLoginRequestedEventArgs> LoginRequested = delegate {};
 
         public override string TitleLabel
         { 
             get{ return "Login"; } 
         }
 
-        //Make this an abstract method in the base class.
-        //so we won't have to derive from LoadView just to populate the view;
         public override void WillPopulateView()
         {
             View.AddSubview(scroll_view = new UIScrollView(){ AlwaysBounceVertical = true });
 
             scroll_view.AddSubview(login_view = new LoginView()
-                                        .Init(l => l.UserDidLogin += o => Login())
+                                    .Init(l => l.OnLoginRequested += (o, e) => OnRequestLogin(e.login_id, e.login_password))
             );
         }
 
@@ -62,7 +60,7 @@ namespace ios_ui_lib
             
             scroll_view.ConstrainLayout(() =>             
             
-                login_view.Frame.Top >= scroll_view.Frame.Top + parent_child_margin &&
+                login_view.Frame.Top >= scroll_view.Frame.Top + double_parent_child_margin &&
                 login_view.Frame.Bottom <= scroll_view.Frame.Bottom - parent_child_margin 
             
             );
@@ -78,12 +76,17 @@ namespace ios_ui_lib
             base.ViewWillAppear(animated);
             NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, OnKeyboardNotification);
             NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillShowNotification, OnKeyboardNotification);
+            NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidShowNotification, OnKeyboardShown);
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            NSNotificationCenter.DefaultCenter.RemoveObservers(new []{ UIKeyboard.WillHideNotification, UIKeyboard.WillShowNotification });
+            NSNotificationCenter
+                .DefaultCenter
+                .RemoveObservers(new []{ UIKeyboard.WillHideNotification, 
+                                            UIKeyboard.WillShowNotification, 
+                                            UIKeyboard.DidShowNotification });
         }
 
         private void OnKeyboardNotification(NSNotification notification)
@@ -93,55 +96,58 @@ namespace ios_ui_lib
 
                 //Check if the keyboard is becoming visible
                 bool visible = notification.Name == UIKeyboard.WillShowNotification;
-                UIView.Animate(UIKeyboard.AnimationDurationFromNotification(notification), () =>
-                    {
-                        UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
-                        var frame = UIKeyboard.FrameEndFromNotification(notification);
-                        keyboardOffset = visible ? (nfloat)frame.Height : 0.0f; 
-                        ApplyConstraints(true);
-                    });
+                UIView.Animate(UIKeyboard.AnimationDurationFromNotification(notification), () => {
+                    UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
+                    var frame = UIKeyboard.FrameEndFromNotification(notification);
+                    keyboardOffset = visible ? (nfloat)frame.Height : 0.0f; 
+                    ApplyConstraints(true);
+                });
             }
 
-            //However: I think the scrolling is done automatically for you, see:
-            //http://stackoverflow.com/a/2703756/502130
-
-            //if not.... then see below
-
-//            //see https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
-//            //for how to scroll rect to visible
-//            //ideally the below code should be called in the Keyboard.DidShowNotification
-//            if (!View.Frame.Contains(login_view.EmailField.Frame.Location))
-//            {
-//                scroll_view.ScrollRectToVisible(login_view.EmailField.Frame, true);
-//            }
-
 
         }
 
-        public void set_user_name(string username)
+        private void OnKeyboardShown(NSNotification notification)
         {
-            login_view.UserIDField.Text = username;
+            //Note: I think there is a way to let the scrolling happen automatically..
+            //see: http://stackoverflow.com/a/2703756/502130
+            //however: this blog post describes a more hands on approach:
+            //http://www.gooorack.com/2013/08/28/xamarin-moving-the-view-on-keyboard-show/
+
+            //I have tried apples scroll_rect_to_visible.
+            //doesn't seem to work, see below
+
+            //see https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
+            //for how to scroll rect to visible
+            //ideally the below code should be called in the Keyboard.DidShowNotification
+            if (!View.Frame.Contains(login_view.PasswordField.Frame.Location))
+            {
+                scroll_view.ScrollRectToVisible(login_view.PasswordField.Frame, true);
+            }
+        }
+
+        public void set_user_id(string user_id)
+        {
+            login_view.UserIDField.Text = user_id;
         }
 
 
 
-        protected virtual void Login()
+        protected virtual void OnRequestLogin(string id, string password)
         {
             if (string.IsNullOrEmpty(login_view.UserIDField.Text))
             {
-                show_alert("Oops", "Please enter a valid email.", "Ok", () =>
-                    {
-                        login_view.UserIDField.BecomeFirstResponder();
-                    });
+                show_alert("Oops", "Please enter a valid email.", "Ok", () => {
+                    login_view.UserIDField.BecomeFirstResponder();
+                });
 
                 return;
             }
             if (string.IsNullOrEmpty(login_view.PasswordField.Text))
             {
-                show_alert("Oops", "Please enter a password.", "Ok", () =>
-                    {
-                        login_view.PasswordField.BecomeFirstResponder();
-                    });
+                show_alert("Oops", "Please enter a password.", "Ok", () => {
+                    login_view.PasswordField.BecomeFirstResponder();
+                });
 
                 return;
             }
@@ -149,12 +155,10 @@ namespace ios_ui_lib
             login_view.UserIDField.ResignFirstResponder();
             login_view.PasswordField.ResignFirstResponder();
 
-            LoginSucceeded();
+            LoginRequested(login_view, new LoginView.OnLoginRequestedEventArgs(id, password));
         }
 
         protected LoginView login_view;
-
         protected UIScrollView scroll_view;
-
     }
 }

@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="Constraints\ConstraintsVC.cs" />
     <Compile Include="MobileEntrySequence\SequenceViewModel.cs" />
+    <Compile Include="Constraints\ConstrainedLoginViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

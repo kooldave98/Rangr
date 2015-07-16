@@ -16,7 +16,7 @@ namespace ios_ui_lib
             Add(
                     scroll_view = new UIScrollView() {
                         TranslatesAutoresizingMaskIntoConstraints = false,
-                        PagingEnabled = true,
+                        PagingEnabled = false,//hmmn,should this be exposed as properties of the view ??
                         ScrollEnabled = true,
                         ShowsHorizontalScrollIndicator = false,
                         ShowsVerticalScrollIndicator = false,

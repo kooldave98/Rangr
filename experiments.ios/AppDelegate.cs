@@ -26,10 +26,10 @@ namespace experiments.ios
 
                         if (!result.Canceled)
                         {   
-                            new AdvancedLoginViewController()
+                            new UILoginViewController()
                                 .Init(c => Window.SwitchRootViewController(c, true))
-                                .Init(c => c.set_user_name(result.EnteredMobileNumber))
-                                .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(new_tab_bar(), true));
+                                .Init(c => c.set_user_id(result.EnteredMobileNumber))
+                                .Init(c => c.LoginRequested += (o, e) => Window.SwitchRootViewController(new_tab_bar(), true));
                         }
                     });
 

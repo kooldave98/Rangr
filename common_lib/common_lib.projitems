@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\UIWindowExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UIViewControllerFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\FluentObjectInitialisationExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)korede_readme.txt" />

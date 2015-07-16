@@ -14,7 +14,7 @@ namespace App.Common
 
 			var requestBody = new List<KeyValuePair<string, string>> () {
                 new KeyValuePair<string, string> ("user_id", request.user_id),
-                new KeyValuePair<string, string> ("secret_code", request.user_id)
+                new KeyValuePair<string, string> ("secret_code", request.secret_code)
 			};
 
             var url = string.Format ("{0}/verify", UserResources.base_rest_url);

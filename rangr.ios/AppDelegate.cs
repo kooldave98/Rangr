@@ -45,10 +45,11 @@ namespace rangr.ios
 
                             if (!result.Canceled)
                             {   
-                                new AdvancedLoginViewController()
-                                    .Init(c => Window.SwitchRootViewController(c, true))
-                                    .Init(c => c.set_user_name(result.EnteredMobileNumber))
-                                    .Init(c => c.LoginSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true));
+                                new VerifyNumberViewController(result.EnteredMobileNumber)
+                                    .Init(c => Window.PresentViewController(c, true))
+                                    .Init(c => c.set_user_id(result.EnteredMobileNumber))
+                                    .Init(c => c.VerificationSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true))
+                                    .Init(c => c.VerificationFailed += async () => c.DismissViewControllerAsync(true));
                             }
                     });
 
@@ -210,10 +211,3 @@ namespace rangr.ios
         private PhoneNumberFormatter formatter;
     }
 }
-
-//public static string RemoveWhitespace(this string input)
-//{
-//    return new string(input.ToCharArray()
-//        .Where(c => !Char.IsWhiteSpace(c))
-//        .ToArray());
-//}

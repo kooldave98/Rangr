@@ -6,6 +6,7 @@ using ModernHttpClient;
 using System.Net.Http;
 using Fusillade;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace common_lib
 {
@@ -27,7 +28,7 @@ namespace common_lib
             {
                 using (var handle = Analytics.Current.TrackTime(request_string))
                 {               
-                    var response = await httpClient.GetAsync(baseUrl);
+                    var response = await httpClient.GetAsync(baseUrl);//WebUtility.UrlEncode(baseUrl));
                     responseString = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                 }

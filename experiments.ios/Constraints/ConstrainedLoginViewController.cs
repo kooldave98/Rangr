@@ -4,9 +4,9 @@ using Foundation;
 using UIKit;
 using common_lib;
 
-namespace ios_ui_lib
+namespace experiments.ios
 {
-    public sealed class SimpleLoginViewController : SimpleViewController
+    public class ConstrainedLoginViewController : SimpleViewController
     {
         public event Action LoginSucceeded = delegate {};
 

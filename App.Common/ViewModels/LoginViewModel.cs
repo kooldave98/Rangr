@@ -12,24 +12,18 @@ namespace App.Common
 
         public async Task<bool> CreateUser()
         {
-            //TODO: Validate mobile number here...
+            if (!validator.is_valid_number(user_mobile_number))
+                throw new InvalidOperationException("Mobile number is not valid");
 
             var userID = await create_user_service
                                 .Create(new CreateUserRequest() { 
-                                            mobile_number = user_mobile_number
+                                            mobile_number = user_mobile_number.RemoveWhitespace()
                                         });
 
             if (userID == null)
             {
                 return false;
             }
-
-            var user = new User()
-            { 
-                user_id = userID.user_id
-            };
-
-            sessionInstance.PersistCurrentUser(user);
 
             return true;
         }
@@ -40,7 +34,7 @@ namespace App.Common
 
             var userID = await verify_user
                                 .execute(new VerifyUserRequest() { 
-                                    user_id = user_mobile_number,
+                                    user_id = user_mobile_number.RemoveWhitespace(),
                                     secret_code = user_secret_code
                                 });
 
@@ -64,11 +58,13 @@ namespace App.Common
 
             create_user_service = new CreateUser();
             verify_user = new VerifyUser();
+            validator = new PhoneNumberValidator();
         }
 
         private CreateUser create_user_service;
         private VerifyUser verify_user;
         private Session sessionInstance;
+        private PhoneNumberValidator validator;
     }
 }
 

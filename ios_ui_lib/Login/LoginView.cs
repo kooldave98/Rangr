@@ -23,7 +23,7 @@ namespace ios_ui_lib
         public readonly UITextField UserIDField;
         public readonly UITextField PasswordField;
 
-        public event Action<LoginView> UserDidLogin = delegate{};
+        public event EventHandler<OnLoginRequestedEventArgs> OnLoginRequested = delegate{};
 
         public LoginView()
         {
@@ -64,8 +64,7 @@ namespace ios_ui_lib
                 {
                     BorderStyle = UITextBorderStyle.RoundedRect,
                     Placeholder = "user id",
-                    TranslatesAutoresizingMaskIntoConstraints = false,
-                    Delegate = new IDFieldDelegate()
+                    TranslatesAutoresizingMaskIntoConstraints = false
                 });
 
             AddConstraint(NSLayoutConstraint.Create(
@@ -126,11 +125,9 @@ namespace ios_ui_lib
             PasswordField.ShouldReturn = field =>
             {
                 field.ResignFirstResponder();
-                UserDidLogin(this);
+                    OnLoginRequested(this, new OnLoginRequestedEventArgs(UserIDField.Text, PasswordField.Text));
                 return true;
             };
-
-            UserIDField.BecomeFirstResponder();
         }
 
         async void DisplayGravatar(string email)
@@ -170,11 +167,16 @@ namespace ios_ui_lib
                 ));
         }
 
-        class IDFieldDelegate : UITextFieldDelegate
+        public class OnLoginRequestedEventArgs : EventArgs
         {
-            public override bool ShouldBeginEditing(UITextField textField)
+            public string login_id { get; private set; }
+
+            public string login_password { get; private set; }
+
+            public OnLoginRequestedEventArgs (string id, string password)
             {
-                return true;
+                login_id = id;
+                login_password = password;
             }
         }
     }
