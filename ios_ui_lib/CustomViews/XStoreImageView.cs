@@ -8,9 +8,9 @@ using Foundation;
 using CoreGraphics;
 using common_lib;
 
-namespace rangr.ios
+namespace ios_ui_lib
 {
-    public class TopAlignedImageView : UIView
+    public class XStoreImageView : UIView
     {
         CGSize origionalSize;
         public UIImage Image
@@ -28,7 +28,7 @@ namespace rangr.ios
         UIImage image;
         UIActivityIndicatorView progress;
 
-        public TopAlignedImageView()
+        public XStoreImageView()
         {
             this.ClipsToBounds = true;
             ImageView = new UIImageView();

@@ -4,42 +4,29 @@ using Foundation;
 using UIKit;
 using App.Common;
 using System.Threading.Tasks;
+using ios_ui_lib;
 using common_lib;
 
 namespace rangr.ios
 {
-    public partial class PostCellView : UITableViewCell
+    public partial class PostCellView : SimpleUITableViewCell
     {
-        private bool didSetupConstraints;
         const string PlaceholderImagePath = "user-default-avatar.png";
         public static readonly NSString Key = new NSString("PostCellView");
 
         private UILabel time_ago;
         private UIImageView user_image;
         private UILabel user_name;
-        private TopAlignedImageView post_image;
+        private XStoreImageView post_image;
         private UILabel post_text;
         private UIView card_view;
 
-        public override void UpdateConstraints()
+        public override void WillAddConstraints()
         {
-            //I really think the super.updateconstraints should be done at the boottom, see SmileyBorgs code
-            base.UpdateConstraints();
+            this.user_name.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.time_ago.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.post_text.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
-            if (this.didSetupConstraints)
-            {
-                return;
-            }
-
-            this.user_name.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.time_ago.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.post_text.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-
-
-            var user_image_width = HumanInterface.medium_square_image_length;
-            var user_image_height = HumanInterface.medium_square_image_length;
-            var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
-            var parent_child_margin = HumanInterface.parent_child_margin;
 
             ContentView.ConstrainLayout(() => 
                 card_view.Frame.Top == ContentView.Frame.Top + sibling_sibling_margin &&
@@ -74,13 +61,13 @@ namespace rangr.ios
                 post_text.Frame.Bottom == card_view.Frame.Bottom - sibling_sibling_margin
 
             );
-
-            this.didSetupConstraints = true;
         }
 
-        public async Task BindDataToCell(Post post)
+        public async Task BindData(Post post)
         {
+            user_name.Text = post.user_id;
             user_name.Text = await post.get_name_for_number();
+
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
             time_ago.Text = post.get_time_ago();
@@ -137,7 +124,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(post_image = new TopAlignedImageView {
+            card_view.AddSubview(post_image = new XStoreImageView {
                 ClipsToBounds = true,
             });
 

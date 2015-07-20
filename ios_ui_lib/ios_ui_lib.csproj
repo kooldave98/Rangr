@@ -88,11 +88,11 @@
     <Compile Include="ImageCropping\CropperViewController.cs" />
     <Compile Include="ImageCropping\CropperView.cs" />
     <Compile Include="CustomViews\UIMultiLineLabelCell.cs" />
-    <Compile Include="CustomViews\TopAlignedImageView.cs" />
     <Compile Include="CustomViews\SwipePagerView.cs" />
     <Compile Include="Login\SimpleStartScreenController.cs" />
     <Compile Include="CustomViews\SimpleUIView.cs" />
     <Compile Include="Login\UILoginViewController.cs" />
+    <Compile Include="CustomViews\XStoreImageView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

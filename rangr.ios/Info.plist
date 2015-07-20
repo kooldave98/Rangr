@@ -38,8 +38,8 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location to provide you the best experience.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to allow your posts to be geo-tagged</string>
 	<key>CFBundleDisplayName</key>
 	<string>Rangr</string>
 </dict>

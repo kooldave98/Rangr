@@ -9,6 +9,7 @@ using App.Common;
 using Google.Maps;
 using ios_ui_lib;
 using common_lib;
+using System.Threading.Tasks;
 
 namespace rangr.ios
 {
@@ -27,21 +28,19 @@ namespace rangr.ios
         private UILabel user_name;
         private UILabel post_text;
 
-        private Post item;
 
         public PostDetailViewController(Post the_item)
         {
-            view_model = new PostDetailsViewModel();
-            view_model.CurrentPost = item = the_item;
+            view_model = new PostDetailsViewModel(the_item);
         }
 
-        public override void ViewDidLoad()
+        public override async void ViewDidLoad()
         {
             base.ViewDidLoad();
 
             create_view();
 
-            BindDataToCell(item);
+            await BindData();
         }
 
         private void create_view()
@@ -94,9 +93,9 @@ namespace rangr.ios
 
         public override void ViewDidLayoutSubviews()
         {
-            this.user_name.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.time_ago.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.post_text.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.user_name.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.time_ago.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.post_text.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
 
 
@@ -138,12 +137,12 @@ namespace rangr.ios
                 
         }
 
-        private void BindDataToCell(Post post)
+        private async Task BindData()
         {
-            user_name.Text = post.user_id.ToString();
-            post_text.Text = post.text;
+            user_name.Text = await view_model.CurrentPost.get_name_for_number();
+            post_text.Text = view_model.CurrentPost.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
+            time_ago.Text = view_model.CurrentPost.get_time_ago();
         }
 
         private MapView LoadMap()

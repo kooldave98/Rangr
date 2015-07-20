@@ -14,16 +14,14 @@ namespace rangr.ios
 {
     public class PostListViewController : BaseViewModelController<FeedViewModel>
     {
-        public override string TitleLabel 
-        {
+        public override string TitleLabel {
             get { return "Feed"; }
         }
 
         public PostListViewController()
         {
             view_model = new FeedViewModel();
-            view_model.OnNewPostsReceived += (sender, e) =>
-            {
+            view_model.OnNewPostsReceived += (sender, e) => {
                 TableView.ReloadData();
             };
         }
@@ -58,13 +56,13 @@ namespace rangr.ios
             TableView.RegisterClassForCellReuse(typeof(PostCellView), PostCellView.Key);
         }
 
-        public override void ViewDidLayoutSubviews()
+        public override void WillAddConstraints()
         {
             View.ConstrainLayout(() => 
-                TableView.Frame.Top == View.Frame.Top &&
-                TableView.Frame.Left == View.Frame.Left &&
-                TableView.Frame.Right == View.Frame.Right &&
-                TableView.Frame.Height == View.Frame.Height
+                TableView.Frame.Top == View.Bounds.Top &&
+                TableView.Frame.Left == View.Bounds.Left &&
+                TableView.Frame.Right == View.Bounds.Right &&
+                TableView.Frame.Height == View.Bounds.Height
             );
         }
 
@@ -73,12 +71,9 @@ namespace rangr.ios
         {
             base.ViewWillAppear(animated);
 
-            if (AppGlobal.Current.CurrentUserExists)
-            {
                 show_progress();
                 await view_model.RefreshPosts();
                 dismiss_progress();
-            }
         }
 
         public void ItemSelected(Post selected_post)
@@ -118,10 +113,9 @@ namespace rangr.ios
                 cell = new PostCellView();
             }
 
-            cell.BindDataToCell(post);
+            cell.BindData(post);
 
             cell.SetNeedsUpdateConstraints();
-            cell.UpdateConstraintsIfNeeded();
 
             return cell;
         }

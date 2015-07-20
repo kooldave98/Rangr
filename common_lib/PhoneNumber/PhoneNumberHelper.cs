@@ -3,26 +3,26 @@ using PhoneNumbers;
 
 namespace common_lib
 {
-    public class PhoneNumberValidator
+    public class PhoneNumberHelper : SingletonBase<PhoneNumberHelper>
     {
-        public bool is_valid_number(string input)
+        public string get_2L_country_code_for_valid_international_number(string input)
         {
             try
             {
-                var number_proto = phoneUtil.Parse(input, string.Empty);
-
-                return phoneUtil.IsValidNumber(number_proto);
+                var number_proto = phoneUtil.Parse(input, string.Empty);            
+                return phoneUtil.GetRegionCodeForNumber(number_proto);
             }
             catch (NumberParseException e)
             {
                 //Log exception somehow
-                return false;
+                throw;
             }
         }
 
-        public PhoneNumberValidator()
+        private PhoneNumberHelper()
         {
             phoneUtil = PhoneNumberUtil.GetInstance();
+
         }
 
         private readonly PhoneNumberUtil phoneUtil;

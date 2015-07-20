@@ -42,8 +42,8 @@ namespace experiments.ios
                 return;
             }
 
-            titleLabel.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            bodyLabel.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            titleLabel.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            bodyLabel.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
             var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
 

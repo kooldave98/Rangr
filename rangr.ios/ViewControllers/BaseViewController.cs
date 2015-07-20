@@ -9,10 +9,6 @@ using ios_ui_lib;
 
 namespace rangr.ios
 {
-    /// <summary>
-    /// Consider deriving from SimpleViewController
-    /// where trivial things like alerts etc are handled
-    /// </summary>
     public abstract class BaseViewModelController<VM> : SimpleViewController where VM : ViewModelBase
     {
         protected VM view_model;

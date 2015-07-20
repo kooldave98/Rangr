@@ -12,7 +12,7 @@ namespace App.Common
 
         public async Task<bool> CreateUser()
         {
-            if (!validator.is_valid_number(user_mobile_number))
+            if (!PhoneNumberValidator.Current.is_valid_number(user_mobile_number))
                 throw new InvalidOperationException("Mobile number is not valid");
 
             var userID = await create_user_service
@@ -58,13 +58,11 @@ namespace App.Common
 
             create_user_service = new CreateUser();
             verify_user = new VerifyUser();
-            validator = new PhoneNumberValidator();
         }
 
         private CreateUser create_user_service;
         private VerifyUser verify_user;
         private Session sessionInstance;
-        private PhoneNumberValidator validator;
     }
 }
 

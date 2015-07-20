@@ -116,7 +116,7 @@ namespace App.Common
                     //as positioning is fundamental to our business
                     //pre-fetch current position
 
-                    await ContactsProvider.Current.request_permission();
+                    await ContactsProvider.Current.get_contacts();
 
                     //preload the location
                     await GeoLocation.GetInstance().GetCurrentPosition();

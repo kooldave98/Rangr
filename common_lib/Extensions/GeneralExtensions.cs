@@ -2,7 +2,7 @@
 
 namespace common_lib
 {
-    public static class FluentObjectInitialisationExtensions
+    public static class GeneralExtensions
     {        
         public static T Init<T>(this T @this, Action<T> initAction)
         {

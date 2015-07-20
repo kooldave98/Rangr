@@ -13,10 +13,6 @@ namespace App.Common
 			CurrentPost = the_seen_post;
 		}
 
-		public PostDetailsViewModel ()
-		{
-			CurrentPost = new Post ();
-		}
 
 		#region ReUseableHelpers
 

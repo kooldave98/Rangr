@@ -3,25 +3,24 @@ using PhoneNumbers;
 
 namespace common_lib
 {
-    public class PhoneNumberFormatter
+    public class PhoneNumberValidator : SingletonBase<PhoneNumberValidator>
     {
-        public string format_number(string input)
+        public bool is_valid_number(string input)
         {
             try
             {
-                var number_proto = phoneUtil.Parse(input, string.Empty);            
+                var number_proto = phoneUtil.Parse(input, string.Empty);
 
-                return phoneUtil.Format(number_proto, PhoneNumberFormat.INTERNATIONAL);
-
+                return phoneUtil.IsValidNumber(number_proto);
             }
             catch (NumberParseException e)
             {
                 //Log exception somehow
-                return input;
+                return false;
             }
         }
 
-        public PhoneNumberFormatter()
+        private PhoneNumberValidator()
         {
             phoneUtil = PhoneNumberUtil.GetInstance();
         }

@@ -261,7 +261,7 @@ namespace ios_ui_lib
                 return;
             }            
 
-            this.description_label.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.description_label.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
 
             //var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
@@ -355,8 +355,8 @@ namespace ios_ui_lib
                 return;
             }            
 
-            this.code_field.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.number_field.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.code_field.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.number_field.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
             var sibling_sibling_margin = HumanInterface.sibling_sibling_margin;
             var parent_child_margin = HumanInterface.parent_child_margin;

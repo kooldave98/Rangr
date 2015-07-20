@@ -20,7 +20,7 @@ namespace rangr.ios
         private UIView card_view;
         private UIImageView user_image;
         private UITextView post_text;
-        private TopAlignedImageView post_image;//uiimageview.ContentMode = UIViewContentMode.ScaleAspectFit;
+        private XStoreImageView post_image;//uiimageview.ContentMode = UIViewContentMode.ScaleAspectFit;
 
 
         public event Action CreatePostSucceeded = delegate {};
@@ -66,7 +66,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(post_image = new TopAlignedImageView {
+            card_view.AddSubview(post_image = new XStoreImageView {
                 ClipsToBounds = true,
             });
 

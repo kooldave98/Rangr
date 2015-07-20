@@ -31,15 +31,14 @@ using UIKit;
 
 namespace common_lib
 {
-    public static class Layout
+    public static class EasyLayout
     {
         //<See>https://github.com/kentcb/TableViewCellWithAutoLayout_dotNET/blob/master/VariableHeightTableCells/Layout.cs
-        public static readonly float RequiredPriority = 1000;
-
-        public static readonly float HighPriority = 750;
-
-        public static readonly float LowPriority = 250;
+        public const float RequiredPriority = (float)UILayoutPriority.Required;
+        public const float HighPriority = (float)UILayoutPriority.DefaultHigh;
+        public const float LowPriority = (float)UILayoutPriority.DefaultLow;
         //</See>
+
         /// <summary>
         /// <para>Constrains the layout of subviews according to equations and
         /// inequalities specified in <paramref name="constraints"/>.  Issue

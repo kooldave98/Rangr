@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 
-using XamAddressBook = Xamarin.Contacts.AddressBook;
-using XamContact = Xamarin.Contacts.Contact;
+using XContact = Xamarin.Contacts.Contact;
+using XAddressBook = Xamarin.Contacts.AddressBook;
 using System.Threading.Tasks;
 using common_lib;
+using System.Collections.Generic;
 
 #if __ANDROID__
 using Android.App;
@@ -16,60 +17,81 @@ namespace App.Common
 {
     public class ContactsProvider : SingletonBase<ContactsProvider>
     {
-        public void get_contacts()
-        {
-            foreach (XamContact contact in address_book.OrderBy (c => c.LastName)) {
-                //Console.WriteLine ("{0} {1}", contact.FirstName, contact.LastName);
+        private IEnumerable<NamedNumber> cached_data;
+
+        public async Task<IEnumerable<NamedNumber>> get_contacts()
+        {            
+            if (cached_data == null)
+            {
+                var permission_granted = await address_book.RequestPermission();
+
+                if (!permission_granted)
+                    return Enumerable.Empty<NamedNumber>();
+            
+
+                var data = address_book
+                    .ToList();
+
+                cached_data= data
+                .Where(c => (!string.IsNullOrWhiteSpace(c.LastName) || !string.IsNullOrWhiteSpace(c.FirstName)) && c.Phones.Count() > 0)
+                .SelectMany(c => c.Phones.Select(p => new NamedNumber(){ Name = string.Format("{0} {1}", c.FirstName, c.LastName), Number = get_clean_number(p.Number) }));
             }
+
+            return cached_data;        
+        }
+
+        public void invalidate_cache()
+        {
+            cached_data = null;
         }
 
         public async Task<string> get_name_for_number(string mobile_number)
         {
-            if (! await request_permission())
-            {
-                return mobile_number.ToString();
-            }
+            var clean_number = get_clean_number(mobile_number);
 
-            if (mobile_number == user_id)
-            {
+            if (clean_number == user_id)
                 return "Me";
-            }
+            
 
-            foreach (var contact in address_book) 
+            var found = (await get_contacts()).SingleOrDefault(c => c.Number == clean_number);
+
+            if (found != null)
             {
-                foreach (var number in contact.Phones)
-                {
-                    if (number.Number == "+" + mobile_number.ToString())
-                    {
-                        return contact.FirstName + contact.LastName;
-                    }
-                }
+                return found.Name;
             }
 
-            return mobile_number.ToString();
+            return clean_number;
         }
 
-        public async Task<bool> request_permission()
-        {
-            permission_granted = await address_book.RequestPermission(); 
-
-            return permission_granted;
+        private string user_id {
+            get{ return Session.Current.GetCurrentUser().user_id; }
         }
 
-        private ContactsProvider()
+        private string get_clean_number(string mobile_number)
         {
+            var code = PhoneNumberHelper.Current.get_2L_country_code_for_valid_international_number(Session.Current.GetCurrentUser().user_id);
+            return PhoneNumberFormatter.Current.clean_number(mobile_number, code);
+        }
+
+        private ContactsProvider() { 
+            /*This is important for the singleton base to work.*/ 
             #if __ANDROID__
-            address_book = new XamAddressBook (Application.Context); //on Android
+            address_book = new XAddressBook (Application.Context); //on Android
             #else
-            address_book = new XamAddressBook ();
+            address_book = new XAddressBook ();
             #endif
-
-            user_id = Session.Current.GetCurrentUser().user_id;
         }
 
-        private XamAddressBook address_book;
-        private string user_id;
-        private bool permission_granted = false;
+        private XAddressBook address_book;
     }
+
+
+    public class NamedNumber
+    {
+        public string Name { get; set; }
+
+        public string Number { get; set;}
+    }
+
 }
 
