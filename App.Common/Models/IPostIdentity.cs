@@ -3,7 +3,7 @@ using common_lib;
 
 namespace App.Common
 {
-	public class PostIdentity : BaseEntity, IPostIdentity
+	public class PostIdentity : IPostIdentity
     {
         public long epoch_id { get; set; }
 

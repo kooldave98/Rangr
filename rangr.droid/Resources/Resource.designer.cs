@@ -26,8 +26,6 @@ namespace rangr.droid
 		
 		public static void UpdateIdValues()
 		{
-			global::SQLite.Resource.String.ApplicationName = global::rangr.droid.Resource.String.ApplicationName;
-			global::SQLite.Resource.String.Hello = global::rangr.droid.Resource.String.Hello;
 			global::AndroidHUD.Resource.Attribute.ahBarColor = global::rangr.droid.Resource.Attribute.ahBarColor;
 			global::AndroidHUD.Resource.Attribute.ahBarLength = global::rangr.droid.Resource.Attribute.ahBarLength;
 			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::rangr.droid.Resource.Attribute.ahBarWidth;
@@ -65,8 +63,6 @@ namespace rangr.droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::rangr.droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::rangr.droid.Resource.Styleable.ProgressWheel_ahTextSize;
-			global::Splat.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
-			global::ModernHttpClient.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::droid_ui_lib.Resource.String.library_name = global::rangr.droid.Resource.String.library_name;
 			global::droid_common_lib.Resource.Attribute.ahBarColor = global::rangr.droid.Resource.Attribute.ahBarColor;
 			global::droid_common_lib.Resource.Attribute.ahBarLength = global::rangr.droid.Resource.Attribute.ahBarLength;
@@ -906,32 +902,26 @@ namespace rangr.droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f07001c
-			public const int ApplicationName = 2131165212;
-			
-			// aapt resource value: 0x7f07001b
-			public const int Hello = 2131165211;
+			// aapt resource value: 0x7f07001e
+			public const int action_login = 2131165214;
 			
 			// aapt resource value: 0x7f070020
-			public const int action_login = 2131165216;
+			public const int action_new_post = 2131165216;
 			
 			// aapt resource value: 0x7f070022
-			public const int action_new_post = 2131165218;
-			
-			// aapt resource value: 0x7f070024
-			public const int action_search_posts = 2131165220;
-			
-			// aapt resource value: 0x7f070023
-			public const int action_send_post = 2131165219;
+			public const int action_search_posts = 2131165218;
 			
 			// aapt resource value: 0x7f070021
-			public const int action_settings = 2131165217;
+			public const int action_send_post = 2131165217;
 			
-			// aapt resource value: 0x7f07001d
-			public const int app_name = 2131165213;
+			// aapt resource value: 0x7f07001f
+			public const int action_settings = 2131165215;
 			
-			// aapt resource value: 0x7f070027
-			public const int app_not_available = 2131165223;
+			// aapt resource value: 0x7f07001b
+			public const int app_name = 2131165211;
+			
+			// aapt resource value: 0x7f070025
+			public const int app_not_available = 2131165221;
 			
 			// aapt resource value: 0x7f070015
 			public const int auth_client_needs_enabling_title = 2131165205;
@@ -1011,29 +1001,29 @@ namespace rangr.droid
 			// aapt resource value: 0x7f070013
 			public const int common_signin_button_text_long = 2131165203;
 			
-			// aapt resource value: 0x7f070026
-			public const int drawer_close = 2131165222;
+			// aapt resource value: 0x7f070024
+			public const int drawer_close = 2131165220;
 			
-			// aapt resource value: 0x7f070025
-			public const int drawer_open = 2131165221;
+			// aapt resource value: 0x7f070023
+			public const int drawer_open = 2131165219;
 			
-			// aapt resource value: 0x7f07001f
-			public const int hint_login_password = 2131165215;
+			// aapt resource value: 0x7f07001d
+			public const int hint_login_password = 2131165213;
 			
-			// aapt resource value: 0x7f07001e
-			public const int hint_login_usermobile = 2131165214;
+			// aapt resource value: 0x7f07001c
+			public const int hint_login_usermobile = 2131165212;
 			
 			// aapt resource value: 0x7f07001a
 			public const int library_name = 2131165210;
 			
-			// aapt resource value: 0x7f07002a
-			public const int new_post_title = 2131165226;
-			
 			// aapt resource value: 0x7f070028
-			public const int posts_title = 2131165224;
+			public const int new_post_title = 2131165224;
 			
-			// aapt resource value: 0x7f070029
-			public const int search_title = 2131165225;
+			// aapt resource value: 0x7f070026
+			public const int posts_title = 2131165222;
+			
+			// aapt resource value: 0x7f070027
+			public const int search_title = 2131165223;
 			
 			static String()
 			{

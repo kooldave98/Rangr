@@ -3,7 +3,7 @@ using common_lib;
 
 namespace App.Common
 {
-    public class ContactIdentity : BaseEntity, IContactIdentity
+    public class ContactIdentity : IContactIdentity
     {
         public long owning_user_id { get; set; }
 

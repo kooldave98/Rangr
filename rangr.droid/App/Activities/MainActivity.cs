@@ -157,7 +157,6 @@ namespace rangr.droid
         {
             var fragment = new PostDetailMapFragment(new Post()
                 {
-                    ID = 111,
                     epoch_id = 222,
                     text = "fake post",
                     user_id = "+447711072437",

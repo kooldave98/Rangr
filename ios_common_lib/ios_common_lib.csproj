@@ -75,27 +75,21 @@
     <Reference Include="BTProgressHUD">
       <HintPath>..\packages\BTProgressHUD.1.0.0\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
     </Reference>
+    <Reference Include="Refit">
+      <HintPath>..\packages\refit.2.3.0\lib\Xamarin.iOS10\Refit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
-    <Compile Include="TextDisplayViewController.cs" />
-    <Compile Include="TextDisplayViewController.designer.cs">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="RefitStubs.cs" />
   </ItemGroup>
   <Import Project="..\common_lib\common_lib.projitems" Label="Shared" Condition="Exists('..\common_lib\common_lib.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\refit.2.3.0\build\refit.targets" Condition="Exists('..\packages\refit.2.3.0\build\refit.targets')" />
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="TextDisplayViewController.xib">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
 </Project>

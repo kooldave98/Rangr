@@ -4,16 +4,13 @@ using System;
 using System.Linq;
 using ModernHttpClient;
 using System.Net.Http;
-using Fusillade;
 using System.Net.Http.Headers;
 using System.Net;
 
 namespace common_lib
 {
-    //TO-REFACTOR
-    //This class violates SOLID in so many ways.
-    //Most importantly it is not re-useable in other apps due 
-    //to its high coupling with with external dependencises
+    //Consider using Refit to implement Http Service access
+    //http://log.paulbetts.org/introducing-refit-2-0/
     public class HttpRequest : SingletonBase<HttpRequest>
     {
         public async Task<string> Get(string baseUrl)
@@ -157,7 +154,7 @@ namespace common_lib
 
         private HttpRequest()
         {
-            httpClient = new HttpClient(NetCache.UserInitiated);
+            httpClient = new HttpClient();
             //httpClient.Timeout = TimeSpan.FromSeconds(100);
         }
 

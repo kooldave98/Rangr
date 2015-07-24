@@ -16,18 +16,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Gravatar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ISOCountry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GetCountryCodes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Styling\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\FileCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\PersistentStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solid\SingletonBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solid\Guard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleViewController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Styling\SimpleTheme.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Styling\RangrTheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layout\EasyLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layout\HumanInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\UIViewControllerExtensions.cs" />
@@ -41,6 +37,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\iOS_GeneralExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\UIViewControllerFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layout\EasierLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Appearance\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Appearance\RangrTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Appearance\SimpleTheme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)korede_readme.txt" />

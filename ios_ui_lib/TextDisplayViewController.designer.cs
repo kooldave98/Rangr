@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace common_lib
+namespace ios_ui_lib
 {
 	[Register ("TextDisplayViewController")]
 	partial class TextDisplayViewController

@@ -17,7 +17,7 @@ namespace rangr.ios
         private UILabel time_ago;
         private UIImageView user_image;
         private UILabel user_name;
-        private XStoreImageView post_image;
+        private UIImageView post_image;
         private UILabel post_text;
         private UIView card_view;
 
@@ -33,9 +33,11 @@ namespace rangr.ios
                 card_view.Frame.Left == ContentView.Frame.Left + sibling_sibling_margin &&
                 card_view.Frame.Right == ContentView.Frame.Right - sibling_sibling_margin &&
                 card_view.Frame.Bottom == ContentView.Frame.Bottom - sibling_sibling_margin
-            );
 
-            card_view.ConstrainLayout(() => 
+                &&
+//            );
+//
+//            card_view.ConstrainLayout(() => 
                 user_image.Frame.Width == user_image_width &&
                 user_image.Frame.Height == user_image_height &&
                 user_image.Frame.Top == card_view.Frame.Top + sibling_sibling_margin &&
@@ -62,16 +64,19 @@ namespace rangr.ios
 
             );
         }
-
+        //Investigate writing a mapper from model to a view
+        //and see how feasible it is to write a mini framework
+        //to hand roll 2 way binding oe auto mapping.
         public async Task BindData(Post post)
         {
             user_name.Text = post.user_id;
-            user_name.Text = await post.get_name_for_number();
+            user_name.Text = "Kookoo";//await post.get_name_for_number();
 
             post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            time_ago.Text = post.get_time_ago();
-            post_image.LoadUrl(string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id));
+            time_ago.Text = "3 days ago..";//post.get_time_ago();
+            post_image.Image = UIImage.FromBundle(PlaceholderImagePath);
+            //post_image.LoadUrl(string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id));
             //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
         }
 
@@ -124,7 +129,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(post_image = new XStoreImageView {
+            card_view.AddSubview(post_image = new UIImageView {
                 ClipsToBounds = true,
             });
 

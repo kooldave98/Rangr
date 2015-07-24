@@ -15,9 +15,7 @@ using Android.Content;
 
 namespace App.Common
 {
-	/// <summary>
-	/// https://github.com/xamarin/Xamarin.Mobile/blob/master/MonoDroid/Samples/GeolocationSample/MainActivity.cs
-	/// </summary>
+	//Need to make this class, as well as the Contacts provider as general as possible
 	public class GeoLocation
 	{
 		//private string sample_geoposition =  "-2.2275587999999997,53.478498699999996";

@@ -4,10 +4,12 @@ using System;
 using Foundation;
 using UIKit;
 
-namespace common_lib
+namespace ios_ui_lib
 {
-    //This controller's purpose at the time of creation 
-    //was purely just to allow me test the Enter Mobile Number Sequence
+    //This is a simple xib-based UIViewController for purely displaying text.
+    //Might adapt it into a sort of console for dumping runtime log data.
+    //See that initial SignalR sample code that exclusively used something like this
+    //for showing that signalr can work on mono/xamarin
     public partial class TextDisplayViewController : UIViewController
     {
         public TextDisplayViewController()

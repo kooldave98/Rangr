@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Splat;
-using ModernHttpClient;
 using System.Net.Http;
 using common_lib;
 
@@ -93,8 +91,6 @@ namespace App.Common
 
         static AppGlobal()
         {
-            //https://github.com/paulcbetts/Fusillade
-            Locator.CurrentMutable.RegisterConstant(new NativeMessageHandler(), typeof(HttpMessageHandler));
             current = new AppGlobal();
         }
 

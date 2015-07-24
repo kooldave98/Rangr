@@ -1,7 +1,6 @@
 ﻿using System;
 using UIKit;
 using App.Common;
-using BigTed;
 using Foundation;
 using CoreGraphics;
 using common_lib;
