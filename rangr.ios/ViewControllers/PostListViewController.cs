@@ -107,19 +107,12 @@ namespace rangr.ios
             var cell = (PostCellView)tableView.DequeueReusableCell(PostCellView.Key);
 
             var post = objects[indexPath.Row];
-            bool was_null = false;
-            if (cell == null)
-            {
-                cell = new PostCellView();
-                was_null = true;
-            }
+
 
             cell.BindData(post);
 
-            if (was_null)
-            {
-                cell.SetNeedsUpdateConstraints();
-            }
+
+
             return cell;
         }
 

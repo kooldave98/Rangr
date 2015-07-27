@@ -41,6 +41,7 @@
     <Folder Include="Resources\" />
     <Folder Include="MobileEntrySequence\" />
     <Folder Include="Login\" />
+    <Folder Include="XStore\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,11 +57,13 @@
     <Compile Include="Login\SimpleStartScreenController.cs" />
     <Compile Include="CustomViews\SimpleUIView.cs" />
     <Compile Include="Login\UILoginViewController.cs" />
-    <Compile Include="CustomViews\XStoreImageView.cs" />
     <Compile Include="TextDisplayViewController.cs" />
     <Compile Include="TextDisplayViewController.designer.cs">
       <DependentUpon>TextDisplayViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomViews\CachedUrlImageView.cs" />
+    <Compile Include="XStore\TextEntryView.cs" />
+    <Compile Include="XStore\StringTableViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

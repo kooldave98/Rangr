@@ -6,6 +6,7 @@ using App.Common;
 using System.Threading.Tasks;
 using ios_ui_lib;
 using common_lib;
+using SDWebImage;
 
 namespace rangr.ios
 {
@@ -64,20 +65,29 @@ namespace rangr.ios
 
             );
         }
+
+        private static UIImage placeholder = UIImage.FromBundle(PlaceholderImagePath);
+
         //Investigate writing a mapper from model to a view
         //and see how feasible it is to write a mini framework
         //to hand roll 2 way binding oe auto mapping.
-        public async Task BindData(Post post)
+        public void BindData(Post post)
         {
             user_name.Text = post.user_id;
-            user_name.Text = "Kookoo";//await post.get_name_for_number();
-
             post_text.Text = post.text;
-            user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            time_ago.Text = "3 days ago..";//post.get_time_ago();
-            post_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            //post_image.LoadUrl(string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id));
+            time_ago.Text = post.get_time_ago();
+            user_image.Image = placeholder;
+
+            post_image.SetImage (
+                url: new NSUrl (string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id)), 
+                placeholder: placeholder
+            );
+            //user_name.Text = await post.get_name_for_number();
+
+
             //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
+
+            this.SetNeedsUpdateConstraints();
         }
 
         public PostCellView()

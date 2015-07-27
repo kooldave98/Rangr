@@ -40,6 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MediaProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Images\IGetImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
@@ -47,5 +48,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Services\Users\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Contacts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Posts\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Images\" />
   </ItemGroup>
 </Project>

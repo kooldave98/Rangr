@@ -21,7 +21,6 @@ namespace rangr.ios
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        private const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
         public static AppDelegate Shared;
         public override UIWindow Window { get; set; }
 
@@ -30,7 +29,7 @@ namespace rangr.ios
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Shared = this;
-            MapServices.ProvideAPIKey(MapsApiKey);
+            MapServices.ProvideAPIKey(Resources.MapsApiKey);
             RangrTheme.Apply();
 
             Window = new UIWindow(UIScreen.MainScreen.Bounds);

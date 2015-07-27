@@ -10,7 +10,7 @@ using common_lib;
 
 namespace ios_ui_lib
 {
-    public class XStoreImageView : UIView
+    public class CachedUrlImageView : UIView
     {
         CGSize origionalSize;
         public UIImage Image
@@ -28,7 +28,7 @@ namespace ios_ui_lib
         UIImage image;
         UIActivityIndicatorView progress;
 
-        public XStoreImageView()
+        public CachedUrlImageView()
         {
             this.ClipsToBounds = true;
             ImageView = new UIImageView();

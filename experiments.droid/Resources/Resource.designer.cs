@@ -26,8 +26,6 @@ namespace experiments.droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Splat.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
-			global::ModernHttpClient.Resource.String.library_name = global::experiments.droid.Resource.String.library_name;
 			global::AndroidHUD.Resource.Attribute.ahBarColor = global::experiments.droid.Resource.Attribute.ahBarColor;
 			global::AndroidHUD.Resource.Attribute.ahBarLength = global::experiments.droid.Resource.Attribute.ahBarLength;
 			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::experiments.droid.Resource.Attribute.ahBarWidth;

@@ -17,5 +17,7 @@ namespace App.Common
 
 
         public const string AnalyticsApiKey = "5f5d7dc30fc0c3f61718fa1ffacecf065b9deb26";
+
+        public const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
 	}
 }

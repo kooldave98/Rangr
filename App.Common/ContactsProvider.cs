@@ -70,7 +70,7 @@ namespace App.Common
 
         private string get_clean_number(string mobile_number)
         {
-            var code = PhoneNumberHelper.Current.get_2L_country_code_for_valid_international_number(Session.Current.GetCurrentUser().user_id);
+            var code = PhoneNumberHelper.Current.get_2L_country_code_for_valid_international_number(user_id);
             return PhoneNumberFormatter.Current.clean_number(mobile_number, code);
         }
 
