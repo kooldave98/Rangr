@@ -22,7 +22,7 @@ namespace ios_ui_lib
             View.AddSubview(scroll_view = new UIScrollView(){ AlwaysBounceVertical = true });
 
             scroll_view.AddSubview(login_view = new LoginView()
-                                    .Init(l => l.OnLoginRequested += (o, e) => OnRequestLogin(e.login_id, e.login_password))
+                                    .Chain(l => l.OnLoginRequested += (o, e) => OnRequestLogin(e.login_id, e.login_password))
             );
         }
 

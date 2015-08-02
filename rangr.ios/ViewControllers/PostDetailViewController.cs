@@ -10,6 +10,7 @@ using Google.Maps;
 using ios_ui_lib;
 using common_lib;
 using System.Threading.Tasks;
+using SDWebImage;
 
 namespace rangr.ios
 {
@@ -27,6 +28,8 @@ namespace rangr.ios
         private UIImageView user_image;
         private UILabel user_name;
         private UILabel post_text;
+        private UIImageView post_image;
+        private SwipePagerView swipe_pager;
 
 
         public PostDetailViewController(Post the_item)
@@ -86,12 +89,19 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(map_view = LoadMap());
-            map_view.TranslatesAutoresizingMaskIntoConstraints = false;
+            map_view = LoadMap().Chain(m => m.TranslatesAutoresizingMaskIntoConstraints = false);
+
+            post_image = new UIImageView() {
+                ClipsToBounds = true,
+            };
+
+            card_view.AddSubview(swipe_pager = new SwipePagerView(new UIView[]{ post_image, map_view }) {
+                TranslatesAutoresizingMaskIntoConstraints = false
+            });
 
         }
 
-        public override void ViewDidLayoutSubviews()
+        public override void WillAddConstraints()
         {
             this.user_name.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
             this.time_ago.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
@@ -128,10 +138,10 @@ namespace rangr.ios
                 post_text.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
                 post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
 
-                map_view.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
-                map_view.Frame.Left == card_view.Frame.Left &&
-                map_view.Frame.Right == card_view.Frame.Right &&
-                map_view.Frame.Bottom == card_view.Frame.Bottom
+                swipe_pager.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
+                swipe_pager.Frame.Left == card_view.Frame.Left &&
+                swipe_pager.Frame.Right == card_view.Frame.Right &&
+                swipe_pager.Frame.Bottom == card_view.Frame.Bottom
 
             );
                 
@@ -143,6 +153,10 @@ namespace rangr.ios
             post_text.Text = view_model.CurrentPost.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
             time_ago.Text = view_model.CurrentPost.get_time_ago();
+
+            post_image.SetImage (
+                url: new NSUrl (string.Format("{0}/images/{1}",Resources.baseUrl, view_model.CurrentPost.image_id))
+            );
         }
 
         private MapView LoadMap()

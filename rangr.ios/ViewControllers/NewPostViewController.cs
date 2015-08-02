@@ -78,7 +78,7 @@ namespace rangr.ios
 
         }
 
-        public override void ViewDidLayoutSubviews()
+        public override void WillAddConstraints()
         {
             var user_image_width = HumanInterface.medium_square_image_length;
             var user_image_height = HumanInterface.medium_square_image_length;

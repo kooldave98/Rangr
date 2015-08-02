@@ -39,16 +39,16 @@ namespace rangr.ios
             else
             Window.RootViewController =
                 new SimpleStartScreenController()
-                        .Init(sc =>sc.OnStartApp += async () => {
+                        .Chain(sc =>sc.OnStartApp += async () => {
                             var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
 
                             if (!result.Canceled)
                             {   
                                 new VerifyNumberViewController(result.EnteredMobileNumber)
-                                    .Init(c => Window.PresentViewController(c, true))
-                                    .Init(c => c.set_user_id(result.EnteredMobileNumber))
-                                    .Init(c => c.VerificationSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true))
-                                    .Init(c => c.VerificationFailed += async () => c.DismissViewControllerAsync(true));
+                                    .Chain(c => Window.PresentViewController(c, true))
+                                    .Chain(c => c.set_user_id(result.EnteredMobileNumber))
+                                    .Chain(c => c.VerificationSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true))
+                                    .Chain(c => c.VerificationFailed += async () => c.DismissViewControllerAsync(true));
                             }
                     });
 
@@ -63,12 +63,12 @@ namespace rangr.ios
             return 
                 new UIViewController[] { 
                     get_feed()
-                        .Init(n => n.TabBarItem = new UITabBarItem("Feed", UIImage.FromBundle("running.png"),1))
-                        .Init(vc=>vc.TabBarItem.BadgeValue = "3"), 
+                        .Chain(n => n.TabBarItem = new UITabBarItem("Feed", UIImage.FromBundle("running.png"),1))
+                        .Chain(vc=>vc.TabBarItem.BadgeValue = "3"), 
                     new MapViewController()
-                        .Init(m=>m.TabBarItem = new UITabBarItem("Map", UIImage.FromBundle("world_times.png"),2)),
+                        .Chain(m=>m.TabBarItem = new UITabBarItem("Map", UIImage.FromBundle("world_times.png"),2)),
                     UIViewControllerFactory.Generic()
-                        .Init(v=>v.TabBarItem = new UITabBarItem(UITabBarSystemItem.Featured, 3))
+                        .Chain(v=>v.TabBarItem = new UITabBarItem(UITabBarSystemItem.Featured, 3))
                 }.ToTabBarController();
         }
 
@@ -78,9 +78,9 @@ namespace rangr.ios
                 main_navigation ??
                 (main_navigation =
                     new PostListViewController()
-                        .Init(c => c.PostItemSelected += show_detail)
-                        .Init(c => c.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false))
-                        .Init(c => c.NavigationItem.RightBarButtonItem.Clicked += show_new_post)
+                        .Chain(c => c.PostItemSelected += show_detail)
+                        .Chain(c => c.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false))
+                        .Chain(c => c.NavigationItem.RightBarButtonItem.Clicked += show_new_post)
                     .ToNavigationController());
         }
 

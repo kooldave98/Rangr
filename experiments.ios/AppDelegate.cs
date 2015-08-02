@@ -21,15 +21,15 @@ namespace experiments.ios
             Window.RootViewController =
                 
                 new SimpleStartScreenController()
-                    .Init(sc =>sc.OnStartApp += async () => {
+                    .Chain(sc =>sc.OnStartApp += async () => {
                         var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
 
                         if (!result.Canceled)
                         {   
                             new UILoginViewController()
-                                .Init(c => Window.SwitchRootViewController(c, true))
-                                .Init(c => c.set_user_id(result.EnteredMobileNumber))
-                                .Init(c => c.LoginRequested += (o, e) => Window.SwitchRootViewController(new_tab_bar(), true));
+                                .Chain(c => Window.SwitchRootViewController(c, true))
+                                .Chain(c => c.set_user_id(result.EnteredMobileNumber))
+                                .Chain(c => c.LoginRequested += (o, e) => Window.SwitchRootViewController(new_tab_bar(), true));
                         }
                     });
 
@@ -43,11 +43,11 @@ namespace experiments.ios
             return
                 new UIViewController[] {
 
-                    new ConstraintsVC().Init(c=>c.TabBarItem = new UITabBarItem("First", UIImage.FromBundle("first.png"), 1)),
+                    new ConstraintsVC().Chain(c=>c.TabBarItem = new UITabBarItem("First", UIImage.FromBundle("first.png"), 1)),
 
-                    new ItemsViewController().ToNavigationController().Init(c=>c.TabBarItem = new UITabBarItem("Second", UIImage.FromBundle("second.png"), 2)),
+                    new ItemsViewController().ToNavigationController().Chain(c=>c.TabBarItem = new UITabBarItem("Second", UIImage.FromBundle("second.png"), 2)),
 
-                    new_map_view_controller().Init(c=>c.TabBarItem = new UITabBarItem("Third", UIImage.FromBundle("first.png"), 3))
+                    new_map_view_controller().Chain(c=>c.TabBarItem = new UITabBarItem("Third", UIImage.FromBundle("first.png"), 3))
 
                 }.ToTabBarController();
         }

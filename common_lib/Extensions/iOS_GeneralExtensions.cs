@@ -7,9 +7,7 @@ namespace common_lib
 {
     public static class iOS_GeneralExtensions
     {
-        public static NSObject nsobject = new NSObject();
-
-        public static void RunOnMainThread (Action action)
+        public static void SafeInvokeOnMainThread (this NSObject nsobject, Action action)
         {
             if (NSThread.Current.IsMainThread) {
                 action ();

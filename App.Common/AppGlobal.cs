@@ -101,6 +101,10 @@ namespace App.Common
             // any work here is likely to be blocking (static constructors run on whatever thread that first 
             // access its instance members, which in our case is an activity doing an initialization check),
             // so we want to do it on a background thread
+//            Task.Run(()=>{
+//                //Ths may be better than below
+//                //investigate
+//            });
             new Task(async () =>
                 { 
 

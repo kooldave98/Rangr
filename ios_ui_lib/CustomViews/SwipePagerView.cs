@@ -16,14 +16,14 @@ namespace ios_ui_lib
             Add(
                     scroll_view = new UIScrollView() {
                         TranslatesAutoresizingMaskIntoConstraints = false,
-                        PagingEnabled = false,//hmmn,should this be exposed as properties of the view ??
+                        PagingEnabled = true,//hmmn,should this be exposed as properties of the view ??
                         ScrollEnabled = true,
                         ShowsHorizontalScrollIndicator = false,
                         ShowsVerticalScrollIndicator = false,
                         AlwaysBounceHorizontal = true
                     }
-                    .Init(sv => sv.Scrolled += (s, e) => page_control.CurrentPage = (int)System.Math.Floor(sv.ContentOffset.X / sv.Frame.Size.Width))
-                    .Init(sv=>sv.AddSubviews(items))                    
+                    .Chain(sv => sv.Scrolled += (s, e) => page_control.CurrentPage = (int)System.Math.Floor(sv.ContentOffset.X / sv.Frame.Size.Width))
+                    .Chain(sv=>sv.AddSubviews(items))
             );
 
             Add(page_control = new UIPageControl(){

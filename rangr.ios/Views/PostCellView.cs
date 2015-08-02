@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ios_ui_lib;
 using common_lib;
 using SDWebImage;
+using System.Linq;
 
 namespace rangr.ios
 {
@@ -53,15 +54,16 @@ namespace rangr.ios
                 time_ago.Frame.Top == user_name.Frame.Bottom + sibling_sibling_margin &&
                 time_ago.Frame.Bottom <= user_image.Frame.Bottom &&
 
-                post_image.Frame.Left == card_view.Frame.Left &&
-                post_image.Frame.Right == card_view.Frame.Right &&
-                post_image.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
-                post_image.Frame.Height == post_image.Frame.Width &&
-
                 post_text.Frame.Left == card_view.Frame.Left + sibling_sibling_margin &&
                 post_text.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
-                post_text.Frame.Top == post_image.Frame.Bottom + parent_child_margin &&
-                post_text.Frame.Bottom == card_view.Frame.Bottom - sibling_sibling_margin
+                post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
+                post_text.Frame.Bottom == post_image.Frame.Top - sibling_sibling_margin &&
+
+                post_image.Frame.Left == card_view.Frame.Left &&
+                post_image.Frame.Right == card_view.Frame.Right &&
+                //post_image.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
+                post_image.Frame.Height == post_image.Frame.Width &&
+                post_image.Frame.Bottom == card_view.Frame.Bottom
 
             );
         }
@@ -82,13 +84,18 @@ namespace rangr.ios
                 url: new NSUrl (string.Format("{0}/images/{1}",Resources.baseUrl, post.image_id)), 
                 placeholder: placeholder
             );
-            //user_name.Text = await post.get_name_for_number();
-
 
             //post_image.LoadUrl ("https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.2885-15/10665470_857323967625561_1501882457_n.jpg");
 
             this.SetNeedsUpdateConstraints();
         }
+
+        public void bind_name(string name)
+        {
+            user_name.Text = name;
+        }
+
+
 
         public PostCellView()
         {
