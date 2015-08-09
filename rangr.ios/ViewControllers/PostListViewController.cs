@@ -28,6 +28,14 @@ namespace rangr.ios
             };
         }
 
+//        func addRow()
+//        {
+//            model.addSingleItem()
+//
+//            let lastIndexPath = NSIndexPath(forRow: model.dataArray.count - 1, inSection: 0)
+//                tableView.insertRowsAtIndexPaths([lastIndexPath], withRowAnimation: .Automatic)
+//        }
+
 
         private UIRefreshControl RefreshControl;
         public UITableView TableView;
