@@ -3,7 +3,7 @@
 
 	<string name="app_name">Rangr</string>
 
-	<string name="hint_login_usermobile">display name</string>
+	<string name="hint_login_username">display name</string>
 	<string name="hint_login_password">beta test key</string>
 	<string name="action_login">Login</string>
 

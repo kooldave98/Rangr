@@ -26,10 +26,6 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <MtouchI18n>
-    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -56,8 +52,6 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <IpaPackageName>
-    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -107,14 +101,13 @@
     <Reference Include="BTProgressHUD">
       <HintPath>..\Components\btprogresshud-1.15\lib\ios-unified\BTProgressHUD.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="XibUsages\PostCellView.xib">
+    <InterfaceDefinition Include="Views\PostCellView.xib">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </InterfaceDefinition>
   </ItemGroup>
@@ -131,25 +124,27 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs">
-      <DependentUpon>AppDelegate.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="VariableHeightCells\ItemsViewController.cs" />
-    <Compile Include="VariableHeightCells\ItemCell.cs">
-      <DependentUpon>ItemsViewController.cs</DependentUpon>
+    <Compile Include="Theme.cs" />
+    <Compile Include="ViewControllers\LoginViewController.cs" />
+    <Compile Include="ViewControllers\LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="VariableHeightCells\Model.cs">
-      <DependentUpon>ItemsViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GoogleMaps\MapViewController.cs" />
-    <Compile Include="XibUsages\PostCellView.cs" />
-    <Compile Include="XibUsages\PostCellView.designer.cs">
+    <Compile Include="ViewControllers\BaseViewController.cs" />
+    <Compile Include="ViewControllers\MapViewController.cs" />
+    <Compile Include="ViewControllers\ConstraintsVC.cs" />
+    <Compile Include="Views\PostCellView.cs" />
+    <Compile Include="Views\PostCellView.designer.cs">
       <DependentUpon>PostCellView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Constraints\ConstraintsVC.cs" />
-    <Compile Include="MobileEntrySequence\SequenceViewModel.cs" />
-    <Compile Include="Constraints\ConstrainedLoginViewController.cs" />
+    <Compile Include="ViewControllers\ItemsViewController.cs" />
+    <Compile Include="ViewControllers\ItemCell.cs">
+      <DependentUpon>ItemsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Model.cs">
+      <DependentUpon>ItemsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -163,19 +158,17 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="VariableHeightCells\" />
-    <Folder Include="GoogleMaps\" />
-    <Folder Include="XibUsages\" />
-    <Folder Include="Constraints\" />
+    <Folder Include="ViewControllers\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ios_ui_lib\ios_ui_lib.csproj">
       <Project>{8D459AA9-125E-4108-8E7D-24C6E47E9B6A}</Project>
       <Name>ios_ui_lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ios_common_lib\ios_common_lib.csproj">
-      <Project>{AE879C71-58B2-424A-897C-19913B22D032}</Project>
-      <Name>ios_common_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

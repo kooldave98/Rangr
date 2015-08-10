@@ -42,13 +42,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Views\AClickableSpan.cs" />
-    <Compile Include="Activities\FragmentBase.cs" />
-    <Compile Include="Activities\FragmentActivityBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -59,12 +56,11 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Views\" />
-    <Folder Include="Activities\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\droid_common_lib\droid_common_lib.csproj">
-      <Project>{35255BD3-7E03-4B61-AECB-953D98695DEB}</Project>
-      <Name>droid_common_lib</Name>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

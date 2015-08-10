@@ -2,9 +2,17 @@ using System;
 
 namespace App.Common
 {
-	public class User : UserIdentity
+	public class User : UserIdentity, IUser
 	{
-        //Nothing for now
+		public string user_display_name { get; set; }
+
+		public string user_status_message { get; set; }
+
+		public string telephone_number { get; set; }
+
+		public string twitter_name { get; set; }
+
+		public string image_url { get; set; }
 	}
 }
 

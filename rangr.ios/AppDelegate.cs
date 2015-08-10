@@ -14,83 +14,78 @@ using System.Threading.Tasks;
 using ios_ui_lib;
 using CoreGraphics;
 using Media.Plugin;
-using common_lib;
 
 namespace rangr.ios
 {
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
+        const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
         public static AppDelegate Shared;
-        public override UIWindow Window { get; set; }
 
-        private UINavigationController main_navigation { get; set;}
+        private UIWindow window;
+        private UITabBarController tab_bar = new UITabBarController();
+        private UINavigationController navigation = new UINavigationController();
+        private MapViewController map_view = new MapViewController();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Shared = this;
-            MapServices.ProvideAPIKey(Resources.MapsApiKey);
-            RangrTheme.Apply();
+            MapServices.ProvideAPIKey(MapsApiKey);
 
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            if (AppGlobal.Current.CurrentUserExists)
-                Window.RootViewController = get_main_tab_bar();
-            else
-            Window.RootViewController =
-                new SimpleStartScreenController()
-                        .Chain(sc =>sc.OnStartApp += async () => {
-                            var result = await new MobileEntrySequence(new SequenceViewModel()).StartAsync(Window);
+            Theme.Apply();
 
-                            if (!result.Canceled)
-                            {   
-                                new VerifyNumberViewController(result.EnteredMobileNumber)
-                                    .Chain(c => Window.PresentViewController(c, true))
-                                    .Chain(c => c.set_user_id(result.EnteredMobileNumber))
-                                    .Chain(c => c.VerificationSucceeded += () => Window.SwitchRootViewController(get_main_tab_bar(), true))
-                                    .Chain(c => c.VerificationFailed += async () => c.DismissViewControllerAsync(true));
-                            }
-                    });
+            //setting these to translucent makes the content to be pushed and not overlaid
+            navigation.NavigationBar.Translucent = false;
+            tab_bar.TabBar.Translucent = false;
+
+            navigation.TabBarItem = new UITabBarItem("Feed", UIImage.FromBundle("running.png"),1);
+            map_view.TabBarItem = new UITabBarItem("Map", UIImage.FromBundle("world_times.png"),2);
+
+            tab_bar.AddChildViewController(navigation);
+            tab_bar.AddChildViewController(map_view);
+
+            show_feed();
+
+            window.RootViewController = tab_bar;
+            window.MakeKeyAndVisible();
+
+            if (!AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
+                var login = new LoginViewController();
+                login.LoginSucceeded += () => {
+
+                    login.DismissViewController(true, null);
+                };
+
+                window.RootViewController.PresentViewController(login, true, null);
+            }
 
 
-
-            Window.MakeKeyAndVisible();
             return true;
         }
 
-        public UITabBarController get_main_tab_bar()
+        public void show_feed()
         {
-            return 
-                new UIViewController[] { 
-                    get_feed()
-                        .Chain(n => n.TabBarItem = new UITabBarItem("Feed", UIImage.FromBundle("running.png"),1))
-                        .Chain(vc=>vc.TabBarItem.BadgeValue = "3"), 
-                    new MapViewController()
-                        .Chain(m=>m.TabBarItem = new UITabBarItem("Map", UIImage.FromBundle("world_times.png"),2)),
-                    UIViewControllerFactory.Generic()
-                        .Chain(v=>v.TabBarItem = new UITabBarItem(UITabBarSystemItem.Featured, 3))
-                }.ToTabBarController();
-        }
+            var vc = new PostListViewController();
+            vc.PostItemSelected += show_detail;
 
-        public UINavigationController get_feed()
-        {
-            return 
-                main_navigation ??
-                (main_navigation =
-                    new PostListViewController()
-                        .Chain(c => c.PostItemSelected += show_detail)
-                        .Chain(c => c.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false))
-                        .Chain(c => c.NavigationItem.RightBarButtonItem.Clicked += show_new_post)
-                    .ToNavigationController());
+            navigation.PushViewController(vc, true);
+            vc.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add), false);
+            vc.NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
+                await show_new_post();
+            };
         }
 
         public void show_detail(Post post_item)
         {
             var dc = new PostDetailViewController(post_item);
-            main_navigation.PushViewController(dc, true);
+            navigation.PushViewController(dc, true);
         }
 
-        public async void show_new_post(object sender, EventArgs e)
+        public async Task show_new_post()
         {
             await select_picture();
         }
@@ -107,7 +102,7 @@ namespace rangr.ios
             if (media_file != null)
             {
                 var dc = new NewPostViewController();
-                var dc_wrapped = dc.ToNavigationController();
+                var dc_wrapped = with_navigation_bar(dc);
 
                 dc.CreatePostSucceeded += () => {
                     dc_wrapped.DismissViewController(true, null);
@@ -123,8 +118,16 @@ namespace rangr.ios
 
                 dc.selected_image = CropCenterSquare(UIImage.FromFile(media_file.Path));
 
-                main_navigation.PresentViewController(dc_wrapped, true, ()=>{ dispose_media_file(media_file); });
+                navigation.PresentViewController(dc_wrapped, true, ()=>{ dispose_media_file(media_file); });
             }
+        }
+
+        private UIViewController with_navigation_bar(UIViewController controller)
+        {
+            var navigation_controller = new UINavigationController(controller);
+            navigation_controller.NavigationBar.Translucent = false;
+
+            return navigation_controller;
         }
 
         private void dispose_media_file(MediaFile Media)
@@ -186,27 +189,6 @@ namespace rangr.ios
             var modifiedImage = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
             return modifiedImage;
-        }
-    }
-
-    public class SequenceViewModel : MobileEntrySequenceViewModel
-    {
-        public override string format_input(string input)
-        {            
-            return PhoneNumberFormatter.Current.format_number(input);
-        }
-
-        public override bool is_valid_international_number(string input)
-        {
-            return PhoneNumberValidator.Current.is_valid_number(input);
-        }
-
-        public override ISOCountry[] iso_countries { get; protected set;}
-
-
-        public SequenceViewModel()
-        {
-            iso_countries = new GetCountryCodes().execute().ToArray();
         }
     }
 }

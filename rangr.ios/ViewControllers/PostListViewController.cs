@@ -8,33 +8,25 @@ using App.Common;
 using System.Collections.Generic;
 using CoreAnimation;
 using CoreGraphics;
-using common_lib;
-using System.Linq;
-using System.Threading.Tasks;
+using ios_ui_lib;
 
 namespace rangr.ios
 {
     public class PostListViewController : BaseViewModelController<FeedViewModel>
     {
-        public override string TitleLabel {
+        public override string TitleLabel 
+        {
             get { return "Feed"; }
         }
 
         public PostListViewController()
         {
             view_model = new FeedViewModel();
-            view_model.OnNewPostsReceived += (sender, e) => {
+            view_model.OnNewPostsReceived += (sender, e) =>
+            {
                 TableView.ReloadData();
             };
         }
-
-//        func addRow()
-//        {
-//            model.addSingleItem()
-//
-//            let lastIndexPath = NSIndexPath(forRow: model.dataArray.count - 1, inSection: 0)
-//                tableView.insertRowsAtIndexPaths([lastIndexPath], withRowAnimation: .Automatic)
-//        }
 
 
         private UIRefreshControl RefreshControl;
@@ -66,13 +58,13 @@ namespace rangr.ios
             TableView.RegisterClassForCellReuse(typeof(PostCellView), PostCellView.Key);
         }
 
-        public override void WillAddConstraints()
+        public override void ViewDidLayoutSubviews()
         {
             View.ConstrainLayout(() => 
-                TableView.Frame.Top == View.Bounds.Top &&
-                TableView.Frame.Left == View.Bounds.Left &&
-                TableView.Frame.Right == View.Bounds.Right &&
-                TableView.Frame.Height == View.Bounds.Height
+                TableView.Frame.Top == View.Frame.Top &&
+                TableView.Frame.Left == View.Frame.Left &&
+                TableView.Frame.Right == View.Frame.Right &&
+                TableView.Frame.Height == View.Frame.Height
             );
         }
 
@@ -81,9 +73,12 @@ namespace rangr.ios
         {
             base.ViewWillAppear(animated);
 
+            if (AppGlobal.Current.CurrentUserAndConnectionExists)
+            {
                 show_progress();
                 await view_model.RefreshPosts();
                 dismiss_progress();
+            }
         }
 
         public void ItemSelected(Post selected_post)
@@ -116,32 +111,19 @@ namespace rangr.ios
         {
             var cell = (PostCellView)tableView.DequeueReusableCell(PostCellView.Key);
 
-            cell.Tag = indexPath.Row;
-
             var post = objects[indexPath.Row];
 
-            cell.BindData(post);
+            if (cell == null)
+            {
+                cell = new PostCellView();
+            }
 
-            get_name(post, indexPath.Row, tableView);
+            cell.BindDataToCell(post);
+
+            cell.SetNeedsUpdateConstraints();
+            cell.UpdateConstraintsIfNeeded();
 
             return cell;
-        }
-
-        //Need to fucking investigate and understand why the strategy used in this sample:
-        //https://github.com/xamarin/monotouch-samples/blob/master/LazyTableImagesAsync/RootViewController.cs
-        //does not work here... Ask the Xamarin forums... maybe ? for now this will do, 
-        //dont know what cost will be incurred doing it this way
-        private void get_name(Post post, int tag, UITableView table)
-        {
-            Task.Run(async ()=>{
-                var name = await post.get_name_for_number();//.ContinueWith(t=>{});
-                this.SafeInvokeOnMainThread (() => {
-                    var cell = table.VisibleCells.Where (c => c.Tag == tag).FirstOrDefault () as PostCellView;
-
-                    if (cell != null)
-                        cell.bind_name(name);
-                });
-            });
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)

@@ -35,46 +35,24 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="MobileEntrySequence\" />
-    <Folder Include="Login\" />
-    <Folder Include="XStore\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MobileEntrySequence\MobileEntrySequence.cs" />
-    <Compile Include="MobileEntrySequence\CountryCodesViewController.cs" />
-    <Compile Include="MobileEntrySequence\MobileEntryViewController.cs" />
-    <Compile Include="MobileEntrySequence\MobileEntrySequenceViewModel.cs" />
-    <Compile Include="Login\LoginView.cs" />
-    <Compile Include="ImageCropping\CropperViewController.cs" />
-    <Compile Include="ImageCropping\CropperView.cs" />
-    <Compile Include="CustomViews\UIMultiLineLabelCell.cs" />
-    <Compile Include="CustomViews\SwipePagerView.cs" />
-    <Compile Include="Login\SimpleStartScreenController.cs" />
-    <Compile Include="CustomViews\SimpleUIView.cs" />
-    <Compile Include="Login\UILoginViewController.cs" />
-    <Compile Include="TextDisplayViewController.cs" />
-    <Compile Include="TextDisplayViewController.designer.cs">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomViews\CachedUrlImageView.cs" />
-    <Compile Include="XStore\TextEntryView.cs" />
-    <Compile Include="XStore\StringTableViewController.cs" />
+    <Compile Include="ViewControllers\CropperViewController.cs" />
+    <Compile Include="Views\CropperView.cs" />
+    <Compile Include="Views\UIMultiLineLabelCell.cs" />
+    <Compile Include="EasyLayout.cs" />
+    <Compile Include="HumanInterface.cs" />
+    <Compile Include="UIViewExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\ios_common_lib\ios_common_lib.csproj">
-      <Project>{AE879C71-58B2-424A-897C-19913B22D032}</Project>
-      <Name>ios_common_lib</Name>
+    <ProjectReference Include="..\solid_lib\solid_lib.csproj">
+      <Project>{2D45084E-4617-475E-BC34-8A6C22F38437}</Project>
+      <Name>solid_lib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="TextDisplayViewController.xib">
-      <DependentUpon>TextDisplayViewController.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
 </Project>

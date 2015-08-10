@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using common_lib;
+using solid_lib;
 
 namespace App.Common
 {
@@ -20,16 +20,8 @@ namespace App.Common
 
             Guard.IsNotNull(PostImage, "PostImage");
 
-            var location = await GeoLocation.GetInstance().GetCurrentPosition();
 
-            var request = new CreatePostRequest(){ 
-                user_id = SessionInstance.GetCurrentUser().user_id,
-                text = PostText,
-                long_lat_acc_geo_string = location.ToLongLatAccString(),
-                image_data = PostImage
-            };
-
-            var result = await create_post.execute (request);
+            var result = await post_services.Create (PostText, SessionInstance.GetCurrentConnection ().connection_id, PostImage);
 
 			if (result != null) {
 				return true;
@@ -41,13 +33,13 @@ namespace App.Common
 		public NewPostViewModel ()
 		{
 			SessionInstance = Session.Current;
-            create_post = new CreatePost ();
+			post_services = new Posts ();
 
 			CurrentUser = SessionInstance.GetCurrentUser ();
 		}
 
 		private Session SessionInstance;
-		private CreatePost create_post;
+		private Posts post_services;
 	}
 }
 

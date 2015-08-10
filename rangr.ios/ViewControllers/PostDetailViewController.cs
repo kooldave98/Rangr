@@ -8,9 +8,6 @@ using App.Common;
 
 using Google.Maps;
 using ios_ui_lib;
-using common_lib;
-using System.Threading.Tasks;
-using SDWebImage;
 
 namespace rangr.ios
 {
@@ -28,22 +25,22 @@ namespace rangr.ios
         private UIImageView user_image;
         private UILabel user_name;
         private UILabel post_text;
-        private UIImageView post_image;
-        private SwipePagerView swipe_pager;
 
+        private Post item;
 
         public PostDetailViewController(Post the_item)
         {
-            view_model = new PostDetailsViewModel(the_item);
+            view_model = new PostDetailsViewModel();
+            view_model.CurrentPost = item = the_item;
         }
 
-        public override async void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
             create_view();
 
-            await BindData();
+            BindDataToCell(item);
         }
 
         private void create_view()
@@ -89,23 +86,16 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            map_view = LoadMap().Chain(m => m.TranslatesAutoresizingMaskIntoConstraints = false);
-
-            post_image = new UIImageView() {
-                ClipsToBounds = true,
-            };
-
-            card_view.AddSubview(swipe_pager = new SwipePagerView(new UIView[]{ post_image, map_view }) {
-                TranslatesAutoresizingMaskIntoConstraints = false
-            });
+            card_view.AddSubview(map_view = LoadMap());
+            map_view.TranslatesAutoresizingMaskIntoConstraints = false;
 
         }
 
-        public override void WillAddConstraints()
+        public override void ViewDidLayoutSubviews()
         {
-            this.user_name.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.time_ago.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
-            this.post_text.SetContentCompressionResistancePriority(EasyLayout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.user_name.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.time_ago.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
+            this.post_text.SetContentCompressionResistancePriority(Layout.RequiredPriority, UILayoutConstraintAxis.Vertical);
 
 
 
@@ -138,25 +128,21 @@ namespace rangr.ios
                 post_text.Frame.Right == card_view.Frame.Right - sibling_sibling_margin &&
                 post_text.Frame.Top == user_image.Frame.Bottom + parent_child_margin &&
 
-                swipe_pager.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
-                swipe_pager.Frame.Left == card_view.Frame.Left &&
-                swipe_pager.Frame.Right == card_view.Frame.Right &&
-                swipe_pager.Frame.Bottom == card_view.Frame.Bottom
+                map_view.Frame.Top == post_text.Frame.Bottom + parent_child_margin &&
+                map_view.Frame.Left == card_view.Frame.Left &&
+                map_view.Frame.Right == card_view.Frame.Right &&
+                map_view.Frame.Bottom == card_view.Frame.Bottom
 
             );
                 
         }
 
-        private async Task BindData()
+        private void BindDataToCell(Post post)
         {
-            user_name.Text = await view_model.CurrentPost.get_name_for_number();
-            post_text.Text = view_model.CurrentPost.text;
+            user_name.Text = post.user_display_name;
+            post_text.Text = post.text;
             user_image.Image = UIImage.FromBundle(PlaceholderImagePath);
-            time_ago.Text = view_model.CurrentPost.get_time_ago();
-
-            post_image.SetImage (
-                url: new NSUrl (string.Format("{0}/images/{1}",Resources.baseUrl, view_model.CurrentPost.image_id))
-            );
+            time_ago.Text = TimeAgoConverter.Current.Convert(post.date);
         }
 
         private MapView LoadMap()

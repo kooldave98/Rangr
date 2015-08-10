@@ -1,5 +1,4 @@
 using System;
-using common_lib;
 
 namespace App.Common
 {
@@ -26,6 +25,19 @@ namespace App.Common
 		{
 			if (ConnectionFailed != null) {
 				ConnectionFailed (this, new AppEventArgs (message));
+			}
+		}
+
+		#endregion
+
+		#region "SimulationTriggered"
+
+		public event EventHandler<AppEventArgs> LocationSimulated;
+
+		public void TriggerLocationSimulatedEvent (string location_string)
+		{
+			if (LocationSimulated != null) {
+				LocationSimulated (this, new AppEventArgs (location_string));
 			}
 		}
 

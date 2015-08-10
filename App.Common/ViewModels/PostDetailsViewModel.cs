@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using common_lib;
 
 namespace App.Common
 {
@@ -13,6 +12,10 @@ namespace App.Common
 			CurrentPost = the_seen_post;
 		}
 
+		public PostDetailsViewModel ()
+		{
+			CurrentPost = new Post ();
+		}
 
 		#region ReUseableHelpers
 

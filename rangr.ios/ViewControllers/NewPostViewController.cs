@@ -6,7 +6,6 @@ using UIKit;
 using System.Drawing;
 using ios_ui_lib;
 using System.Runtime.InteropServices;
-using common_lib;
 
 namespace rangr.ios
 {
@@ -20,7 +19,7 @@ namespace rangr.ios
         private UIView card_view;
         private UIImageView user_image;
         private UITextView post_text;
-        private CachedUrlImageView post_image;//uiimageview.ContentMode = UIViewContentMode.ScaleAspectFit;
+        private TopAlignedImageView post_image;//uiimageview.ContentMode = UIViewContentMode.ScaleAspectFit;
 
 
         public event Action CreatePostSucceeded = delegate {};
@@ -66,7 +65,7 @@ namespace rangr.ios
                 TranslatesAutoresizingMaskIntoConstraints = false
             });
 
-            card_view.AddSubview(post_image = new CachedUrlImageView {
+            card_view.AddSubview(post_image = new TopAlignedImageView {
                 ClipsToBounds = true,
             });
 
@@ -78,7 +77,7 @@ namespace rangr.ios
 
         }
 
-        public override void WillAddConstraints()
+        public override void ViewDidLayoutSubviews()
         {
             var user_image_width = HumanInterface.medium_square_image_length;
             var user_image_height = HumanInterface.medium_square_image_length;

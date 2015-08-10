@@ -1,68 +1,46 @@
 using System;
 using System.Threading.Tasks;
-using common_lib;
 
 namespace App.Common
 {
-    public class LoginViewModel : ViewModelBase
-    {
-        public string user_mobile_number { get; set; }
+	public class LoginViewModel : ViewModelBase
+	{
+		public string UserDisplayName { get; set; }
 
-        public string user_secret_code { get; set; }
+		public async Task<bool> CreateUser ()
+		{
+			if (string.IsNullOrWhiteSpace (UserDisplayName)) {
+				throw new InvalidOperationException ("You must enter a Display Name to create a new user");
+			}
 
-        public async Task<bool> CreateUser()
-        {
-            if (!PhoneNumberValidator.Current.is_valid_number(user_mobile_number))
-                throw new InvalidOperationException("Mobile number is not valid");
+			var userID = await UserServices.Create (UserDisplayName);
 
-            var userID = await create_user_service
-                                .Create(new CreateUserRequest() { 
-                                            mobile_number = user_mobile_number.RemoveWhitespace()
-                                        });
+			if (userID == null) {
+				return false;
+			}
 
-            if (userID == null)
-            {
-                return false;
-            }
 
-            return true;
-        }
+			var user = await UserServices.Get (userID.user_id.ToString ());
 
-        public async Task<bool> VerifyUser()
-        {
-            //TODO: Validate mobile number here...
+			if (user == null) {
+				return false;
+			}
 
-            var userID = await verify_user
-                                .execute(new VerifyUserRequest() { 
-                                    user_id = user_mobile_number.RemoveWhitespace(),
-                                    secret_code = user_secret_code
-                                });
+			sessionInstance.PersistCurrentUser (user);
 
-            if (userID == null)
-            {
-                return false;
-            }
 
-            var user = new User() { 
-                user_id = userID.user_id
-            };
+			return true;
+		}
 
-            sessionInstance.PersistCurrentUser(user);
+		public LoginViewModel ()
+		{
+			sessionInstance = Session.Current;
 
-            return true;
-        }
+			UserServices = new Users ();
+		}
 
-        public LoginViewModel()
-        {
-            sessionInstance = Session.Current;
-
-            create_user_service = new CreateUser();
-            verify_user = new VerifyUser();
-        }
-
-        private CreateUser create_user_service;
-        private VerifyUser verify_user;
-        private Session sessionInstance;
-    }
+		private Users UserServices;
+		private Session sessionInstance;
+	}
 }
 
