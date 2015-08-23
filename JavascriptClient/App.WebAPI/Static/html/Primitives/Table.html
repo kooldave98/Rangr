@@ -1,0 +1,21 @@
+﻿<table id="@table.id" class="statictable">
+        
+        <thead>
+            <tr>
+                @foreach( var column in table.columns ) {
+                    <th>@column</th>
+                }                
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach ( var row in table.rows ) {                
+                <tr id="@row.id" data-details-url="@row.url" >
+                    @foreach ( var field in row.fields ) {
+                        <td>@Field( field as dynamic )</td>
+                    }
+                </tr>
+            }            
+        </tbody>
+            
+    </table>

@@ -1,0 +1,25 @@
+﻿<article class="stream">
+    <form data-bind="submit: addPost">
+        <input type="text" placeholder="What's happening" data-bind="value: newPost" />
+        <button type="button" class="btn btn-primary" data-bind="event: { click: addPost }">Send</button>
+    </form>
+    <div data-bind="foreach: posts.slice(0).reverse()">
+        <div class="well">
+
+            <a href="#">
+                <img src="http://placehold.it/50x50&amp;text=No-Image">
+            </a>
+            <a href="#" data-bind="text: UserEmail"></a>
+            <a href="#" class="pull-right" data-bind="text: Date"></a>
+
+            <p data-bind="text: ID"></p>
+            <p data-bind="text: Text"></p>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
