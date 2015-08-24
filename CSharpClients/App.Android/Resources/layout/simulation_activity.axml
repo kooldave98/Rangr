@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RadioButton
+        android:id="@+id/radio_Live"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Live"
+        android:onClick="OnRadioButtonClicked" />
+    <RadioButton
+        android:id="@+id/radio_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point A"
+        android:onClick="OnRadioButtonClicked" />
+    <RadioButton
+        android:id="@+id/radio_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point B"
+        android:onClick="OnRadioButtonClicked" />
+    <RadioButton
+        android:id="@+id/radio_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point C"
+        android:onClick="OnRadioButtonClicked" />
+    <RadioButton
+        android:id="@+id/radio_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point D"
+        android:onClick="OnRadioButtonClicked" />
+</RadioGroup>
