@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>App.Common</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditProfileViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FeedViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewPostViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PeopleViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PostDetailsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProfileViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Connections.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Posts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Users.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppGlobal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommonClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GeoLocationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PersistentStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Connection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ConnectionIdentity.cs">
+      <DependentUpon>..\..\App.Core.Portable\Models\Connection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IUser.cs">
+      <DependentUpon>..\..\App.Core.Portable\Models\User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Post.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PostIdentity.cs">
+      <DependentUpon>..\..\App.Core.Portable\Models\Post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UserIdentity.cs">
+      <DependentUpon>..\..\App.Core.Portable\Models\User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Persistence\EntityDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeAgoConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GeoCoordinate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JSTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Gravatar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)UI\" />
+  </ItemGroup>
+</Project>

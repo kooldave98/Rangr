@@ -1,5 +1,6 @@
 ## Xamarin stuff
-Components
+Components/
+packages/
 [Pp]ackages
 *.userprefs
 Resource.designer.cs
