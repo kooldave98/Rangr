@@ -14,8 +14,6 @@ namespace App.Common
     {
         private Analytics(){}
 
-        const string ApiKey = "5f5d7dc30fc0c3f61718fa1ffacecf065b9deb26";
-
         bool initialized;
 
         #if __ANDROID__
@@ -23,18 +21,18 @@ namespace App.Common
         {
             if (!initialized) {
                 try {
-                    Insights.Initialize (ApiKey, context);
+                    Insights.Initialize (Resources.XAMARIN_INSIGHTS_API_KEY, context);
                 } catch {}
             }
             initialized = true;
         }
 
-        #else
+        #elif __IOS__
         public void Initialize ()
         {
             if (!initialized) {
                 try {
-                    Insights.Initialize (ApiKey);
+                    Insights.Initialize (Resources.XAMARIN_INSIGHTS_API_KEY);
                 } catch {}
             }
             initialized = true;

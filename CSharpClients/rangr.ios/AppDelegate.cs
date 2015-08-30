@@ -20,7 +20,6 @@ namespace rangr.ios
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        const string MapsApiKey = "AIzaSyACSPtVSdTYtRYQTjNh1Y6sUmNtVpshP4o";
         public static AppDelegate Shared;
 
         private UIWindow window;
@@ -31,7 +30,7 @@ namespace rangr.ios
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Shared = this;
-            MapServices.ProvideAPIKey(MapsApiKey);
+            MapServices.ProvideAPIKey(Resources.GOOGLE_MAPS_API_KEY);
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 

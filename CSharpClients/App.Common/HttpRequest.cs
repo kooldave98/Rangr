@@ -147,7 +147,6 @@ namespace App.Common
 
                 throw;
             }
-
             return responseString;
 
         }

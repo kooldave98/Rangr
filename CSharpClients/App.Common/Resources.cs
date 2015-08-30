@@ -8,7 +8,10 @@ namespace App.Common
 {
 	public static class Resources
 	{
-		public const string baseUrl = "http://rangrapp.azurewebsites.net/api";
-        //public const string baseUrl = "http://10.211.55.3:1898/api";
+		public const string baseUrl = "http://rangrapp-staging.azurewebsites.net/api";
+        //public const string baseUrl = "http://rangrapp.azurewebsites.net/api";
+
+        public const string GOOGLE_MAPS_API_KEY = "your_api_key_here";
+        public const string XAMARIN_INSIGHTS_API_KEY = "your_xamarin_insights_api_key_here";
 	}
 }
