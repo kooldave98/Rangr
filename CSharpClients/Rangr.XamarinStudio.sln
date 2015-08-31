@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.droid", "App.Android\rangr.droid.csproj", "{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "rangr.common", "App.Common\rangr.common.shproj", "{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.ios", "rangr.ios\rangr.ios.csproj", "{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "rangr.common", "rangr.common\rangr.common.shproj", "{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.droid", "rangr.droid\rangr.droid.csproj", "{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
