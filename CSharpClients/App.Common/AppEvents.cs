@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Common
+namespace rangr.common
 {
     public class AppEvents : SingletonBase<AppEvents>
 	{

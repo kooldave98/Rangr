@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace App.Common
+namespace rangr.common
 {
 	//The ios workarounds are because I didn't want to be repopulating the list each time.
 	//So I am caching the latest posts every time a pull is made.

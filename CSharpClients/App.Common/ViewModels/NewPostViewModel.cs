@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using solid_lib;
 
-namespace App.Common
+namespace rangr.common
 {
 	public class NewPostViewModel : ViewModelBase
 	{

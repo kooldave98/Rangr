@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace App.Common
+namespace rangr.common
 {
 	public class PeopleViewModel : ViewModelBase
 	{

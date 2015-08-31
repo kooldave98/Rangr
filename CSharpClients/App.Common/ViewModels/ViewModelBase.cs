@@ -19,7 +19,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace App.Common 
+namespace rangr.common 
 {
 	/// <summary>
 	/// Base class for all view models

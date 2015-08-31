@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace App.Common
+namespace rangr.common
 {
 	public class PostDetailsViewModel : ViewModelBase
 	{

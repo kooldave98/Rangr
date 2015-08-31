@@ -2,7 +2,7 @@ using System;
 using UIKit;
 using CoreGraphics;
 using System.Collections.Generic;
-using App.Common;
+using rangr.common;
 
 namespace rangr.ios
 {

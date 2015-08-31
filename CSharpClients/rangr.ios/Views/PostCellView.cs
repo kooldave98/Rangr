@@ -2,7 +2,7 @@ using System;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using App.Common;
+using rangr.common;
 using ios_ui_lib;
 
 namespace rangr.ios

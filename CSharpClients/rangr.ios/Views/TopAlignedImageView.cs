@@ -6,7 +6,7 @@ using System.Text;
 using UIKit;
 using Foundation;
 using CoreGraphics;
-using App.Common;
+using rangr.common;
 
 namespace rangr.ios
 {

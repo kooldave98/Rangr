@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.droid", "App.Android\rangr.droid.csproj", "{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "rangr.common", "App.Common\rangr.common.shproj", "{92E3AA5D-F7F7-4444-A25A-AF920D057BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rangr.ios", "rangr.ios\rangr.ios.csproj", "{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+		AppStore|iPhoneSimulator = AppStore|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.AppStore|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhone.Build.0 = Debug|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Debug|x86.Build.0 = Debug|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhone.ActiveCfg = Release|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhone.Build.0 = Release|iPhone
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|x86.ActiveCfg = Release|iPhoneSimulator
+		{28A6C86F-207B-4F4B-912D-DD0F8C0719EA}.Release|x86.Build.0 = Release|iPhoneSimulator
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Debug|x86.Build.0 = Debug|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|iPhone.Build.0 = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|x86.ActiveCfg = Release|Any CPU
+		{CDE4FB50-6F13-4ADF-8B9C-6D59CF3E2001}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.CommitMessageStyle = $2
+		$2.LastFilePostfix = "@:\n  "
+		$2.InterMessageLines = 0
+		$1.inheritsSet = Mono
+	EndGlobalSection
+EndGlobal

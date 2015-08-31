@@ -4,7 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using App.Common;
+using rangr.common;
 
 namespace rangr.ios
 {

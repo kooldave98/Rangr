@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace App.Common
+namespace rangr.common
 {
 	public class EditProfileViewModel : ViewModelBase
 	{

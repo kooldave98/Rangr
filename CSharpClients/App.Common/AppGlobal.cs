@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Splat;
 using ModernHttpClient;
 using System.Net.Http;
 using solid_lib;
@@ -18,7 +17,7 @@ using AndroidApp = Android.App;
 
 #endif
 
-namespace App.Common
+namespace rangr.common
 {
     /// <summary>
     /// Singleton class for Application wide objects. 
@@ -182,8 +181,6 @@ namespace App.Common
 
         static AppGlobal()
         {
-            //https://github.com/paulcbetts/Fusillade
-            Locator.CurrentMutable.RegisterConstant(new NativeMessageHandler(), typeof(HttpMessageHandler));
             current = new AppGlobal();
         }
 
