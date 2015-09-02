@@ -88,7 +88,6 @@
     </Compile>
     <Compile Include="Code\FragmentArchitecture\Fragments\PostListFragment.cs" />
     <Compile Include="Code\FragmentArchitecture\Fragments\SearchFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\MainActivity.cs" />
     <Compile Include="Code\ActivitiesArchitecture\Activities\AboutAppActivity.cs" />
     <Compile Include="Code\ActivitiesArchitecture\Activities\BaseActivity.cs" />
     <Compile Include="Code\ActivitiesArchitecture\Activities\LoginActivity.cs" />
@@ -129,6 +128,8 @@
     <Compile Include="Code\FragmentArchitecture\FragmentActivityBase.cs" />
     <Compile Include="Code\FragmentArchitecture\FragmentBase.cs" />
     <Compile Include="Code\Views\AppActionBarDrawerToggle.cs" />
+    <Compile Include="Code\FragmentArchitecture\FragmentHostActivity.cs" />
+    <Compile Include="StartUpActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -27,17 +27,14 @@ using droid_ui_lib;
 
 namespace rangr.droid
 {
-    [Activity(Label = "@string/app_name", 
-        //MainLauncher = true, 
+    [Activity(Label = "@string/app_name",
         Icon = "@drawable/icon", 
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : Activity, ListView.IOnItemClickListener, ActionBar.IOnNavigationListener
+    public class FragmentHostActivity : Activity, ListView.IOnItemClickListener, ActionBar.IOnNavigationListener
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            Analytics.Current.Initialize(ApplicationContext);
 
             SetContentView(Resource.Layout.main_with_drawer);
 

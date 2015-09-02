@@ -67,15 +67,16 @@ namespace rangr.droid
 
 			AppGlobal.Current.Resume (this);
 
-			if (this.GetType () != typeof(LoginActivity) && !AppGlobal.Current.CurrentUserAndConnectionExists) {
-				//This if condition allows me to make any activity the startup activity
-				//Basically, the startup Activity should not be the Login, what should happen is..
-				//if the app is not logged in, then we popup the Login Activity to authenticate the user.
-				//So, each activity still needs to do its individual UserAndConnection checks (see below)
-				//[if (AppGlobal.Current.CurrentUserAndConnectionExists)]
-				//See the PostFeedActivity OnResume for an example of what I mean
-				StartActivity (typeof(LoginActivity));
-			} 
+            //NO NEED ANYMORE FOR THIS, NOW DOING THIS IN THE START ACTIVITY
+//			if (this.GetType () != typeof(LoginActivity) && !AppGlobal.Current.CurrentUserAndConnectionExists) {
+//				//This if condition allows me to make any activity the startup activity
+//				//Basically, the startup Activity should not be the Login, what should happen is..
+//				//if the app is not logged in, then we popup the Login Activity to authenticate the user.
+//				//So, each activity still needs to do its individual UserAndConnection checks (see below)
+//				//[if (AppGlobal.Current.CurrentUserAndConnectionExists)]
+//				//See the PostFeedActivity OnResume for an example of what I mean
+//				StartActivity (typeof(LoginActivity));
+//			} 
 
 			is_paused = false;
 		}

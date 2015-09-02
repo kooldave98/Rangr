@@ -12,8 +12,8 @@ namespace rangr.droid
 {
     [Activity(Label = "@string/app_name"				
 				, NoHistory = true
-				, ScreenOrientation = ScreenOrientation.Portrait)]
-    //, LaunchMode = LaunchMode.SingleTop)]			
+                //, LaunchMode = LaunchMode.SingleTop
+				, ScreenOrientation = ScreenOrientation.Portrait)]	
 	public class LoginActivity : BaseActivity, TextView.IOnEditorActionListener
     {
 
@@ -83,6 +83,7 @@ namespace rangr.droid
                             {
                                 await AppGlobal.Current.CreateNewConnectionFromLogin();
 
+                                StartActivity(typeof(StartUpActivity));
                                 Finish();
                             }
 

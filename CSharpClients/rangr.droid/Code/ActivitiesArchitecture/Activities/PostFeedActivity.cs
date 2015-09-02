@@ -17,16 +17,15 @@ using AndroidResource = Android.Resource;
 
 namespace rangr.droid
 {
-    [Activity(Label = "@string/app_name", 
-        MainLauncher = true, 
+    [Activity(Label = "@string/app_name",
+        Icon = "@drawable/icon",
         ScreenOrientation = ScreenOrientation.Portrait)]
-
     public class PostFeedActivity : BaseActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Analytics.Current.Initialize(ApplicationContext);
+
             Title = "Feed";		
 
             SetContentView(Resource.Layout.PostList);
