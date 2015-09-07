@@ -15,17 +15,82 @@ using CustomViews;
 using rangr.common;
 using Android.Support.V4.Widget;
 using solid_lib;
+using Android.Content.PM;
 
 namespace rangr.droid
 {
+
+    [Activity(Label = "@string/app_name",
+        Icon = "@drawable/icon",
+        ScreenOrientation = ScreenOrientation.Portrait)]
+    public class SearchFragmentActivity : FragmentActivity<SearchFragment>
+    {
+        private const string intent_name = "hashtag";
+
+        protected override SearchFragment CustomLoadFragment()
+        {
+            if (Intent.HasExtra(intent_name))
+            {
+                var hash_tag_name = Intent.GetStringExtra(intent_name);
+                return new SearchFragment(hash_tag_name);
+            }
+            return new SearchFragment();
+        }
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            Title = "Search";
+
+            if (!Intent.HasExtra(intent_name))
+            {
+                Finish();
+            }
+
+            ActionBar.SetDisplayHomeAsUpEnabled(true);  
+
+            Fragment.HashTagSelected += (ht) => {
+                StartActivity(typeof(SearchFragmentActivity));
+            };
+
+            Fragment.PostItemSelected += (p) => {
+                var postDetails = PostDetailFragmentActivity.CreateIntent(this, p);
+                StartActivity(postDetails);
+            };
+               
+        }
+
+        public override bool OnNavigateUp()
+        {
+            base.OnNavigateUp();
+
+            Finish();
+
+            return true;
+        }
+
+        public static Intent CreateIntent(Context context, string hash_tag)
+        {
+            return new Intent(context, typeof(SearchFragmentActivity)).PutExtra(intent_name, hash_tag);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            base.OnCreateOptionsMenu(menu);
+
+            MenuInflater.Inflate(Resource.Menu.search, menu);
+
+            return true;
+        }
+    }
+
     //Todo: Pull out a common abstract PostListFragment
     //and let there be a FeedFragment and a SearchFragment
     public class SearchFragment : VMFragment<SearchViewModel>
     {
-        public override string TitleLabel
-        { 
-            get
-            {
+        public override string TitleLabel { 
+            get {
                 return string.Format("Search: #{0}", view_model.hash_tag_search_keyword);
             } 
         }
@@ -39,16 +104,13 @@ namespace rangr.droid
             postListView.EmptyView = view.FindViewById<View>(Android.Resource.Id.Empty);
             postListView.InitEndlessness(Resource.Layout.loadMore, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
-            postListView.OnLoadMoreTriggered += async (sender, e) =>
-            {
+            postListView.OnLoadMoreTriggered += (sender, e) => {
                 //await view_model.OlderPosts ();
-                JSTimer.SetTimeout(delegate
-                    {
-                        Activity.RunOnUiThread(() =>
-                            {
-                                ((EndlessListView)sender).SetEndlessListLoaderComplete();
-                            });
-                    }, 1500);//1.5 secs
+                JSTimer.SetTimeout(delegate {
+                    Activity.RunOnUiThread(() => {
+                        ((EndlessListView)sender).SetEndlessListLoaderComplete();
+                    });
+                }, 1500);//1.5 secs
             };
 
             #region setup list adapter
@@ -66,16 +128,13 @@ namespace rangr.droid
             refresher.SetColorScheme(Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
                 Resource.Color.xam_gray, Resource.Color.xam_green);
 
-            refresher.Refresh += async (sender, e) =>
-            {
+            refresher.Refresh += async (sender, e) => {
                 //await view_model.RefreshPosts ();
-                JSTimer.SetTimeout(delegate
-                    {
-                        Activity.RunOnUiThread(() =>
-                            {
-                                refresher.Refreshing = false;
-                            });
-                    }, 1500);//1.5 secs
+                JSTimer.SetTimeout(delegate {
+                    Activity.RunOnUiThread(() => {
+                        refresher.Refreshing = false;
+                    });
+                }, 1500);//1.5 secs
 
             };
 
@@ -83,8 +142,7 @@ namespace rangr.droid
 
 
             // wire up post click handler
-            postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
-            {
+            postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 var post = view_model.Posts[e.Position];
                 PostItemSelected(post);
             };
@@ -117,25 +175,21 @@ namespace rangr.droid
             if (AppGlobal.Current.CurrentUserAndConnectionExists)
             {
 
-                NewPostsReceivedHandler = (object sender, EventArgs e) =>
-                {
+                NewPostsReceivedHandler = (object sender, EventArgs e) => {
                     //Refresh list view data
-                    Activity.RunOnUiThread(() =>
-                        {
-                            postListAdapter.NotifyDataSetChanged();
-                        });
+                    Activity.RunOnUiThread(() => {
+                        postListAdapter.NotifyDataSetChanged();
+                    });
                 };
 
                 view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-                GeoLocatorRefreshedHandler = async (object sender, EventArgs e) =>
-                {
+                GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
                     await view_model.RefreshPosts();
 
-                    JSTimer.SetTimeout(delegate
-                        {
-                            dismiss_refresher();
-                        }, 500);//1/2 a second
+                    JSTimer.SetTimeout(delegate {
+                        dismiss_refresher();
+                    }, 500);//1/2 a second
                 };
 
                 AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
@@ -157,11 +211,6 @@ namespace rangr.droid
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
         }
 
-        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
-        {
-            inflater.Inflate(Resource.Menu.search, menu);
-        }
-
         public SearchFragment(string the_hash_tag)
         {
             view_model = new SearchViewModel();
@@ -170,6 +219,8 @@ namespace rangr.droid
 
         public SearchFragment()
         {
+            view_model = new SearchViewModel();
+            view_model.hash_tag_search_keyword = "NO_PARAMS";
         }
 
         private PostsAdapter postListAdapter;

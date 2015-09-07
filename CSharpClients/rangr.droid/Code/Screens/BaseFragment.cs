@@ -22,7 +22,7 @@ namespace rangr.droid
     /// Investigate using custom notifications/toasts using the below library
     /// https://github.com/Redth/AndHUD
     /// </summary>
-    public abstract class BaseFragment : Fragment
+    public abstract class BaseFragment : FragmentBase
     {
         public abstract string TitleLabel { get; }
 
@@ -35,20 +35,18 @@ namespace rangr.droid
         protected void show_progress(string title = "Loading...", string message = "Busy")
         {
             this.
-            Activity.RunOnUiThread(() =>
-                {
-                    progress = ProgressDialog.Show(this.Activity, title, message, true);
-                });
+            Activity.RunOnUiThread(() => {
+                progress = ProgressDialog.Show(this.Activity, title, message, true);
+            });
 
         }
 
         protected void dismiss_progress()
         {
-            this.Activity.RunOnUiThread(() =>
-                {
-                    if (progress != null)
-                        progress.Dismiss();
-                });
+            this.Activity.RunOnUiThread(() => {
+                if (progress != null)
+                    progress.Dismiss();
+            });
 
         }
 
@@ -56,18 +54,17 @@ namespace rangr.droid
         {
 //            if (!is_paused)
 //            {
-            this.Activity.RunOnUiThread(() =>
-                {
+            this.Activity.RunOnUiThread(() => {
 //                    if (true)
 //                    {
-                    AndHUD.Shared.ShowToast(this.Activity, message, MaskType.Clear, TimeSpan.FromSeconds(5));
+                AndHUD.Shared.ShowToast(this.Activity, message, MaskType.Clear, TimeSpan.FromSeconds(5));
 
 
 //                        var t = Toast.MakeText(this.Activity, message, ToastLength.Long);
 //                        t.SetGravity(GravityFlags.Center, 0, 0);
 //                        t.Show();
 //                    }
-                });
+            });
             //}
 
         }
@@ -79,17 +76,16 @@ namespace rangr.droid
             var builder = new AlertDialog.Builder(this.Activity)
                     .SetTitle(title)
                     .SetMessage(message)
-                    .SetPositiveButton(ok_button_text, (innerSender, innere) =>
-                {
-                    Activity.RunOnUiThread(() =>
-                        {
-                            if (ok_button_action != null)
-                            {
-                                ok_button_action();
-                            }
-                        });
+                    .SetPositiveButton(ok_button_text, (innerSender, innere) => {
+                                                            Activity.RunOnUiThread(() => {
+                                                                if (ok_button_action != null)
+                                                                {
+                                                                    ok_button_action();
+                                                                }
+                                                            }
+                    );
 
-                });
+            });
             var dialog = builder.Create();
             dialog.Show();
             //}
@@ -131,8 +127,7 @@ namespace rangr.droid
             SetHasOptionsMenu(true);
         }
 
-        public Action SetupActionBarNavigation = delegate
-        {
+        public Action SetupActionBarNavigation = delegate {
         };
 
         public override void OnResume()
@@ -144,8 +139,7 @@ namespace rangr.droid
 
             SetupActionBarNavigation();
 
-            isBusyChangedEventHandler = (sender, e) =>
-            {
+            isBusyChangedEventHandler = (sender, e) => {
 
                 if (view_model.IsBusy)
                 {
@@ -159,15 +153,13 @@ namespace rangr.droid
 
             view_model.IsBusyChanged += isBusyChangedEventHandler;
 
-            ConnectionFailedHandler = (sender, e) =>
-            {
+            ConnectionFailedHandler = (sender, e) => {
                 ShowToast("An attempt to establish a network connection failed.");
             };
 
-            GeolocatorFailedHandler = (sender, e) =>
-            {
+            GeolocatorFailedHandler = (sender, e) => {
                 ShowToast("An attempt to retrieve your geolocation failed. " +
-                    "\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
+                "\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
             };
 
             AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;

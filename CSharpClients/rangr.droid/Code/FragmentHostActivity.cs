@@ -22,9 +22,8 @@ using Android.Support.V4.View;
 /// 3. Sort out menus
 /// 4. Introduce action bar spinner on Posts Fragment
 /// </todo>
-using droid_ui_lib;
 
-
+//This 
 namespace rangr.droid
 {
     [Activity(Label = "@string/app_name",
@@ -53,7 +52,14 @@ namespace rangr.droid
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Menu.main, menu);
+            if (current_fragment.GetType() == typeof(PostListFragment))
+            {
+                MenuInflater.Inflate(Resource.Menu.posts, menu);
+            }
+            else
+            {                
+                MenuInflater.Inflate(Resource.Menu.main, menu);
+            }
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -104,6 +110,18 @@ namespace rangr.droid
 
             return base.OnOptionsItemSelected(item);
         }
+
+//        public override bool OnOptionsItemSelected(IMenuItem item)
+//        {
+//            switch (item.ItemId)
+//            { 
+//                case Resource.Id.new_post_menu_item:
+//                    NewPostSelected();
+//                    break;
+//            }
+//
+//            return base.OnOptionsItemSelected(item);
+//        }
 
         private void show_login()
         {

@@ -18,15 +18,68 @@ using Android.Support.V4.Widget;
 using Android.Text;
 using System.Text.RegularExpressions;
 using solid_lib;
+using Android.Content.PM;
 
 namespace rangr.droid
 {
+    [Activity(Label = "@string/app_name",
+        Icon = "@drawable/icon",
+        ScreenOrientation = ScreenOrientation.Portrait)]
+    public class PostListFragmentActivity : FragmentActivity<PostListFragment>
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            Fragment.HashTagSelected += (ht) => {
+                StartActivity(typeof(SearchFragmentActivity));
+            };
+
+            Fragment.PostItemSelected += (p) => {
+                var postDetails = PostDetailFragmentActivity.CreateIntent(this, p);
+                StartActivity(postDetails);
+            };
+
+//            Fragment.NewPostSelected += () => {
+//                StartActivity(typeof(NewPostActivity));
+//
+//                //Below will be ideal for an image picker, not on new post
+//                    var result = await StartActivityForResultAsync<AsyncActivity>();
+//                    if (result.ResultCode == Result.Ok)
+//                    {
+//                        var text = result.Data.GetStringExtra(AsyncActivity.TextExtra);
+//                        Fragment.UpdateText(text);
+//                    }
+//
+//            };
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            base.OnCreateOptionsMenu(menu);
+
+            MenuInflater.Inflate(Resource.Menu.posts, menu);
+
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            { 
+                case Resource.Id.new_post_menu_item:
+                    StartActivity(typeof(NewPostFragmentActivity));
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+    }
+
     public class PostListFragment : VMFragment<FeedViewModel>
     {
-        public override string TitleLabel
-        { 
-            get
-            {
+        public override string TitleLabel { 
+            get {
                 return GetString(Resource.String.posts_title);
             } 
         }
@@ -46,16 +99,13 @@ namespace rangr.droid
             postListView.EmptyView = view.FindViewById<View>(Android.Resource.Id.Empty);
             postListView.InitEndlessness(Resource.Layout.loadMore, Resource.Id.loadMoreButton, Resource.Id.loadMoreProgress);
 
-            postListView.OnLoadMoreTriggered += async (sender, e) =>
-            {
+            postListView.OnLoadMoreTriggered += async (sender, e) => {
                 await view_model.OlderPosts();
-                JSTimer.SetTimeout(delegate
-                    {
-                        Activity.RunOnUiThread(() =>
-                            {
-                                ((EndlessListView)sender).SetEndlessListLoaderComplete();
-                            });
-                    }, 1500);//1.5 secs
+                JSTimer.SetTimeout(delegate {
+                    Activity.RunOnUiThread(() => {
+                        ((EndlessListView)sender).SetEndlessListLoaderComplete();
+                    });
+                }, 1500);//1.5 secs
             };
 
             #region setup list adapter
@@ -73,16 +123,13 @@ namespace rangr.droid
             refresher.SetColorScheme(Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
                 Resource.Color.xam_gray, Resource.Color.xam_green);
 
-            refresher.Refresh += async (sender, e) =>
-            {
+            refresher.Refresh += async (sender, e) => {
                 await view_model.RefreshPosts();
-                JSTimer.SetTimeout(delegate
-                    {
-                        Activity.RunOnUiThread(() =>
-                            {
-                                refresher.Refreshing = false;
-                            });
-                    }, 1500);//1.5 secs
+                JSTimer.SetTimeout(delegate {
+                    Activity.RunOnUiThread(() => {
+                        refresher.Refreshing = false;
+                    });
+                }, 1500);//1.5 secs
 
             };
 
@@ -90,8 +137,7 @@ namespace rangr.droid
 
 
             // wire up post click handler
-            postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
-            {
+            postListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
                 var post = view_model.Posts[e.Position];
                 PostItemSelected(post);
             };
@@ -122,25 +168,21 @@ namespace rangr.droid
             if (AppGlobal.Current.CurrentUserAndConnectionExists)
             {
 
-                NewPostsReceivedHandler = (object sender, EventArgs e) =>
-                {
+                NewPostsReceivedHandler = (object sender, EventArgs e) => {
                     //Refresh list view data
-                    Activity.RunOnUiThread(() =>
-                        {
-                            postListAdapter.NotifyDataSetChanged();
-                        });
+                    Activity.RunOnUiThread(() => {
+                        postListAdapter.NotifyDataSetChanged();
+                    });
                 };
 
                 view_model.OnNewPostsReceived += NewPostsReceivedHandler;
 
-                GeoLocatorRefreshedHandler = async (object sender, EventArgs e) =>
-                {
+                GeoLocatorRefreshedHandler = async (object sender, EventArgs e) => {
                     await view_model.RefreshPosts();
 
-                    JSTimer.SetTimeout(delegate
-                        {
-                            dismiss_refresher();
-                        }, 500);//1/2 a second
+                    JSTimer.SetTimeout(delegate {
+                        dismiss_refresher();
+                    }, 500);//1/2 a second
                 };
 
                 AppGlobal.Current.GeoLocatorRefreshed += GeoLocatorRefreshedHandler;
@@ -162,23 +204,6 @@ namespace rangr.droid
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
         }
 
-        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
-        {
-            inflater.Inflate(Resource.Menu.posts, menu);
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            { 
-                case Resource.Id.new_post_menu_item:
-                    NewPostSelected();
-                    break;
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
-
         public PostListFragment()
         {
             if (view_model == null)
@@ -192,7 +217,6 @@ namespace rangr.droid
         private SwipeRefreshLayout refresher;
 
         public event Action<Post> PostItemSelected = delegate {};
-        public event Action NewPostSelected = delegate {};
         public event Action<string> HashTagSelected = delegate {};
     }
 
@@ -208,8 +232,7 @@ namespace rangr.droid
             this._posts = posts;
         }
 
-        public override Post this [int position]
-        {
+        public override Post this [int position] {
             get { return _posts[position]; }
         }
 
@@ -218,8 +241,7 @@ namespace rangr.droid
             return position;
         }
 
-        public override int Count
-        {
+        public override int Count {
             get { return _posts.Count; }
         }
 

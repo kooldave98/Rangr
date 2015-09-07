@@ -79,57 +79,45 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\BaseFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\LoginFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\NewPostFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\PostDetailFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\PostDetailMapFragment.cs">
-      <DependentUpon>..\..\..\PostDetailsActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\FragmentArchitecture\Fragments\PostListFragment.cs" />
-    <Compile Include="Code\FragmentArchitecture\Fragments\SearchFragment.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\AboutAppActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\BaseActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\LoginActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\NewPostActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PeopleActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PeopleMapFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PeopleListFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PeopleListAdapter.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PostDetailsActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PostMapFragment.cs">
-      <DependentUpon>PostDetailsActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PostFeedActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\PostFeedAdapter.cs">
-      <DependentUpon>PostFeedActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\ProfileActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\ProfileAdapter.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\EditProfileActivity.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\ActivitiesArchitecture\Activities\SearchActivity.cs" />
-    <Compile Include="Code\ActivitiesArchitecture\Activities\SimulationActivity.cs" />
     <Compile Include="Code\Views\AClickableSpan.cs" />
     <Compile Include="Code\Views\EndlessListView.cs" />
     <Compile Include="Code\Views\HyperTextView.cs" />
     <Compile Include="Code\Views\PeopleGroupsListView.cs" />
     <Compile Include="Code\Views\TextViewHyperlinkOnTouchListener.cs" />
     <Compile Include="Code\Views\TextViewWriter.cs" />
-    <Compile Include="Code\FragmentArchitecture\FragmentActivityBase.cs" />
-    <Compile Include="Code\FragmentArchitecture\FragmentBase.cs" />
     <Compile Include="Code\Views\AppActionBarDrawerToggle.cs" />
-    <Compile Include="Code\FragmentArchitecture\FragmentHostActivity.cs" />
     <Compile Include="StartUpActivity.cs" />
+    <Compile Include="Code\FragmentBase.cs" />
+    <Compile Include="Code\FragmentHostActivity.cs" />
+    <Compile Include="Code\Screens\BaseFragment.cs" />
+    <Compile Include="Code\Screens\LoginFragment.cs" />
+    <Compile Include="Code\Screens\NewPostFragment.cs" />
+    <Compile Include="Code\Screens\PostDetailFragment.cs" />
+    <Compile Include="Code\Screens\PostDetailMapFragment.cs">
+      <DependentUpon>PostDetailFragment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\PostListFragment.cs" />
+    <Compile Include="Code\Screens\SearchFragment.cs" />
+    <Compile Include="Code\Screens\Activities\AboutAppActivity.cs" />
+    <Compile Include="Code\Screens\Activities\EditProfileActivity.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\Activities\PeopleActivity.cs" />
+    <Compile Include="Code\Screens\Activities\PeopleListAdapter.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\Activities\PeopleListFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\Activities\PeopleMapFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\Activities\ProfileActivity.cs" />
+    <Compile Include="Code\Screens\Activities\ProfileAdapter.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\Activities\SimulationActivity.cs" />
+    <Compile Include="Code\Screens\Activities\BaseActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -256,8 +244,6 @@
     <Folder Include="Resources\values-v14\" />
     <Folder Include="Resources\xml\" />
     <Folder Include="Code\" />
-    <Folder Include="Code\ActivitiesArchitecture\" />
-    <Folder Include="Code\ActivitiesArchitecture\Activities\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\anim\" />
   </ItemGroup>

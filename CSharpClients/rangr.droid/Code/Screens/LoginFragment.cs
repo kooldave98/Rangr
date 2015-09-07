@@ -13,15 +13,30 @@ using Android.Views;
 using Android.Widget;
 using rangr.common;
 using Android.Views.InputMethods;
+using Android.Content.PM;
 
 namespace rangr.droid
 {
+    [Activity(Label = "@string/app_name"                
+        , NoHistory = true
+        , ScreenOrientation = ScreenOrientation.Portrait)]
+    public class LoginFragmentActivity : FragmentActivity<LoginFragment>
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            
+            Fragment.LoginSucceeded += () => {
+                StartActivity(typeof(PostListFragmentActivity));
+                Finish();
+            };
+        }
+    }
+
     public class LoginFragment : VMFragment<LoginViewModel>, TextView.IOnEditorActionListener
     {
-        public override string TitleLabel
-        { 
-            get
-            {
+        public override string TitleLabel { 
+            get {
                 return GetString(Resource.String.app_name);
             } 
         }
@@ -41,17 +56,14 @@ namespace rangr.droid
             userName.SetOnEditorActionListener(this);
             password.SetOnEditorActionListener(this);
 
-            userName.TextChanged += (sender, e) =>
-            {
+            userName.TextChanged += (sender, e) => {
                 view_model.UserDisplayName = userName.Text;
             };
-            password.TextChanged += (sender, e) =>
-            {
+            password.TextChanged += (sender, e) => {
                 //loginViewModel.Password = password.Text;
             };
 
-            loginHelp.Click += (sender, e) =>
-            {
+            loginHelp.Click += (sender, e) => {
                 ShowAlert("Need Help?", "Enter your desired display name and your given beta testing key.");
             };
 
@@ -91,19 +103,18 @@ namespace rangr.droid
 
                     hide_keyboard_and_show_progress();
 
-                    ShowAlert("Disclaimer", "This app is in beta, it may be subject to changes, loss of data and unavailability.", "Ok", async delegate
+                    ShowAlert("Disclaimer", "This app is in beta, it may be subject to changes, loss of data and unavailability.", "Ok", async delegate {
+                        var create_user_successful = await view_model.CreateUser();
+
+                        if (create_user_successful)
                         {
-                            var create_user_successful = await view_model.CreateUser();
+                            await AppGlobal.Current.CreateNewConnectionFromLogin();
 
-                            if (create_user_successful)
-                            {
-                                await AppGlobal.Current.CreateNewConnectionFromLogin();
+                            LoginSucceeded();
+                        }
 
-                                LoginSucceeded();
-                            }
-
-                            hide_progress();
-                        });
+                        hide_progress();
+                    });
 
 
                 }

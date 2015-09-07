@@ -25,8 +25,8 @@ namespace rangr.droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Analytics.Current.Initialize(ApplicationContext);
-
+            Analytics.Current.Initialize(ApplicationContext); 
+                
             start_activity_architecture();
 
             //start_fragment_architecture();
@@ -34,15 +34,17 @@ namespace rangr.droid
             Finish();
         }
 
+
+
         /// <summary>
         /// The all activities based architecture
         /// </summary>
         private void start_activity_architecture()
         {
             if (AppGlobal.Current.CurrentUserAndConnectionExists) {
-                StartActivity (typeof(PostFeedActivity));
+                StartActivity (typeof(PostListFragmentActivity));
             } else {
-                StartActivity (typeof(LoginActivity));
+                StartActivity (typeof(LoginFragmentActivity));
             }
         }
 
