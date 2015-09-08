@@ -29,7 +29,7 @@ namespace rangr.droid
             return true;
         }
 
-        protected override PostDetailFragment CustomLoadFragment()
+        public override PostDetailFragment LoadFragment()
         {
             Post post;
             if (Intent.HasExtra ("Post")) {
@@ -39,7 +39,7 @@ namespace rangr.droid
                 post = new Post ();
             }
 
-            return new PostDetailFragment(post);
+            return PostDetailFragment.newInstance(post);
         }
 
         protected override void OnCreate (Bundle bundle)
@@ -92,16 +92,22 @@ namespace rangr.droid
 
         private TextView postTextLabel;
 
-        public PostDetailFragment(Post the_post)
+        protected override void Initialise()
         {
-            post = the_post;
+            var postBytes = Arguments.GetByteArray(INIT_ARG_KEY);
+            post = PostDetailsViewModel.Deserialize (postBytes);
             view_model = new PostDetailsViewModel(post);
         }
 
-        public PostDetailFragment()
+        public static PostDetailFragment newInstance(Post a_post) 
         {
-            post = new Post();
-            view_model = new PostDetailsViewModel(post);
+            var post_bytes = PostDetailsViewModel.Serialize(a_post).ToArray();
+
+            var fragment = new PostDetailFragment(){
+                Arguments = new Bundle()
+                    .Chain(b=>b.PutByteArray(INIT_ARG_KEY, post_bytes))
+            };
+            return fragment;
         }
 
         private Post post;

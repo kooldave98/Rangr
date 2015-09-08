@@ -30,6 +30,11 @@ namespace rangr.droid
             return true;
         }
 
+        public override NewPostFragment LoadFragment()
+        {
+            return new NewPostFragment();
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

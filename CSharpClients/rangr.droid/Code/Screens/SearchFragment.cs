@@ -27,14 +27,14 @@ namespace rangr.droid
     {
         private const string intent_name = "hashtag";
 
-        protected override SearchFragment CustomLoadFragment()
+        public override SearchFragment LoadFragment()
         {
             if (Intent.HasExtra(intent_name))
             {
                 var hash_tag_name = Intent.GetStringExtra(intent_name);
-                return new SearchFragment(hash_tag_name);
+                return SearchFragment.newInstance(hash_tag_name);
             }
-            return new SearchFragment();
+            return SearchFragment.newInstance("NO_PARAMS");
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -211,16 +211,21 @@ namespace rangr.droid
             AppGlobal.Current.GeoLocatorRefreshed -= GeoLocatorRefreshedHandler;
         }
 
-        public SearchFragment(string the_hash_tag)
+        protected override void Initialise()
         {
+            var search_string = Arguments.GetString(INIT_ARG_KEY);
             view_model = new SearchViewModel();
-            view_model.hash_tag_search_keyword = the_hash_tag;
+            view_model.hash_tag_search_keyword = search_string;
         }
 
-        public SearchFragment()
-        {
-            view_model = new SearchViewModel();
-            view_model.hash_tag_search_keyword = "NO_PARAMS";
+        public static SearchFragment newInstance(string the_hash_tag) 
+        {           
+
+            var fragment = new SearchFragment(){
+                Arguments = new Bundle()
+                                .Chain(b=>b.PutString(INIT_ARG_KEY, the_hash_tag))
+                };
+            return fragment;
         }
 
         private PostsAdapter postListAdapter;

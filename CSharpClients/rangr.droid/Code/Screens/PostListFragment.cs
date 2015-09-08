@@ -27,6 +27,11 @@ namespace rangr.droid
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class PostListFragmentActivity : FragmentActivity<PostListFragment>
     {
+        public override PostListFragment LoadFragment()
+        {
+            return new PostListFragment();
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

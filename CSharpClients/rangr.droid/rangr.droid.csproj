@@ -98,26 +98,24 @@
     </Compile>
     <Compile Include="Code\Screens\PostListFragment.cs" />
     <Compile Include="Code\Screens\SearchFragment.cs" />
-    <Compile Include="Code\Screens\Activities\AboutAppActivity.cs" />
-    <Compile Include="Code\Screens\Activities\EditProfileActivity.cs">
+    <Compile Include="Code\Screens\ProfileActivity.cs" />
+    <Compile Include="Code\Screens\SimulationActivity.cs" />
+    <Compile Include="Code\Screens\AboutAppActivity.cs" />
+    <Compile Include="Code\Screens\EditProfileActivity.cs" />
+    <Compile Include="Code\Screens\PeopleActivity.cs" />
+    <Compile Include="Code\Screens\PeopleListAdapter.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\PeopleListFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\PeopleMapFragment.cs">
+      <DependentUpon>PeopleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\ProfileAdapter.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Screens\Activities\PeopleActivity.cs" />
-    <Compile Include="Code\Screens\Activities\PeopleListAdapter.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\Activities\PeopleListFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\Activities\PeopleMapFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\Activities\ProfileActivity.cs" />
-    <Compile Include="Code\Screens\Activities\ProfileAdapter.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\Activities\SimulationActivity.cs" />
-    <Compile Include="Code\Screens\Activities\BaseActivity.cs" />
+    <Compile Include="Code\Screens\BaseActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

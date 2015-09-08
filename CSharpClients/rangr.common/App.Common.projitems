@@ -53,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\HttpFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Connections\Connections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Patterns\ObjectExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

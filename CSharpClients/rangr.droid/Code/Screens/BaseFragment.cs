@@ -119,8 +119,13 @@ namespace rangr.droid
 
     public abstract class VMFragment<V> : BaseFragment where V : ViewModelBase
     {
+        public static string INIT_ARG_KEY = "ARG_KEY";
+        protected virtual void Initialise() {/*Meant to be optionally overriden*/}
+
         public override void OnCreate(Bundle bundle)
         {
+            Initialise();
+
             Guard.IsNotNull(view_model, "view_model");
             //notify ("OnCreate");
             base.OnCreate(bundle);

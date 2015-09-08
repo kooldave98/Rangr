@@ -31,6 +31,11 @@ namespace rangr.droid
                 Finish();
             };
         }
+
+        public override LoginFragment LoadFragment()
+        {
+            return new LoginFragment();
+        }
     }
 
     public class LoginFragment : VMFragment<LoginViewModel>, TextView.IOnEditorActionListener

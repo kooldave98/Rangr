@@ -25,12 +25,12 @@ namespace rangr.droid
         /// <param name="fragmentTag">The tag which uniquely identifies the fragment.</param>
         /// <param name="containerId">The resource ID of the parent view to use for a newly created fragment.</param>
         /// <returns>The found or created fragment.</returns>
-        public static TFragment FindOrCreateFragment<TFragment>(Activity activity, string fragmentTag, int containerId) where TFragment : FragmentBase, new()
+        public static TFragment FindOrCreateFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag, int containerId) where TFragment : FragmentBase, new()
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
             if (fragment == null)
             {
-                fragment = new TFragment();
+                fragment = activity.LoadFragment();
                 SwapFragment(activity, fragment, fragmentTag, containerId);
             }
 
@@ -133,43 +133,14 @@ namespace rangr.droid
             }
         }
 
-        /// <summary>
-        /// Loads the fragment for this activity and stores it in the Fragment property.
-        /// </summary>
-        private TFragment LoadFragment()
-        {
-            try
-            {
-                return FragmentBase.FindOrCreateFragment<TFragment>(this, FragmentTag, Android.Resource.Id.Content);
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    var fragment = CustomLoadFragment();
-
-                    FragmentBase.SwapFragment<TFragment>(this, fragment, FragmentTag, Android.Resource.Id.Content);
-
-                    return fragment;
-                }
-                catch (Exception)
-                {
-                    throw new Exception("Could not create an instance of TFragment, try overriding LoadFragment");
-                }
-            }
-        }
-
-        protected virtual TFragment CustomLoadFragment()
-        {
-            return new TFragment();
-        }
+        public abstract TFragment LoadFragment();
 
         /// <inheritdoc />
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            Fragment = LoadFragment();
+            Fragment = FragmentBase.FindOrCreateFragment<TFragment>(this, FragmentTag, Android.Resource.Id.Content);
         }
 
         protected override async void OnDestroy()

@@ -200,7 +200,7 @@ namespace rangr.droid
 
         private void show_search(string hash_tag)
         {
-            search_fragment = new SearchFragment(hash_tag);
+            search_fragment = SearchFragment.newInstance(hash_tag);
             search_fragment.HashTagSelected += (ht) => show_search(ht);
             search_fragment.SetupActionBarNavigation = () =>
             {
@@ -213,7 +213,7 @@ namespace rangr.droid
 
         private void show_detail(Post post)
         {
-            post_detail_fragment = new PostDetailFragment(post);
+            post_detail_fragment = PostDetailFragment.newInstance(post);
             post_detail_fragment.SetupActionBarNavigation = () =>
             {
                 drawer_toggle.DrawerIndicatorEnabled = false;
