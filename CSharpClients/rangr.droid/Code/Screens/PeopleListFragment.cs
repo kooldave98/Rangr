@@ -13,7 +13,7 @@ using rangr.common;
 
 namespace rangr.droid
 {
-	public class PeopleListFragment : ListFragment
+	public class PeopleListFragment : PeopleFragment
 	{
 		public override void OnCreate (Bundle savedInstanceState)
 		{
@@ -23,27 +23,29 @@ namespace rangr.droid
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			var peopleListView = inflater.Inflate (Resource.Layout.PeopleList, container, false);
+			var view = inflater.Inflate (Resource.Layout.PeopleList, container, false);
 
 
-			peopleListView.PivotY = 0;
-			peopleListView.PivotX = container.Width;
+			view.PivotY = 0;
+			view.PivotX = container.Width;
 
-			return peopleListView;
+			return view;
 		}
 
 		public override void OnViewCreated (View view, Bundle savedInstanceState)
 		{
 			base.OnViewCreated (view, savedInstanceState);
 
-			ListView.DividerHeight = 0;
-			ListView.Divider = null;
+            people_list_view = view.FindViewById<ListView>(Resource.Id.list);
+
+            people_list_view.DividerHeight = 0;
+            people_list_view.Divider = null;
 
 			HandleOnConnectionsReceived = (object sender, EventArgs e) => {
 				list_adapter = new PeopleListAdapter (view.Context, view_model.ConnectedUsers, view_model.CurrentLocation);
 
 				Activity.RunOnUiThread (() => {
-					ListAdapter = list_adapter;
+                    people_list_view.Adapter = list_adapter;
 					list_adapter.NotifyDataSetChanged ();
 				});
 			};
@@ -86,12 +88,8 @@ namespace rangr.droid
 
 		private EventHandler<EventArgs> HandleOnConnectionsReceived;
 
-		public PeopleListFragment (PeopleViewModel the_view_model)
-		{
-			view_model = the_view_model;
-		}
 
 		PeopleListAdapter list_adapter;
-		PeopleViewModel view_model;
+        ListView people_list_view;
 	}
 }

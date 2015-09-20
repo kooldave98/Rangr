@@ -87,7 +87,6 @@
     <Compile Include="Code\Views\TextViewWriter.cs" />
     <Compile Include="Code\Views\AppActionBarDrawerToggle.cs" />
     <Compile Include="StartUpActivity.cs" />
-    <Compile Include="Code\FragmentBase.cs" />
     <Compile Include="Code\FragmentHostActivity.cs" />
     <Compile Include="Code\Screens\BaseFragment.cs" />
     <Compile Include="Code\Screens\LoginFragment.cs" />
@@ -101,21 +100,23 @@
     <Compile Include="Code\Screens\ProfileActivity.cs" />
     <Compile Include="Code\Screens\SimulationActivity.cs" />
     <Compile Include="Code\Screens\AboutAppActivity.cs" />
-    <Compile Include="Code\Screens\EditProfileActivity.cs" />
-    <Compile Include="Code\Screens\PeopleActivity.cs" />
+    <Compile Include="Code\Screens\EditProfileActivity.cs">
+      <DependentUpon>ProfileActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Screens\PeopleListAdapter.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleListFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleMapFragment.cs">
-      <DependentUpon>PeopleActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\ProfileAdapter.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\BaseActivity.cs" />
+    <Compile Include="Code\Screens\PeopleFragmentActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

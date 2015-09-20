@@ -322,7 +322,7 @@ namespace rangr.droid
                     break;
                 case 1:
                     drawer_list.SetItemChecked(current_drawer_item, true);
-                    StartActivity(typeof(PeopleActivity));
+                    StartActivity(typeof(PeopleFragmentActivity));
                     return;
                 case 2:
                     drawer_list.SetItemChecked(current_drawer_item, true);

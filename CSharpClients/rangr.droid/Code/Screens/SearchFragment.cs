@@ -27,7 +27,7 @@ namespace rangr.droid
     {
         private const string intent_name = "hashtag";
 
-        public override SearchFragment LoadFragment()
+        public override SearchFragment InitFragment()
         {
             if (Intent.HasExtra(intent_name))
             {

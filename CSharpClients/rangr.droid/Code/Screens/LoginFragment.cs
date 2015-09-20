@@ -32,7 +32,7 @@ namespace rangr.droid
             };
         }
 
-        public override LoginFragment LoadFragment()
+        public override LoginFragment InitFragment()
         {
             return new LoginFragment();
         }

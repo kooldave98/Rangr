@@ -13,9 +13,17 @@ using rangr.common;
 
 namespace rangr.droid
 {
+    //Need to think about..
+    //1. The fragment container
+    //2. The fragment tag
+    //3. How to properly swap out fragments
 	[Activity (Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]			
-	public class PeopleActivity : BaseActivity
-	{
+    public class PeopleFragmentActivity : FragmentActivity<PeopleFragment>
+	{        
+        public override PeopleFragment InitFragment()
+        {
+            throw new NotImplementedException();
+        }
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -29,8 +37,8 @@ namespace rangr.droid
 			//setup the action bar for tabs mode
 			this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 
-			list_fragment = new PeopleListFragment (view_model);
-			map_fragment = new PeopleMapFragment (view_model);
+			list_fragment = new PeopleListFragment ();
+			map_fragment = new PeopleMapFragment ();
 
 
 			AddTab ("List", list_fragment);
@@ -62,23 +70,11 @@ namespace rangr.droid
 				e.FragmentTransaction.Add (Resource.Id.fragmentContainer, view);
 
 			};
-			tab.TabUnselected += delegate(object sender, ActionBar.TabEventArgs e) {
+			tab.TabUnselected += (object sender, ActionBar.TabEventArgs e) => {
 				e.FragmentTransaction.Remove (view);
 			};
 
 			this.ActionBar.AddTab (tab);
-		}
-
-		protected override void OnResume()
-		{
-			base.OnResume ();
-		}
-
-		protected override void OnPause()
-		{
-			base.OnPause ();
-
-			Finish ();
 		}
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
@@ -92,18 +88,20 @@ namespace rangr.droid
 
 		private PeopleListFragment list_fragment;
 		private PeopleMapFragment map_fragment;
-
-		private PeopleViewModel view_model;
-
-		protected override ViewModelBase init_view_model ()
-		{
-			if (view_model == null) {
-				view_model = new PeopleViewModel ();
-			}
-
-			return view_model;
-			
-		}
 	}
+
+    public abstract class PeopleFragment : VMFragment<PeopleViewModel>
+    {
+        public override string TitleLabel {
+            get {
+                return "People";
+            }
+        }
+
+        protected override void Initialise()
+        {
+            view_model = new PeopleViewModel();
+        }
+    }
 }
 

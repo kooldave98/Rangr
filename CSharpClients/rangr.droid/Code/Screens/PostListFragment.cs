@@ -27,7 +27,7 @@ namespace rangr.droid
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class PostListFragmentActivity : FragmentActivity<PostListFragment>
     {
-        public override PostListFragment LoadFragment()
+        public override PostListFragment InitFragment()
         {
             return new PostListFragment();
         }
@@ -106,7 +106,7 @@ namespace rangr.droid
 
             postListView.OnLoadMoreTriggered += async (sender, e) => {
                 await view_model.OlderPosts();
-                JSTimer.SetTimeout(delegate {
+                JSTimer.SetTimeout(() => {
                     Activity.RunOnUiThread(() => {
                         ((EndlessListView)sender).SetEndlessListLoaderComplete();
                     });

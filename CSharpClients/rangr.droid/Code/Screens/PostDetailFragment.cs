@@ -29,7 +29,7 @@ namespace rangr.droid
             return true;
         }
 
-        public override PostDetailFragment LoadFragment()
+        public override PostDetailFragment InitFragment()
         {
             Post post;
             if (Intent.HasExtra ("Post")) {
@@ -58,6 +58,7 @@ namespace rangr.droid
             return intent;
         }
     }
+
     public class PostDetailFragment : VMFragment<PostDetailsViewModel>
     {
         public override string TitleLabel { 

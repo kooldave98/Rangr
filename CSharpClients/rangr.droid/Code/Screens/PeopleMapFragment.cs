@@ -15,20 +15,9 @@ using rangr.common;
 
 namespace rangr.droid
 {
-	public class PeopleMapFragment : Fragment
+    public class PeopleMapFragment : PeopleFragment
 	{
 		private GoogleMap _map;
-
-		public override void OnActivityCreated (Bundle savedInstanceState)
-		{
-			base.OnActivityCreated (savedInstanceState);				
-		}
-
-		public override void OnCreate (Bundle savedInstanceState)
-		{
-			base.OnCreate (savedInstanceState);
-			RetainInstance = true;
-		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -143,13 +132,6 @@ namespace rangr.droid
 		{
 			return new LatLng (geo_value.Latitude, geo_value.Longitude);
 		}
-
-		public PeopleMapFragment (PeopleViewModel the_view_model)
-		{
-			view_model = the_view_model;
-		}
-
-		PeopleViewModel view_model;
 	}
 }
 

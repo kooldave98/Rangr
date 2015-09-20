@@ -30,7 +30,7 @@ namespace rangr.droid
             return true;
         }
 
-        public override NewPostFragment LoadFragment()
+        public override NewPostFragment InitFragment()
         {
             return new NewPostFragment();
         }

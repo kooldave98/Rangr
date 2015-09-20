@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace rangr.droid
 {
+    /// <summary>
+    /// This will be removed when all activities have been converted to FragmentActivities
+    /// </summary>
 	public abstract class BaseActivity : Activity
 	{
 		private bool is_paused = false;
@@ -102,7 +105,7 @@ namespace rangr.droid
                     ResurrectActivity (typeof(PostListFragmentActivity));
 				break;
 			case Resource.Id.people_menu_item:
-				ResurrectActivity (typeof(PeopleActivity));
+				ResurrectActivity (typeof(PeopleFragmentActivity));
 				break;
 			case Resource.Id.profile_menu_item:
 				ResurrectActivity (typeof(ProfileActivity));
