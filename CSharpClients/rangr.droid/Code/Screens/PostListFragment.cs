@@ -44,19 +44,6 @@ namespace rangr.droid
                 var postDetails = PostDetailFragmentActivity.CreateIntent(this, p);
                 StartActivity(postDetails);
             };
-
-//            Fragment.NewPostSelected += () => {
-//                StartActivity(typeof(NewPostActivity));
-//
-//                //Below will be ideal for an image picker, not on new post
-//                    var result = await StartActivityForResultAsync<AsyncActivity>();
-//                    if (result.ResultCode == Result.Ok)
-//                    {
-//                        var text = result.Data.GetStringExtra(AsyncActivity.TextExtra);
-//                        Fragment.UpdateText(text);
-//                    }
-//
-//            };
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

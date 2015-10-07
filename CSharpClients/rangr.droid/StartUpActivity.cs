@@ -25,6 +25,7 @@ namespace rangr.droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            //RequestWindowFeature(Android.Views.WindowFeatures.NoTitle);
             Analytics.Current.Initialize(ApplicationContext); 
                 
             start_activity_architecture();

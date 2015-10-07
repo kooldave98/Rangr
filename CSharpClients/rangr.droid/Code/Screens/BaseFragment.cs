@@ -79,13 +79,13 @@ namespace rangr.droid
                     .SetTitle(title)
                     .SetMessage(message)
                     .SetPositiveButton(ok_button_text, (innerSender, innere) => {
-                                                            Activity.RunOnUiThread(() => {
-                                                                if (ok_button_action != null)
-                                                                {
-                                                                    ok_button_action();
-                                                                }
-                                                            }
-                    );
+                Activity.RunOnUiThread(() => {
+                    if (ok_button_action != null)
+                    {
+                        ok_button_action();
+                    }
+                }
+                );
 
             });
             var dialog = builder.Create();
@@ -122,7 +122,10 @@ namespace rangr.droid
     public abstract class VMFragment<V> : BaseFragment where V : ViewModelBase
     {
         public static string INIT_ARG_KEY = "ARG_KEY";
-        protected virtual void Initialise() {/*Meant to be optionally overriden*/}
+
+        protected virtual void Initialise()
+        {/*Meant to be optionally overriden*/
+        }
 
         public override void OnCreate(Bundle bundle)
         {
@@ -236,14 +239,21 @@ namespace rangr.droid
         /// <param name="fragmentTag">The tag which uniquely identifies the fragment.</param>
         /// <param name="containerId">The resource ID of the parent view to use for a newly created fragment.</param>
         /// <returns>The found or created fragment.</returns>
-        public static TFragment FindOrCreateFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag, int containerId) where TFragment : FragmentBase
+//        public static TFragment FindOrCreateFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag, int containerId) where TFragment : FragmentBase
+//        {
+//            var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
+//            if (fragment == null)
+//            {
+//                fragment = activity.InitFragment();
+//                SwapFragment(activity, fragment, fragmentTag, containerId);
+//            }
+//
+//            return fragment;
+//        }
+
+        public static TFragment FindFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag) where TFragment : FragmentBase
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
-            if (fragment == null)
-            {
-                fragment = activity.InitFragment();
-                SwapFragment(activity, fragment, fragmentTag, containerId);
-            }
 
             return fragment;
         }
@@ -344,14 +354,48 @@ namespace rangr.droid
             }
         }
 
+        protected virtual int ContainerID { 
+            get { 
+                return Android.Resource.Id.Content; 
+            } 
+        }
+
+        private int TERRIBLE_IDEA = -999999;
+        protected virtual int ContentViewID {
+            get{
+                //Can this cause any weird subtle bugs
+                //INVESTIGATE/IMPROVE this implementation
+                return TERRIBLE_IDEA;
+            }
+        }
+
+        #region "I'm not entirely satisfied with these 2 methods for loading a fragment. They will need to be consolidated somehow."
         public abstract TFragment InitFragment();
+
+        protected void LoadFragment()
+        {
+            Fragment = FragmentBase.FindFragment<TFragment>(this, FragmentTag) ?? InitFragment();
+            FragmentBase.SwapFragment(this, Fragment, FragmentTag, ContainerID);
+        }
+
+        protected void LoadNewFragment()
+        {
+            Fragment =  InitFragment();
+            FragmentBase.SwapFragment(this, Fragment, FragmentTag, ContainerID);
+        }
+        #endregion
 
         /// <inheritdoc />
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            Fragment = FragmentBase.FindOrCreateFragment<TFragment>(this, FragmentTag, Android.Resource.Id.Content);
+            if (ContentViewID != TERRIBLE_IDEA)
+            {
+                SetContentView(ContentViewID);
+            }
+
+            LoadFragment();
         }
 
         protected override async void OnDestroy()

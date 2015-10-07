@@ -107,7 +107,8 @@ namespace rangr.common
             }
             catch (Exception e)
             {
-
+                //hack, the server returns multipart content, need to fix this later
+                post_id = new PostIdentity();
                 AppEvents.Current.TriggerConnectionFailedEvent(e.Message);
                 Debug.WriteLine(e.Message);
             }

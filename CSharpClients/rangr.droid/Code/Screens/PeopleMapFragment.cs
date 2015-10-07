@@ -12,11 +12,17 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using rangr.common;
+using solid_lib;
 
 namespace rangr.droid
 {
     public class PeopleMapFragment : PeopleFragment
 	{
+        public void set_vm(PeopleViewModel vm)
+        {
+            view_model = Guard.IsNotNull(vm, "vm");
+        }
+
 		private GoogleMap _map;
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

@@ -21,6 +21,75 @@ namespace rangr.ios
 
             Theme.Primitive.Apply(View);
         }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            isBusyChangedEventHandler = (sender, e) => {
+
+                if (view_model.IsBusy)
+                {
+                    show_progress();
+                }
+                else
+                {
+                    dismiss_progress();
+                }
+            };
+
+            view_model.IsBusyChanged += isBusyChangedEventHandler;
+
+            ConnectionFailedHandler = (sender, e) => {
+                show_toast("An attempt to establish a network connection failed.");
+            };
+
+            GeolocatorFailedHandler = (sender, e) => {
+                show_toast("An attempt to retrieve your geolocation failed. " +
+                    "\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
+            };
+
+            AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
+
+            AppEvents.Current.GeolocatorFailed += GeolocatorFailedHandler;
+
+            view_model.ResumeState();
+
+            AppGlobal.Current.Resume();
+
+
+            is_paused = false;
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            view_model.IsBusyChanged -= isBusyChangedEventHandler;
+
+            view_model.PauseState();
+
+            dismiss_progress();
+
+            //Potentially easier way to unsubscribe event handlers
+            //http://www.h3mm3.com/2011/06/unsubscribing-to-events-in-c.html
+
+            AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
+
+            AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
+
+            AppGlobal.Current.Pause();
+
+            is_paused = true;
+        }
+
+        private bool is_paused = false;
+
+        private EventHandler isBusyChangedEventHandler;
+
+        private EventHandler<AppEventArgs> ConnectionFailedHandler;
+
+        private EventHandler<AppEventArgs> GeolocatorFailedHandler;
     }
 
     public abstract class BaseViewController : UIViewController

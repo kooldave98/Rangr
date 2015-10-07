@@ -22,8 +22,6 @@ using Android.Support.V4.View;
 /// 3. Sort out menus
 /// 4. Introduce action bar spinner on Posts Fragment
 /// </todo>
-
-//This 
 namespace rangr.droid
 {
     [Activity(Label = "@string/app_name",

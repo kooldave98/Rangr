@@ -14,6 +14,10 @@ using Android.Widget;
 using rangr.common;
 using Android.Content.PM;
 using Android.Text;
+using Android.Provider;
+using Android.Graphics;
+using Xamarin.Media;
+using System.IO;
 
 namespace rangr.droid
 {
@@ -44,7 +48,29 @@ namespace rangr.droid
             Fragment.PostTextChanged += (txt) => {
                 send_button.SetEnabled(!string.IsNullOrWhiteSpace(txt));
             };
+
+            Fragment.RequestImagePicker += async () => {
+
+                var picker = new MediaPicker(this);
+
+                    var intent = picker.GetPickPhotoUI();
+
+                    var result = await StartActivityForResultAsync(intent);
+
+                    if (result.ResultCode == Result.Canceled)
+                        return;
+
+                    var media_file = await result.Data.GetMediaFileExtraAsync(this);
+
+                    Fragment.SetImage(ImageHelper.Current.get_square_bitmap(media_file.Path));                
+
+            };
+
+            Fragment.NewPostCreated += () => {
+                Finish();
+            };
         }
+
 
         private IMenuItem send_button;
 
@@ -87,18 +113,50 @@ namespace rangr.droid
 
             view.FindViewById<TextView>(Resource.Id.UserNameText).SetText(view_model.CurrentUser.user_display_name, TextView.BufferType.Normal);
 
-            post_text_input = view.FindViewById<EditText>(Resource.Id.PostText);
-            post_text_input.TextChanged += (object sender, TextChangedEventArgs e) => {
+            post_text_input = view.FindViewById<EditText>(Resource.Id.PostText)
+                                .Chain(p => p.TextChanged += (object sender, TextChangedEventArgs e) => {
                 var text = ((EditText)sender).Text;
 
                 PostTextChanged(text);
                 view_model.PostText = text;
-            };
+            });
+            post_image = view.FindViewById<ImageView>(Resource.Id.PostImage);
 
             return view;
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if (!is_image_set)
+            {
+                is_image_set = true;
+                RequestImagePicker();
+            }
+        }
+
         private EditText post_text_input;
+        private ImageView post_image;
+        private bool is_image_set = false;
+
+        public void SetImage(Bitmap image)
+        {
+            //Todo: Validate image dimensions
+            post_image.SetImageBitmap(image);
+            view_model.PostImage = prepare_image(image);
+        }
+
+        private HttpFile prepare_image(Bitmap image)
+        {
+            byte[] bytes;
+            using (var stream = new MemoryStream())
+            {
+                image.Compress(Bitmap.CompressFormat.Jpeg, 0, stream);
+                bytes = stream.ToArray();
+            }
+            return new HttpFile("photo","image/jpg", bytes); 
+        }
 
         //All this logic can be pushed into the ViewModel
         public async void HandleSaveButtonClicked(object sender, EventArgs e)
@@ -124,6 +182,8 @@ namespace rangr.droid
             }
         }
 
+        public event Action RequestImagePicker = delegate {};
+
         public event Action<string> PostTextChanged = delegate{};
 
         public NewPostFragment()
@@ -135,5 +195,33 @@ namespace rangr.droid
         }
 
         public event Action NewPostCreated = delegate {};
+    }
+
+    public class ImageHelper : SingletonBase<ImageHelper>
+    {
+        public Bitmap get_square_bitmap(string image_path)
+        {
+            var image_file = new Java.IO.File(image_path);
+            return crop_square(BitmapFactory.DecodeFile(image_file.AbsolutePath));
+        }
+
+        private Bitmap crop_square(Bitmap bitmap)
+        {
+            var width = bitmap.Width;
+            var height = bitmap.Height;
+            var newWidth = (height > width) ? width : height;
+            var newHeight = (height > width) ? height - (height - width) : height;
+            var cropW = (width - height) / 2;
+            cropW = (cropW < 0) ? 0 : cropW;
+            var cropH = (height - width) / 2;
+            cropH = (cropH < 0) ? 0 : cropH;
+            var cropImg = Bitmap.CreateBitmap(bitmap, cropW, cropH, newWidth, newHeight);
+
+            return cropImg;
+        }
+
+        private ImageHelper()
+        {
+        }
     }
 }
