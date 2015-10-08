@@ -285,6 +285,9 @@ namespace rangr.droid
                 .SetText(TimeAgoConverter.Current.Convert(item.date), TextView.BufferType.Normal);
 
             view.FindViewById<ImageView>(Resource.Id.profilePic).SetImageResource(Resource.Drawable.user_default_avatar);
+            Koush.UrlImageViewHelper
+                .SetUrlDrawable (view.FindViewById<ImageView>(Resource.Id.feedImage1)
+                                , string.Format("{0}/images/{1}",Resources.baseUrl, item.image_id));
             //Finally return the view
             return view;
         }

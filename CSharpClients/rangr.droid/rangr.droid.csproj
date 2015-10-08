@@ -16,7 +16,7 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>rangr.droid</AssemblyName>
-    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
@@ -60,12 +60,6 @@
     <Reference Include="AndHUD">
       <HintPath>..\packages\AndHUD.1.2.0\lib\MonoAndroid\AndHUD.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.10.6\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="ModernHttpClient">
       <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
     </Reference>
@@ -80,6 +74,15 @@
     </Reference>
     <Reference Include="Media.Plugin.Abstractions">
       <HintPath>..\packages\Xam.Plugin.Media.1.0.2\lib\MonoAndroid10\Media.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.11.1\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.0.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="UrlImageViewHelper">
+      <HintPath>..\Components\urlimageviewhelper-1.0.4.1\lib\android\UrlImageViewHelper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -110,20 +113,20 @@
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleListAdapter.cs">
-      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragment.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleListFragment.cs">
-      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragment.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleMapFragment.cs">
-      <DependentUpon>PeopleFragmentActivity.cs</DependentUpon>
+      <DependentUpon>PeopleFragment.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\ProfileAdapter.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\BaseActivity.cs" />
-    <Compile Include="Code\Screens\PeopleFragmentActivity.cs" />
     <Compile Include="Code\Screens\MonitoredActivity.cs" />
+    <Compile Include="Code\Screens\PeopleFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -239,7 +242,7 @@
   </ItemGroup>
   <Import Project="..\rangr.common\App.Common.projitems" Label="Shared" Condition="Exists('..\rangr.common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
+  <Import Project="..\packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-mdpi\" />
@@ -264,6 +267,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamarin.mobile">
       <Version>0.7.4</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="urlimageviewhelper">
+      <Version>1.0.4.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
