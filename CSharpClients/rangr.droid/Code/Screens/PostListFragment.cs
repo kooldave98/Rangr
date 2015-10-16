@@ -50,7 +50,7 @@ namespace rangr.droid
         {
             base.OnCreateOptionsMenu(menu);
 
-            MenuInflater.Inflate(Resource.Menu.posts, menu);
+            MenuInflater.Inflate(Resource.Menu.main_menu, menu);
 
             return true;
         }
@@ -112,8 +112,6 @@ namespace rangr.droid
             #region Setup pull to refresh
 
             refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
-            refresher.SetColorScheme(Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
-                Resource.Color.xam_gray, Resource.Color.xam_green);
 
             refresher.Refresh += async (sender, e) => {
                 await view_model.RefreshPosts();

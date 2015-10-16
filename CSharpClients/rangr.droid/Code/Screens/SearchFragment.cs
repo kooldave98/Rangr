@@ -125,10 +125,8 @@ namespace rangr.droid
             #region Setup pull to refresh
 
             refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
-            refresher.SetColorScheme(Resource.Color.xam_dark_blue, Resource.Color.xam_purple, 
-                Resource.Color.xam_gray, Resource.Color.xam_green);
 
-            refresher.Refresh += async (sender, e) => {
+            refresher.Refresh += (sender, e) => {
                 //await view_model.RefreshPosts ();
                 JSTimer.SetTimeout(delegate {
                     Activity.RunOnUiThread(() => {

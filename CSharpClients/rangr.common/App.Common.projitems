@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Connections\Connections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patterns\ObjectExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\OnGoogleMapReady.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

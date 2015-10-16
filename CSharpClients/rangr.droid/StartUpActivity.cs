@@ -30,8 +30,6 @@ namespace rangr.droid
                 
             start_activity_architecture();
 
-            //start_fragment_architecture();
-
             Finish();
         }
 
@@ -47,14 +45,6 @@ namespace rangr.droid
             } else {
                 StartActivity (typeof(LoginFragmentActivity));
             }
-        }
-
-        /// <summary>
-        /// The all fragments hosted in one Activity based architecture
-        /// </summary>
-        private void start_fragment_architecture()
-        {
-            StartActivity(typeof(FragmentHostActivity));
         }
     }
 }

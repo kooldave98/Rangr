@@ -179,9 +179,6 @@ namespace rangr.droid
             view_model.ResumeState();
 
             AppGlobal.Current.Resume(this.Activity);
-
-
-            is_paused = false;
         }
 
         public override void OnPause()
@@ -204,15 +201,11 @@ namespace rangr.droid
 
             AppGlobal.Current.Pause(this.Activity);
 
-            is_paused = true;
-
             ////I think this is a quick and dirty way to prevent crashes really.
             ////If every activity is loaded fresh and killed everytime, then there'll be nothing that can crash, haha
             ////Only problem is this may be resource intensive.
             //Finish();
         }
-
-        private bool is_paused = false;
 
         private EventHandler isBusyChangedEventHandler;
 
@@ -300,7 +293,7 @@ namespace rangr.droid
         {
             if (this.GetType() != typeof(LoginFragmentActivity))
             {
-                MenuInflater.Inflate(Resource.Menu.menu, menu);
+                MenuInflater.Inflate(Resource.Menu.base_menu, menu);
             }
 
             return base.OnCreateOptionsMenu(menu);
@@ -311,11 +304,8 @@ namespace rangr.droid
         {
             switch (item.ItemId)
             {
-                case Resource.Id.feed_menu_item:
-                    ResurrectActivity(typeof(PostListFragmentActivity));
-                    break;
                 case Resource.Id.people_menu_item:
-                    ResurrectActivity(typeof(PeopleFragmentActivity));
+                    ResurrectActivity(typeof(PeopleListFragmentActivity));
                     break;
                 case Resource.Id.profile_menu_item:
                     ResurrectActivity(typeof(ProfileActivity));
@@ -354,19 +344,10 @@ namespace rangr.droid
             }
         }
 
-        protected virtual int ContainerID { 
+        private int ContainerID { 
             get { 
                 return Android.Resource.Id.Content; 
             } 
-        }
-
-        private int TERRIBLE_IDEA = -999999;
-        protected virtual int ContentViewID {
-            get{
-                //Can this cause any weird subtle bugs
-                //INVESTIGATE/IMPROVE this implementation
-                return TERRIBLE_IDEA;
-            }
         }
 
         #region "I'm not entirely satisfied with these 2 methods for loading a fragment. They will need to be consolidated somehow."
@@ -389,11 +370,6 @@ namespace rangr.droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            if (ContentViewID != TERRIBLE_IDEA)
-            {
-                SetContentView(ContentViewID);
-            }
 
             LoadFragment();
         }

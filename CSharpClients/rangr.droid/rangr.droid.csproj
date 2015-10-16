@@ -54,9 +54,6 @@
     <Reference Include="Xamarin.Mobile">
       <HintPath>..\Components\xamarin.mobile-0.7.4\lib\android\Xamarin.Mobile.dll</HintPath>
     </Reference>
-    <Reference Include="GooglePlayServicesLib">
-      <HintPath>..\Components\googleplayservices-13.0\lib\android\GooglePlayServicesLib.dll</HintPath>
-    </Reference>
     <Reference Include="AndHUD">
       <HintPath>..\packages\AndHUD.1.2.0\lib\MonoAndroid\AndHUD.dll</HintPath>
     </Reference>
@@ -69,20 +66,20 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Media.Plugin">
-      <HintPath>..\packages\Xam.Plugin.Media.1.0.2\lib\MonoAndroid10\Media.Plugin.dll</HintPath>
-    </Reference>
-    <Reference Include="Media.Plugin.Abstractions">
-      <HintPath>..\packages\Xam.Plugin.Media.1.0.2\lib\MonoAndroid10\Media.Plugin.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.11.1\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="UrlImageViewHelper">
+      <HintPath>..\Components\urlimageviewhelper-1.0.4.1\lib\android\UrlImageViewHelper.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.23.0.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
-    <Reference Include="UrlImageViewHelper">
-      <HintPath>..\Components\urlimageviewhelper-1.0.4.1\lib\android\UrlImageViewHelper.dll</HintPath>
+    <Reference Include="Xamarin.GooglePlayServices.Base">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Base.26.0.0.0\lib\MonoAndroid41\Xamarin.GooglePlayServices.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Maps">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.26.0.0.0\lib\MonoAndroid41\Xamarin.GooglePlayServices.Maps.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -94,16 +91,11 @@
     <Compile Include="Code\Views\PeopleGroupsListView.cs" />
     <Compile Include="Code\Views\TextViewHyperlinkOnTouchListener.cs" />
     <Compile Include="Code\Views\TextViewWriter.cs" />
-    <Compile Include="Code\Views\AppActionBarDrawerToggle.cs" />
     <Compile Include="StartUpActivity.cs" />
-    <Compile Include="Code\FragmentHostActivity.cs" />
     <Compile Include="Code\Screens\BaseFragment.cs" />
     <Compile Include="Code\Screens\LoginFragment.cs" />
     <Compile Include="Code\Screens\NewPostFragment.cs" />
     <Compile Include="Code\Screens\PostDetailFragment.cs" />
-    <Compile Include="Code\Screens\PostDetailMapFragment.cs">
-      <DependentUpon>PostDetailFragment.cs</DependentUpon>
-    </Compile>
     <Compile Include="Code\Screens\PostListFragment.cs" />
     <Compile Include="Code\Screens\SearchFragment.cs" />
     <Compile Include="Code\Screens\ProfileActivity.cs" />
@@ -112,20 +104,14 @@
     <Compile Include="Code\Screens\EditProfileActivity.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Screens\PeopleListAdapter.cs">
-      <DependentUpon>PeopleFragment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\PeopleListFragment.cs">
-      <DependentUpon>PeopleFragment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Code\Screens\PeopleMapFragment.cs">
-      <DependentUpon>PeopleFragment.cs</DependentUpon>
-    </Compile>
     <Compile Include="Code\Screens\ProfileAdapter.cs">
       <DependentUpon>ProfileActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\BaseActivity.cs" />
     <Compile Include="Code\Screens\MonitoredActivity.cs" />
+    <Compile Include="Code\Screens\PeopleListAdapter.cs">
+      <DependentUpon>PeopleFragment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Screens\PeopleFragment.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,22 +121,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\PostDetails.axml" />
-    <AndroidResource Include="Resources\layout\PostListItem.axml">
-      <DependentUpon>PostList.axml</DependentUpon>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewPost.axml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
-    <AndroidResource Include="Resources\menu\menu.xml" />
-    <AndroidResource Include="Resources\layout\People.axml" />
-    <AndroidResource Include="Resources\layout\PeopleList.axml">
-      <DependentUpon>People.axml</DependentUpon>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\PostList.axml" />
+    <AndroidResource Include="Resources\layout\PeopleList.axml" />
     <AndroidResource Include="Resources\layout\PeopleListItem.axml">
-      <DependentUpon>People.axml</DependentUpon>
+      <DependentUpon>PeopleList.axml</DependentUpon>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EmailPropertyListItem.axml">
       <DependentUpon>Profile.axml</DependentUpon>
@@ -175,7 +151,6 @@
     <AndroidResource Include="Resources\layout\EditProfile.axml" />
     <AndroidResource Include="Resources\layout\loading_layout.axml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
-    <AndroidResource Include="Resources\layout\GoogleMap.axml" />
     <AndroidResource Include="Resources\drawable\bg_parent_rounded_corner.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\drawable\twitter.png" />
@@ -218,13 +193,13 @@
     <AndroidResource Include="Resources\layout\post_detail.axml" />
     <AndroidResource Include="Resources\layout\post_list.axml" />
     <AndroidResource Include="Resources\layout\loadMore.axml" />
-    <AndroidResource Include="Resources\menu\main.xml" />
-    <AndroidResource Include="Resources\menu\posts.xml" />
     <AndroidResource Include="Resources\menu\search.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\action_search.png" />
     <AndroidResource Include="Resources\drawable-mdpi\action_search.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\action_search.png" />
-    <AndroidResource Include="Resources\layout\post_list_item.axml" />
+    <AndroidResource Include="Resources\layout\post_list_item.axml">
+      <DependentUpon>post_list.axml</DependentUpon>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\main_with_drawer.axml" />
     <AndroidResource Include="Resources\anim\enter.xml" />
     <AndroidResource Include="Resources\anim\exit.xml" />
@@ -239,6 +214,9 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_drawer.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_drawer.png" />
+    <AndroidResource Include="Resources\menu\main_menu.xml" />
+    <AndroidResource Include="Resources\menu\base_menu.xml" />
+    <AndroidResource Include="Resources\menu\profile.xml" />
   </ItemGroup>
   <Import Project="..\rangr.common\App.Common.projitems" Label="Shared" Condition="Exists('..\rangr.common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
@@ -257,14 +235,6 @@
     <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ItemGroup>
-    <XamarinComponentReference Include="googleplayservices">
-      <Version>13.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="xamandroidsupportv4-18">
-      <Version>20.0.0.4</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="xamarin.mobile">
       <Version>0.7.4</Version>
       <Visible>False</Visible>

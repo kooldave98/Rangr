@@ -58,23 +58,16 @@ namespace rangr.droid
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			menu.Add ("Edit Profile").SetShowAsAction (ShowAsAction.IfRoom);
-
-			MenuInflater.Inflate (Resource.Menu.menu, menu);
-
-			menu.FindItem (Resource.Id.profile_menu_item).SetEnabled (false);
+            MenuInflater.Inflate (Resource.Menu.profile, menu);
 
 			return base.OnCreateOptionsMenu (menu);
 		}
 
 		public override bool OnOptionsItemSelected (IMenuItem item)
 		{
-			switch (item.TitleFormatted.ToString ()) { 
-			case "Edit Profile":
+            switch (item.ItemId) { 
+                case Resource.Id.edit_profile_menu_item:
 				StartActivityForResult (typeof(EditProfileActivity), 0);
-				break;
-			case "Console":
-				ShowToast ("Console not available");
 				break;
 			}
 

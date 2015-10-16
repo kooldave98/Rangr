@@ -30,7 +30,7 @@ namespace rangr.ios
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Shared = this;
-            MapServices.ProvideAPIKey(Resources.GOOGLE_MAPS_API_KEY);
+            MapServices.ProvideAPIKey(Resources.IOS_GOOGLE_MAPS_API_KEY);
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
