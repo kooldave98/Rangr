@@ -92,27 +92,26 @@
     <Compile Include="Code\Views\TextViewHyperlinkOnTouchListener.cs" />
     <Compile Include="Code\Views\TextViewWriter.cs" />
     <Compile Include="StartUpActivity.cs" />
-    <Compile Include="Code\Screens\LoginFragment.cs" />
-    <Compile Include="Code\Screens\NewPostFragment.cs" />
-    <Compile Include="Code\Screens\PostDetailFragment.cs" />
-    <Compile Include="Code\Screens\PostListFragment.cs" />
-    <Compile Include="Code\Screens\SearchFragment.cs" />
-    <Compile Include="Code\Screens\ProfileActivity.cs" />
     <Compile Include="Code\Screens\SimulationActivity.cs" />
     <Compile Include="Code\Screens\AboutAppActivity.cs" />
-    <Compile Include="Code\Screens\EditProfileActivity.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Code\Screens\ProfileAdapter.cs">
-      <DependentUpon>ProfileActivity.cs</DependentUpon>
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Screens\BaseActivity.cs" />
     <Compile Include="Code\Screens\MonitoredActivity.cs" />
     <Compile Include="Code\Screens\PeopleListAdapter.cs">
-      <DependentUpon>PeopleFragment.cs</DependentUpon>
+      <DependentUpon>PeopleScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Screens\PeopleFragment.cs" />
     <Compile Include="Code\Screens\InfrastructureBase.cs" />
+    <Compile Include="Code\Screens\ProfileScreen.cs" />
+    <Compile Include="Code\Screens\EditProfileScreen.cs">
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Screens\SearchScreen.cs" />
+    <Compile Include="Code\Screens\LoginScreen.cs" />
+    <Compile Include="Code\Screens\NewPostScreen.cs" />
+    <Compile Include="Code\Screens\PeopleScreen.cs" />
+    <Compile Include="Code\Screens\PostDetailScreen.cs" />
+    <Compile Include="Code\Screens\PostListScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -148,7 +147,6 @@
       <DependentUpon>Profile.axml</DependentUpon>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Profile.axml" />
-    <AndroidResource Include="Resources\layout\EditProfile.axml" />
     <AndroidResource Include="Resources\layout\loading_layout.axml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\drawable\bg_parent_rounded_corner.xml" />
@@ -217,6 +215,7 @@
     <AndroidResource Include="Resources\menu\main_menu.xml" />
     <AndroidResource Include="Resources\menu\base_menu.xml" />
     <AndroidResource Include="Resources\menu\profile.xml" />
+    <AndroidResource Include="Resources\layout\edit_profile.axml" />
   </ItemGroup>
   <Import Project="..\rangr.common\App.Common.projitems" Label="Shared" Condition="Exists('..\rangr.common\App.Common.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
