@@ -23,7 +23,7 @@ namespace rangr.droid
 {
     [Activity(Label = "@string/app_name"
             , ScreenOrientation = ScreenOrientation.Portrait)]         
-    public class NewPostFragmentActivity : FragmentActivity<NewPostFragment>
+    public class NewPostFragmentActivity : FragmentActivity
     {
         public override bool OnNavigateUp()
         {
@@ -34,14 +34,18 @@ namespace rangr.droid
             return true;
         }
 
-        public override NewPostFragment InitFragment()
-        {
-            return new NewPostFragment();
+        private NewPostFragment the_fragment;
+        private NewPostFragment Fragment {
+            get{ 
+                return the_fragment ?? (the_fragment = new NewPostFragment());
+            }
         }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            PushFragment(Fragment);
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
 
@@ -195,33 +199,5 @@ namespace rangr.droid
         }
 
         public event Action NewPostCreated = delegate {};
-    }
-
-    public class ImageHelper : SingletonBase<ImageHelper>
-    {
-        public Bitmap get_square_bitmap(string image_path)
-        {
-            var image_file = new Java.IO.File(image_path);
-            return crop_square(BitmapFactory.DecodeFile(image_file.AbsolutePath));
-        }
-
-        private Bitmap crop_square(Bitmap bitmap)
-        {
-            var width = bitmap.Width;
-            var height = bitmap.Height;
-            var newWidth = (height > width) ? width : height;
-            var newHeight = (height > width) ? height - (height - width) : height;
-            var cropW = (width - height) / 2;
-            cropW = (cropW < 0) ? 0 : cropW;
-            var cropH = (height - width) / 2;
-            cropH = (cropH < 0) ? 0 : cropH;
-            var cropImg = Bitmap.CreateBitmap(bitmap, cropW, cropH, newWidth, newHeight);
-
-            return cropImg;
-        }
-
-        private ImageHelper()
-        {
-        }
     }
 }

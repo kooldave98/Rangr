@@ -18,7 +18,7 @@ using Android.Gms.Maps.Model;
 namespace rangr.droid
 {
     [Activity(Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait)]         
-    public class PeopleListFragmentActivity : Activity
+    public class PeopleListFragmentActivity : FragmentActivity
     {
         private PeopleViewModel people_vm = new PeopleViewModel();
 

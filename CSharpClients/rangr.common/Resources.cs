@@ -11,7 +11,7 @@ namespace rangr.common
 		public const string baseUrl = "http://rangrapp-staging.azurewebsites.net/api";
         //public const string baseUrl = "http://rangrapp.azurewebsites.net/api";
 
-        //public const string baseUrl = "http://192.168.1.76:1898/api";
+        //public const string baseUrl = "http://192.168.1.78:1898/api";
 
         public const string ANDROID_GOOGLE_MAPS_API_KEY = "KEY_HERE";
         public const string IOS_GOOGLE_MAPS_API_KEY = "KEY_HERE";

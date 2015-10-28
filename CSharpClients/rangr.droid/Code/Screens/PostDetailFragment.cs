@@ -20,7 +20,7 @@ namespace rangr.droid
 {
     [Activity (Label = "@string/app_name"
             , ScreenOrientation = ScreenOrientation.Portrait)]         
-    public class PostDetailFragmentActivity : FragmentActivity<PostDetailFragment>
+    public class PostDetailFragmentActivity : FragmentActivity
     {        
         public override bool OnNavigateUp ()
         {
@@ -31,22 +31,34 @@ namespace rangr.droid
             return true;
         }
 
-        public override PostDetailFragment InitFragment()
+        private PostDetailFragment the_fragment;
+        private PostDetailFragment Fragment
         {
-            Post post;
-            if (Intent.HasExtra ("Post")) {
-                var postBytes = Intent.GetByteArrayExtra ("Post");
-                post = PostDetailsViewModel.Deserialize (postBytes);
-            } else {
-                post = new Post ();
-            }
+            get{
+                if (the_fragment != null)
+                    return the_fragment;
+                
 
-            return PostDetailFragment.newInstance(post);
+                Post post;
+                if (Intent.HasExtra("Post"))
+                {
+                    var postBytes = Intent.GetByteArrayExtra("Post");
+                    post = PostDetailsViewModel.Deserialize(postBytes);
+                }
+                else
+                {
+                    post = new Post();
+                }
+
+                return the_fragment = PostDetailFragment.newInstance(post);
+            }
         }
 
         protected override void OnCreate (Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            PushFragment(Fragment);
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
         }

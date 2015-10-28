@@ -25,16 +25,22 @@ namespace rangr.droid
     [Activity(Label = "@string/app_name",
         Icon = "@drawable/icon",
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class PostListFragmentActivity : FragmentActivity<PostListFragment>
+    public class PostListFragmentActivity : MainFragmentActivity
     {
-        public override PostListFragment InitFragment()
+        private PostListFragment the_fragment;
+        public PostListFragment Fragment
         {
-            return new PostListFragment();
+            get{
+                return the_fragment ??
+                    (the_fragment = new PostListFragment());
+            }
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            PushFragment(Fragment);
 
             Fragment.HashTagSelected += (ht) => {
                 StartActivity(typeof(SearchFragmentActivity));
@@ -46,26 +52,7 @@ namespace rangr.droid
             };
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            base.OnCreateOptionsMenu(menu);
 
-            MenuInflater.Inflate(Resource.Menu.main_menu, menu);
-
-            return true;
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            { 
-                case Resource.Id.new_post_menu_item:
-                    StartActivity(typeof(NewPostFragmentActivity));
-                    break;
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
     }
 
     public class PostListFragment : VMFragment<FeedViewModel>

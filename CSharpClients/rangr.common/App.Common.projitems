@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patterns\ObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\OnGoogleMapReady.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AndroidImageHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

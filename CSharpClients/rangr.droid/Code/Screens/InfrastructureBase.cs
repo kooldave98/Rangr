@@ -20,11 +20,108 @@ using System.Threading;
 
 namespace rangr.droid
 {
+    public abstract class VMFragment<V> : PlainFragment where V : ViewModelBase
+    {
+        public static string INIT_ARG_KEY = "ARG_KEY";
+
+        protected virtual void Initialise()
+        {/*Meant to be optionally overriden*/
+        }
+
+        public override void OnCreate(Bundle bundle)
+        {
+            Initialise();
+
+            Guard.IsNotNull(view_model, "view_model");
+            //notify ("OnCreate");
+            base.OnCreate(bundle);
+            SetHasOptionsMenu(true);
+        }
+
+        public Action SetupActionBarNavigation = delegate {
+        };
+
+        public override void OnResume()
+        {
+            //notify ("OnResume");
+            base.OnResume();
+
+            Activity.ActionBar.Title = TitleLabel;
+
+            SetupActionBarNavigation();
+
+            isBusyChangedEventHandler = (sender, e) => {
+
+                if (view_model.IsBusy)
+                {
+                    show_progress();
+                }
+                else
+                {
+                    dismiss_progress();
+                }
+            };
+
+            view_model.IsBusyChanged += isBusyChangedEventHandler;
+
+            ConnectionFailedHandler = (sender, e) => {
+                ShowToast("An attempt to establish a network connection failed.");
+            };
+
+            GeolocatorFailedHandler = (sender, e) => {
+                ShowToast("An attempt to retrieve your geolocation failed. " +
+                    "\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
+            };
+
+            AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
+
+            AppEvents.Current.GeolocatorFailed += GeolocatorFailedHandler;
+
+            view_model.ResumeState();
+
+            AppGlobal.Current.Resume(this.Activity);
+        }
+
+        public override void OnPause()
+        {
+            //notify ("OnPause");
+            base.OnPause();
+
+            view_model.IsBusyChanged -= isBusyChangedEventHandler;
+
+            view_model.PauseState();
+
+            dismiss_progress();
+
+            //Potentially easier way to unsubscribe event handlers
+            //http://www.h3mm3.com/2011/06/unsubscribing-to-events-in-c.html
+
+            AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
+
+            AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
+
+            AppGlobal.Current.Pause(this.Activity);
+
+            ////I think this is a quick and dirty way to prevent crashes really.
+            ////If every activity is loaded fresh and killed everytime, then there'll be nothing that can crash, haha
+            ////Only problem is this may be resource intensive.
+            //Finish();
+        }
+
+        private EventHandler isBusyChangedEventHandler;
+
+        private EventHandler<AppEventArgs> ConnectionFailedHandler;
+
+        private EventHandler<AppEventArgs> GeolocatorFailedHandler;
+
+        protected V view_model;
+    }
+        
     /// <summary>
     /// Investigate using custom notifications/toasts using the below library
     /// https://github.com/Redth/AndHUD
     /// </summary>
-    public abstract class BaseFragment : FragmentBase
+    public abstract class PlainFragment : FragmentBase
     {
         public abstract string TitleLabel { get; }
 
@@ -119,104 +216,7 @@ namespace rangr.droid
 
     }
 
-    public abstract class VMFragment<V> : BaseFragment where V : ViewModelBase
-    {
-        public static string INIT_ARG_KEY = "ARG_KEY";
-
-        protected virtual void Initialise()
-        {/*Meant to be optionally overriden*/
-        }
-
-        public override void OnCreate(Bundle bundle)
-        {
-            Initialise();
-
-            Guard.IsNotNull(view_model, "view_model");
-            //notify ("OnCreate");
-            base.OnCreate(bundle);
-            SetHasOptionsMenu(true);
-        }
-
-        public Action SetupActionBarNavigation = delegate {
-        };
-
-        public override void OnResume()
-        {
-            //notify ("OnResume");
-            base.OnResume();
-
-            Activity.ActionBar.Title = TitleLabel;
-
-            SetupActionBarNavigation();
-
-            isBusyChangedEventHandler = (sender, e) => {
-
-                if (view_model.IsBusy)
-                {
-                    show_progress();
-                }
-                else
-                {
-                    dismiss_progress();
-                }
-            };
-
-            view_model.IsBusyChanged += isBusyChangedEventHandler;
-
-            ConnectionFailedHandler = (sender, e) => {
-                ShowToast("An attempt to establish a network connection failed.");
-            };
-
-            GeolocatorFailedHandler = (sender, e) => {
-                ShowToast("An attempt to retrieve your geolocation failed. " +
-                "\n Please set your location mode on your phone's location settings to HIGH ACCURRACY");
-            };
-
-            AppEvents.Current.ConnectionFailed += ConnectionFailedHandler;
-
-            AppEvents.Current.GeolocatorFailed += GeolocatorFailedHandler;
-
-            view_model.ResumeState();
-
-            AppGlobal.Current.Resume(this.Activity);
-        }
-
-        public override void OnPause()
-        {
-            //notify ("OnPause");
-            base.OnPause();
-
-            view_model.IsBusyChanged -= isBusyChangedEventHandler;
-
-            view_model.PauseState();
-
-            dismiss_progress();
-
-            //Potentially easier way to unsubscribe event handlers
-            //http://www.h3mm3.com/2011/06/unsubscribing-to-events-in-c.html
-
-            AppEvents.Current.ConnectionFailed -= ConnectionFailedHandler;
-
-            AppEvents.Current.GeolocatorFailed -= GeolocatorFailedHandler;
-
-            AppGlobal.Current.Pause(this.Activity);
-
-            ////I think this is a quick and dirty way to prevent crashes really.
-            ////If every activity is loaded fresh and killed everytime, then there'll be nothing that can crash, haha
-            ////Only problem is this may be resource intensive.
-            //Finish();
-        }
-
-        private EventHandler isBusyChangedEventHandler;
-
-        private EventHandler<AppEventArgs> ConnectionFailedHandler;
-
-        private EventHandler<AppEventArgs> GeolocatorFailedHandler;
-
-        protected V view_model;
-    }
-
-    /// <summary>
+        /// <summary>
     /// The base class for top-level fragments in Android. These are the fragments which maintain the view hierarchy and state for each top-level
     /// Activity. These fragments all use RetainInstance = true to allow them to maintain state across configuration changes (i.e.,
     /// when the device rotates we reuse the fragments). Activity classes are basically just dumb containers for these fragments.
@@ -224,36 +224,12 @@ namespace rangr.droid
     public abstract class FragmentBase : Fragment
     {
         /// <summary>
-        /// Tries to locate an already created fragment with the given tag. If the fragment is not found then a new one will be created and inserted into
-        /// the given activity using the given containerId as the parent view.
+        /// The tag string to use when finding or creating this activity's fragment. This will be contructed using the type of this generic instance.
         /// </summary>
-        /// <typeparam name="TFragment">The type of fragment to create.</typeparam>
-        /// <param name="activity">The activity to search for or create the view in.</param>
-        /// <param name="fragmentTag">The tag which uniquely identifies the fragment.</param>
-        /// <param name="containerId">The resource ID of the parent view to use for a newly created fragment.</param>
-        /// <returns>The found or created fragment.</returns>
-//        public static TFragment FindOrCreateFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag, int containerId) where TFragment : FragmentBase
-//        {
-//            var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
-//            if (fragment == null)
-//            {
-//                fragment = activity.InitFragment();
-//                SwapFragment(activity, fragment, fragmentTag, containerId);
-//            }
-//
-//            return fragment;
-//        }
-
-        public static TFragment FindFragment<TFragment>(FragmentActivity<TFragment> activity, string fragmentTag) where TFragment : FragmentBase
-        {
-            var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
-
-            return fragment;
-        }
-
-        public static void SwapFragment<TFragment>(Activity activity, TFragment fragment, string fragmentTag, int containerId) where TFragment : FragmentBase
-        {
-            activity.FragmentManager.BeginTransaction().Add(containerId, fragment, fragmentTag).Commit();
+        protected string FragmentTag {
+            get {
+                return GetType().Name;
+            }
         }
 
         /// <inheritdoc />
@@ -283,42 +259,51 @@ namespace rangr.droid
 
 
     /// <summary>
-    /// An Activity that uses a retained Fragment for its implementation.
+    /// The landing home page activity
     /// </summary>
-    public abstract class FragmentActivity<TFragment> : Activity where TFragment : FragmentBase
+    public abstract class MainFragmentActivity : FragmentActivity
     {
-        #region "This bit really shouldn't be mixed with the rest, don't wanna contamite something that should really be a library type stuff"
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
+        public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            if (this.GetType() != typeof(LoginFragmentActivity))
-            {
-                MenuInflater.Inflate(Resource.Menu.base_menu, menu);
+            switch (item.ItemId)
+            { 
+                case Resource.Id.new_post_menu_item:
+                    StartActivity(typeof(NewPostFragmentActivity));
+                    break;
             }
 
-            return base.OnCreateOptionsMenu(menu);
+            return base.OnOptionsItemSelected(item);
         }
-
 
         public override bool OnMenuItemSelected(int featureId, IMenuItem item)
         {
             switch (item.ItemId)
             {
                 case Resource.Id.people_menu_item:
-                    ResurrectActivity(typeof(PeopleListFragmentActivity));
+                    StartActivity(typeof(PeopleListFragmentActivity));
                     break;
                 case Resource.Id.profile_menu_item:
-                    ResurrectActivity(typeof(ProfileActivity));
+                    StartActivity(typeof(ProfileActivity));
                     break;
                 case Resource.Id.simulation_menu_item:
-                    ResurrectActivity(typeof(SimulationActivity));
+                    StartActivity(typeof(SimulationActivity));
                     break;
                 case Resource.Id.settings_menu_item:
-                    ResurrectActivity(typeof(AboutAppActivity));
+                    StartActivity(typeof(AboutAppActivity));
                     break;
             }
 
             return base.OnMenuItemSelected(featureId, item);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            base.OnCreateOptionsMenu(menu);
+
+            MenuInflater.Inflate(Resource.Menu.base_menu, menu);
+            MenuInflater.Inflate(Resource.Menu.main_menu, menu);
+
+            return true;
         }
 
         protected void ResurrectActivity(Type activityType)
@@ -327,51 +312,25 @@ namespace rangr.droid
             i.SetFlags(ActivityFlags.ReorderToFront);
             StartActivity(i);
         }
-
-        #endregion
-
-        /// <summary>
-        /// The top-level fragment which manages the view and state for this activity.
-        /// </summary>
-        public TFragment Fragment { get; protected set; }
-
-        /// <summary>
-        /// The tag string to use when finding or creating this activity's fragment. This will be contructed using the type of this generic instance.
-        /// </summary>
-        protected string FragmentTag {
-            get {
-                return GetType().Name;
-            }
-        }
-
-        private int ContainerID { 
-            get { 
-                return Android.Resource.Id.Content; 
-            } 
-        }
-
-        #region "I'm not entirely satisfied with these 2 methods for loading a fragment. They will need to be consolidated somehow."
-        public abstract TFragment InitFragment();
-
-        protected void LoadFragment()
+    }
+    public abstract class FragmentActivity : Activity
+    {
+        public TFragment FindFragment<TFragment>(string fragmentTag) where TFragment : FragmentBase
         {
-            Fragment = FragmentBase.FindFragment<TFragment>(this, FragmentTag) ?? InitFragment();
-            FragmentBase.SwapFragment(this, Fragment, FragmentTag, ContainerID);
+            var fragment = FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
+
+            return fragment;
         }
 
-        protected void LoadNewFragment()
+        //Todo: Maintain a stack and allow push/pop
+        public void PushFragment<TFragment>(TFragment fragment, int containerId = Android.Resource.Id.Content) where TFragment : FragmentBase
         {
-            Fragment =  InitFragment();
-            FragmentBase.SwapFragment(this, Fragment, FragmentTag, ContainerID);
+            FragmentManager.BeginTransaction().Add(containerId, fragment, fragment.Tag).Commit();
         }
-        #endregion
 
-        /// <inheritdoc />
-        protected override void OnCreate(Bundle savedInstanceState)
+        public void PushFragment(Fragment fragment, string fragmentTag, int containerId = Android.Resource.Id.Content)
         {
-            base.OnCreate(savedInstanceState);
-
-            LoadFragment();
+            FragmentManager.BeginTransaction().Add(containerId, fragment, fragmentTag).Commit();
         }
 
         protected override async void OnDestroy()
@@ -381,19 +340,6 @@ namespace rangr.droid
             await Task.Yield();
 
             GC.Collect();
-        }
-
-        /// <inheritdoc />
-        public override void OnAttachedToWindow()
-        {
-            base.OnAttachedToWindow();
-            Fragment.OnAttachedToWindow();
-        }
-
-        /// <inheritdoc />
-        protected override void OnNewIntent(Intent intent)
-        {
-            Fragment.OnNewIntent(intent);
         }
 
         // This is an arbitrary number to use as an initial request code for StartActivityForResultAsync.

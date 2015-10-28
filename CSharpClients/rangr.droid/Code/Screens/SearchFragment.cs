@@ -23,23 +23,31 @@ namespace rangr.droid
     [Activity(Label = "@string/app_name",
         Icon = "@drawable/icon",
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SearchFragmentActivity : FragmentActivity<SearchFragment>
+    public class SearchFragmentActivity : FragmentActivity
     {
         private const string intent_name = "hashtag";
 
-        public override SearchFragment InitFragment()
+        private SearchFragment the_fragment;
+        public SearchFragment Fragment
         {
-            if (Intent.HasExtra(intent_name))
-            {
-                var hash_tag_name = Intent.GetStringExtra(intent_name);
-                return SearchFragment.newInstance(hash_tag_name);
+            get{
+                if (the_fragment != null)
+                    return the_fragment;
+            
+                if (Intent.HasExtra(intent_name))
+                {
+                    var hash_tag_name = Intent.GetStringExtra(intent_name);
+                    return SearchFragment.newInstance(hash_tag_name);
+                }
+                return the_fragment = SearchFragment.newInstance("NO_PARAMS");
             }
-            return SearchFragment.newInstance("NO_PARAMS");
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            PushFragment(Fragment);
 
             Title = "Search";
 

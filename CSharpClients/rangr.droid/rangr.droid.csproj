@@ -92,7 +92,6 @@
     <Compile Include="Code\Views\TextViewHyperlinkOnTouchListener.cs" />
     <Compile Include="Code\Views\TextViewWriter.cs" />
     <Compile Include="StartUpActivity.cs" />
-    <Compile Include="Code\Screens\BaseFragment.cs" />
     <Compile Include="Code\Screens\LoginFragment.cs" />
     <Compile Include="Code\Screens\NewPostFragment.cs" />
     <Compile Include="Code\Screens\PostDetailFragment.cs" />
@@ -113,6 +112,7 @@
       <DependentUpon>PeopleFragment.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Screens\PeopleFragment.cs" />
+    <Compile Include="Code\Screens\InfrastructureBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -20,21 +20,24 @@ namespace rangr.droid
     [Activity(Label = "@string/app_name"                
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class LoginFragmentActivity : FragmentActivity<LoginFragment>
+    public class LoginFragmentActivity : FragmentActivity
     {
+        private LoginFragment the_fragment;
+        private LoginFragment Fragment {
+            get{ 
+                return the_fragment ?? (the_fragment = new LoginFragment());
+            }
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
+
+            PushFragment(Fragment);
+
             Fragment.LoginSucceeded += () => {
                 StartActivity(typeof(PostListFragmentActivity));
                 Finish();
             };
-        }
-
-        public override LoginFragment InitFragment()
-        {
-            return new LoginFragment();
         }
     }
 
