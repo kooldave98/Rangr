@@ -1,0 +1,196 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain", "App.Domain\App.Domain.csproj", "{B99E5D0D-DB85-4A85-9E6B-615211C298BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Persistence.EF", "App.Persistence.EF\App.Persistence.EF.csproj", "{E484C58A-7CC1-4613-A7BE-D4D73741BD2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Persistence", "App.Persistence\App.Persistence.csproj", "{D55F6539-554A-49BC-8B6F-E88983AE29E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.WebAPI", "App.WebAPI\App.WebAPI.csproj", "{4700E9A0-8C75-4587-88C3-F5E24E5F953F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{858F8713-29E9-43E3-982A-BA347868DFBE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{3B720670-EC79-41ED-8D89-E44E91ACE0C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.Persistence", "App.Library.Persistence\App.Library.Persistence.csproj", "{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.Persistence.EF", "App.Library.Persistence.EF\App.Library.Persistence.EF.csproj", "{DB45C293-80BB-4E64-B861-87469DCFDB7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.CodeStructures", "App.Library.CodeStructures\App.Library.CodeStructures.csproj", "{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.Ninject", "App.Library.Ninject\App.Library.Ninject.csproj", "{D42D77AE-489C-49B4-809D-E513A5A2C032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Services", "App.Services\App.Services.csproj", "{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.EntityFramework", "App.Library.EntityFramework\App.Library.EntityFramework.csproj", "{27F7C62E-2B40-42E0-90E3-10A085AB3528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Integration", "App.Integration\App.Integration.csproj", "{C0D6DD08-7565-460B-BAC5-E44C5EF7822F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{F8490AD9-9A36-41D2-9665-43FCCEBB516E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{DEE9FCBE-65EE-43DB-9B90-2B97F60A63C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.WebAPI", "App.Library.WebAPI\App.Library.WebAPI.csproj", "{CFDB4218-315D-4803-8875-D72DD45E93C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkItems", "WorkItems", "{3C4114B2-B902-431C-A3E2-594E8E48161D}"
+	ProjectSection(SolutionItems) = preProject
+		Todo.txt = Todo.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.Azure", "App.Library.AzureStorage\App.Library.Azure.csproj", "{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{B819F03A-FCC1-4B8A-8F69-0EB5BBECEC02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Library.DomainHelpers", "App.Library.DomainHelpers\App.Library.DomainHelpers.csproj", "{59C632C4-43E3-4CCC-803E-58F7609C77E8}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 15
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kooldave98.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = App.Domain\\App.Domain.csproj
+		SccProjectTopLevelParentUniqueName1 = RangrApp.sln
+		SccProjectName1 = App.Domain
+		SccLocalPath1 = App.Domain
+		SccProjectUniqueName2 = App.Integration\\App.Integration.csproj
+		SccProjectTopLevelParentUniqueName2 = RangrApp.sln
+		SccProjectName2 = App.Integration
+		SccLocalPath2 = App.Integration
+		SccProjectUniqueName3 = App.Library.AzureStorage\\App.Library.Azure.csproj
+		SccProjectTopLevelParentUniqueName3 = RangrApp.sln
+		SccProjectName3 = App.Library.AzureStorage
+		SccLocalPath3 = App.Library.AzureStorage
+		SccProjectUniqueName4 = App.Library.CodeStructures\\App.Library.CodeStructures.csproj
+		SccProjectTopLevelParentUniqueName4 = RangrApp.sln
+		SccProjectName4 = App.Library.CodeStructures
+		SccLocalPath4 = App.Library.CodeStructures
+		SccProjectUniqueName5 = App.Library.DomainHelpers\\App.Library.DomainHelpers.csproj
+		SccProjectTopLevelParentUniqueName5 = RangrApp.sln
+		SccProjectName5 = App.Library.DomainHelpers
+		SccLocalPath5 = App.Library.DomainHelpers
+		SccProjectUniqueName6 = App.Library.EntityFramework\\App.Library.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName6 = RangrApp.sln
+		SccProjectName6 = App.Library.EntityFramework
+		SccLocalPath6 = App.Library.EntityFramework
+		SccProjectUniqueName7 = App.Library.Ninject\\App.Library.Ninject.csproj
+		SccProjectTopLevelParentUniqueName7 = RangrApp.sln
+		SccProjectName7 = App.Library.Ninject
+		SccLocalPath7 = App.Library.Ninject
+		SccProjectUniqueName8 = App.Library.Persistence.EF\\App.Library.Persistence.EF.csproj
+		SccProjectTopLevelParentUniqueName8 = RangrApp.sln
+		SccProjectName8 = App.Library.Persistence.EF
+		SccLocalPath8 = App.Library.Persistence.EF
+		SccProjectUniqueName9 = App.Library.Persistence\\App.Library.Persistence.csproj
+		SccProjectTopLevelParentUniqueName9 = RangrApp.sln
+		SccProjectName9 = App.Library.Persistence
+		SccLocalPath9 = App.Library.Persistence
+		SccProjectUniqueName10 = App.Library.WebAPI\\App.Library.WebAPI.csproj
+		SccProjectTopLevelParentUniqueName10 = RangrApp.sln
+		SccProjectName10 = App.Library.WebAPI
+		SccLocalPath10 = App.Library.WebAPI
+		SccProjectUniqueName11 = App.Persistence.EF\\App.Persistence.EF.csproj
+		SccProjectTopLevelParentUniqueName11 = RangrApp.sln
+		SccProjectName11 = App.Persistence.EF
+		SccLocalPath11 = App.Persistence.EF
+		SccProjectUniqueName12 = App.Persistence\\App.Persistence.csproj
+		SccProjectTopLevelParentUniqueName12 = RangrApp.sln
+		SccProjectName12 = App.Persistence
+		SccLocalPath12 = App.Persistence
+		SccProjectUniqueName13 = App.Services\\App.Services.csproj
+		SccProjectTopLevelParentUniqueName13 = RangrApp.sln
+		SccProjectName13 = App.Services
+		SccLocalPath13 = App.Services
+		SccProjectUniqueName14 = App.WebAPI\\App.WebAPI.csproj
+		SccProjectName14 = App.WebAPI
+		SccLocalPath14 = App.WebAPI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B99E5D0D-DB85-4A85-9E6B-615211C298BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99E5D0D-DB85-4A85-9E6B-615211C298BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99E5D0D-DB85-4A85-9E6B-615211C298BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99E5D0D-DB85-4A85-9E6B-615211C298BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E484C58A-7CC1-4613-A7BE-D4D73741BD2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E484C58A-7CC1-4613-A7BE-D4D73741BD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E484C58A-7CC1-4613-A7BE-D4D73741BD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E484C58A-7CC1-4613-A7BE-D4D73741BD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55F6539-554A-49BC-8B6F-E88983AE29E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55F6539-554A-49BC-8B6F-E88983AE29E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55F6539-554A-49BC-8B6F-E88983AE29E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55F6539-554A-49BC-8B6F-E88983AE29E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4700E9A0-8C75-4587-88C3-F5E24E5F953F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4700E9A0-8C75-4587-88C3-F5E24E5F953F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4700E9A0-8C75-4587-88C3-F5E24E5F953F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4700E9A0-8C75-4587-88C3-F5E24E5F953F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB45C293-80BB-4E64-B861-87469DCFDB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB45C293-80BB-4E64-B861-87469DCFDB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB45C293-80BB-4E64-B861-87469DCFDB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB45C293-80BB-4E64-B861-87469DCFDB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D42D77AE-489C-49B4-809D-E513A5A2C032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42D77AE-489C-49B4-809D-E513A5A2C032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42D77AE-489C-49B4-809D-E513A5A2C032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42D77AE-489C-49B4-809D-E513A5A2C032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F7C62E-2B40-42E0-90E3-10A085AB3528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F7C62E-2B40-42E0-90E3-10A085AB3528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F7C62E-2B40-42E0-90E3-10A085AB3528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F7C62E-2B40-42E0-90E3-10A085AB3528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D6DD08-7565-460B-BAC5-E44C5EF7822F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D6DD08-7565-460B-BAC5-E44C5EF7822F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D6DD08-7565-460B-BAC5-E44C5EF7822F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D6DD08-7565-460B-BAC5-E44C5EF7822F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDB4218-315D-4803-8875-D72DD45E93C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDB4218-315D-4803-8875-D72DD45E93C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDB4218-315D-4803-8875-D72DD45E93C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDB4218-315D-4803-8875-D72DD45E93C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C632C4-43E3-4CCC-803E-58F7609C77E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C632C4-43E3-4CCC-803E-58F7609C77E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C632C4-43E3-4CCC-803E-58F7609C77E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C632C4-43E3-4CCC-803E-58F7609C77E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B99E5D0D-DB85-4A85-9E6B-615211C298BA} = {F8490AD9-9A36-41D2-9665-43FCCEBB516E}
+		{E484C58A-7CC1-4613-A7BE-D4D73741BD2D} = {DEE9FCBE-65EE-43DB-9B90-2B97F60A63C2}
+		{D55F6539-554A-49BC-8B6F-E88983AE29E1} = {F8490AD9-9A36-41D2-9665-43FCCEBB516E}
+		{664D5702-CE9A-49C1-A7A1-BB0C5E5E21A4} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{DB45C293-80BB-4E64-B861-87469DCFDB7B} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{F8A890D6-4B2B-4F5D-B24C-61769A7DF4CF} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{D42D77AE-489C-49B4-809D-E513A5A2C032} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{5AC2CD2C-0E08-419C-BFA8-8AFA3568A37E} = {F8490AD9-9A36-41D2-9665-43FCCEBB516E}
+		{27F7C62E-2B40-42E0-90E3-10A085AB3528} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{C0D6DD08-7565-460B-BAC5-E44C5EF7822F} = {B819F03A-FCC1-4B8A-8F69-0EB5BBECEC02}
+		{CFDB4218-315D-4803-8875-D72DD45E93C5} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{D8EE90A3-3E03-4765-B89B-4067A6D8FF1C} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+		{59C632C4-43E3-4CCC-803E-58F7609C77E8} = {3B720670-EC79-41ED-8D89-E44E91ACE0C3}
+	EndGlobalSection
+EndGlobal

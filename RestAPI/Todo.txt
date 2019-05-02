@@ -1,0 +1,4 @@
+1. Azure Image Server //Done
+2. Upload image for Domain Entity (User Image, Craft Image) -- [Use the request headers]
+3. Update User Image command
+4. Web Jobs resize image See here //http://azure.microsoft.com/en-us/documentation/articles/websites-dotnet-webjobs-sdk-get-started/ 
